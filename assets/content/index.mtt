@@ -1,0 +1,41 @@
+<header class="hero-unit">
+	<div class="container">
+		<h1>Haxe Code Cookbook</h1>
+		<h3 class="lead">
+			Easy to read <a href="http://haxe.org/">Haxe</a> coding examples.
+		</h3>
+	</div>
+</header>
+
+<hr/>
+
+<section class="container">
+	<div class="row">
+		<div class="span3">
+			<h3>Learning by example</h3>
+      <p>The Haxe Foundation facilitates the following code cookbook for the Haxe commmunity. 
+      Enjoy learning Haxe; It is great!</p>
+      
+		</div>
+		<div class="span3">
+			<h3>More documentation</h3>
+			<p>
+        <p><a href="https://haxe.org/manual"><i class="fa fa-arrow"></i> Haxe Manual</a></p>
+        <p><a href="https://api.haxe.org"><i class="fa fa-arrow"></i> Haxe API documentation</a></p>
+      </p>
+		</div>
+		<div class="span3">
+			<h3>Contribution is easy</h3>
+			<p>The project is being developed on GitHub. Feel free to contribute code snippets.</p>
+			<p><a href="https://github.com/markknol/code-cookbook"><i class="fa fa-github"></i> Haxe Code Cookbook on Github</a></p>
+		
+		</div>
+		<div class="span3">
+			<h3>Try Haxe yourself</h3>
+			<p>You can try Haxe in the browser! </p>
+      <p><a href="https://github.com/markknol/code-cookbook"><i class="fa fa-github"></i> try.haxe.org</a></p>
+		
+    </div>
+	</div>
+</section>
+

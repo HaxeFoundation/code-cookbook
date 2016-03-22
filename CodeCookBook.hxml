@@ -1,0 +1,7 @@
+-lib markdown
+-lib hxtemplo
+-lib hxparse
+-cp src
+-neko CodeCookBook.n
+-main Main
+-dce no

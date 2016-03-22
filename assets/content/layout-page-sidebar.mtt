@@ -1,0 +1,35 @@
+::use 'layout.mtt'::
+  <header class="hero-unit-small">
+    <div class="container">
+      <div class="row">
+        <h1>
+          Haxe Code Cookbook
+        </h1>
+      </div>
+    </div>
+  </header>
+  <main class="container">
+    <section class="row">
+      <nav class="span4" id="sidebar">
+        <h3>Documentation</h3>
+        <ul class="unstyled">
+          
+          ::foreach group groups.keys()::
+            ::set isBook = group.indexOf("/cookbook/") == 0::
+            <li ::cond isBook::>::group.split("/")[2]::
+              <ul class="unstyled">
+                ::foreach page groups.get(group)::
+                <li><a href="::page.outputPath::">::page.title::</a></li>
+                ::end::
+              </ul>
+            </li>
+            <br ::cond isBook::/>
+          ::end::
+        </ul>
+      </nav>
+      <article class="span8">
+        ::raw pageContent::
+      </article>
+    </section>
+  </main>
+::end::
