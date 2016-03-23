@@ -20,7 +20,7 @@ Call `build-site.bat` to re-generate the output files.
 
 ### Contributing to the content/website/
 
-Please edit the code snippets, website files, template and markdown in the [assets folder](https://github.com/markknol/code-cookbook/tree/master/assets/cookbook) and do a pull request.
+Please edit the code snippets, website files, template and markdown in the [assets folder](assets/content/cookbook) and do a pull request.
 
 It would be nice if you keep the formatting of the code in the same style as used already.
 
