@@ -13,6 +13,9 @@ using StringTools;
 class Generator {
   public var contentPath = "./";
   public var outputPath = "./";
+  public var repositoryUrl = "";
+  public var domain = "";
+  public var titlePostFix = "";
   
   private var _pages:Array<Page> = new Array<Page>();
   private var _groups:Map<String,Array<Page>> = new Map<String,Array<Page>>();
@@ -32,12 +35,14 @@ class Generator {
     for (page in _pages) {
       // set the data for the page
       var data = {
-        title: '${page.title} - Haxe Code Cookbook', 
+        title: '${page.title}' + titlePostFix, 
         year: Date.now().getFullYear(), // we're professional now
         pages: _pages,
+        currentPage: page,
+        contributionUrl:getContributionUrl(page),
+        absoluteUrl:getAbsoluteUrl(page),
         groups: _groups,
         pageContent: null,
-        customData: page.customData
       }
       data.pageContent = getContent(contentPath + page.contentPath, data);
       
@@ -59,6 +64,14 @@ class Generator {
       // write output into file
       File.saveContent(outputPath + page.outputPath, html);
     }
+  }
+  
+  public function getContributionUrl(page:Page) {
+    return repositoryUrl + contentPath + page.contentPath;
+  }
+  
+  public function getAbsoluteUrl(page:Page) {
+    return domain + page.outputPath;
   }
   
   private function addPage(page:Page, group:String) {

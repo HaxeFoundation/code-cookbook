@@ -14,6 +14,10 @@ class Main {
     generator.outputPath = "output/";
     generator.contentPath = "assets/content/";
     
+    generator.titlePostFix = " - Haxe Code Cookbook";
+    generator.domain = "http://haxe-cookbook.stroep.nl/";
+    generator.repositoryUrl = "https://github.com/HaxeFoundation/code-cookbook/tree/master/";
+    
     generator.build(true);
     generator.includeDirectory("assets/includes");
   }

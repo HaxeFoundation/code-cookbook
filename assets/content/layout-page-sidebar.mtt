@@ -29,6 +29,11 @@
       </nav>
       <article class="span8">
         ::raw pageContent::
+        
+        <hr/>
+        
+        <a href="::contributionUrl::">Edit this snippet</a> | 
+        <a href="https://github.com/HaxeFoundation/code-cookbook/issues/new?title=[::currentPage.title::]&body=%0A%0ASources:%0A*%20::absoluteUrl::%0A*%20::contributionUrl::">Suggest improvement</a>
       </article>
     </section>
   </main>
