@@ -14,26 +14,25 @@
         <h3>Documentation</h3>
         <ul class="unstyled">
           
-          ::foreach group groups.keys()::
-            ::set isBook = group.indexOf("/cookbook/") == 0::
-            <li ::cond isBook::>::group.split("/")[2]::
+          ::foreach category sitemap::
+            <li>::category.title::
               <ul class="unstyled">
-                ::foreach page groups.get(group)::
+                ::foreach page category.pages::
                 <li><a href="::page.outputPath::">::page.title::</a></li>
                 ::end::
               </ul>
             </li>
-            <br ::cond isBook::/>
+            <br/>
           ::end::
         </ul>
       </nav>
       <article class="span8">
         ::raw pageContent::
-        
         <hr/>
-        
-        <a href="::contributionUrl::">Edit this snippet</a> | 
-        <a href="https://github.com/HaxeFoundation/code-cookbook/issues/new?title=[::currentPage.title::]&body=%0A%0ASources:%0A*%20::absoluteUrl::%0A*%20::contributionUrl::">Suggest improvement</a>
+        <div class="contribution">
+          <a href="::contributionUrl::">Suggest improvement</a> | 
+          <a href="https://github.com/HaxeFoundation/code-cookbook/issues/new?title=[::currentPage.title::]&body=%0A%0ASources:%0A*%20::absoluteUrl::%0A*%20::contributionUrl::">Report issue</a>
+        </div>
       </article>
     </section>
   </main>

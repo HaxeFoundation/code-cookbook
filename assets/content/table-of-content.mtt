@@ -1,0 +1,7 @@
+<h1>::currentCategory.title::</h1>
+
+<ul>
+::foreach page currentCategory.pages::
+  <li><a href="::page.outputPath::">::page.title::</a></li>
+::end::
+</ul>

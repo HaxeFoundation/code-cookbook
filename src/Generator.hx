@@ -16,9 +16,10 @@ class Generator {
   public var repositoryUrl = "";
   public var domain = "";
   public var titlePostFix = "";
+  public var sitemap:Array<Category> = [];
   
   private var _pages:Array<Page> = new Array<Page>();
-  private var _groups:Map<String,Array<Page>> = new Map<String,Array<Page>>();
+  private var _folders:Map<String,Array<Page>> = new Map<String,Array<Page>>();
   
   public function new() {
     
@@ -29,19 +30,26 @@ class Generator {
    * @param doMinify minifies the HTML output.
    */
   public function build (doMinify:Bool = false) {
+    initTemplate();
+    
     addGeneralPages();
     addCookbookPages();
     
-    for (page in _pages) {
+    // after all other pages are added
+    createSitemap();
+    addCategoryPages();
+    
+    for(page in _pages) {
       // set the data for the page
       var data = {
         title: '${page.title}' + titlePostFix, 
         year: Date.now().getFullYear(), // we're professional now
         pages: _pages,
         currentPage: page,
+        currentCategory: getCategory(page),
         contributionUrl:getContributionUrl(page),
         absoluteUrl:getAbsoluteUrl(page),
-        groups: _groups,
+        sitemap: sitemap,
         pageContent: null,
       }
       data.pageContent = getContent(contentPath + page.contentPath, data);
@@ -66,6 +74,34 @@ class Generator {
     }
   }
   
+  private function getCategory(page:Page):Category {
+    for (category in sitemap) {
+      if (category.pages.indexOf(page) != -1 ) {
+        return category;
+      }
+    }
+    return null;
+  }
+  
+  private function addCategoryPages() {
+    for (category in sitemap) {
+      addPage(new Page("layout-page-sidebar.mtt", 
+                       "table-of-content.mtt", 
+                       category.id + "-index.html")
+                       .setTitle('${category.title } - table of content'), category.folder);
+    }
+  }
+  
+  // categorizes the folders 
+  private function createSitemap() {
+    for (key in _folders.keys()) {
+      var id = key.split("/")[2];
+      if (key.indexOf("/cookbook/") == 0) {
+        sitemap.push(new Category(id.toLowerCase(), id, key, _folders.get(key)));
+      }
+    }
+  }
+  
   public function getContributionUrl(page:Page) {
     return repositoryUrl + contentPath + page.contentPath;
   }
@@ -74,22 +110,21 @@ class Generator {
     return domain + page.outputPath;
   }
   
-  private function addPage(page:Page, group:String) {
+  private function addPage(page:Page, folder:String = null) {
     _pages.push(page);
     
-    if (!_groups.exists(group)) {
-      _groups.set(group, []);
+    if (folder != null) {
+      if (!_folders.exists(folder)) {
+        _folders.set(folder, []);
+      }
+      _folders.get(folder).push(page);
     }
-    _groups.get(group).push(page);
   }
   
   private function addGeneralPages() {
-    var page1 = new Page("layout.mtt", "index.mtt", "index.html")
-      .setTitle("Build and debug cross platform applications using Haxe");
     var page2 = new Page("layout-page-main.mtt", "index.mtt", "index.html")
       .setTitle("Build and debug cross platform applications using Haxe");
       
-    addPage(page1, "/home");
     addPage(page2, "/home");
   }
   
@@ -141,14 +176,23 @@ class Generator {
       }
     }
   }
+  
+  private function initTemplate() {
+    // for some reason this is needed, otherwise templates doesn't work.
+    // the function fails, but i think internally Template can resolve paths now.
+    try { 
+      Template.fromFile(contentPath + "layout.mtt").execute({});
+    } catch(e:Dynamic) { }
+  }
+  
 }
 
 
 class Page { 
   public var title:String;
   public var templatePath:String;
-  public var contentPath: String;
-  public var outputPath: String;
+  public var contentPath:String;
+  public var outputPath:String;
   public var customData:Dynamic;
   
   public function new(templatePath:String, contentPath:String, outputPath:String) {
@@ -165,5 +209,19 @@ class Page {
   public function setTitle(title:String):Page {
     this.title = title;
     return this;
+  }
+}
+
+class Category {
+  public var title:String;
+  public var id:String;
+  public var folder:String;
+  public var pages:Array<Page>;
+  
+  public function new(id:String, title:String, folder:String, pages:Array<Page>){
+    this.id = id;
+    this.title = title;
+    this.folder = folder;
+    this.pages = pages;
   }
 }
