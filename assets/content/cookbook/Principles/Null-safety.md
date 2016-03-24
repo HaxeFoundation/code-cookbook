@@ -68,4 +68,4 @@ class Test {
 }
 ```
 
-> Author: [Nadako](https://github.com/nadako)
+> Author: [Dan Korostelev](https://github.com/nadako)
