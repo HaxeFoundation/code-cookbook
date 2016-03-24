@@ -1,10 +1,8 @@
 package;
 
 import Generator;
-import neko.Lib;
 
 /**
- * ...
  * @author Mark Knol
  */
 class Main {
