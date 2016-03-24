@@ -41,13 +41,15 @@ class Generator {
     
     for(page in _pages) {
       // set the data for the page
+      var category = getCategory(page);
       var data = {
         title: '${page.title}' + titlePostFix, 
         year: Date.now().getFullYear(), // we're professional now
         pages: _pages,
         currentPage: page,
-        currentCategory: getCategory(page),
+        currentCategory: category,
         contributionUrl:getContributionUrl(page),
+        addLinkUrl: (category != null) ? getAddLinkUrl(category) : getAddLinkUrl(page),
         absoluteUrl:getAbsoluteUrl(page),
         sitemap: sitemap,
         pageContent: null,
@@ -104,7 +106,15 @@ class Generator {
   }
   
   public function getContributionUrl(page:Page) {
-    return repositoryUrl + contentPath + page.contentPath;
+    return repositoryUrl + "tree/master/" + contentPath + page.contentPath;
+  }
+  
+  public function getAddLinkUrl(category:Category  = null, page:Page = null) {
+    if (category!= null) {
+      return repositoryUrl + "new/master/" + contentPath + getDirectory(category.pages[0].contentPath);
+    } else {
+      return repositoryUrl + "new/master/" + contentPath + getDirectory(page.contentPath);
+    }
   }
   
   public function getAbsoluteUrl(page:Page) {
@@ -147,8 +157,14 @@ class Generator {
     return File.getContent(contentPath + path).split("\n").shift().split("# ").join("");
   }
   
+  private static inline function getDirectory(file:String) {
+    var paths = file.split("/");
+    paths.pop();
+    return paths.join("/");
+  }
+  
   private static inline function getExtension(file:String) {
-   return file.split(".").pop();
+    return file.split(".").pop();
   }
   
   private static inline function getWithoutExtension(file:String) {

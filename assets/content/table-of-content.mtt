@@ -5,3 +5,9 @@
   <li ::cond page.visible::><a href="::page.outputPath::">::page.title::</a></li>
 ::end::
 </ul>
+  
+<hr/>
+  
+<div class="contribution">
+ <i class="fa fa-plus-circle"></i> <a href="::addLinkUrl::">Add new snippet</a>
+</div>

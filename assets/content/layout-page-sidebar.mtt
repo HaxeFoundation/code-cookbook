@@ -30,8 +30,9 @@
         ::raw pageContent::
         <hr/>
         <div class="contribution" ::cond currentPage.visible::>
-          <a href="::contributionUrl::">Suggest improvement</a> | 
-          <a href="https://github.com/HaxeFoundation/code-cookbook/issues/new?title=[::currentPage.title::]&body=%0A%0ASources:%0A*%20::absoluteUrl::%0A*%20::contributionUrl::">Report issue</a>
+          <i class="fa fa-lightbulb-o"></i> <a href="::contributionUrl::">Suggest improvement</a> | 
+          <i class="fa fa-exclamation-circle"></i> <a href="https://github.com/HaxeFoundation/code-cookbook/issues/new?title=[::currentPage.title::]&body=%0A%0ASources:%0A*%20::absoluteUrl::%0A*%20::contributionUrl::">Report issue</a> |
+          <i class="fa fa-plus-circle"></i> <a href="::addLinkUrl::">Add new snippet</a>
         </div>
       </article>
     </section>

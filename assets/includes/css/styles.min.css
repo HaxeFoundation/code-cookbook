@@ -7,6 +7,9 @@ article h2,article h3,article h4,article h5,article h6{margin-top:20px;}
 article h3{border-bottom:1px dotted #ddd;}
 article h2{border-bottom:1px dotted #aaa;}
 a,a:hover{color:#257fc2;}
+.contribution{color:#ccc;}
+.contribution a{color:#444;}
+.contribution .fa{color:#999;}
 @media (max-width:767px){body{padding:0 20px;margin:0;}}
 @media (max-width:500px){body .hero-unit h3{font-size:90%;}
 body .hero-unit h3 br{display:none;}}

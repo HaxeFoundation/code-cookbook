@@ -36,6 +36,19 @@ a, a:hover {
   color: #257fc2;
 }
 
+.contribution {
+  color: #ccc;
+}
+
+.contribution a {
+  color: #444;
+}
+
+.contribution .fa {
+  color: #999;
+}
+
+
 @media (max-width: 767px) {
   body {
     padding: 0 20px;
