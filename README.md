@@ -22,7 +22,14 @@ Call `build-site.bat` to re-generate the output files.
 
 Please edit the code snippets, website files, template and markdown in the [assets folder](assets/content/cookbook) and do a pull request.
 
-It would be nice if you keep the formatting of the code in the same style as used already.
+It would be nice if you keep the formatting of the code in the same style as used already:
+
+* braces on same line
+* two-space indentation
+* no type-hints for local variables and function return unless it's instructive
+* type-hints for fields
+* type-hints for function arguments unless it's very obvious
+* judicious use of extra line-breaks to avoid ugly automatic breaks (check the output)
 
 ### Contributing to the generator
 
