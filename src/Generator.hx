@@ -1,4 +1,5 @@
 package;
+import haxe.Timer;
 import haxe.ds.StringMap;
 import haxe.io.Error;
 import haxe.Json;
@@ -39,41 +40,44 @@ class Generator {
     createSitemap();
     addCategoryPages();
     
-    for(page in _pages) {
-      // set the data for the page
-      var category = getCategory(page);
-      var data = {
-        title: '${page.title}' + titlePostFix, 
-        year: Date.now().getFullYear(), // we're professional now
-        pages: _pages,
-        currentPage: page,
-        currentCategory: category,
-        contributionUrl:getContributionUrl(page),
-        addLinkUrl: (category != null) ? getAddLinkUrl(category) : getAddLinkUrl(page),
-        absoluteUrl:getAbsoluteUrl(page),
-        sitemap: sitemap,
-        pageContent: null,
+    Timer.measure(function() {
+      for(page in _pages) {
+        // set the data for the page
+        var category = getCategory(page);
+        var data = {
+          title: '${page.title}' + titlePostFix, 
+          year: Date.now().getFullYear(), // we're professional now
+          pages: _pages,
+          currentPage: page,
+          currentCategory: category,
+          contributionUrl:getContributionUrl(page),
+          addLinkUrl: (category != null) ? getAddLinkUrl(category) : getAddLinkUrl(page),
+          absoluteUrl:getAbsoluteUrl(page),
+          sitemap: sitemap,
+          pageContent: null,
+        }
+        data.pageContent = getContent(contentPath + page.contentPath, data);
+        
+        //trace("generating " + outputPath + page.outputPath);
+       // trace("from " + contentPath + page.templatePath);
+        
+        // execute the template
+        var template = Template.fromFile(contentPath + page.templatePath);
+        var html = template.execute(data);
+        
+        if (doMinify) {
+          // strip crap
+          var length = html.length;
+          html = Minifier.removeComments(Minifier.minify(html));
+          var newLength = html.length;
+          //trace("optimized " + (Std.int(100 / length * (length - newLength) * 100) / 100) + "%");
+        }
+        
+        // write output into file
+        File.saveContent(outputPath + page.outputPath, html);
       }
-      data.pageContent = getContent(contentPath + page.contentPath, data);
-      
-      trace("generating " + outputPath + page.outputPath);
-      trace("from " + contentPath + page.templatePath);
-      
-      // execute the template
-      var template = Template.fromFile(contentPath + page.templatePath);
-      var html = template.execute(data);
-      
-      if (doMinify) {
-        // strip crap
-        var length = html.length;
-        html = Minifier.removeComments(Minifier.minify(html));
-        var newLength = html.length;
-        trace("optimized " + (Std.int(100 / length * (length - newLength) * 100) / 100) + "%");
-      }
-      
-      // write output into file
-      File.saveContent(outputPath + page.outputPath, html);
-    }
+    });
+    trace(_pages.length + " done!");
   }
   
   private function getCategory(page:Page):Category {
@@ -110,10 +114,11 @@ class Generator {
   }
   
   public function getAddLinkUrl(category:Category  = null, page:Page = null) {
+    var fileNameHint = "?filename=snippet-name.md";
     if (category!= null) {
-      return repositoryUrl + "new/master/" + contentPath + getDirectory(category.pages[0].contentPath);
+      return repositoryUrl + "new/master/" + contentPath + getDirectory(category.pages[0].contentPath) + fileNameHint;
     } else {
-      return repositoryUrl + "new/master/" + contentPath + getDirectory(page.contentPath) + "?filename=snippet-name.md";
+      return repositoryUrl + "new/master/" + contentPath + getDirectory(page.contentPath) + fileNameHint;
     }
   }
   
