@@ -30,3 +30,5 @@ for (i in new ReverseIterator(5, 0)) {
 // 1
 // 0
 ```
+
+> Learn more about iterators here: <http://haxe.org/manual/lf-iterators.html>

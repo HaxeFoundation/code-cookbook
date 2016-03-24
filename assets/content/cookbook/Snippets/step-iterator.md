@@ -31,3 +31,5 @@ for (i in new StepIterator(0, 10, 2)) {
 // 6
 // 8
 ```
+
+> Learn more about iterators here: <http://haxe.org/manual/lf-iterators.html>

@@ -10,10 +10,8 @@
 import haxe.macro.Context;
 import haxe.macro.Expr;
 
-class MyMacro 
-{
-  public static function build():Array<Field> 
-  {
+class MyMacro {
+  public static function build():Array<Field> {
     // get existing fields from the context from where build() is called
     var fields = Context.getBuildFields();
     
@@ -34,10 +32,11 @@ class MyMacro
 
 ```
 @:build(MyMacro.build())
-class Main 
-{
+class Main {
   public function new() {
     trace(Main.STATIC_VAR); // 1.5;
   }
 }
 ```
+
+> Author: [Mark Knol](http://github.com/markknol)
