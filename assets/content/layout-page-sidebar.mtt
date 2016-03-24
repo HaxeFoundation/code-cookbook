@@ -18,7 +18,7 @@
             <li>::category.title::
               <ul class="unstyled">
                 ::foreach page category.pages::
-                <li><a href="::page.outputPath::">::page.title::</a></li>
+                <li ::cond page.visible::><a href="::page.outputPath::">::page.title::</a></li>
                 ::end::
               </ul>
             </li>

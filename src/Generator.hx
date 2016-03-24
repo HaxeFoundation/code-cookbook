@@ -88,7 +88,8 @@ class Generator {
       addPage(new Page("layout-page-sidebar.mtt", 
                        "table-of-content.mtt", 
                        category.id + "-index.html")
-                       .setTitle('${category.title } - table of content'), category.folder);
+                        .setTitle('${category.title } - table of content')
+                        .hidden(), category.folder);
     }
   }
   
@@ -189,6 +190,7 @@ class Generator {
 
 
 class Page { 
+  public var visible:Bool = true;
   public var title:String;
   public var templatePath:String;
   public var contentPath:String;
@@ -208,6 +210,11 @@ class Page {
   
   public function setTitle(title:String):Page {
     this.title = title;
+    return this;
+  }
+  
+  public function hidden() {
+    visible = false;
     return this;
   }
 }

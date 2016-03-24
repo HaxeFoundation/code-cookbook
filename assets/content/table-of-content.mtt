@@ -2,6 +2,6 @@
 
 <ul>
 ::foreach page currentCategory.pages::
-  <li><a href="::page.outputPath::">::page.title::</a></li>
+  <li ::cond page.visible::><a href="::page.outputPath::">::page.title::</a></li>
 ::end::
 </ul>
