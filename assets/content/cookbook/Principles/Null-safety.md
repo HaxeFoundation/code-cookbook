@@ -67,3 +67,5 @@ class Test {
   }
 }
 ```
+
+> Author: [Nadako](https://github.com/nadako)

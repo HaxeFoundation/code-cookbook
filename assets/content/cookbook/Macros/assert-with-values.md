@@ -86,4 +86,5 @@ class Main {
 }
 ```
 
-> Inspired by <https://github.com/sconover/wrong>
+> Inspired by <https://github.com/sconover/wrong>  
+> Author: [Simn](https://github.com/simn)
