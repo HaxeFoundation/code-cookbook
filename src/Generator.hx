@@ -113,7 +113,7 @@ class Generator {
     if (category!= null) {
       return repositoryUrl + "new/master/" + contentPath + getDirectory(category.pages[0].contentPath);
     } else {
-      return repositoryUrl + "new/master/" + contentPath + getDirectory(page.contentPath);
+      return repositoryUrl + "new/master/" + contentPath + getDirectory(page.contentPath) + "?filename=snippet-name.md";
     }
   }
   
