@@ -40,10 +40,10 @@
 				</ul-->
 				<ul class="nav">
 					<!-- required submenu  on every subsite -->
-            <li  class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Sections</a>
+            <li  class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book"></i> Browse..</a>
               <ul class="dropdown-menu">
                 ::foreach category sitemap::
-                  <li><a href="::category.id::-index.html">::category.title::</a></li>
+                  <li><a href="::category.id::-index.html">::category.title:: <small class="category-count">(::category.getPageCount()::)</small></a></li>
                 ::end::
               </ul>
             </li>

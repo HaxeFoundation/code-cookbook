@@ -231,4 +231,8 @@ class Category {
     this.folder = folder;
     this.pages = pages;
   }
+  
+  public function getPageCount():Int {
+    return [for (page in pages) if (page.visible) page].length;
+  }
 }
