@@ -85,7 +85,7 @@ class Generator {
       if (!FileSystem.isDirectory(contentPath + documentationPath + file)) {
          var page = new Page("layout-page-sidebar.mtt", 
                              documentationPath + file, 
-                             getWithoutExtension(file) + ".html")
+                             getWithoutExtension(file).toLowerCase() + ".html")
             .setTitle( getDocumentationTitle(documentationPath + file));
         addPage(page, documentationPath);
       } else {
