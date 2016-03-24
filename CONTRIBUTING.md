@@ -2,12 +2,15 @@
 
 ### Formatting 
 
- * First line of a snippet is the title used in the menu. Keep this title short.
- * Use 2 spaces instead of tabs.
- * Braces on the same line.
+ * braces on same line
+ * two-space indentation
+ * no type-hints for local variables and function return unless it's instructive
+ * type-hints for fields
+ * type-hints for function arguments unless it's very obvious
+ * judicious use of extra line-breaks to avoid ugly automatic breaks (check the output)
  
-This would be a typical template to use. Use <code>```haxe</code> for syntax highlighting.
-
+This would be a typical template to use. Use <code>```haxe</code> for syntax highlighting.  
+The first line of a snippet is the title used in the menu. Keep this title short.
  
 ```markdown
    # Title of the page
