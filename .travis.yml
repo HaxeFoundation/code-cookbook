@@ -8,5 +8,8 @@ haxe:
 hxml:
   - CodeCookBook.hxml
 
+after_script:
+  - neko CodeCookBook.n
+
 notifications:
   email: false
