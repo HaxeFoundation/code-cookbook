@@ -9,6 +9,7 @@ hxml:
   - CodeCookBook.hxml
 
 after_script:
+  - md output
   - neko CodeCookBook.n
 
 notifications:
