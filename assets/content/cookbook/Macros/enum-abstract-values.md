@@ -15,8 +15,9 @@ using haxe.macro.Tools;
 class AbstractEnumTools {
   public static macro function getValues(typePath:Expr):Expr {
     // Get the type from a given expression converted to string.
-    // This will work for identifiers and field access which is what we need, It will also consider local imports.
-    // If expression is not a valid type path or type is not found, compiler will give a error here.
+    // This will work for identifiers and field access which is what we need,
+    // it will also consider local imports. If expression is not a valid type path or type is not found,
+    // compiler will give a error here.
     var type = Context.getType(typePath.toString());
 
     // Switch on the type and check if it's an abstract with @:enum metadata
