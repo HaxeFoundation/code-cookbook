@@ -46,7 +46,7 @@
   <postBuildCommand alwaysRun="False">build-site.bat</postBuildCommand>
   <!-- Other project options -->
   <options>
-    <option showHiddenPaths="False" />
+    <option showHiddenPaths="True" />
     <option testMovie="Custom" />
     <option testMovieCommand="run.bat" />
   </options>
