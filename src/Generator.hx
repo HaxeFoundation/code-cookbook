@@ -51,6 +51,7 @@ class Generator {
           currentPage: page,
           currentCategory: category,
           contributionUrl:getContributionUrl(page),
+          editUrl:getEditUrl(page),
           addLinkUrl: (category != null) ? getAddLinkUrl(category) : getAddLinkUrl(page),
           absoluteUrl:getAbsoluteUrl(page),
           sitemap: sitemap,
@@ -102,11 +103,17 @@ class Generator {
   // categorizes the folders 
   private function createSitemap() {
     for (key in _folders.keys()) {
-      var id = key.split("/")[2];
+      var structure = key.split("/");
+      structure.pop();
+      var id = structure.pop();
       if (key.indexOf("/cookbook/") == 0) {
         sitemap.push(new Category(id.toLowerCase(), id, key, _folders.get(key)));
       }
     }
+  }
+  
+  public function getEditUrl(page:Page) {
+    return repositoryUrl + "edit/master/" + contentPath + page.contentPath;
   }
   
   public function getContributionUrl(page:Page) {
