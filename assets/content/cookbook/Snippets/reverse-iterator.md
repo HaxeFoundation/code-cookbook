@@ -1,5 +1,29 @@
 # Reverse iterator
 
+Haxe has a special [range operator](http://haxe.org/manual/expression-for.html) `for(i in 0...5)` to iterate forward. 
+Because it requires `min...max`, you cannot do `for(i in 5...0)`, thus you cannot iterate backwards using this syntax.
+
+You could use a [while loop](http://haxe.org/manual/expression-while.html) for this:
+  
+```haxe
+var total = 5;
+var i = total;
+while(i >= 0) {
+  trace(i);
+  i --;
+}
+// 5
+// 4
+// 3
+// 2
+// 1
+// 0
+```
+
+This is not always optimal since you need variables outside the loop. 
+
+You can also create [custom iterators](http://haxe.org/manual/lf-iterators.html) which provide such functionality.
+
 ```haxe
 class ReverseIterator {
   var end:Int;
@@ -30,5 +54,7 @@ for (i in new ReverseIterator(5, 0)) {
 // 1
 // 0
 ```
+
+
 
 > Learn more about iterators here: <http://haxe.org/manual/lf-iterators.html>
