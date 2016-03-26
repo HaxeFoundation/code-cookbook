@@ -12,8 +12,8 @@ using StringTools;
  * @author Mark Knol
  */
 class Generator {
-  public var contentPath = "./";
-  public var outputPath = "./";
+  public var contentPath = "./assets/content/";
+  public var outputPath = "./output/";
   public var repositoryUrl = "";
   public var domain = "";
   public var titlePostFix = "";
@@ -22,9 +22,7 @@ class Generator {
   private var _pages:Array<Page> = new Array<Page>();
   private var _folders:Map<String,Array<Page>> = new Map<String,Array<Page>>();
   
-  public function new() {
-    
-  }
+  public function new() { }
   
   /**
    * Build the Code Cookbook website with static website generator.
@@ -45,7 +43,7 @@ class Generator {
         // set the data for the page
         var category = getCategory(page);
         var data = {
-          title: '${page.title}' + titlePostFix, 
+          title: '${page.title} $titlePostFix', 
           year: Date.now().getFullYear(), // we're professional now
           pages: _pages,
           currentPage: page,
@@ -58,9 +56,6 @@ class Generator {
           pageContent: null,
         }
         data.pageContent = getContent(contentPath + page.contentPath, data);
-        
-        //trace("generating " + outputPath + page.outputPath);
-       // trace("from " + contentPath + page.templatePath);
         
         // execute the template
         var template = Template.fromFile(contentPath + page.templatePath);
@@ -78,7 +73,7 @@ class Generator {
         File.saveContent(outputPath + page.outputPath, html);
       }
     });
-    trace(_pages.length + " done!");
+    trace(_pages.length + "pages done!");
   }
   
   private function getCategory(page:Page):Category {
@@ -112,15 +107,15 @@ class Generator {
     }
   }
   
-  public function getEditUrl(page:Page) {
+  public inline function getEditUrl(page:Page) {
     return repositoryUrl + "edit/master/" + contentPath + page.contentPath;
   }
   
-  public function getContributionUrl(page:Page) {
+  public inline function getContributionUrl(page:Page) {
     return repositoryUrl + "tree/master/" + contentPath + page.contentPath;
   }
   
-  public function getAddLinkUrl(category:Category  = null, page:Page = null) {
+  public inline function getAddLinkUrl(category:Category  = null, page:Page = null) {
     var fileNameHint = "?filename=snippet-name.md";
     if (category!= null) {
       return repositoryUrl + "new/master/" + contentPath + getDirectory(category.pages[0].contentPath) + fileNameHint;
@@ -129,7 +124,7 @@ class Generator {
     }
   }
   
-  public function getAbsoluteUrl(page:Page) {
+  public inline function getAbsoluteUrl(page:Page) {
     return domain + page.outputPath;
   }
   
@@ -166,6 +161,7 @@ class Generator {
   }
   
   private function getDocumentationTitle(path:String) {
+    // pick first header `# mytitle` from markdown file
     return File.getContent(contentPath + path).split("\n").shift().split("# ").join("");
   }
   
@@ -215,7 +211,6 @@ class Generator {
   }
   
 }
-
 
 class Page { 
   public var visible:Bool = true;
