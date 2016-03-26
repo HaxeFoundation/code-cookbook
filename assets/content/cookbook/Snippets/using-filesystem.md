@@ -1,0 +1,81 @@
+# Using File system
+
+Haxe has some targets that can directly access the filesystem:
+
+Name | Access to filesystem
+--- | --- | 
+C++ | Yes 
+Neko | Yes 
+PHP | Yes 
+Java  | Yes
+C#  | Yes 
+Python  | Yes 
+JavaScript | No 
+ActionScript 3  | No 
+Flash | No 
+
+### Check if filesystem is available
+
+You can savely access the filesystem if you wrap the code with [conditional compilation](http://haxe.org/manual/lf-condition-compilation.html):
+  
+```haxe
+#if sys
+trace("file system can be accessed");
+#end
+```
+Otherwise you will get the error:
+  _"You cannot access the sys package while targeting js (for sys.FileSystem)"_.
+
+### Read content of a file
+
+This example reads a text file:
+```
+var content:String = sys.io.File.readContent('my_folder/my_file.txt');
+trace(myContent);
+```
+
+### Write content to a file
+
+This example writes an object `person` to a Json file:
+```
+var user = {name:"Mark", age:31};
+var content:String = haxe.Json.stringify(user);
+sys.io.File.saveContent(content, 'my_folder/my_file.json');
+```
+> Api documentation: <http://api.haxe.org/sys/io/File.html>
+
+### Recursive loop through all directories / files
+```haxe
+import sys.FileSystem;
+
+private function recursiveLoop(folder:String = "my_folder/") {
+  if (FileSystem.exists(folder)) {
+    trace("directory found: " + folder);
+    for (file in FileSystem.readDirectory(folder)) {
+      if (!FileSystem.isDirectory(folder + file)) {
+        trace("file found: " + folder + file);
+        // do something with file
+      } else {
+        var directory = folder + file + "/";
+        recursiveLoop(directory);
+      }
+    }
+  } else {
+    trace('"$folder" does not exists');
+  }
+}
+```
+> Api documentation: <http://api.haxe.org/sys/FileSystem.html>
+
+### Checking file attributes
+
+```haxe
+var stat:FileStat = FileSystem.stat("myFile.txt");
+trace("Last access time: " + stat.atime);
+trace("Last modification time: " + stat.mtime);
+trace("Last status change time: " + stat.ctime);
+trace("Last status change time: " + stat.ctime);
+trace("The user id: " + stat.uid);
+trace("File size: " + stat.size);
+```
+> Api documentation: <http://api.haxe.org/sys/FileStat.html>
