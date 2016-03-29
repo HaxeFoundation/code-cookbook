@@ -8,11 +8,11 @@ This project contains a static website generator, it is mixing templates and mar
 
 ### Structure
 
- * The actual code snippets are in `assets/content/cookbook`, organized per folder.
- * The template files are in `assets/content/`.
- * The static files (css, js, images) files are in `assets/includes/`.
- * The Haxe source files of the generator are in `src/`
- * The website-generated content will output in `output/`
+ * The actual code snippets are in [assets/content/cookbook](assets/content/cookbook), organized per folder.
+ * The template files are in [assets/content/](assets/content).
+ * The static files (css, js, images) files are in [assets/includes/](assets/includes).
+ * The Haxe source files of the generator are in [src/](src).
+ * The website-generated content will output in `output`.
 
 ### Running a local copy
 
@@ -26,12 +26,12 @@ Please edit the code snippets, website files, template and markdown in the [asse
 
 It would be nice if you keep the formatting of the code in the same style as used already:
 
-* braces on same line
-* two-space indentation
-* no type-hints for local variables and function return unless it's instructive
-* type-hints for fields
-* type-hints for function arguments unless it's very obvious
-* judicious use of extra line-breaks to avoid ugly automatic breaks (check the output)
+* braces on same line.
+* two-space indentation.
+* no type-hints for local variables and function return unless it's instructive.
+* type-hints for fields.
+* type-hints for function arguments unless it's very obvious.
+* judicious use of extra line-breaks to avoid ugly automatic breaks (check the output).
 
 ### Contributing to the generator
 
