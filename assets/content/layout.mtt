@@ -52,7 +52,7 @@
 						<ul class="dropdown-menu">
 						::foreach tag tags.keys()::
 							<!-- display tag only if there is more than one page with it -->
-							<li ::cond tags.get(tag).length>1::><a href="tag/::tag::.html"><i class="fa fa-tag"></i> ::tag:: <small class="category-count">(::tags.get(tag).length::)</small></a></li>
+							<li ::cond tags.get(tag).length>1:: ::attr class if(tag==currentPage.customData.tag) "active"::><a href="tag/::tag::.html"><i class="fa fa-tag"></i> ::tag:: <small class="category-count">(::tags.get(tag).length::)</small></a></li>
 						::end::
 						</ul>
 					</li>
