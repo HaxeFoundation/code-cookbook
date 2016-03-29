@@ -29,15 +29,15 @@
 		<div class="span4">
 			<h3>More documentation</h3>
 			<p>
-				<p><i class="fa fa-external-link"></i> <a href="https://haxe.org/manual"><i class="fa fa-arrow"></i> Haxe Manual</a></p>
-				<p><i class="fa fa-external-link"></i> <a href="https://api.haxe.org"><i class="fa fa-arrow"></i> Haxe API documentation</a></p>
+				<p><i class="fa fa-external-link"></i> <a href="http://haxe.org/manual">Haxe Manual</a></p>
+				<p><i class="fa fa-external-link"></i> <a href="http://api.haxe.org">Haxe API documentation</a></p>
 				<p>You can try Haxe in the browser! <a href="https://try.haxe.org/">try.haxe.org</a></p>
 			</p>
 		</div>
 		<div class="span4">
 			<h3>Contribution is easy</h3>
 			<p>The project is being developed on GitHub. Feel free to contribute code snippets.</p>
-			<p><a href="https://github.com/markknol/code-cookbook"><i class="fa fa-github"></i> Haxe Code Cookbook on Github</a></p>
+			<p><i class="fa fa-github"></i> <a href="https://github.com/markknol/code-cookbook">Haxe Code Cookbook on Github</a></p>
 		
 		</div>
 	</div>
