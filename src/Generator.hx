@@ -119,17 +119,17 @@ class Generator {
       addPage(new Page("layout-page-sidebar.mtt", 
                        "tags.mtt", 
                        'tag/$tag.html')
-                        .setTitle('${tag} - tags')
+                        .setTitle('Tag - ${tag}')
                         .setCustomData({tag:tag, pages: tags.get(tag)})
                         .hidden(), "tags");
     }
   }
   
   private function addGeneralPages() {
-    var page2 = new Page("layout-page-main.mtt", "index.mtt", "index.html")
+    var page = new Page("layout-page-main.mtt", "index.mtt", "index.html")
       .setTitle("Build and debug cross platform applications using Haxe");
       
-    addPage(page2, "/home");
+    addPage(page, "/home");
   }
   
   private function addCookbookPages(documentationPath:String = "cookbook/") {
