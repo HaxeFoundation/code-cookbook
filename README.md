@@ -8,7 +8,7 @@ This project contains a static website generator, it is mixing templates and mar
 
 ### Structure
 
- * The actual code snippets are in [assets/content/Cookbook](assets/content/Cookbook), organized per folder.
+ * The actual code snippets are in [assets/content/cookbook](assets/content/cookbook), organized per folder.
  * The template files are in [assets/content/](assets/content).
  * The static files (css, js, images) files are in [assets/includes/](assets/includes).
  * The Haxe source files of the generator are in [src/](src).
