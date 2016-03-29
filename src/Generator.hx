@@ -223,7 +223,7 @@ class Generator {
   }
   
   public inline function getAddLinkUrl(category:Category  = null, page:Page = null) {
-    var fileNameHint = "?filename=snippet-name.md";
+    var fileNameHint = "/?filename=snippet-name.md";
     var directory = if (category != null) {
       getDirectory(category.pages[0].contentPath);
     } else {
