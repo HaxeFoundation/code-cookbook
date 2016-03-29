@@ -14,9 +14,9 @@ JavaScript | No
 ActionScript 3  | No 
 Flash | No 
 
-### Check if filesystem is available
+### Check if FileSystem is available
 
-You can savely access the filesystem if you wrap the code with [conditional compilation](http://haxe.org/manual/lf-condition-compilation.html):
+You can savely access the `sys`-package if you wrap the code with [conditional compilation](http://haxe.org/manual/lf-condition-compilation.html):
   
 ```haxe
 #if sys
@@ -36,7 +36,7 @@ trace(myContent);
 
 ### Write content to a file
 
-This example writes an object `person` to a Json file:
+This example writes an object `person` to a json file:
 ```
 var user = {name:"Mark", age:31};
 var content:String = haxe.Json.stringify(user);
