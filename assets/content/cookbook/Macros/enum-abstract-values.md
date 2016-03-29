@@ -1,3 +1,5 @@
+[tags]: / "enum,macro,macro-function"
+
 # Get all values of an @:enum abstract
 
 The following macro function returns an array of all possible values of a given `@:enum abstract` type.

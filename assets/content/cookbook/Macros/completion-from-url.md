@@ -1,3 +1,5 @@
+[tags]: / "completion,macro,build-macro"
+
 # Code completion from URL
 
 This example will load an URL, scrape all id's from the HTML page and use them for auto-completion.

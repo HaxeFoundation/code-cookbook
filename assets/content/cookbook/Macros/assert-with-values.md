@@ -1,3 +1,5 @@
+[tags]: / "macro-function,macro,validation"
+
 # Assert macro that shows sub-expression values
 
 Sometimes failed assertion checks make it difficult to tell what went wrong. For debugging the programmer not only wants to know

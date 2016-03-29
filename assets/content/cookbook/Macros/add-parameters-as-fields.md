@@ -1,3 +1,5 @@
+[tags]: / "macro,macro-function,building-fields"
+
 # Add parameters as fields
 
 This macro function automatically assigns parameters of method to local variables.

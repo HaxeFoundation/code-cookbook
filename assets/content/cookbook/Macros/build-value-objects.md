@@ -1,3 +1,5 @@
+[tags]: / "build-macro,macro,building-fields"
+
 # Create value-objects
 
 ```haxe

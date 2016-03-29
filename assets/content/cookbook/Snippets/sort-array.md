@@ -1,3 +1,5 @@
+[tags]: / "array"
+
 # Sorting arrays
 
 ### Sort an array of values

@@ -1,3 +1,5 @@
+[tags]: / "enum,pattern-matching,macro,macro-function"
+
 # Extract values from known enum instances
 
 Sometimes we have an instance of `enum` that is of known constructor (or we only accept that constructor) and we

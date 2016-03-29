@@ -1,3 +1,5 @@
+[tags]: / "build-macro,macro,building-fields"
+
 # Add property with getter
 
 > Virtually adds this property to a class:

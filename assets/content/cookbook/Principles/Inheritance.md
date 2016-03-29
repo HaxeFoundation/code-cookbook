@@ -1,3 +1,5 @@
+[tags]: / "class"
+
 # Inheritance
 
 Classes inherit from other classes using the `extends` keyword:

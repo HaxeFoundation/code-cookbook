@@ -1,3 +1,5 @@
+[tags]: / "git,macro,macro-function,process"
+
 # Add git commit-hash in build
 
 This example executes a process on the system, compile-time. 

@@ -1,3 +1,5 @@
+[tags]: / "arguments,macro,building-fields,build-macro"
+
 # Generate dispatch code
 
 Automatically generate dispatch functions as:

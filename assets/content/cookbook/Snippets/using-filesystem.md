@@ -1,3 +1,5 @@
+[tags]: / "filesystem"
+
 # Using File system
 
 Haxe has some targets that can directly access the filesystem:

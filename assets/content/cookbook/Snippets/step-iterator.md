@@ -1,3 +1,5 @@
+[tags]: / "iterator"
+
 # Stepped iterator
 
 Haxe has a special [range operator](http://haxe.org/manual/expression-for.html) `for(i in 0...5)` to iterate forward. 

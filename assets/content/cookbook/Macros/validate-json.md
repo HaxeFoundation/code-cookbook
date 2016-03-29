@@ -1,3 +1,5 @@
+[tags]: / "json,validation,macro,macro-function"
+
 # Validates a .JSON file compile-time
 
 Json is quite a strict format. 

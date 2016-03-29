@@ -1,3 +1,5 @@
+[tags]: / "build-macro,macro,building-fields"
+
 # Add a static field
 
 > Virtually adds this static variable to a class:
