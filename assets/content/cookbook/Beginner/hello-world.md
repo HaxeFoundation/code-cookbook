@@ -1,6 +1,6 @@
 # Hello world
 
-This tutorial demonstrates how to write and compile a Hello World Haxe program. It explains the involved file-format (.hx) and gives a basic explanation of what the Haxe Compiler does with them.
+> This tutorial demonstrates how to write and compile a Hello World Haxe program. It explains the involved file-format (.hx) and gives a basic explanation of what the Haxe Compiler does with them.
 
 #### Requirements
 
