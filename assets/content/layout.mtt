@@ -7,7 +7,7 @@
 	
   <!-- general css -->
   <link rel="stylesheet" type="text/css" href="http://haxe.org/css/bootstrap.min.css"/>
-  <link rel="stylesheet" href="css/github.css"/>
+  <link rel="stylesheet" href="css/github.min.css"/>
   <link rel="stylesheet" type="text/css" href="css/styles.min.css"/>
   <!--link rel="icon" href="http://haxedevelop.org/favicon.ico"/-->
 
