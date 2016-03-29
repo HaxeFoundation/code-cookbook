@@ -1,4 +1,4 @@
-[tags]: / "enum,macro,macro-function"
+[tags]: / "enum,macro-function"
 
 # Get all values of an @:enum abstract
 

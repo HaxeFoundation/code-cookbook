@@ -1,4 +1,4 @@
-[tags]: / "macro-function,macro,validation"
+[tags]: / "macro-function,validation"
 
 # Assert macro that shows sub-expression values
 

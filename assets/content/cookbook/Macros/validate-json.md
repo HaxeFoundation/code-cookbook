@@ -1,4 +1,4 @@
-[tags]: / "json,validation,macro,macro-function"
+[tags]: / "json,validation,macro-function"
 
 # Validates a .JSON file compile-time
 

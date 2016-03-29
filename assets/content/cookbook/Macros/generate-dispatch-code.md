@@ -1,4 +1,4 @@
-[tags]: / "arguments,macro,building-fields,build-macro"
+[tags]: / "arguments,building-fields,build-macro"
 
 # Generate dispatch code
 

@@ -1,4 +1,4 @@
-[tags]: / "completion,macro,build-macro"
+[tags]: / "completion,build-macro"
 
 # Code completion from URL
 

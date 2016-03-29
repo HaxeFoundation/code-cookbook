@@ -1,4 +1,4 @@
-[tags]: / "enum,pattern-matching,macro,macro-function"
+[tags]: / "enum,pattern-matching,macro-function"
 
 # Extract values from known enum instances
 

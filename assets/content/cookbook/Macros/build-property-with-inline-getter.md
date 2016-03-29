@@ -1,4 +1,4 @@
-[tags]: / "build-macro,macro,building-fields"
+[tags]: / "build-macro,building-fields"
 
 # Add property with getter
 
