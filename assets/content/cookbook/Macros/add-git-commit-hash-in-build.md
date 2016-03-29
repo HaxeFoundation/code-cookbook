@@ -6,6 +6,7 @@ This allows to run a git command `git rev-parse HEAD` and use it's result as val
 ```haxe
 class MyMacros {
   public static macro function getGitCommitHash():haxe.macro.ExprOf<String> {
+    #if !display
     var process = new sys.io.Process('git', ['rev-parse', 'HEAD']);
     if (process.exitCode() != 0) {
       var message = process.stderr.readAll().toString();
@@ -18,6 +19,12 @@ class MyMacros {
     
     // Generates a string expression
     return macro $v{commitHash};
+    #else 
+    // `#if display` is used for code completion. In this case returning an
+    // empty string is good enough; We don't want to call git on every hint.
+    var commitHash:String = "";
+    return macro $v{commitHash};
+    #end
   }
 }
 ```
