@@ -5,6 +5,13 @@ haxe:
   - "3.2.1"
   - development
 
+before_script:
+  - npm install -g less
+  - npm install -g less-plugin-clean-css
+  - lessc assets/includes/css/github.css assets/includes/css/github.min.css --clean-css="--s1 --advanced"
+  - lessc assets/includes/css/haxe-nav.css assets/includes/css/haxe-nav.min.css --clean-css="--s1 --advanced"
+  - lessc assets/includes/css/styles.css assets/includes/css/styles.min.css --clean-css="--s1 --advanced"
+  
 hxml:
   - CodeCookBook.hxml
 

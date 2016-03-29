@@ -11,7 +11,7 @@ body, body p, body td, body li {
 
 .btn, .btn-large, .btn-medium, .btn-small {
   border-radius: 4px!important;
-  margin-right:5px;
+  margin-right:5px; 
 }
 
 h1,h2,h3 {
@@ -82,7 +82,7 @@ a, a:hover {
   background: #FBC707;
   
   background-repeat: no-repeat;
-	background: -webkit-gradient(radial, 50% 80%, 0, center center, 100, from(183,77,49), to(100,33,38)));
+	background: -webkit-gradient(radial, 50% 80%, 0, center center, 100, from(183,77,49), to(100,33,38));
 	background: -webkit-radial-gradient(50% 80%, circle, rgb(183,77,49), rgb(100,33,38));
 	background: -moz-radial-gradient(50% 80%, circle, rgb(183,77,49), rgb(100,33,38));
 	background: -ms-radial-gradient(50% 80%, circle, rgb(183,77,49), rgb(100,33,38));
