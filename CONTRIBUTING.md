@@ -10,7 +10,9 @@
  * judicious use of extra line-breaks to avoid ugly automatic breaks (check the output)
  
 This would be a typical template to use. Use <code>```haxe</code> for syntax highlighting.  
+
 The first heading is used in the menu. Keep this title short.
+
 You can tag the snippet using the `[tags]: / "tag1,tag2"`. Don't use spaces, try to use [an existing tag](used-tags.txt).
  
 ```markdown
