@@ -1,0 +1,7 @@
+<h1><i class="fa fa-tag"></i> Tagged with <em>::currentPage.customData.tag::</em></h1>
+
+<ul>
+::foreach page currentPage.customData.pages::
+	<li ::cond page.visible::><a href="::page.outputPath::">::page.title::</a></li>
+::end::
+</ul>

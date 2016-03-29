@@ -1,6 +1,6 @@
 body{font-family:"Open Sans",sans-serif;font-weight:400;font-size:16px;color:#1e1e1e;}
 body,body p,body td,body li{line-height:1.5;}
-.btn,.btn-large,.btn-medium,.btn-small{border-radius:4px!important;}
+.btn,.btn-large,.btn-medium,.btn-small{border-radius:4px!important;margin-right:5px;}
 h1,h2,h3{font-weight:normal;}
 article h1,article h2,article h3,article h4,article h5,article h6{margin-bottom:20px;}
 article h2,article h3,article h4,article h5,article h6{margin-top:20px;}
@@ -36,9 +36,9 @@ body .hero-unit h3 br{display:block;}}
 .secondary-section h3 a:hover{color:#eee;text-decoration:underline;}
 .dark{background:rgb(20,20,25);color:#fff;}
 .dark-section{background:rgb(20,20,25);color:#fff;padding:2em 1em;}
-footer{margin-top:40px;font-size:12px;}
+footer{margin-top:40px;font-size:14px;}
 .copyright{padding:6px;overflow:hidden;text-align:center;margin:40px 0;}
-blockquote{margin-left:20px;border-left:5px solid #eee;font-style:italic;padding-left:30px;}
+blockquote{margin-left:20px;border-left:5px solid #eee;font-style:italic;padding:15px 30px;}
 .dark a,.dark a:hover,.dark a:active{color:rgb(234,130,32);}
 .dark a.flashdevelop,.dark a.flashdevelop:hover,.dark a.flashdevelop:active{color:#eee;text-decoration:underline;}
 .btn-success{background:rgb(234,130,32);}
@@ -55,3 +55,4 @@ article table td:not(:first-child),article table th:not(:first-child){border-lef
 article table td,article table th{padding:3px 5px;text-align:left;}
 article table td:first-child,article table th:first-child{width:140px;}
 code.prettyprint{padding:0.5em;display:block;}
+.tag{padding-left:5px;padding-right:5px;}

@@ -19,6 +19,7 @@ class Generator {
   public var domain = "";
   public var titlePostFix = "";
   public var sitemap:Array<Category> = [];
+  public var tags:StringMap<Array<Page>>;
   
   private var _pages:Array<Page> = new Array<Page>();
   private var _folders:Map<String,Array<Page>> = new Map<String,Array<Page>>();
@@ -36,16 +37,20 @@ class Generator {
     addCookbookPages();
     
     // after all other pages are added
+    collectTags();
     createSitemap();
     addCategoryPages();
+    addTagPages();
     
     Timer.measure(function() {
       for(page in _pages) {
         // set the data for the page
         var category = getCategory(page);
+        
         var data = {
           title: '${page.title} $titlePostFix', 
           year: Date.now().getFullYear(), // we're professional now
+          baseHref: getBaseHref(page),
           pages: _pages,
           currentPage: page,
           currentCategory: category,
@@ -54,6 +59,7 @@ class Generator {
           addLinkUrl: (category != null) ? getAddLinkUrl(category) : getAddLinkUrl(page),
           absoluteUrl:getAbsoluteUrl(page),
           sitemap: sitemap,
+          tags: tags,
           pageContent: null,
         }
         data.pageContent = getContent(contentPath + page.contentPath, data);
@@ -71,10 +77,114 @@ class Generator {
         }
         
         // write output into file
+        var targetDirectory = getDirectory(outputPath + page.outputPath);
+        if (!FileSystem.exists(targetDirectory)) {
+          FileSystem.createDirectory(targetDirectory);
+        }
         File.saveContent(outputPath + page.outputPath, html);
       }
     });
-    trace(_pages.length + "pages done!");
+    
+    var allTags = [for (tag in tags.keys()) tag];
+    File.saveContent("used-tags.txt", allTags.join(",\\r\\n"));
+    
+    trace(sitemap.length + " categories");
+    trace(allTags.length + " tags");
+    trace(_pages.length + " pages done!");
+  }
+  
+  private function addPage(page:Page, folder:String = null) {
+    _pages.push(page);
+    
+    if (folder != null) {
+      if (!_folders.exists(folder)) {
+        _folders.set(folder, []);
+      }
+      _folders.get(folder).push(page);
+    }
+  }
+  
+  private function addCategoryPages() {
+    for (category in sitemap) {
+      addPage(new Page("layout-page-sidebar.mtt", 
+                       "table-of-content.mtt", 
+                       'category/${category.id}/index.html')
+                        .setTitle('${category.title } - table of content')
+                        .hidden(), category.folder);
+    }
+  }
+  
+  private function addTagPages() {
+    for (tag in tags.keys()) {
+      addPage(new Page("layout-page-sidebar.mtt", 
+                       "tags.mtt", 
+                       'tag/$tag.html')
+                        .setTitle('${tag} - tags')
+                        .setCustomData({tag:tag, pages: tags.get(tag)})
+                        .hidden(), "tags");
+    }
+  }
+  
+  private function addGeneralPages() {
+    var page2 = new Page("layout-page-main.mtt", "index.mtt", "index.html")
+      .setTitle("Build and debug cross platform applications using Haxe");
+      
+    addPage(page2, "/home");
+  }
+  
+  private function addCookbookPages(documentationPath:String = "cookbook/") {
+    for (file in FileSystem.readDirectory(contentPath + documentationPath)) {
+      if (!FileSystem.isDirectory(contentPath + documentationPath + file)) {
+        
+         var page = new Page("layout-page-sidebar.mtt", 
+                             documentationPath + file, 
+                             documentationPath.replace('cookbook/', 'category/').toLowerCase() + 
+                                getWithoutExtension(file).toLowerCase() + ".html")
+            .setTags(getTags(documentationPath + file))
+            .setTitle(getDocumentationTitle(documentationPath + file));
+        addPage(page, documentationPath);
+      } else {
+        addCookbookPages(documentationPath + file + "/" );
+      }
+    }
+  }
+  
+  // categorizes the folders 
+  private function createSitemap() {
+    for (key in _folders.keys()) {
+      var structure = key.split("/");
+      structure.pop();
+      var id = structure.pop();
+      if (key.indexOf("cookbook/") == 0) {
+        sitemap.push(new Category(id.toLowerCase(), id, key, _folders.get(key)));
+      }
+    }
+  }
+  
+  // collects all tags and counts them
+  private function collectTags() {
+    tags = new StringMap<Array<Page>>();
+    for (page in _pages) {
+      if (page.tags != null) {
+        for (tag in page.tags) {
+          tag = tag.toLowerCase();
+          if (!tags.exists(tag)) {
+            tags.set(tag, []);
+          }
+          tags.get(tag).push(page);
+        }
+      }
+    }
+  }
+  
+  private function getDocumentationTitle(path:String) {
+    // pick first header `# mytitle` from markdown file
+    var lines = File.getContent(contentPath + path).split("\n");
+    var prefix = "# ";
+    for (line in lines) {
+      if (line.substr(0, prefix.length) == prefix) return line.substr(prefix.length);
+    }
+    return null;
   }
   
   private function getCategory(page:Page):Category {
@@ -86,26 +196,22 @@ class Generator {
     return null;
   }
   
-  private function addCategoryPages() {
-    for (category in sitemap) {
-      addPage(new Page("layout-page-sidebar.mtt", 
-                       "table-of-content.mtt", 
-                       category.id + "-index.html")
-                        .setTitle('${category.title } - table of content')
-                        .hidden(), category.folder);
-    }
+  private function getBaseHref(page:Page) {
+    var href = [for (s in page.outputPath.split("/")) ".."];
+    href[0] = ".";
+    return href.join("/");
   }
   
-  // categorizes the folders 
-  private function createSitemap() {
-    for (key in _folders.keys()) {
-      var structure = key.split("/");
-      structure.pop();
-      var id = structure.pop();
-      if (key.indexOf("/cookbook/") == 0) {
-        sitemap.push(new Category(id.toLowerCase(), id, key, _folders.get(key)));
+  private function getTags(path:String) {
+    // pick first header `# mytitle` from markdown file
+    var lines = File.getContent(contentPath + path).split("\n");
+    var prefix = "[tags]: / \"";
+    for (line in lines) {
+      if (line.substr(0, prefix.length) == prefix) {
+        return line.substr(prefix.length, line.length-prefix.length-2).toLowerCase().split(",");
       }
     }
+    return null;
   }
   
   public inline function getEditUrl(page:Page) {
@@ -128,43 +234,6 @@ class Generator {
   
   public inline function getAbsoluteUrl(page:Page) {
     return domain + page.outputPath;
-  }
-  
-  private function addPage(page:Page, folder:String = null) {
-    _pages.push(page);
-    
-    if (folder != null) {
-      if (!_folders.exists(folder)) {
-        _folders.set(folder, []);
-      }
-      _folders.get(folder).push(page);
-    }
-  }
-  
-  private function addGeneralPages() {
-    var page2 = new Page("layout-page-main.mtt", "index.mtt", "index.html")
-      .setTitle("Build and debug cross platform applications using Haxe");
-      
-    addPage(page2, "/home");
-  }
-  
-  private function addCookbookPages(documentationPath:String = "/cookbook/") {
-    for (file in FileSystem.readDirectory(contentPath + documentationPath)) {
-      if (!FileSystem.isDirectory(contentPath + documentationPath + file)) {
-         var page = new Page("layout-page-sidebar.mtt", 
-                             documentationPath + file, 
-                             getWithoutExtension(file).toLowerCase() + ".html")
-            .setTitle( getDocumentationTitle(documentationPath + file));
-        addPage(page, documentationPath);
-      } else {
-        addCookbookPages(documentationPath + file + "/" );
-      }
-    }
-  }
-  
-  private function getDocumentationTitle(path:String) {
-    // pick first header `# mytitle` from markdown file
-    return File.getContent(contentPath + path).split("\n").shift().split("# ").join("");
   }
   
   private static inline function getDirectory(file:String) {
@@ -221,6 +290,7 @@ class Page {
   public var contentPath:String;
   public var outputPath:String;
   public var customData:Dynamic;
+  public var tags:Array<String>;
   
   public function new(templatePath:String, contentPath:String, outputPath:String) {
     this.templatePath = templatePath;
@@ -235,6 +305,11 @@ class Page {
   
   public function setTitle(title:String):Page {
     this.title = title;
+    return this;
+  }
+  
+  public function setTags(tags:Array<String>):Page {
+    this.tags = tags;
     return this;
   }
   

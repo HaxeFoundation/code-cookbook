@@ -10,28 +10,29 @@
 <hr/>
 
 <section class="container">
-  
-			<h3><i class="fa fa-book"></i> Start browsing..</h3>
-          ::foreach category sitemap::
-            <a href="::category.id::-index.html" class="btn btn-large"><strong>::category.title::</strong> <small class="category-count">(::category.getPageCount()::)</small></a>
-          ::end::
-<hr/>
-  
+	<h3><i class="fa fa-book"></i> Start browsing..</h3>
+	::foreach category sitemap::
+		<a href="category/::category.id::/index.html" class="btn btn-large"><strong>::category.title::</strong> <small class="category-count">(::category.getPageCount()::)</small></a>
+	::end::
+	<hr/>
+	::foreach tag tags.keys()::
+		<span class="tag"><i class="fa fa-tag"></i>&nbsp;<a href="tag/::tag::.html">::tag::&nbsp;<small class="category-count">(::tags.get(tag).length::)</small></a></span>
+	::end::
+	<hr/>
 	<div class="row">
 		<div class="span4">
 			<h3>Learning by example</h3>
-      <p>The Haxe Foundation facilitates the following code cookbook for the Haxe commmunity. 
-      Enjoy learning Haxe; It is great!</p>
-      
+		<p>The Haxe Foundation facilitates the following code cookbook for the Haxe commmunity. 
+		Enjoy learning Haxe; It is great!</p>
+
 		</div>
 		<div class="span4">
 			<h3>More documentation</h3>
 			<p>
-        <p><a href="https://haxe.org/manual"><i class="fa fa-arrow"></i> Haxe Manual</a></p>
-        <p><a href="https://api.haxe.org"><i class="fa fa-arrow"></i> Haxe API documentation</a></p>
-        <p>You can try Haxe in the browser! <a href="https://github.com/markknol/code-cookbook">try.haxe.org</a></p>
-		
-      </p>
+				<p><a href="https://haxe.org/manual"><i class="fa fa-arrow"></i> Haxe Manual</a></p>
+				<p><a href="https://api.haxe.org"><i class="fa fa-arrow"></i> Haxe API documentation</a></p>
+				<p>You can try Haxe in the browser! <a href="https://github.com/markknol/code-cookbook">try.haxe.org</a></p>
+			</p>
 		</div>
 		<div class="span4">
 			<h3>Contribution is easy</h3>

@@ -11,6 +11,7 @@ body, body p, body td, body li {
 
 .btn, .btn-large, .btn-medium, .btn-small {
   border-radius: 4px!important;
+  margin-right:5px;
 }
 
 h1,h2,h3 {
@@ -213,7 +214,7 @@ a, a:hover {
 
 footer {
   margin-top: 40px;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .copyright {
@@ -227,7 +228,7 @@ blockquote {
   margin-left: 20px;
   border-left: 5px solid #eee;
   font-style: italic;
-  padding-left: 30px;
+  padding: 15px 30px;
 }
 
 .dark a, .dark a:hover, .dark a:active {
@@ -298,4 +299,9 @@ article table td:first-child, article table th:first-child {
 code.prettyprint { 
   padding: 0.5em;
   display: block;
+}
+
+.tag { 
+  padding-left:5px;
+  padding-right:5px;
 }
