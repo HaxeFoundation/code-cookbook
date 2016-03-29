@@ -12,6 +12,7 @@ class Main {
     generator.titlePostFix = " - Haxe Code Cookbook";
     generator.domain = "http://haxe-cookbook.stroep.nl/";
     generator.repositoryUrl = "https://github.com/HaxeFoundation/code-cookbook/";
+    generator.repositoryBranch = "master";
     
     generator.build(true);
     generator.includeDirectory("assets/includes");

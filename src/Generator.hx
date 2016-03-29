@@ -15,6 +15,7 @@ class Generator {
   public var contentPath = "./assets/content/";
   public var outputPath = "./output/";
   public var repositoryUrl = "";
+  public var repositoryBranch = "";
   public var domain = "";
   public var titlePostFix = "";
   public var sitemap:Array<Category> = [];
@@ -108,20 +109,21 @@ class Generator {
   }
   
   public inline function getEditUrl(page:Page) {
-    return repositoryUrl + "edit/master/" + contentPath + page.contentPath;
+    return '${repositoryUrl}edit/${repositoryBranch}/${contentPath}${page.contentPath}';
   }
   
   public inline function getContributionUrl(page:Page) {
-    return repositoryUrl + "tree/master/" + contentPath + page.contentPath;
+    return '${repositoryUrl}tree/${repositoryBranch}/${contentPath}${page.contentPath}';
   }
   
   public inline function getAddLinkUrl(category:Category  = null, page:Page = null) {
     var fileNameHint = "?filename=snippet-name.md";
-    if (category!= null) {
-      return repositoryUrl + "new/master/" + contentPath + getDirectory(category.pages[0].contentPath) + fileNameHint;
+    var directory = if (category != null) {
+      getDirectory(category.pages[0].contentPath);
     } else {
-      return repositoryUrl + "new/master/" + contentPath + getDirectory(page.contentPath) + fileNameHint;
+      getDirectory(page.contentPath);
     }
+    return '${repositoryUrl}new/master/${contentPath}${directory}${fileNameHint}';
   }
   
   public inline function getAbsoluteUrl(page:Page) {
