@@ -38,7 +38,7 @@ body .hero-unit h3 br{display:block;}}
 .dark-section{background:rgb(20,20,25);color:#fff;padding:2em 1em;}
 footer{margin-top:40px;font-size:12px;}
 .copyright{padding:6px;overflow:hidden;text-align:center;margin:40px 0;}
-blockquote{border-color:#5D4037;}
+blockquote{margin-left:20px;border-left:5px solid #eee;font-style:italic;padding-left:30px;}
 .dark a,.dark a:hover,.dark a:active{color:rgb(234,130,32);}
 .dark a.flashdevelop,.dark a.flashdevelop:hover,.dark a.flashdevelop:active{color:#eee;text-decoration:underline;}
 .btn-success{background:rgb(234,130,32);}
@@ -54,3 +54,4 @@ article table tr:not(:last-child){border-bottom:1px solid #ccc;}
 article table td:not(:first-child),article table th:not(:first-child){border-left:1px solid #ccc;}
 article table td,article table th{padding:3px 5px;text-align:left;}
 article table td:first-child,article table th:first-child{width:140px;}
+code.prettyprint{padding:0.5em;display:block;}

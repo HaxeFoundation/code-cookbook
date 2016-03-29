@@ -224,7 +224,10 @@ footer {
 }
 
 blockquote {
-  border-color: #5D4037;
+  margin-left: 20px;
+  border-left: 5px solid #eee;
+  font-style: italic;
+  padding-left: 30px;
 }
 
 .dark a, .dark a:hover, .dark a:active {
@@ -290,4 +293,9 @@ article table td, article table th {
 
 article table td:first-child, article table th:first-child { 
   width:140px;
+}
+
+code.prettyprint { 
+  padding: 0.5em;
+  display: block;
 }
