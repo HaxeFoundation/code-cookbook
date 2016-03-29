@@ -69,19 +69,19 @@ class AssertionFailure {
 class Main {
     static function main() {
         //Error: Assertion failure: x == 7 && y == 11
-            //x: 7
-            //x == 7: true
-            //y: 10
-            //y == 11: false
-            //x == 7 && y == 11: false
+        //x: 7
+        //x == 7: true
+        //y: 10
+        //y == 11: false
+        //x == 7 && y == 11: false
         var x = 7;
         var y = 10;
         Assert.assert(x == 7 && y == 11);
-
+        
         //Error: Assertion failure: a.length > 0
-            //a: []
-            //a.length: 0
-            //a.length > 0: false
+        //a: []
+        //a.length: 0
+        //a.length > 0: false
         var a = [];
         Assert.assert(a.length > 0);
     }
