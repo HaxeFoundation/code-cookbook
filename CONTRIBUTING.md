@@ -8,12 +8,16 @@
  * type-hints for fields
  * type-hints for function arguments unless it's very obvious
  * judicious use of extra line-breaks to avoid ugly automatic breaks (check the output)
+
+### Other remarks
  
-This would be a typical template to use. Use <code>```haxe</code> for syntax highlighting.  
+ * the first heading is used in the navigation. Keep this title short.
+ * tag the snippet using `[tags]: / "tag1,tag2"` (no spaces). Try to use [an existing tag](used-tags.txt).
+ * mention the author / sources at the bottom of the page.
+ * if possible, link to related pages in the [Haxe Manual](http://haxe.org/manual) / [API documentation](http://api.haxe.org)
+ * if you want to use images, upload them in the <assets/includes/img> folder.
 
-The first heading is used in the menu. Keep this title short.
-
-You can tag the snippet using the `[tags]: / "tag1,tag2"`. Don't use spaces, try to use [an existing tag](used-tags.txt).
+This would be a typical template to use. Use <code>```haxe</code> for syntax highlighting:
  
 ```markdown
    [tags]: / "enum,pattern-matching,macro,macro-function"
@@ -38,10 +42,3 @@ You can tag the snippet using the `[tags]: / "tag1,tag2"`. Don't use spaces, try
     > Author: [Name](http://github.com/usename)
   
 ```
-
-### Other remarks
-
- * Provide code comments where needed.
- * Please mention the author / sources in the bottom of the page.
- * If possible, link to related pages in the [Haxe Manual](http://haxe.org/manual) / [API documentation](http://api.haxe.org)
- * If you want to use images, upload them in the <assets/includes/img> folder.
