@@ -14,12 +14,6 @@ This project contains a static website generator, it is mixing templates and mar
  * The Haxe source files of the generator are in [src/](src).
  * The website-generated content will output in `output`.
 
-## Running a local copy
-
-To run the project you need [Haxe](http://haxe.org).
-
-Call `build-site.bat` to re-generate the output files.
-
 ## Contributing snippets
 
 Please add/edit the code snippets (markdown files) in the [assets folder](assets/content/cookbook) and do a pull request.
@@ -69,12 +63,25 @@ This would be a typical template to use. Use <code>```haxe</code> for syntax hig
   
 ```
 
+## Running a local copy
+
+To run the project you need [Haxe](http://haxe.org).
+
+Call `build-site.bat` to re-generate the output files.
+
 ## Contributing to the generator
 
 You need [Haxe](http://haxe.org) 3.2+ installed.
 
-The static site generator source depends on [hxtemplo](http://lib.haxe.org/p/hxtemplo) and [markdown](http://lib.haxe.org/p/markdown). Install from haxelib:
+The static site generator source depends on [hxtemplo](http://lib.haxe.org/p/hxtemplo) and [markdown](http://lib.haxe.org/p/markdown).
+Install from haxelib:
 ```
 haxelib install hxtemplo
 haxelib install markdown
+```
+The CSS files are compressed using [less](http://lesscss.org/#using-less). 
+Install from npm:
+```
+npm install -g less
+npm install -g less-plugin-clean-css
 ```
