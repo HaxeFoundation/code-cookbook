@@ -14,7 +14,12 @@ body, body p, body td, body li {
   margin-right:5px; 
 }
 
-h1,h2,h3 {
+h1 {
+  font-weight: normal;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: "Source Sans Pro", courier;
   font-weight: normal;
 }
 
@@ -49,7 +54,6 @@ a, a:hover {
   color: #999;
 }
 
-
 @media (max-width: 767px) {
   body {
     padding: 0 20px;
@@ -58,7 +62,6 @@ a, a:hover {
 }
 
 @media (max-width: 500px) {
-	
   body .hero-unit h3 {
     font-size: 90%;
   }
@@ -106,8 +109,8 @@ a, a:hover {
 }
 
 .hero-unit h1, .hero-unit-small h1 {
-  margin-bottom: .5em;
   color: #fff;
+  text-shadow:2px 2px 2px rgba(0,0,0,.15);
 }
 
 .hero-unit h1 small, .hero-unit-small h1 small {
@@ -132,73 +135,14 @@ a, a:hover {
   max-height: 90px;
 }
 
-.hero-unit-small .btn-download {
-  width: 134px;
-  height: 40px;
-  font-size: 20px;
-  line-height: 40px;
-  border-width: 1px;
-  margin-top: 30px;
-}
-
-.hero-unit-small .btn-download .fa {
-  top: 17px;
-}
-
-.hero-unit h3 br {
-  display: block;
+.hero-unit h3.lead {
+  color: #EA8220;
 }
 
 .hero-unit a, .hero-unit a:hover {
-  color: #fff;
+  color: #FBC707;
   text-decoration: none;
   border-bottom: 1px dashed #fff;
-}
-
-.btn-download {
-  font-size: 26.5px;
-  border-radius: 10px;
-  position: relative;
-  background: none;
-  box-shadow: none;
-  border: 1px dashed #fff;
-  color: #fff;
-  width: 204px;
-  height: 54px;
-  line-height: 54px;
-  text-shadow: none;
-  padding-right: 33px;
-}
-
-.btn-download:hover, .btn-download:active {
-  color: #fff;
-  background: rgba(255,255,255,0.1);
-}
-
-.btn-download .fa {
-  position: absolute;
-  right: 15px;
-  top: 23px;
-  font-size: 16px;
-}
-
-.secondary-section {
-  background: #257fc2;
-	/*background-color: #257fc2;*/
-  padding: 2em 1em;
-}
-
-.secondary-section h1 small {
-  color: #D7CCC8;
-}
-
-.secondary-section h3 a {
-  color: #FFF;
-}
-
-.secondary-section h3 a:hover {
-  color: #eee;
-  text-decoration: underline;
 }
 
 .dark {
@@ -303,5 +247,21 @@ code.prettyprint {
 
 .tag { 
   padding-left:5px;
-  padding-right:5px;
+  padding-right:10px;
+}
+
+.tag small {
+  color:#999;
+  font-size:80%;
+}
+
+.tag a {
+  color:#A84B38;
+}
+.tag a:hover {
+  color:#EA8220;
+}
+
+.fa {
+  color:#555;
 }

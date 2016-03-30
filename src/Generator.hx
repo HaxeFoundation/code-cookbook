@@ -1,8 +1,6 @@
 package;
 import haxe.Timer;
 import haxe.ds.StringMap;
-import haxe.io.Error;
-import haxe.Json;
 import sys.FileSystem;
 import sys.io.File;
 import templo.Template;
@@ -127,7 +125,7 @@ class Generator {
   
   private function addGeneralPages() {
     var page = new Page("layout-page-main.mtt", "index.mtt", "index.html")
-      .setTitle("Build and debug cross platform applications using Haxe");
+      .setTitle("Easy to read Haxe coding examples");
       
     addPage(page, "/home");
   }

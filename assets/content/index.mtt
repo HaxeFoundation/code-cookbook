@@ -8,7 +8,7 @@
 </header>
 
 <hr/>
-
+  
 <section class="container">
 	<h3><i class="fa fa-book"></i> Start browsing..</h3>
 	::foreach category sitemap::
@@ -19,6 +19,7 @@
 		<span class="tag"><i class="fa fa-tag"></i>&nbsp;<a href="tag/::tag::.html">::tag::&nbsp;<small class="category-count">(::tags.get(tag).length::)</small></a></span>
 	::end::
 	<hr/>
+  
 	<div class="row">
 		<div class="span4">
 			<h3>Learning by example</h3>
