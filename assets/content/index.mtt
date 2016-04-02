@@ -22,13 +22,13 @@
   
 	<div class="row">
 		<div class="span4">
-			<h3>Learning by example</h3>
+			<h3><i class="fa fa-big fa-rocket"></i> Learning by example</h3>
 		<p>The Haxe Foundation facilitates the following code cookbook for the Haxe commmunity. 
 		Enjoy learning Haxe; It is great!</p>
 
 		</div>
 		<div class="span4">
-			<h3>More documentation</h3>
+			<h3><i class="fa fa-big fa-gears"></i> More documentation</h3>
 			<p>
 				<p><i class="fa fa-external-link"></i> <a href="http://haxe.org/manual">Haxe Manual</a></p>
 				<p><i class="fa fa-external-link"></i> <a href="http://api.haxe.org">Haxe API documentation</a></p>
@@ -36,7 +36,7 @@
 			</p>
 		</div>
 		<div class="span4">
-			<h3>Contribution is easy</h3>
+			<h3><i class="fa fa-big fa-globe"></i> Contribution is easy</h3>
 			<p>The project is being developed on GitHub. Feel free to contribute code snippets.</p>
 			<p><i class="fa fa-github"></i> <a href="https://github.com/markknol/code-cookbook">Haxe Code Cookbook on Github</a></p>
 		

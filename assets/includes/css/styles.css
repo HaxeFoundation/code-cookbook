@@ -55,9 +55,17 @@ a, a:hover {
 }
 
 @media (max-width: 767px) {
-  body {
+  body {padding:0}
+  .container {
     padding: 0 20px;
     margin: 0;
+  }
+  .navbar-fixed-top, .navbar-fixed-bottom, .navbar-static-top {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .fa.fa-big {
+    display:block;
   }
 }
 
@@ -264,4 +272,15 @@ code.prettyprint {
 
 .fa {
   color:#555;
+}
+
+.fa-big {
+	font-size:38px;
+	color:#555;
+  padding-left:25px;
+  padding-right:25px;
+}
+
+.btn {
+  margin-bottom: 5px;
 }
