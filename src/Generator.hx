@@ -211,7 +211,7 @@ class Generator {
     var prefix = "[tags]: / \"";
     for (line in lines) {
       if (line.substr(0, prefix.length) == prefix) {
-        return line.substr(prefix.length, line.length-prefix.length-2).toLowerCase().split(",");
+        return line.substr(prefix.length, line.length-prefix.length-1).replace('"',"").toLowerCase().split(",");
       }
     }
     return null;
