@@ -45,18 +45,6 @@ class ReverseIterator {
 
 Loop from 5 to 0.
 
-```haxe 
-for (i in new ReverseIterator(5, 0)) {
-  trace(i);
-}
-// 5
-// 4
-// 3
-// 2
-// 1
-// 0
-```
-
-
+[tryhaxe](http://try.haxe.org/embed/ae6ef)
 
 > Learn more about iterators here: <http://haxe.org/manual/lf-iterators.html>

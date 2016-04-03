@@ -44,8 +44,6 @@ class GridIteratorObject {
 The following example uses the GridIterator and displays a grid of 6x5 using dark colored divs.
 Because of the used `js` package/features, it only compiles in the JavaScript target.
 
-<iframe src="http://try.haxe.org/embed/F80dA" width="100%" height="350" frameborder="no" allowfullscreen style="border:1px solid #ccc;border-radius:10px;box-shadow:0 0 5px #ccc">
-	<a href="http://try.haxe.org/#F80dA">Try Haxe !</a>
-</iframe>
+[tryhaxe](http://try.haxe.org/embed/F80dA)
 
 > Learn more about iterators here: <http://haxe.org/manual/lf-iterators.html>

@@ -175,6 +175,11 @@ class Generator {
     }
   }
   
+  private function replaceTryHaxeTags(content:String) {
+    //[tryhaxe](http://try.haxe.org/embed/ae6ef)
+    return  ~/(\[tryhaxe\])(\()(.+?)(\))/.replace(content, '<iframe src="$3" class="try-haxe"><a href="$3">Try Haxe!</a></iframe>');
+  }
+  
   private function getDocumentationTitle(path:String) {
     // pick first header `# mytitle` from markdown file
     var lines = File.getContent(contentPath + path).split("\n");
@@ -250,9 +255,9 @@ class Generator {
     return path.join(".");
   }
   
-  private static function getContent(file:String, data) {
+  private function getContent(file:String, data) {
     return switch(getExtension(file)) {
-      case "md": Markdown.markdownToHtml(File.getContent(file));
+      case "md": Markdown.markdownToHtml(replaceTryHaxeTags(File.getContent(file)));
       case "mtt": Template.fromFile(file).execute(data);
       default: File.getContent(file);
     }

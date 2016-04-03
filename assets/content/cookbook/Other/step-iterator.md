@@ -47,15 +47,6 @@ class StepIterator {
 
 Loop in steps of two from 0 to 10.
 
-```haxe 
-for (i in new StepIterator(0, 10, 2)) {
-  trace(i);
-}
-// 0
-// 2
-// 4
-// 6
-// 8
-```
+[tryhaxe](http://try.haxe.org/embed/9F186)
 
 > Learn more about iterators here: <http://haxe.org/manual/lf-iterators.html>
