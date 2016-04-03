@@ -11,17 +11,9 @@ myArray.sort(function(a, b):Int {
   return 0;
 });
 ```
+This method isn't [stable](https://en.wikipedia.org/wiki/Sorting_algorithm#Stability) on all targets. If you need to retain the order of equal elements you should use `haxe.ds.ArraySort`
 
-### Alternative using reflection
-  
-```haxe
-myArray.sort(function(a, b):Int {
-  return Reflect.compare(a,b);
-});
-```
-> Learn more about `Reflect.compare()`: <http://api.haxe.org/Reflect.html#compare>
-
-### Using haxe.ds.ArraySort
+###  Using haxe.ds.ArraySort
 
 ```haxe
 haxe.ds.ArraySort.sort(myArray, function(a, b):Int {
@@ -32,10 +24,11 @@ haxe.ds.ArraySort.sort(myArray, function(a, b):Int {
 ```
 > Learn more about `haxe.ds.ArraySort`: <http://api.haxe.org/haxe/ds/ArraySort.html>
 
+
 ## Usage
 
 [tryhaxe](http://try.haxe.org/embed/aE8c8)
 
-Notice how the second array, when using `haxe.ds.ArraySort`, keeps the order of the elements with equal `i`.
+Notice how the second array, when using `haxe.ds.ArraySort`, keeps the order of the elements with equal `i`. The sorting is stable.
 
 
