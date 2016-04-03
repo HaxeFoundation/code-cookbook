@@ -16,11 +16,9 @@ import haxe.macro.Context;
 import haxe.macro.Expr;
 
 class MapBuilder {
-  public static macro function build() : Array<Field> {
+  public static macro function build(names : Array<String>) : Array<Field> {
     // The context is the class this build macro is called on
     var fields = Context.getBuildFields();
-    // We will hash this array of names as an example
-    var names = ["Aaron", "Bobbi", "Carol", "Dennis", "Eric", "Frank"];
     // A map is an array of `key => value` expressions
     var map : Array<Expr> = [];
     // We add a `key => value` expression for every name
@@ -52,7 +50,7 @@ class MapBuilder {
 ## Usage
 
 ```
-@:build(MapBuilder.build())
+@:build(MapBuilder.build(["Aaron", "Bobbi", "Carol", "Dennis", "Eric", "Frank"]))
 class Main {
   static function main() {
     trace(namesHashed.get("Bobbi"));
@@ -60,5 +58,6 @@ class Main {
 }
 ```
 
-> Learn about macros here: http://haxe.org/manual/macro.html
-> Author: [Domagoj Štrekelj](http://github.com/dstrekelj)
+>  Learn about macros here: http://haxe.org/manual/macro.html
+
+>  Author: [Domagoj Štrekelj](http://github.com/dstrekelj)
