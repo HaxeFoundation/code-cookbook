@@ -59,8 +59,7 @@ class MyMacro {
 
 ```haxe
 @:build(MyMacro.build())
-class Main 
-{
+class Main {
   public function new() {
     trace(this.myVar); // 1.5;
   }
