@@ -22,8 +22,8 @@
 	<meta property="og:url" content="http://code.haxe.org/" />
 	<meta property="og:image" content="http://code.haxe.org/img/share.jpg" />
 
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic' rel='stylesheet' type='text/css'/>
-	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400' rel='stylesheet' type='text/css'/>
+	<link href='//fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic' rel='stylesheet' type='text/css'/>
+	<link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400' rel='stylesheet' type='text/css'/>
 </head>
 <body>
 
@@ -150,7 +150,7 @@
 	</div>
 </footer>
 
-<link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css"/>
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css"/>
 <!-- link rel="stylesheet" type="text/css" href="http://haxe.org/css/style.css"/ -->
 
 
