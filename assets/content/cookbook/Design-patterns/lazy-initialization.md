@@ -4,7 +4,7 @@ This is a basic example of the [Lazy initialization](https://en.wikipedia.org/wi
 
 ```haxe
 class Fruit {
-  private static var instances_ = new Map<String, Fruit>();
+  private static var _instances = new Map<String, Fruit>();
 
   public var name(default, null):String;
 
@@ -13,14 +13,14 @@ class Fruit {
   }
 
   public static function getFruitByName(name:String):Fruit {
-    if (!instances_.exists(name)) {
-      instances_.set(name, new Fruit(name));
+    if (!_instances.exists(name)) {
+      _instances.set(name, new Fruit(name));
     }
-    return instances_.get(name);
+    return _instances.get(name);
   }
 
   public static function printAllTypes() {
-    trace([for(key in instances_.keys()) key]);
+    trace([for(key in _instances.keys()) key]);
   }
 }
 ```
