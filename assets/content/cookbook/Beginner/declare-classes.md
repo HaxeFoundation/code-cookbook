@@ -23,6 +23,7 @@ var calculator = new Calculator();
 trace(calculator.add(1, 2));
 trace(calculator.multiply(2, 3));
 ```
+> See <http://haxe.org/manual/types-class-instance.html>
 
 ### Declare a class with inheritance
 
@@ -49,6 +50,7 @@ var myDog = new Dog();
 // We can also access its parent's methods
 myDog.sayHello();
 ```
+> See <http://haxe.org/manual/types-class-inheritance.html>
 
 ### Declare a class with fields
 
@@ -74,3 +76,26 @@ trace(user.name);
 // But we cannot access it's private variables
 trace(user.age); // Error; 
 ```
+> See <http://haxe.org/manual/class-field.html>
+
+### Declare a generic class 
+
+Declare a new class with its own fields, create a new instance and also be able to access and hide its properties.
+
+```haxe
+class Value<T> {
+  public var value:T;
+  
+  public function new(value:T) {
+    this.value = value;
+  }
+}
+
+// Create a new Value Int instance
+var myIntValue = new Value<Int>(5);
+
+// Create a new Value String instance
+var myStringValue = new Value<String>("String");
+
+```
+> See <http://haxe.org/manual/type-system-generic.html>
