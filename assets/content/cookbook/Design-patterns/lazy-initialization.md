@@ -3,26 +3,24 @@
 This is a basic example of the [Lazy initialization](https://en.wikipedia.org/wiki/Lazy_initialization) design pattern in Haxe.
 
 ```haxe
-class Fruit 
-{
-  private static var instances_:Map<String,Fruit> = new Map<String,Fruit>();
+class Fruit {
+  private static var _instances = new Map<String, Fruit>();
+
   public var name(default, null):String;
- 
-  public function new(name:String)
-  {
+
+  public function new(name:String) {
     this.name = name;
   }
- 
-  public static function getFruitByName(name:String):Fruit
-  {
-    if (!instances_.exists(name)) {
-      instances_.set(name, new Fruit(name));
+
+  public static function getFruitByName(name:String):Fruit {
+    if (!_instances.exists(name)) {
+      _instances.set(name, new Fruit(name));
     }
-    return instances_.get(name);
+    return _instances.get(name);
   }
-  
-  public static function printCurrentTypes() {
-    trace([for(key in instances_.keys()) key]);
+
+  public static function printAllTypes() {
+    trace([for(key in _instances.keys()) key]);
   }
 }
 ```
@@ -30,18 +28,15 @@ class Fruit
 ### Usage
   
 ```haxe
-class Main 
-{
-  public static function main () 
-  {
-    Fruit.getFruitByTypeName("Banana");
-    Fruit.printCurrentTypes(); // ["Banana"]
- 
-    Fruit.getFruitByTypeName("Apple");
-    Fruit.printCurrentTypes(); // ["Banana","Apple"]
- 
-    Fruit.getFruitByTypeName("Banana");
-    Fruit.printCurrentTypes(); // ["Banana","Apple"]
+class Test {
+  public static function main () {
+    var banana = Fruit.getFruitByName("Banana");
+    var apple = Fruit.getFruitByName("Apple");
+    var banana2 = Fruit.getFruitByName("Banana");
+    
+    trace(banana == banana2); // true. same banana
+    
+    Fruit.printAllTypes(); // ["Banana","Apple"]
   }
 }
 ```
