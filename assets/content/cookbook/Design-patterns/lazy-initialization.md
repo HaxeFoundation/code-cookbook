@@ -41,7 +41,7 @@ class Main
     Fruit.printCurrentTypes(); // ["Banana","Apple"]
  
     Fruit.getFruitByTypeName("Banana");
-    Fruit.printCurrentTypes(); // ["Banana","Apple"]
+    Fruit.printCurrentTypes(); // ["Banana"]
   }
 }
 ```
