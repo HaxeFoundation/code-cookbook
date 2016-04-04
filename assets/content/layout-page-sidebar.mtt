@@ -9,7 +9,7 @@
 <main class="container">
 	<section class="row">
 		<nav class="span4 sidebar-toc" id="sidebar" ::cond currentPage.customData.tag==null ::>
-			<h3>Table of content</h3>
+			<h3>Table of contents</h3>
 			<ul class="unstyled">
 			::foreach category sitemap::
 				<li><a href="category/::category.id::/index.html" >::category.title::</a>

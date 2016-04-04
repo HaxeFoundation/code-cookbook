@@ -42,14 +42,14 @@
 				</ul-->
 				<ul class="nav">
 					<!-- required submenu  on every subsite -->
-					<li  class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book"></i> Browse..</a>
+					<li  class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book"></i> Browse <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 						::foreach category sitemap::
 							<li ::attr class if(category==currentCategory) "active"::><a href="category/::category.id::/index.html">::category.title:: <small class="category-count">(::category.getPageCount()::)</small></a></li>
 						::end::
 						</ul>
 					</li>
-					<li  class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-tags"></i> Tags</a>
+					<li  class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-tags"></i> Tags <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 						::foreach tag tags.keys()::
 							<!-- display tag only if there is more than one page with it -->
