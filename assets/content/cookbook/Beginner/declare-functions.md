@@ -1,3 +1,5 @@
+[tags]: / "class"
+
 # Declare functions
 
 ```haxe

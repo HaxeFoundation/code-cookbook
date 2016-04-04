@@ -1,3 +1,5 @@
+[tags]: / "class"
+
 # Declare classes
 
 Create a new class with two functions and create a new instance of it.
