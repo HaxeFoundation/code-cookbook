@@ -38,7 +38,7 @@
 		<div class="span4">
 			<h3><i class="fa fa-big fa-globe"></i> Contribution is easy</h3>
 			<p>The project is being developed on GitHub. Feel free to contribute code snippets.</p>
-			<p><i class="fa fa-github"></i> <a href="https://github.com/markknol/code-cookbook">Haxe Code Cookbook on Github</a></p>
+			<p><i class="fa fa-github"></i> <a href="https://github.com/HaxeFoundation/code-cookbook">Haxe Code Cookbook on Github</a></p>
 		
 		</div>
 	</div>
