@@ -83,6 +83,9 @@
 							<li>
 								<a href="http://lib.haxe.org">Haxelib</a>
 							</li>
+							<li class="active">
+								<a href="http://code.haxe.org">Code Cookbook</a>
+							</li>
 						</ul>
 					</li>
 					<li class=" dropdown">
