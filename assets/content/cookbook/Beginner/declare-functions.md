@@ -23,18 +23,6 @@ function sayHelloTo(name:String) {
 // Call it
 sayHelloTo("Mark");
 ```
-
-### Declare function with arguments
-
-```haxe
-// Declare our new function
-function sayHelloTo(name:String) {
-  trace('Hello ${name}');
-}
-
-// Call it
-sayHelloTo("Mark");
-```
 > See <http://haxe.org/manual/types-function.html>
 
 ### Declare functions with default arguments
