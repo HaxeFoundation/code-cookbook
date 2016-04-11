@@ -1,74 +1,74 @@
 <!DOCTYPE html>
 <html lang="en" id="page">
-<head>
-	<meta charset='utf-8'/>
-	<meta name="viewport" content="width=device-width" />
-	<title>::title::</title>
+  <head>
+	  <meta charset='utf-8'/>
+	  <meta name="viewport" content="width=device-width" />
+	  <title>::title::</title>
 
-	<base href="::baseHref::"/>
+	  <base href="::baseHref::"/>
 
-	<!-- general css -->
-	<link rel="stylesheet" type="text/css" href="http://haxe.org/css/bootstrap.min.css"/>
-	<link rel="stylesheet" href="css/github.min.css"/>
-	<link rel="stylesheet" type="text/css" href="css/styles.min.css"/>
-	<link rel="icon" href="http://haxe.org/favicon.ico"/>
+	  <!-- general css -->
+	  <link rel="stylesheet" type="text/css" href="http://haxe.org/css/bootstrap.min.css"/>
+	  <link rel="stylesheet" href="css/github.min.css"/>
+	  <link rel="stylesheet" type="text/css" href="css/styles.min.css"/>
+	  <link rel="icon" href="http://haxe.org/favicon.ico"/>
 
-	<!-- Twitter Card data -->
-	<meta name="twitter:creator" content="@haxe_org"/>
+	  <!-- Twitter Card data -->
+	  <meta name="twitter:creator" content="@haxe_org"/>
 
-	<!-- Open Graph data -->
-	<meta property="og:title" content="::title::" />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="http://code.haxe.org/" />
-	<meta property="og:image" content="http://code.haxe.org/img/share.jpg" />
+	  <!-- Open Graph data -->
+	  <meta property="og:title" content="::title::" />
+	  <meta property="og:type" content="article" />
+	  <meta property="og:url" content="http://code.haxe.org/" />
+	  <meta property="og:image" content="http://code.haxe.org/img/share.jpg" />
 
-	<link href='//fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic' rel='stylesheet' type='text/css'/>
-	<link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400' rel='stylesheet' type='text/css'/>
-</head>
-<body>
+	  <link href='//fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic' rel='stylesheet' type='text/css'/>
+	  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:400' rel='stylesheet' type='text/css'/>
+  </head>
+  <body>
 
-<nav class="section nav dark">
-	<div class="navbar navbar-fixed-top navbar-inverse">
-		<div class="navbar-inner">
-			<button class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse" type="button"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button> <a class="brand haxe-logo" href="http://haxe.org/"><img alt="Haxe" height="21" onerror="this.src='http://haxe.org/img/haxe-logo-horizontal-on-dark.png'" src="http://haxe.org/img/haxe-logo-horizontal-on-dark.svg" width="107" /></a>
-			
-			<a class="brand sub ide" href="./index.html">CODE</a>
+    <nav class="section nav dark">
+	    <div class="navbar navbar-fixed-top navbar-inverse">
+		    <div class="navbar-inner">
+			    <button class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse" type="button"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button> <a class="brand haxe-logo" href="http://haxe.org/"><img alt="Haxe" height="21" onerror="this.src='http://haxe.org/img/haxe-logo-horizontal-on-dark.png'" src="http://haxe.org/img/haxe-logo-horizontal-on-dark.svg" width="107" /></a>
+			    
+			    <a class="brand sub ide" href="./index.html">CODE</a>
 
-			<div class="nav-collapse collapse">
-				<!--ul class="nav pull-right search-link-menu">
-					<li>
-						<a href="/search"><i class="fa fa-search"></i></a>
-					</li>
-				</ul-->
-				<ul class="nav">
-					<!-- required submenu  on every subsite -->
-					<li  class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book"></i> Browse <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-						::foreach category sitemap::
-							<li ::attr class if(category==currentCategory) "active"::><a href="category/::category.id::/index.html">::category.title:: <small class="category-count">(::category.getPageCount()::)</small></a></li>
-						::end::
-						</ul>
-					</li>
-					<li  class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-tags"></i> Tags <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-						::foreach tag tags.keys()::
-							<!-- display tag only if there is more than one page with it -->
-							<li ::cond tags.get(tag).length>1:: ::attr class if(tag==currentPage.customData.tag) "active"::><a href="tag/::tag::.html"><i class="fa fa-tag"></i> ::tag:: <small class="category-count">(::tags.get(tag).length::)</small></a></li>
-						::end::
-						</ul>
-					</li>
-					<li class="divider"></li>
-					<!-- required submenu  on every subsite, put class="active" on   -->
-					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="/documentation/">Learn Haxe <b class="caret"></b></a>
+			    <div class="nav-collapse collapse">
+				    <!--ul class="nav pull-right search-link-menu">
+					      <li>
+						      <a href="/search"><i class="fa fa-search"></i></a>
+					      </li>
+				        </ul-->
+				    <ul class="nav">
+					    <!-- required submenu  on every subsite -->
+					    <li  class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book"></i> Browse <b class="caret"></b></a>
+						    <ul class="dropdown-menu">
+						      ::foreach category sitemap::
+							    <li ::attr class if(category==currentCategory) "active"::><a href="category/::category.id::/index.html">::category.title:: <small class="category-count">(::category.getPageCount()::)</small></a></li>
+						      ::end::
+						    </ul>
+					    </li>
+					    <li  class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-tags"></i> Tags <b class="caret"></b></a>
+						    <ul class="dropdown-menu">
+						      ::foreach tag tags.keys()::
+							    <!-- display tag only if there is more than one page with it -->
+							    <li ::cond tags.get(tag).length>1:: ::attr class if(tag==currentPage.customData.tag) "active"::><a href="tag/::tag::.html"><i class="fa fa-tag"></i> ::tag:: <small class="category-count">(::tags.get(tag).length::)</small></a></li>
+						      ::end::
+						    </ul>
+					    </li>
+					    <li class="divider"></li>
+					    <!-- required submenu  on every subsite, put class="active" on   -->
+					    <li class="dropdown">
+						    <a class="dropdown-toggle" data-toggle="dropdown" href="/documentation/">Learn Haxe <b class="caret"></b></a>
 
-						<ul class="dropdown-menu">
-							<li>
-								<a href="http://haxe.org/documentation/">Introduction</a>
-							</li>
-							<li class="divider"></li>
-							<!--li>
-								<a href="http://haxe.org/tutorial/">Tutorials</a>
+						    <ul class="dropdown-menu">
+							    <li>
+								    <a href="http://haxe.org/documentation/">Introduction</a>
+							    </li>
+							    <li class="divider"></li>
+							    <!--li>
+								      <a href="http://haxe.org/tutorial/">Tutorials</a>
 							</li-->
 							<li>
 								<a href="http://haxe.org/manual/">Manual</a>
@@ -137,10 +137,10 @@
 			</div>
 		</div>
 	</div>
-</nav>
-  
+    </nav>
+<div class="main-content">
 ::raw __content__::
-
+</div>
 <footer class="section dark site-footer">
 	<div class="container">
 		<div class="copyright">

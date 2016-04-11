@@ -3,6 +3,9 @@ body {
   font-weight: 400;
   font-size: 16px;
   color: #1e1e1e;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 body, body p, body td, body li {
@@ -12,6 +15,10 @@ body, body p, body td, body li {
 .btn, .btn-large, .btn-medium, .btn-small {
   border-radius: 4px!important;
   margin-right:5px; 
+}
+
+.main-content {
+  flex: 1;
 }
 
 h1 {
