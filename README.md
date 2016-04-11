@@ -32,7 +32,7 @@ It would be nice if you keep the formatting of the code in the same style as use
 ##### Other remarks
  
  * the first heading is used in the navigation. Keep this title short.
- * tag the snippet using `[tags]: / "tag1,tag2"` (no spaces). Try to use [an existing tag](used-tags.txt).
+ * tag the snippet using `[tags]: / "tag1,tag2"` (no spaces). Try to use [an existing tag](http://code.haxe.org/).
  * mention the author / sources at the bottom of the page.
  * if possible, link to related pages in the [Haxe Manual](http://haxe.org/manual) / [API documentation](http://api.haxe.org)
  * if you want to use images, upload them in the <assets/includes/img> folder.
