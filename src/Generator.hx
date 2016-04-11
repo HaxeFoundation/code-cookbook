@@ -83,7 +83,7 @@ class Generator {
       }
     });
     
-    //var allTags = [for (tag in tags.keys()) tag];
+    var allTags = [for (tag in tags.keys()) tag];
     //File.saveContent("used-tags.txt", allTags.join("\r\n"));
     
     trace(sitemap.length + " categories");
