@@ -19,7 +19,7 @@ abstract Email(String) to String {
 // The following works
 var mail:Email = 'eve@paradise.com';
         
-// The following causes throws an exception
+// The following throws an exception
 var mail: Email = 'adam#paradise.com';
 
 ```
