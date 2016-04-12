@@ -20,6 +20,6 @@ abstract Email(String) to String {
 var mail:Email = 'eve@paradise.com';
         
 // The following throws an exception
-var mail: Email = 'adam#paradise.com';
+var mail:Email = 'adam#paradise.com';
 
 ```
