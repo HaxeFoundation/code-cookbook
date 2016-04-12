@@ -1,11 +1,9 @@
 #Email
 
-[Abstract types]() (not to be confused with [Abstract classes]() are based on concrete types (strings, floats etc.) but adds compile time restrictions or functionalities to these. 
-
-> This abstract type is based on the String type, but sets the restriction that it can only represent a valid email address. If not, an exception is thrown.
+The following [Abstract type](http://haxe.org/manual/types-abstract.html) example is based on the String type, but sets the restriction that it can only represent a valid email address. If not, the compiler will throw an exception.
 
 
-
+```
 abstract Email(String) to String {
 	inline public function new(email:String) {
 		this = email.toLowerCase();
@@ -15,3 +13,4 @@ abstract Email(String) to String {
 
 	@:from  inline static public function fromString(email:String) return new Email(email);
 }
+```
