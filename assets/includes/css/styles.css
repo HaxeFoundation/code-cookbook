@@ -5,7 +5,7 @@ body {
   color: #1e1e1e;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 body, body p, body td, body li {
@@ -18,7 +18,7 @@ body, body p, body td, body li {
 }
 
 .main-content {
-  flex: 1;
+  flex: 1 0 auto; 
 }
 
 h1 {
@@ -174,6 +174,7 @@ a, a:hover {
 footer {
   margin-top: 40px;
   font-size: 14px;
+  flex-shrink: 0;
 }
 
 .copyright {
