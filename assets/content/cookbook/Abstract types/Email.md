@@ -1,6 +1,6 @@
 #Email
 
-The following [Abstract type](http://haxe.org/manual/types-abstract.html) example is based on the String type, but sets the restriction that it can only represent a valid email address. If not, the compiler will throw an exception.
+The following Email [Abstract type](http://haxe.org/manual/types-abstract.html) example is based on the underlying String type, but sets the restriction that it can only represent a valid email address. If not, the compiler will throw an exception.
 
 
 ```
@@ -11,6 +11,16 @@ abstract Email(String) to String {
 		if (!ereg.match(this)) throw 'Email "$this" is invalid';
 	}
 
-	@:from  inline static public function fromString(email:String) return new Email(email);
+	@:from inline static public function fromString(email:String) return new Email(email);
 }
+```
+## Usage
+
+```
+// The following works
+var mail:Email = 'eve@paradise.com';
+        
+// The following causes throws an exception
+var mail: Email = 'adam#paradise.com';
+
 ```
