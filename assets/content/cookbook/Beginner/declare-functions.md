@@ -92,3 +92,23 @@ trace(equals("hello","hello")); // true
 trace(equals("hello","world")); // false
 ```
 > See <http://haxe.org/manual/type-system-type-parameters.html>
+
+### Declare an inline function
+
+```haxe
+// Declare our new function
+inline function sum(a:Int, b:Int):Int {
+  return a + b;
+}
+
+// Call it
+var result = sum(2, 4);
+trace(result);
+```
+In JavaScript this will be compiled (where possible) as:
+```js
+var result = 6;
+console.log(result);
+```
+
+> See <http://haxe.org/manual/class-field-inline.html>
