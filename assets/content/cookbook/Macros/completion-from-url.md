@@ -14,7 +14,7 @@ class MyMacro {
 
     //trace(h);
 
-    var r = ~/id=["']([A-Za-z0-9]+)["']/ig;
+    var r = ~/id=["']([A-Za-z0-9]+)["']/;
     var ids = [];
     while (r.match(h)) {
       var id = r.matched(1);
