@@ -136,7 +136,7 @@ class Generator {
         
          var page = new Page("layout-page-sidebar.mtt", 
                              documentationPath + file, 
-                             documentationPath.replace('cookbook/', 'category/').toLowerCase() + 
+                             documentationPath.replace('cookbook/', 'category/').toLowerCase().replace(" ", "-") + 
                                 getWithoutExtension(file).toLowerCase() + ".html")
             .setTags(getTags(documentationPath + file))
             .setTitle(getDocumentationTitle(documentationPath + file));
@@ -154,7 +154,7 @@ class Generator {
       structure.pop();
       var id = structure.pop();
       if (key.indexOf("cookbook/") == 0) {
-        sitemap.push(new Category(id.toLowerCase(), id, key, _folders.get(key)));
+        sitemap.push(new Category(id.toLowerCase().replace(" ", "-"), id, key, _folders.get(key)));
       }
     }
   }
