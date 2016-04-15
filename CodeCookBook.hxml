@@ -4,4 +4,4 @@
 -cp src
 -neko CodeCookBook.n
 -main Main
--dce no
+-dce std
