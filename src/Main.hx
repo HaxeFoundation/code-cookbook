@@ -10,7 +10,7 @@ class Main {
   public static function main() {
     var generator = new Generator();
     generator.titlePostFix = " - Haxe Code Cookbook";
-    generator.domain = "http://haxe-cookbook.stroep.nl/";
+    generator.basePath = "http://haxe-cookbook.stroep.nl/";
     generator.repositoryUrl = "https://github.com/HaxeFoundation/code-cookbook/";
     generator.repositoryBranch = "master";
     

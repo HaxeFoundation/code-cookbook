@@ -1,6 +1,7 @@
 package;
 import haxe.Timer;
 import haxe.ds.StringMap;
+import markdown.AST.ElementNode;
 import sys.FileSystem;
 import sys.io.File;
 import templo.Template;
@@ -14,13 +15,11 @@ class Generator {
   public var outputPath = "./output/";
   public var repositoryUrl = "";
   public var repositoryBranch = "";
-  public var domain = "";
+  public var basePath = "";
   public var titlePostFix = "";
-  public var sitemap:Array<Category> = [];
-  public var tags:StringMap<Array<Page>>;
   
   private var _pages:Array<Page> = new Array<Page>();
-  private var _folders:Map<String,Array<Page>> = new Map<String,Array<Page>>();
+  private var _folders:StringMap<Array<Page>> = new StringMap<Array<Page>>();
   
   public function new() { }
   
@@ -35,15 +34,15 @@ class Generator {
     addCookbookPages();
     
     // after all other pages are added
-    collectTags();
-    createSitemap();
-    addCategoryPages();
-    addTagPages();
+    var tags:StringMap<Array<Page>> = collectTags();
+    var sitemap:Array<Category> = createSitemap();
+    addCategoryPages(sitemap);
+    addTagPages(tags);
     
     Timer.measure(function() {
       for(page in _pages) {
         // set the data for the page
-        var category = getCategory(page);
+        var category = getCategory(sitemap, page);
         
         var data = {
           title: '${page.title} $titlePostFix', 
@@ -52,15 +51,15 @@ class Generator {
           pages: _pages,
           currentPage: page,
           currentCategory: category,
-          contributionUrl:getContributionUrl(page),
-          editUrl:getEditUrl(page),
+          contributionUrl: getContributionUrl(page),
+          editUrl: getEditUrl(page),
           addLinkUrl: (category != null) ? getAddLinkUrl(category) : getAddLinkUrl(page),
-          absoluteUrl:getAbsoluteUrl(page),
+          absoluteUrl: getAbsoluteUrl(page),
           sitemap: sitemap,
           tags: tags,
           pageContent: null,
         }
-        data.pageContent = getContent(contentPath + page.contentPath, data);
+        data.pageContent = page.pageContent != null ? page.pageContent : getContent(contentPath + page.contentPath, data);
         
         // execute the template
         var template = Template.fromFile(contentPath + page.templatePath);
@@ -75,7 +74,7 @@ class Generator {
         }
         
         // write output into file
-        var targetDirectory = getDirectory(outputPath + page.outputPath);
+        var targetDirectory = getDirectoryPath(outputPath + page.outputPath);
         if (!FileSystem.exists(targetDirectory)) {
           FileSystem.createDirectory(targetDirectory);
         }
@@ -102,21 +101,17 @@ class Generator {
     }
   }
   
-  private function addCategoryPages() {
+  private function addCategoryPages(sitemap:Array<Category>) {
     for (category in sitemap) {
-      addPage(new Page("layout-page-sidebar.mtt", 
-                       "table-of-content.mtt", 
-                       'category/${category.id}/index.html')
+      addPage(new Page("layout-page-sidebar.mtt",  "table-of-content.mtt",  'category/${category.id}/index.html')
                         .setTitle('${category.title } - table of content')
                         .hidden(), category.folder);
     }
   }
   
-  private function addTagPages() {
+  private function addTagPages(tags:StringMap<Array<Page>>) {
     for (tag in tags.keys()) {
-      addPage(new Page("layout-page-sidebar.mtt", 
-                       "tags.mtt", 
-                       'tag/$tag.html')
+      addPage(new Page("layout-page-sidebar.mtt",  "tags.mtt",  'tag/$tag.html')
                         .setTitle('Tag - ${tag}')
                         .setCustomData({tag:tag, pages: tags.get(tag)})
                         .hidden(), "tags");
@@ -125,7 +120,7 @@ class Generator {
   
   private function addGeneralPages() {
     var page = new Page("layout-page-main.mtt", "index.mtt", "index.html")
-      .setTitle("Easy to read Haxe coding examples");
+                          .setTitle("Easy to read Haxe coding examples");
       
     addPage(page, "/home");
   }
@@ -133,13 +128,11 @@ class Generator {
   private function addCookbookPages(documentationPath:String = "cookbook/") {
     for (file in FileSystem.readDirectory(contentPath + documentationPath)) {
       if (!FileSystem.isDirectory(contentPath + documentationPath + file)) {
-        
-         var page = new Page("layout-page-sidebar.mtt", 
+        var page = new Page("layout-page-sidebar.mtt", 
                              documentationPath + file, 
                              documentationPath.replace('cookbook/', 'category/').toLowerCase().replace(" ", "-") + 
-                                getWithoutExtension(file).toLowerCase() + ".html")
-            .setTags(getTags(documentationPath + file))
-            .setTitle(getDocumentationTitle(documentationPath + file));
+                                getWithoutExtension(file).toLowerCase() + ".html");
+        page.pageContent = parseMarkdownContent(page, documentationPath + file);
         addPage(page, documentationPath);
       } else {
         addCookbookPages(documentationPath + file + "/" );
@@ -148,7 +141,8 @@ class Generator {
   }
   
   // categorizes the folders 
-  private function createSitemap() {
+  private function createSitemap():Array<Category> {
+    var sitemap = [];
     for (key in _folders.keys()) {
       var structure = key.split("/");
       structure.pop();
@@ -157,11 +151,12 @@ class Generator {
         sitemap.push(new Category(id.toLowerCase().replace(" ", "-"), id, key, _folders.get(key)));
       }
     }
+    return sitemap;
   }
   
   // collects all tags and counts them
   private function collectTags() {
-    tags = new StringMap<Array<Page>>();
+    var tags = new StringMap<Array<Page>>();
     for (page in _pages) {
       if (page.tags != null) {
         for (tag in page.tags) {
@@ -173,6 +168,7 @@ class Generator {
         }
       }
     }
+    return tags;
   }
   
   private function replaceTryHaxeTags(content:String) {
@@ -180,17 +176,7 @@ class Generator {
     return  ~/(\[tryhaxe\])(\()(.+?)(\))/.replace(content, '<iframe src="$3" class="try-haxe"><a href="$3">Try Haxe!</a></iframe>');
   }
   
-  private function getDocumentationTitle(path:String) {
-    // pick first header `# mytitle` from markdown file
-    var lines = File.getContent(contentPath + path).split("\n");
-    var prefix = "# ";
-    for (line in lines) {
-      if (line.substr(0, prefix.length) == prefix) return line.substr(prefix.length);
-    }
-    return null;
-  }
-  
-  private function getCategory(page:Page):Category {
+  private function getCategory(sitemap:Array<Category>, page:Page):Category {
     for (category in sitemap) {
       if (category.pages.indexOf(page) != -1 ) {
         return category;
@@ -205,18 +191,6 @@ class Generator {
     return href.join("/");
   }
   
-  private function getTags(path:String) {
-    // pick first header `# mytitle` from markdown file
-    var lines = File.getContent(contentPath + path).split("\n");
-    var prefix = "[tags]: / \"";
-    for (line in lines) {
-      if (line.substr(0, prefix.length) == prefix) {
-        return line.substr(prefix.length, line.length-prefix.length-1).replace('"',"").toLowerCase().split(",");
-      }
-    }
-    return null;
-  }
-  
   public inline function getEditUrl(page:Page) {
     return '${repositoryUrl}edit/${repositoryBranch}/${contentPath}${page.contentPath}';
   }
@@ -225,21 +199,21 @@ class Generator {
     return '${repositoryUrl}tree/${repositoryBranch}/${contentPath}${page.contentPath}';
   }
   
-  public inline function getAddLinkUrl(category:Category  = null, page:Page = null) {
+  public function getAddLinkUrl(category:Category  = null, page:Page = null) {
     var fileNameHint = "/snippet-name.md/?filename=snippet-name.md";
     var directory = if (category != null) {
-      getDirectory(category.pages[0].contentPath);
+      getDirectoryPath(category.pages[0].contentPath);
     } else {
-      getDirectory(page.contentPath);
+      getDirectoryPath(page.contentPath);
     }
     return '${repositoryUrl}new/master/${contentPath}${directory}${fileNameHint}';
   }
   
   public inline function getAbsoluteUrl(page:Page) {
-    return domain + page.outputPath;
+    return basePath + page.outputPath;
   }
   
-  private static inline function getDirectory(file:String) {
+  private static inline function getDirectoryPath(file:String) {
     var paths = file.split("/");
     paths.pop();
     return paths.join("/");
@@ -255,23 +229,65 @@ class Generator {
     return path.join(".");
   }
   
-  private function getContent(file:String, data) {
+  private function getContent(file:String, data:Dynamic) {
     return switch(getExtension(file)) {
-      case "md": Markdown.markdownToHtml(replaceTryHaxeTags(File.getContent(file)));
-      case "mtt": Template.fromFile(file).execute(data);
-      default: File.getContent(file);
+      case "md": 
+        parseMarkdownContent(null, file);
+      case "mtt": 
+        Template.fromFile(file).execute(data);
+      default: 
+        File.getContent(file);
     }
   }
   
-  public function includeDirectory(dir:String, ?output:String) {
-    if (output == null) output = outputPath;
-    trace("include directory: " + output);
+  public function parseMarkdownContent(page:Page, file:String):String {
+    var document = new Markdown.Document();
+    var markdown = replaceTryHaxeTags(File.getContent(contentPath + file));
+
+    try {
+      // replace windows line endings with unix, and split
+      var lines = ~/(\r\n|\r)/g.replace(markdown, '\n').split("\n");
+      
+      // parse ref links
+      document.parseRefLinks(lines);
+      
+      // parse tags
+      if (page != null) {
+        var link = document.refLinks["tags"];
+        page.tags = (link != null) ? link.title.split(",").map(function(a) return a.toLowerCase().trim()) : null;
+      }
+      
+      // parse ast
+      var blocks = document.parseLines(lines);
+      
+      // pick first header, use it as title for the page
+      if (page != null) {
+        for (block in blocks) {
+          var el = Std.instance(block, ElementNode);
+          if (el != null && el.tag == "h1" && !el.isEmpty()) {
+              page.title = new markdown.HtmlRenderer().render(el.children);
+              break;
+          }
+        }
+      }
+      return Markdown.renderHtml(blocks);
+    } catch (e:Dynamic){
+      return '<pre>$e</pre>';
+    }
+	}
+  
+  public function includeDirectory(dir:String, ?path:String) {
+    if (path == null) path = outputPath;
+    trace("include directory: " + path);
+    
     for (file in FileSystem.readDirectory(dir)) {
-      if (FileSystem.isDirectory(dir + "/" + file)) {
-        FileSystem.createDirectory(output + "/" + file);
-        includeDirectory(dir + "/" + file, output + "/" + file);
+      var srcPath = '$dir/$file';
+      var dstPath = '$path/$file';
+      if (FileSystem.isDirectory(srcPath)) {
+        FileSystem.createDirectory(dstPath);
+        includeDirectory(srcPath, dstPath);
       } else {
-        File.copy(dir + "/" + file, output + "/" + file);
+        File.copy(srcPath, dstPath);
       }
     }
   }
@@ -283,7 +299,6 @@ class Generator {
       Template.fromFile(contentPath + "layout.mtt").execute({});
     } catch(e:Dynamic) { }
   }
-  
 }
 
 class Page { 
@@ -294,6 +309,8 @@ class Page {
   public var outputPath:String;
   public var customData:Dynamic;
   public var tags:Array<String>;
+  
+  public var pageContent:String;
   
   public function new(templatePath:String, contentPath:String, outputPath:String) {
     this.templatePath = templatePath;
