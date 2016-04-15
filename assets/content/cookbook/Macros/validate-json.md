@@ -39,7 +39,7 @@ class Validator {
 This example only validates the _.json_ files in debug builds and not in display mode (auto-completion). 
 The function can be called from anywhere.
 
-```
+```haxe
 class Test {
   static function main() {
     #if (debug && !display)
