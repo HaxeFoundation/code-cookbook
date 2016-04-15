@@ -101,3 +101,29 @@ var myStringValue = new Value<String>("String");
 
 ```
 > See <http://haxe.org/manual/type-system-generic.html>
+
+### Declare a inline constructor 
+
+Declare a new class with an inline constructor (`new()` function), create a new instance and reveal its effect.
+
+```haxe
+class Point {
+  public var x:Float;
+  public var y:Float;
+
+  public inline function new(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+}
+
+// Create a new Value Int instance
+var myPoint = new Point(5, 2);
+```
+In JavaScript, this will be compiled (where possible) as:
+```js
+var myPoint_x = 100;
+var myPoint_y = 150;
+console.log(myPoint_x);
+```
+> See <http://haxe.org/manual/lf-inline-constructor.html>
