@@ -17,8 +17,7 @@ using Lambda;
 #end
 
 
-class StructureCombiner
-{
+class StructureCombiner {
   // we use an Array<Expr>, because we want the macro to work on variable amount of structures
   public static macro function combine(rest: Array<Expr>): Expr {
     var pos = Context.currentPos();
@@ -55,7 +54,7 @@ class StructureCombiner
 
 ## Usage
 
-you should import the macro class with using.
+You can import the macro class with `using`.
 
 ```
 using StructureCombiner;
