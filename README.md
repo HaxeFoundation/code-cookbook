@@ -39,29 +39,31 @@ It would be nice if you keep the formatting of the code in the same style as use
 
 This would be a typical template to use. Use <code>```haxe</code> for syntax highlighting:
  
-```markdown
-   [tags]: / "enum,pattern-matching,macro,macro-function"
-   
-   # Title of the page
+<pre>
+&lbrack;tags&rbrack;: / "enum,pattern-matching,macro,macro-function"
 
-   Description and explanation of the code.
+# Title of the page
 
-   ## Implementation
-   ```haxe
-    class Test {
-      // Code here
-    }
-    ```
-   ## Usage
-    ```haxe
-    class Test {
-      // Code here
-    }
-    ```
-    > More on this topic: <http://haxe.org/manual/class-field.html>
-    > Author: [Name](http://github.com/usename)
-  
-```
+Description and explanation of the code.
+
+## Implementation
+&grave;&grave;&grave;haxe
+class Test {
+  // Code here
+}
+&grave;&grave;&grave;
+
+## Usage
+&grave;&grave;&grave;haxe
+class Test {
+  // Code here
+}
+&grave;&grave;&grave;
+
+&gt; More on this topic: &lt;http://haxe.org/manual/class-field.html&gt;
+&gt; 
+&gt; Author: &lbrack;Name&rbrack;(http://github.com/username)
+</pre>
 
 ## Running a local copy
 
