@@ -48,7 +48,7 @@ Description and explanation of the code.
 
 ## Implementation
 &grave;&grave;&grave;haxe
-class Test {
+class Main {
   // Code here
 }
 &grave;&grave;&grave;
