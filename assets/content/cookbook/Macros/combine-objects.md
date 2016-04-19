@@ -31,7 +31,7 @@ class StructureCombiner
       switch ( trest.follow() ) {
         case TAnonymous(_.get() => tr):
           // for each parameter we create a tmp var with an unique name.
-          // we need a tmp var in the the parameter is the result of a complex expression.
+          // we need a tmp var in the case, the parameter is the result of a complex expression.
           var tmp = "tmp_" + cnt;
           cnt++;
           var extVar = macro $i{tmp};
