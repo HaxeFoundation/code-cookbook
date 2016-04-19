@@ -1,18 +1,18 @@
 [tags]: / "abstract-type"
 
-# Temperatures (Celsius <-> Fahrenheit)
+# Temperatures (Celcius <-> Fahrenheit)
 
 The following Celcius and Fahrenheit [Abstract types](http://haxe.org/manual/types-abstract.html) are based on the underlying `Float` type, but sets the restriction that it can never hold values below absolute zero. 
 
 Also, the `@:to` [field casts](http://haxe.org/manual/types-abstract-implicit-casts.html) take care of automatically converting from one unit to the other.
 
 ```haxe
-abstract Celsius(Float) to Float {    
+abstract Celcius(Float) to Float {    
   inline function new(value : Float)  
     this = Math.max(value, -273.15);
     
-  @:from inline static public function fromFloat(value : Float) : Celsius
-    return new Celsius(value);    
+  @:from inline static public function fromFloat(value : Float) : Celcius
+    return new Celcius(value);    
     
   // the following field cast automatically converts to Fahrenheit from Celcius
   @:to inline public function toFahrenheit() : Fahrenheit    
@@ -27,7 +27,7 @@ abstract Fahrenheit(Float) to Float {
     return new Fahrenheit(value);      
   
   // the following field cast automatically converts to Celcius from Fahrenheit
-  @:to inline public function toCelsius() : Celsius
+  @:to inline public function toCelcius() : Celcius
     return (this - 32) * 5 / 9;
 }
 ```
@@ -36,14 +36,13 @@ abstract Fahrenheit(Float) to Float {
 
 ```haxe
 // Here we start by defining a temperature in Celcius
-var waterfreezeC:Celsius = 0;
-trace('Water freezes at $waterfreezeC degrees Celsius.');   
+var waterfreezeC:Celcius = 0;
+trace('Water freezes at $waterfreezeC degrees Celcius.');   
 
 // Please note the unit conversion in the following line, automatically 
 // invoking the Celcius.toFahrenheit() method for us:
 var waterfreezeF:Fahrenheit = waterfreezeC;        
 trace('Water freezes at $waterfreezeF degrees Fahrenheit.');   
-
 ```
 
 ## Credits to Franco Ponticelli
