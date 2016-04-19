@@ -1,9 +1,9 @@
-[tags]: / "typedef,macro-function"
+[tags]: / "macro-function"
 
 # Combine two or more structures
 
 Haxe makes it easy to define extensions for a `typedef`, but there is no easy way to combine
-the values of two or more structures to one like `{a:2}` and `{b:"foo"}` to `{a:2,b:"foo"}`.
+the values of two or more structures to one, like `{a:2}` and `{b:"foo"}` to `{a:2,b:"foo"}`.
 The following macro does this for you.
 
 ## Implementation
@@ -41,7 +41,8 @@ class StructureCombiner
 						all.set(fname, { field: fname, expr: macro $extVar.$fname } );
 					}
 				default:
-					return Context.error("Object type expected instead of " + trest.toString(), rx.pos);
+					return Context.error("Object type expected instead of "
+						+ trest.toString(), rx.pos);
 			}
 		}
 		var result = {expr:EObjectDecl(all.array()), pos: pos};
