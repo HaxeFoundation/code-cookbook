@@ -10,7 +10,7 @@
     <movie height="0" />
     <movie version="0" />
     <movie minorVersion="0" />
-    <movie platform="Neko" />
+    <movie platform="Custom" />
     <movie background="#FFFFFF" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
@@ -41,7 +41,7 @@
     <hidden path="obj" />
   </hiddenPaths>
   <!-- Executed before build -->
-  <preBuildCommand />
+  <preBuildCommand>haxe CodeCookBook.hxml</preBuildCommand>
   <!-- Executed after build -->
   <postBuildCommand alwaysRun="False">build-site.bat</postBuildCommand>
   <!-- Other project options -->

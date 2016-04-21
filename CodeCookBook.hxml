@@ -5,3 +5,11 @@
 -neko CodeCookBook.n
 -main Main
 -dce no
+
+--next
+
+-cp src
+-js assets/includes/js/highlighter.js
+-main Highlighter
+-dce full
+-D analyzer

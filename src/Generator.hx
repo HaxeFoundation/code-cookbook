@@ -2,6 +2,7 @@ package;
 import haxe.Timer;
 import haxe.ds.StringMap;
 import markdown.AST.ElementNode;
+import markdown.AST.TextNode;
 import sys.FileSystem;
 import sys.io.File;
 import templo.Template;
@@ -262,11 +263,32 @@ class Generator {
       
       // pick first header, use it as title for the page
       if (page != null) {
+        var hasTitle = false;
         for (block in blocks) {
           var el = Std.instance(block, ElementNode);
-          if (el != null && el.tag == "h1" && !el.isEmpty()) {
+          if (el != null) {
+            if (!hasTitle && el.tag == "h1" && !el.isEmpty()) {
               page.title = new markdown.HtmlRenderer().render(el.children);
+              hasTitle = true;
+              #if !generator_highlight 
               break;
+              #end
+            }
+            #if generator_highlight 
+            else if (el.tag == "pre") {
+              var preNode = Std.instance(el.children[0], ElementNode);
+              if (preNode != null && preNode.attributes.exists("class")) {
+                var className = preNode.attributes.get("class");
+                if (className.indexOf("haxe") != -1 || className.indexOf("js") != -1) {
+                  var codeText = Std.instance(preNode.children[0], TextNode);
+                  if (codeText!=null) {
+                    codeText.text = Highlighter.syntaxHighlight(codeText.text);
+                    preNode.attributes.set("class", preNode.attributes.get("class")  + " highlighted");
+                  }
+                }
+              }
+            }
+            #end
           }
         }
       }
@@ -274,7 +296,7 @@ class Generator {
     } catch (e:Dynamic){
       return '<pre>$e</pre>';
     }
-	}
+  }
   
   public function includeDirectory(dir:String, ?path:String) {
     if (path == null) path = outputPath;
