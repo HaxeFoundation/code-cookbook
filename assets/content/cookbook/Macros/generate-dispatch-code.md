@@ -63,13 +63,13 @@ You will need to create a `Dispatcher` base class.
 ```haxe
 @:autoBuild(DispatchBuilder.build())
 class Dispatcher<T> {
-	var listeners:Array<T>;
+  var listeners:Array<T>;
 	
-	public function new() {
-		listeners = [];
-	}
+  public function new() {
+    listeners = [];
+  }
 
-	// addListener, removeListener,...
+  // addListener, removeListener,...
 }
 ```
 
@@ -77,13 +77,13 @@ Extend `Dispatcher` to profit from automatically generated dispatch functions.
 
 ```haxe
 class Example extends Dispatcher<Dynamic> {
-	public function onDoubleArguments(one:String, two:Int);
-	public function onSingleArgument(one:String);
-	public function onNoArgument();
-	public function onEmptyBody() { }
-	public function onNonEmptyBody() {
-		trace('my code here');
-	}
+  public function onDoubleArguments(one:String, two:Int);
+  public function onSingleArgument(one:String);
+  public function onNoArgument();
+  public function onEmptyBody() { }
+  public function onNonEmptyBody() {
+    trace('my code here');
+  }
 }
 ```
 
