@@ -21,8 +21,10 @@ abstract RFloat(Float) from Float {
    
   @:to inline public function toString():String
     return Std.string(toFloat());
-  
-  static inline var multiplier = 1000000000000000;
+
+  // The number of zeros in the following valuer
+  // corresponds to the number of decimals rounding precision
+  static inline var multiplier = 10000000;
     
   static inline function roundPrecision(value:Float):Float
     return Math.round(value * multiplier) / multiplier;
