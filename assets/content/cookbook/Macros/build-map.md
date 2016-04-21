@@ -29,17 +29,17 @@ class MapBuilder {
     // We push the map into the context build fields
     fields.push({
       // The line position that will be referenced on error
-      pos:      Context.currentPos(),
+      pos: Context.currentPos(),
       // Field name
-      name:     "namesHashed",
+      name: "namesHashed",
       // Attached metadata (we are not adding any)
-      meta:     null,
+      meta: null,
       // Field type is Map<String, String>, `map` is the map
-      kind:     FieldType.FVar(macro : Map<String, String>, macro $a{map}),
+      kind: FieldType.FVar(macro : Map<String, String>, macro $a{map}),
       // Documentation (we are not adding any)
-      doc:      null,
+      doc: null,
       // Field visibility
-      access:   [Access.APublic, Access.AStatic]
+      access: [Access.APublic, Access.AStatic]
     });
     // Return the context build fields to build the type
     return fields;
@@ -58,6 +58,6 @@ class Main {
 }
 ```
 
->  Learn about macros here: http://haxe.org/manual/macro.html
-
->  Author: [Domagoj Štrekelj](http://github.com/dstrekelj)
+> Learn about macros here: <http://haxe.org/manual/macro.html>
+> 
+> Author: [Domagoj Štrekelj](http://github.com/dstrekelj)
