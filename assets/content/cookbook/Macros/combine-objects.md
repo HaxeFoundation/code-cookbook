@@ -8,7 +8,7 @@ The following macro does this for you.
 
 ## Implementation
 
-```
+```haxe
 #if macro
 import haxe.macro.Expr;
 import haxe.macro.Context;
@@ -56,7 +56,7 @@ class StructureCombiner {
 
 You can import the macro class with `using`.
 
-```
+```haxe
 using StructureCombiner;
 
 typedef Foo = { a: Int, b: Float }
