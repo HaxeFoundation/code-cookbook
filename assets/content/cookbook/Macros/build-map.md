@@ -49,7 +49,7 @@ class MapBuilder {
 
 ## Usage
 
-```
+```haxe
 @:build(MapBuilder.build(["Aaron", "Bobbi", "Carol", "Dennis", "Eric", "Frank"]))
 class Main {
   static function main() {

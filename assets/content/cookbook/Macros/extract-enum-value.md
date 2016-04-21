@@ -8,7 +8,7 @@ it's quite verbose, so we can instead use this macro static extension method tha
 
 ## Implementation
 
-```
+```haxe
 #if macro
 import haxe.macro.Expr;
 #end
@@ -30,7 +30,7 @@ class Tools {
 
 ## Usage
 
-```
+```haxe
 using Tools;
 
 class Main {

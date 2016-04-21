@@ -32,7 +32,7 @@ class MyMacro {
 
 ## Usage
 
-```
+```haxe
 @:build(MyMacro.build())
 class Main {
   public function new() {

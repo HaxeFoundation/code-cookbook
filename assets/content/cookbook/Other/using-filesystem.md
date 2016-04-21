@@ -31,7 +31,7 @@ Otherwise you will get the error:
 ### Read content of a file
 
 This example reads a text file:
-```
+```haxe
 var content:String = sys.io.File.readContent('my_folder/my_file.txt');
 trace(myContent);
 ```
@@ -39,7 +39,7 @@ trace(myContent);
 ### Write content to a file
 
 This example writes an object `person` to a json file:
-```
+```haxe
 var user = {name:"Mark", age:31};
 var content:String = haxe.Json.stringify(user);
 sys.io.File.saveContent(content, 'my_folder/my_file.json');

@@ -62,8 +62,7 @@ You will need to create a `Dispatcher` base class.
 
 ```haxe
 @:autoBuild(DispatchBuilder.build())
-class Dispatcher<T>
-{
+class Dispatcher<T> {
 	var listeners:Array<T>;
 	
 	public function new() {
@@ -77,8 +76,7 @@ class Dispatcher<T>
 Extend `Dispatcher` to profit from automatically generated dispatch functions.
 
 ```haxe
-class Example extends Dispatcher<Dynamic>
-{
+class Example extends Dispatcher<Dynamic> {
 	public function onDoubleArguments(one:String, two:Int);
 	public function onSingleArgument(one:String);
 	public function onNoArgument();
