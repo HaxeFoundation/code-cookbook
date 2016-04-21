@@ -16,11 +16,13 @@ abstract RFloat(Float) from Float {
     this = value;
   
   // The following rounds the result whenever converted to a Float
-  @:to inline public function toFloat():Float 
+  @:to inline public function toFloat():Float  {
     return roundPrecision(this);
-   
-  @:to inline public function toString():String
+  }
+ 
+  @:to inline public function toString():String {
     return Std.string(toFloat());
+  }
 
   // The number of zeros in the following valuer
   // corresponds to the number of decimals rounding precision

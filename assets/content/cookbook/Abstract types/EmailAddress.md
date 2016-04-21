@@ -6,13 +6,15 @@ The following EmailAddress [Abstract type](http://haxe.org/manual/types-abstract
 
 ```haxe
 abstract EmailAddress(String) to String {
-  static var ereg  = ~/^[\w-\.]{2,}@[\w-\.]{2,}\.[a-z]{2,6}$/i;
+  static var ereg = ~/^[\w-\.]{2,}@[\w-\.]{2,}\.[a-z]{2,6}$/i;
   inline public function new(address:String) {
     if (!ereg.match(address)) throw 'EmailAddress "$address" is invalid';
     this = address.toLowerCase();
   }
 
-  @:from inline static public function fromString(address:String) return new EmailAddress(address);
+  @:from inline static public function fromString(address:String) {
+    return new EmailAddress(address);
+  }
 }
 ```
 ## Usage
