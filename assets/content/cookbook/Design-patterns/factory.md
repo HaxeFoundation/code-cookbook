@@ -5,10 +5,9 @@
 This is a basic example of the [Factory](https://en.wikipedia.org/wiki/Factory_pattern) design pattern in Haxe.
 
 ```haxe
-class Item<T> 
-{
-  public static function create<T>():Item<T> // factory method
-  {
+class Item<T> {
+  // factory method
+  public static function create<T>():Item<T> {
     return new Item<T>();
   }
   
@@ -21,10 +20,8 @@ class Item<T>
 ### Usage
   
 ```haxe
-class Main 
-{
-  public static function main () 
-  {
+class Main {
+  public static function main () {
     // This works because of type-inference, the 
     // compiler knows that the return type must be of type `Item<Int>`s
     var myItem:Item<Int> = Item.create(); 
