@@ -74,6 +74,37 @@ a, a:hover {
   .fa.fa-big {
     display:block;
   }
+  
+  
+  main.container section {
+    display: flex;
+    flex-direction: column;
+  }
+  main.container section article {
+    order: 1;
+  }
+  main.container section nav {
+    order: 2;
+  }
+  
+  nav#sidebar {
+    margin-top:20px;
+  }
+  
+  /* only display main categories on mobile */
+  nav#sidebar.sidebar-toc li li { 
+    display:none;
+  }
+  nav#sidebar.sidebar-toc br {
+    display:none;
+  }
+  
+  /* display tags inline on mobile */
+  nav#sidebar.sidebar-tags li { 
+    display:inline-block;
+    border-left:0;
+    margin-right:20px;
+  }
 }
 
 @media (max-width: 500px) {
