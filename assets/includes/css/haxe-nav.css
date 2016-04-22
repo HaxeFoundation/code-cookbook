@@ -82,10 +82,13 @@ nav .navbar .nav>li>.dropdown-menu:after {
 @media (max-width: 979px)
 {
 	nav .navbar-fixed-top .navbar-inner, nav .navbar-fixed-bottom .navbar-inner {
-	  padding: 0px;
+		padding: 0px;
 	}
 	nav .navbar-fixed-top {
-	  margin-bottom: 0;
+		margin-bottom: 0;
+	}
+	.nav .divider {
+		display: none;
 	}
 }
 
