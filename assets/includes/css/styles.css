@@ -111,6 +111,10 @@ a, a:hover {
   body .hero-unit h3 {
     font-size: 90%;
   }
+  
+  body .hero-unit {
+    padding: 2em;
+  }
 
   body .hero-unit h3 br {
     display: none;
@@ -142,7 +146,7 @@ a, a:hover {
 }
 
 .hero-unit {
-  padding: 1em 1em;
+  padding: 4em;
   margin-bottom: 0;
   box-shadow: inset 0px 0px 50px rgba(0,0,0, 0.35);
 }
