@@ -1,8 +1,8 @@
 [tags]: / "filesystem"
 
-# Using File system
+# Using the file system
 
-Haxe has some targets that can directly access the filesystem:
+These are the Haxe targets that can directly access the filesystem:
 
 Name | Access to filesystem
 --- | --- | 
@@ -13,12 +13,13 @@ Java  | Yes
 C#  | Yes 
 Python  | Yes 
 JavaScript | No 
+NodeJS (using [hxnodejs](http://lib.haxe.org/p/hxnodejs/)) | Yes 
 ActionScript 3  | No 
 Flash | No 
 
 ### Check if FileSystem is available
 
-You can savely access the `sys`-package if you wrap the code with [conditional compilation](http://haxe.org/manual/lf-condition-compilation.html):
+You can safely access the `sys`-package if you wrap the code with [conditional compilation](http://haxe.org/manual/lf-condition-compilation.html):
   
 ```haxe
 #if sys
