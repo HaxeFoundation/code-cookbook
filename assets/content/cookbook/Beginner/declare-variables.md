@@ -2,7 +2,8 @@
 
 # Declare variables
 
-Create a variable without type. Although the type is not explicity declared, you cannot reassign the variable later to a different type.
+### Declare a variable without a declared type
+Create a variable without a declared type. Although the type is not explicity declared, you cannot reassign the variable later to a different type.
 
 ```haxe
 var foo = 2;
@@ -12,7 +13,7 @@ foo = "2"; // will trow error "String should be Int"
 ```
 
 
-### Declare a variable with type
+### Declare a variable with a declared type
 
 Create a variable with type.
 
@@ -21,14 +22,35 @@ var foo:Int = 2;
 var bar:String = "2";
 ```
 
-### Declare variable with Dynamic type
+### Inital values of variables
 
-Create a variable with Dynamic type. By declaring a variable Dynamic, you may reassign value to the variable.
-
+In Haxe, variables are null until used - including number types.
 
 ```haxe
-var foo:Dynamic = 2;
-trace(Std.is(foo, Int)); //true
-foo = "2";
-trace(Std.is(foo, String)); //true
+var foo:Int;
+trace(foo == null); //output true;
+```
+
+
+### Redeclaration of variables
+
+If you redeclare a variable in the local scope you will not recieve an error, the local scope value will be used.
+
+```haxe
+  var foo:Int = 0;
+  function demonstrateDifferentScopes() {
+    outputClassVar();
+    outputLocalVar();
+  }
+  
+  static function outputClassVar()
+  {
+    trace(foo); //output 0
+  }
+  
+  static function outputLocalVar()
+  {
+    var foo:Int = 1;
+	trace(foo); //output 1
+  }
 ```
