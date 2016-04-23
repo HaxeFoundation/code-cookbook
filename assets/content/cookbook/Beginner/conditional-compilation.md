@@ -6,9 +6,11 @@
 
 Conditional compilation is a tool commonly used to alter the flow of the compilation process. It relies on the use of compiler flags (also known as _defines_), which are configurable values that exist only during compilation.
 
-Compiler flags are set with `-D key` or `-D key=value` from the command-line or build file. The values of Float, Int, and String constants are used directly when evaluating conditionals.
+Compiler flags are set with `-D key` or `-D key=value` from the command-line or build file. The values of `Float`, `Int`, and `String` constants are used directly when evaluating conditionals.
 
 Note that those conditional compilation branches that the compiler doesn't enter are discarded while parsing the source file.
+
+To get a list of supported Haxe compiler flags, use `haxe --help-defines`.
 
 ## Implementation
 ```haxe
@@ -48,5 +50,6 @@ Welcome, super user!
 ```
 
 > Learn about conditional compilation here: <http://haxe.org/manual/lf-condition-compilation.html>
+> Learn about available global compiler flags here: <http://haxe.org/manual/lf-condition-compilation-flags.html>
 >
 > Author: [Domagoj Štrekelj](http://github.com/dstrekelj)
