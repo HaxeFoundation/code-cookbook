@@ -1,4 +1,4 @@
-[tags]: / "conditional-compilation,branching"
+[tags]: / "conditional-compilation"
 
 # Conditional compilation
 
