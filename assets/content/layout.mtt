@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html lang="en" id="page">
   <head>
-	  <meta charset='utf-8'/>
-	  <meta name="viewport" content="width=device-width" />
-	  <title>::title::</title>
+	<meta charset='utf-8'/>
+	<meta name="viewport" content="width=device-width" />
+	<title>::title::</title>
 
-	  <base href="::baseHref::"/>
+	<base href="::baseHref::"/>
 
-	  <!-- general css -->
-	  <link rel="stylesheet" type="text/css" href="http://haxe.org/css/bootstrap.min.css"/>
-	  <link rel="stylesheet" type="text/css" href="css/styles.min.css"/>
-	  <link rel="icon" href="http://haxe.org/favicon.ico"/>
+	<!-- general css -->
+	<link rel="stylesheet" type="text/css" href="http://haxe.org/css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="css/styles.min.css"/>
+	<link rel="icon" href="http://haxe.org/favicon.ico"/>
 
-	  <!-- Twitter Card data -->
-	  <meta name="twitter:creator" content="@haxe_org"/>
+	<meta name="keyword" content="::if (currentPage.tags!=null)::::foreach tag currentPage.tags::::tag::,::end::::end::, haxe,code,snippet" />
 
-	  <!-- Open Graph data -->
-	  <meta property="og:title" content="::title::" />
-	  <meta property="og:type" content="article" />
-	  <meta property="og:url" content="http://code.haxe.org/" />
-	  <meta property="og:image" content="http://code.haxe.org/img/share.png" />
+	<!-- Twitter Card data -->
+	<meta name="twitter:creator" content="@haxe_org"/>
 
-	  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic' rel='stylesheet' type='text/css'/>
-	  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400' rel='stylesheet' type='text/css'/>
+	<!-- Open Graph data -->
+	<meta property="og:title" content="::title::" />
+	<meta property="og:type" content="article" />
+	<meta property="og:url" content="http://code.haxe.org/" />
+	<meta property="og:image" content="http://code.haxe.org/img/share.png" />
+
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic' rel='stylesheet' type='text/css'/>
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400' rel='stylesheet' type='text/css'/>
   </head>
 <body>
 	<nav class="section nav dark">
@@ -43,10 +45,7 @@
 					</li>
 					<li  class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-tags"></i> Tags <b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							::foreach tag tags.keys()::
-							<!-- display tag only if there is more than one page with it -->
-							<li ::cond tags.get(tag).length>1:: ::attr class if(tag==currentPage.customData.tag) "active"::><a href="tag/::tag::.html"><i class="fa fa-tag"></i> ::tag:: <small class="category-count">(::tags.get(tag).length::)</small></a></li>
-							::end::
+							::foreach tag tags.keys()::<li ::cond tags.get(tag).length>1:: ::attr class if(tag==currentPage.customData.tag) "active"::><a href="tag/::tag::.html" rel="tag"><i class="fa fa-tag"></i> ::tag:: <small class="category-count">(::tags.get(tag).length::)</small></a></li>::end::
 						</ul>
 					</li>
 					<li class="divider"></li>

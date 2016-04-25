@@ -3,11 +3,6 @@ var EReg = function(r,opt) {
 	opt = opt.split("u").join("");
 	this.r = new RegExp(r,opt);
 };
-EReg.prototype = {
-	replace: function(s,by) {
-		return s.replace(this.r,by);
-	}
-};
 var Highlighter = function() { };
 Highlighter.main = function() {
 	js.JQuery("code.prettyprint").each(function() {
@@ -24,15 +19,21 @@ Highlighter.syntaxHighlight = function(html) {
 	var vals = ["null","true","false","this"];
 	var vals1 = new EReg("\\b(" + vals.join("|") + ")\\b","g");
 	var types = new EReg("\\b([A-Z][a-zA-Z0-9]*)\\b","g");
-	html = new EReg("('[^']*')","g").replace(html,"<span __xlass='str'>$1</span>");
-	html = kwds1.replace(html,"<span class='kwd'>$1</span>");
-	html = vals1.replace(html,"<span class='val'>$1</span>");
-	html = types.replace(html,"<span class='type'>$1</span>");
-	html = html.split("__xlass").join("class");
-	html = new EReg("(\"[^\"]*\")","g").replace(html,"<span class='str'>$1</span>");
-	html = new EReg("(//[^\n]*)","g").replace(html,"<span class='cmt'>$1</span>");
-	html = new EReg("(/\\*\\*?[^*]*\\*?\\*/)","g").replace(html,"<span class='cmt'>$1</span>");
-	html = html.split("\t").join("    ");
+	html = html.replace(kwds1.r,"<span class='kwd'>$1</span>");
+	html = html.replace(vals1.r,"<span class='val'>$1</span>");
+	html = html.replace(types.r,"<span class='type'>$1</span>");
+	var tmp;
+	var _this = new EReg("(\"[^\"]*\")","g");
+	tmp = html.replace(_this.r,"<span class='str'>$1</span>");
+	html = tmp;
+	var tmp1;
+	var _this1 = new EReg("(//.+\n)","g");
+	tmp1 = html.replace(_this1.r,"<span class='cmt'>$1</span>");
+	html = tmp1;
+	var tmp2;
+	var _this2 = new EReg("(/\\*\\*?[^*]*\\*?\\*/)","g");
+	tmp2 = html.replace(_this2.r,"<span class='cmt'>$1</span>");
+	html = tmp2;
 	return html;
 };
 var q = window.jQuery;

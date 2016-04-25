@@ -27,7 +27,7 @@
 			<h3>All tags</h3>
 			<ul class="unstyled">
 			::foreach tag tags.keys()::
-				<li ::attr class if(tag==currentPage.customData.tag) "active"::><i class="fa fa-tag"></i> <a href="tag/::tag::.html">::tag::</a> <small class="category-count">(::tags.get(tag).length::)</small></li>
+				<li ::attr class if(tag==currentPage.customData.tag) "active"::><i class="fa fa-tag"></i> <a href="tag/::tag::.html" rel="tag">::tag::</a> <small class="category-count">(::tags.get(tag).length::)</small></li>
 			::end::
 			</ul>
 		</nav>
@@ -37,7 +37,7 @@
 				<hr/>
 				Tags: 
 				::foreach tag currentPage.tags::
-					<span class="tag"><i class="fa fa-tag"></i>&nbsp;<a href="tag/::tag::.html">::tag::</a></span>
+					<span class="tag"><i class="fa fa-tag"></i>&nbsp;<a href="tag/::tag::.html" rel="tag">::tag::</a></span>
 				::end::
 			</div>
 			<hr/>
