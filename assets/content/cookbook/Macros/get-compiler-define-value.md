@@ -1,4 +1,4 @@
-[tags]: / "macro-function"
+[tags]: / "conditional-compilation,macro-function"
 
 # Working with compiler flags
 
