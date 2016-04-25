@@ -6,7 +6,6 @@ import Generator;
  * @author Mark Knol
  */
 class Main {
-	
   public static function main() {
     var generator = new Generator();
     generator.titlePostFix = " - Haxe Code Cookbook";
@@ -14,7 +13,7 @@ class Main {
     generator.repositoryUrl = "https://github.com/HaxeFoundation/code-cookbook/";
     generator.repositoryBranch = "master";
     
-    generator.build(true);
+    generator.build();
     generator.includeDirectory("assets/includes");
   }
 }

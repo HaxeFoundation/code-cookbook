@@ -64,12 +64,12 @@ class Generator {
         
         // execute the template
         var template = Template.fromFile(contentPath + page.templatePath);
-        var html = template.execute(data);
+        var html = Minifier.removeComments(template.execute(data));
         
         if (doMinify) {
           // strip crap
           var length = html.length;
-          html = Minifier.removeComments(Minifier.minify(html));
+          html = Minifier.minify(html);
           var newLength = html.length;
           //trace("optimized " + (Std.int(100 / length * (length - newLength) * 100) / 100) + "%");
         }
