@@ -40,7 +40,7 @@ class AbstractEnumTools {
         return macro $a{valueExprs};
       default:
         // The given type is not an abstract, or doesn't have @:enum metadata, show a nice error message.
-        throw new Error(type.toString() + " should be @:anum abstract", typePath.pos);
+        throw new Error(type.toString() + " should be @:enum abstract", typePath.pos);
     }
   }
 }
