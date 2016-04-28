@@ -45,7 +45,7 @@ var rf:RFloat = 2.0 - 1.1;
 trace(rf); // 0.9
 ```
 
-A cool trick is to let the [compile time type check]() force a cast to `RFloat` only in the moment when it's actually needed:
+A cool trick is to let the [compile time type check](http://haxe.org/manual/expression-type-check.html) force a cast to `RFloat` only in the moment when it's actually needed:
 
 ```haxe
 // We define the variable as a standard float
