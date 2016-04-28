@@ -85,7 +85,7 @@ var rf = FloatTools.round2(f); // 0.12
 ...but the use as static extension brings the functionality directly to any float type value or variable in the current module:
 
 ```haxe
-using FloatTools; // Adding 'Math' as a static extension
+using FloatTools; // Adding 'FloatTools' as a static extension
 
 class Main {
   static function main() {
