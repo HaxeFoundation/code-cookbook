@@ -2,6 +2,9 @@
 
 # Using static extensions
 
+The concept of [static extensions](http://haxe.org/manual/lf-static-extension.html) is a very poweful concept that gives the possibility of keeping types and objects lightweight, and extending them with functionality only when actually needed.
+Here we will have a look at how some commonly used methods for basic types are implemented as extension methods, and how you can write your own.
+
 ## Where is string replace?
 
 All programming languages that have a `String` type also have something like a `.replace(searchFor:String, replaceWith:String)` method.
@@ -10,7 +13,7 @@ Therefore, it might come as a surprise that you can't do the following in Haxe:
 var s = 'ABxD';
 var corr = s.replace('x', 'C'); // Causes an 'String has no field replace' compilation error
 ```
-Instead, the string replace method lives as a static method in a class called `StringTools`. It can be used like this...
+Instead, the string replace method lives as a static method in a class called **[StringTools](http://api.haxe.org/StringTools.html)**. It can be used like this...
 ```haxe
 var str = 'ABxD';
 var corr = StringTools.replace(str, 'x', 'C');
@@ -43,7 +46,7 @@ Another example: The `Float` type doesn't have a round method:
 var f = 0.9;
 trace(f.round()); // Causes a 'Float has no field round' compile error
 ```
-Instead it lives in the `Math` class (together with `abs()`, `floor()` and other useful methods), so we add it to the module as an static extension:
+Instead it lives in the **[Math](http://api.haxe.org/Math.html)** class (together with `abs()`, `floor()` and other useful methods), so we add it to the module as an static extension:
 ```haxe
 using Math; // Adding 'Math' as a static extension
 
@@ -54,6 +57,8 @@ class Main {
   }
 }
 ```
+Another class often used for static extension is the **[Lambda](http://api.haxe.org/Lambda.html)**, wich extends iterable types (arrays and lists) with functional methods.
+
 
 # Writing your own static extension
 
@@ -77,7 +82,7 @@ We can of course use this new method in the following way...
 var f = 0.119999;
 var rf = FloatTools.round2(f); // 0.12
 ```
-...but the use as static extension brings the functionality directly to any float variable in the current module:
+...but the use as static extension brings the functionality directly to any float type value or variable in the current module:
 
 ```haxe
 using FloatTools; // Adding 'Math' as a static extension
