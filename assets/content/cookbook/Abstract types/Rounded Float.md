@@ -17,7 +17,7 @@ abstract RFloat(Float) from Float {
   
   // The following rounds the result whenever converted to a Float
   @:to inline public function toFloat():Float  {
-    return roundPrecision(this);
+    return roundFloat(this);
   }
  
   @:to inline public function toString():String {
@@ -28,7 +28,7 @@ abstract RFloat(Float) from Float {
   // corresponds to the number of decimals rounding precision
   static inline var multiplier = 10000000;
     
-  static inline function roundPrecision(value:Float):Float
+  static inline function roundFloat(value:Float):Float
     return Math.round(value * multiplier) / multiplier;
 }
 ```
@@ -43,6 +43,15 @@ trace(f); // 0.8999999999999999
 // RFloat abstract rounds the error away
 var rf:RFloat = 2.0 - 1.1;
 trace(rf); // 0.9
+```
+
+A cool trick is to let the [compile time type check]() force a cast to 'RFloat' only in the moment when it's actually needed:
+
+```haxe
+// We define the variable as a standard float
+var f:Float = 2.0 - 1.1;
+// In the moment we need the rounded version, we use the '(f:RFloat)' syntax to force a cast to 'RFloat':
+trace((f:RFloat)); // 0.9
 ```
 
 > Learn about Haxe Abstracts here: <http://haxe.org/manual/types-abstract.html>
