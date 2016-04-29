@@ -26,8 +26,8 @@ trace(corr); // ABCD
 To our rescue, we can use the methods of `StringTools` as [static extensions](http://haxe.org/manual/lf-static-extension.html) by
 adding `using StringTools;` to the top of our [module](http://haxe.org/manual/type-system-modules-and-paths.html) (typically below the import statements):
 ```haxe
-// We add StringTools as a static extension with the keyword 'using'
-// - typically below the module imports:
+// We add StringTools as a static extension with the keyword 'using',
+// typically below the module imports:
 using StringTools; 
 
 class Main {
@@ -40,6 +40,20 @@ class Main {
 ```
 The example above compiles because the `using StringTools;` statement "extends" the functionality of the string variables with the `replace()` method.
 (You get other methods as well: `trim()`, `escape()` and `encode()` methods among others.)
+
+The extension methods don't just work on *variables*, they can be used directly on *values* as well:
+```haxe
+// We add StringTools as a static extension with the keyword 'using',
+// typically below the module imports:
+using StringTools; 
+
+class Main {
+  static public function main() {
+    var corr = 'ABxD'.replace('x', 'C'); // replace method used directly on the string!
+  }
+}
+```
+
 
 Another example: The `Float` type doesn't have a round method:
 ```haxe
@@ -60,7 +74,7 @@ class Main {
 Another class often used for static extension is the **[Lambda](http://api.haxe.org/Lambda.html)**, wich extends iterable types (arrays and lists) with functional methods.
 
 
-# Writing your own static extension
+# Writing your own static extensions
 
 This concept of extending the functionality of Haxe types and objects using static extensions is very powerful. 
 It makes it very easy to create your own reusable libraries with the extensions that you need for the data that you use.
@@ -92,8 +106,7 @@ class Main {
     var f = 0.119999;
     var rf = f.round2(); // 0.12
     
-    // Please note that the following also works: 
-    // using the extension method on the value itself
+    // Please note that the following also works, using the extension method on the value itself
     var rf = 0.119999.round2(); // 0.12
   }
 }
@@ -107,7 +120,7 @@ As you can see in the example above, we just skip the first parameter to the `ro
 Let's say that we have a file called Main.hx with a class called `Main`. This means that the module is referred to as `Main`, and that
 any other class(es) defined in the same class are referred to as `Main.Foo`, `Main.Bar` etc.
 [Here's a Try Haxe example](http://try.haxe.org/#720E5) where the FloatTools class has to be referred to as `Test.FloatTools`
-because the module name is `Test` (wich means that the filename in this case is Test.hx).
+because the module name is `Test` (which means that the filename in this case is Test.hx).
 
 
 
