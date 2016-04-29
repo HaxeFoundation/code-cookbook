@@ -43,8 +43,6 @@ The example above compiles because the `using StringTools;` statement "extends" 
 
 The extension methods don't just work on *variables*, they can be used directly on *values* as well:
 ```haxe
-// We add StringTools as a static extension with the keyword 'using',
-// typically below the module imports:
 using StringTools; 
 
 class Main {
