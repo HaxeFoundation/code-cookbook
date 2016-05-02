@@ -30,7 +30,7 @@ Now, we can create a **build.hxml** *without* specifying the Main class `-main M
 Instead we use `--macro "include('package.path.to.lib.classes')"` to include the packages we want:
 
 ```haxe
-// build.hxml
+# build.hxml
 
 -cp src 
 
