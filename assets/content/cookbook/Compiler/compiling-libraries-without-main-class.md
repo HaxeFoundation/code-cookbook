@@ -41,11 +41,7 @@ Instead we use `--macro "include('package.path.to.lib.classes')"` to include the
 
 ```
 
-You can include more than one package if needed:
-```haxe
---macro "include('foo')"    # <- Include all classes in the 'foo' package
---macro "include('bar.buz')"    # <- Include all classes in the 'bar.buz' package
-```
+
 
 ### Compile
 
@@ -63,6 +59,12 @@ foo_BarLib.prototype = {
   }
 };
 })(typeof console != "undefined" ? console : {log:function(){}});
+```
+
+You can include more than one package if needed:
+```haxe
+--macro "include('foo')"    # <- Include all classes in the 'foo' package
+--macro "include('bar.buz')"    # <- Include all classes in the 'bar.buz' package
 ```
 
 ### Exposing Haxe classes for JavaScript
