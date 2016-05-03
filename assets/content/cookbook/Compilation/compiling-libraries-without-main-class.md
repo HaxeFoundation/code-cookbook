@@ -30,7 +30,7 @@ Now, we can create a **build.hxml** *without* specifying the Main class `-main M
 Instead we use `--macro "include('package.path.to.lib.classes')"` to include the packages we want:
 
 ```haxe
-// build.hxml
+# build.hxml
 
 -cp src 
 
@@ -41,11 +41,7 @@ Instead we use `--macro "include('package.path.to.lib.classes')"` to include the
 
 ```
 
-You can include more than one package if needed:
-```haxe
---macro "include('foo')"    # <- Include all classes in the 'foo' package
---macro "include('bar.buz')"    # <- Include all classes in the 'bar.buz' package
-```
+
 
 ### Compile
 
@@ -65,8 +61,14 @@ foo_BarLib.prototype = {
 })(typeof console != "undefined" ? console : {log:function(){}});
 ```
 
+You can include more than one package if needed:
+```haxe
+--macro "include('foo')"    # <- Include all classes in the 'foo' package
+--macro "include('bar.buz')"    # <- Include all classes in the 'bar.buz' package
+```
+
 ### Exposing Haxe classes for JavaScript
 
-If you are writing libraries for javascript, you might want to use the `@:expose` metadata to make your code available in the global namespace. You can [read more about that in the Haxe manual](http://code.haxe.org/category/beginner/using-static-extensions.html).
+If you are writing libraries for javascript, you might want to use the `@:expose` metadata to make your code available in the global namespace. You can [read more about that in the Haxe manual](http://haxe.org/manual/target-javascript-expose.html).
 
-> Author: [Jonas Nystrˆm](https://github.com/cambiata)
+> Author: [Jonas Nystr√∂m](https://github.com/cambiata)
