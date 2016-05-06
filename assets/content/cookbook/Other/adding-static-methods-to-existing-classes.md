@@ -1,8 +1,8 @@
 [tags]: / "static-extension"
 
-# Adding Static Methods to Existing Classes
+# Adding static methods to existing classes
 
-Haxe allows you to add static methods to existing classes (eg. `Math`) via the Static Extensions feature. The "secret sauce" is to specify the first parameter of the extension as `Class<X>` where `X` is the class you want to add static methods to (eg. `Math`), and to make the method public.
+Haxe allows you to add static methods to existing classes (eg. `Math`) via the static extensions feature. The "secret sauce" is to specify the first parameter of the extension as `Class<X>` where `X` is the class you want to add static methods to (eg. `Math`), and to make the method public.
 
 Here's a class with a static method that adds a `randomBetween(a, b)` method to `Math`:
 
