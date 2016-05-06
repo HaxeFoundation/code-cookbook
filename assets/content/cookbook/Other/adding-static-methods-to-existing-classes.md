@@ -33,7 +33,7 @@ using MathExtensions;
 
 class Test {
     static function main() {
-        trace('Random value between 10 and 20: ${Math.randomBetween(10, 20)}');
+        trace("Random value between 10 and 20:" + Math.randomBetween(10, 20));
     }
 }
 
