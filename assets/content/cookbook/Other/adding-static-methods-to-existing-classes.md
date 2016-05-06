@@ -1,4 +1,4 @@
-[tags]: / "static-extensions"
+[tags]: / "static-extension"
 
 # Adding Static Methods to Existing Classes
 
