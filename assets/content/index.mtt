@@ -12,7 +12,7 @@
 <section class="container">
 	<h3><i class="fa fa-book"></i> Start browsing..</h3>
 	::foreach category sitemap::
-		<a href="category/::category.id::/index.html" class="btn btn-large"><strong>::category.title::</strong> <small class="category-count">(::category.getPageCount()::)</small></a>
+		<a href="category/::category.id::/" class="btn btn-large"><strong>::category.title::</strong> <small class="category-count">(::category.getPageCount()::)</small></a>
 	::end::
 	<hr/>
 	::foreach tag tags.keys()::

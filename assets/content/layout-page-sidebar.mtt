@@ -12,7 +12,7 @@
 			<h3>Table of contents</h3>
 			<ul class="unstyled">
 			::foreach category sitemap::
-				<li><a href="category/::category.id::/index.html" >::category.title::</a>
+				<li><a href="category/::category.id::/" >::category.title::</a>
 					<ul class="unstyled">
 					::foreach page category.pages::
 						<li ::cond page.visible:: ::attr class if(page==currentPage) "active"::><a href="::page.outputPath::">::page.title::</a></li>
