@@ -16,6 +16,17 @@ class MySingleton {
 }
 ```
 
+More elegant way.
+
+```haxe
+class MySingleton {
+
+  public static var instance(default, null):MySingleton = new MySingleton();
+  
+  private function new () {}  // private constructrotr
+}
+```
+
 ### Usage
   
 ```haxe
