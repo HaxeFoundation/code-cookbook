@@ -1,4 +1,4 @@
-[tags]: / "libraries,javascript"
+[tags]: / "libraries,javascript,dead-code-elimination"
 
 # Compiling libraries without main class
 
@@ -25,7 +25,7 @@ class BarLib {
 }
 ```
 
-### Create a build.hxml with --macro include
+### Create a build.hxml without -main
 Now, we can create a **build.hxml** *without* specifying the Main class `-main Main` the way we usually do. 
 Instead we use `--macro "include('package.path.to.lib.classes')"` to include the packages we want:
 
@@ -34,16 +34,14 @@ Instead we use `--macro "include('package.path.to.lib.classes')"` to include the
 
 -cp src 
 
-# add the package(s) that you want to include the following way: 
---macro "include('foo')"    # <- Include all classes in the 'foo' package
+# add the class(es) that you want to include the following way, one per line
+foo.BarLib    # <- Include the class foo.BarLib
 
--js bin/lib.js    # <- Compile library, in this case to javascript
+-js bin/lib.js    # <- Compile the library, in this case to javascript
 
 ```
 
-
-
-### Compile
+### Compile the library
 
 Now, you can compile your library with `> haxe build.hxml`.
 
@@ -63,9 +61,35 @@ foo_BarLib.prototype = {
 
 You can include more than one package if needed:
 ```haxe
---macro "include('foo')"    # <- Include all classes in the 'foo' package
---macro "include('bar.buz')"    # <- Include all classes in the 'bar.buz' package
+# build.hxml
+-cp src 
+
+foo.BarLib    # include class foo.BarLib
+buz.qux.Norf  # include class buz.qux.Norf
+Config        # include class Config
+...
+
 ```
+
+### Caution with dead code elimination
+
+[Dead code elimination](http://haxe.org/manual/cr-dce.html) is a great Haxe compiler feature that lets the compiler remove code that isn't used by the program. In this case, when dealing with libraries, this might cause unwantede results: If you compile the examples above with full dead code elimination (using the compilation flag ```-dce full```), all your library code will be stripped away! To avoid a class being stripped away like this, use the metadata ```@:keep``` before the class definition:
+
+```haxe
+// foo.BarLib.hx
+
+package foo;
+
+@:keep // <-- Avoid dead code elimination stripping this class away 
+class BarLib {
+  public function new()  {}
+
+  public function test() {
+    return 'Hello from BarLib!';
+  }
+}
+```
+
 
 ### Exposing Haxe classes for JavaScript
 
