@@ -372,3 +372,7 @@ pre .cmt {
 pre .cmt .kwd, pre .cmt .str, pre .cmt .val, pre .cmt .type {
 	color: #998;
 }
+
+.last-modified {
+  color:#999;
+}

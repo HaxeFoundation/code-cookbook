@@ -7,7 +7,13 @@ var Highlighter = function() { };
 Highlighter.main = function() {
 	js.JQuery("code.prettyprint").each(function() {
 		var el = js.JQuery(this);
-		if(!el.hasClass("highlighted") && (el.hasClass("haxe") || el.hasClass("js"))) {
+		var tmp;
+		if(!el.hasClass("highlighted")) {
+			var tmp1;
+			if(!el.hasClass("haxe")) tmp1 = el.hasClass("js"); else tmp1 = true;
+			if(!tmp1) tmp = el.hasClass("javascript"); else tmp = true;
+		} else tmp = false;
+		if(tmp) {
 			el.html(Highlighter.syntaxHighlight(el.html()));
 			el.addClass("highlighted");
 		}
