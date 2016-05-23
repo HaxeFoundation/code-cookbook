@@ -1,6 +1,6 @@
 [tags]: / "javascript,dead-code-elimination,libraries"
 
-# Using Haxe classes from standard javascript
+# Using Haxe classes in standard javascript
 
 Normally, when compiling Haxe to javascript, the resulting code is kept away from the global scope. This means that you can't reach the Haxe generated code from other scripts. 
 To make that possible, there's the ```@:expose``` metadata that can be used on a class. This makes the class "exposed" to the global scope, and therefore possible to use in standard javascript.
