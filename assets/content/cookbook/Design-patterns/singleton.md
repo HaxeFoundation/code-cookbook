@@ -4,14 +4,9 @@ This is a basic example of the [Singleton](https://en.wikipedia.org/wiki/Singlet
 
 ```haxe
 class MySingleton {
-  public static var instance(get, null):T;
-  static function get_instance() {
-    if (instance == null) {
-      instance = new MySingleton();
-    }
-    return instance;
-  }
-
+  // read-only property
+  public static var instance(default, null):MySingleton = new MySingleton();
+  
   private function new () {}  // private constructor
 }
 ```
