@@ -7,7 +7,7 @@ class Highlighter{
   public static function main() {
     new js.JQuery("code.prettyprint").each(function() {
       var el = js.JQuery.cur;
-      if (!el.hasClass("highlighted") && (el.hasClass("haxe") || el.hasClass("js"))) {
+      if (!el.hasClass("highlighted") && (el.hasClass("haxe") || el.hasClass("js") || el.hasClass("javascript"))) {
         el.html(syntaxHighlight(el.html()));
         el.addClass("highlighted");
       }
