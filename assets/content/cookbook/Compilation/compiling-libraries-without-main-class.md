@@ -29,7 +29,7 @@ class BarLib {
 Now, we can create a **build.hxml** *without* specifying the Main class `-main Main` the way we usually do. 
 Instead we add the classes that we want to include, one per row, using the full class name including package path:
 
-```haxe
+```
 # build.hxml
 
 -cp src 
@@ -38,7 +38,6 @@ Instead we add the classes that we want to include, one per row, using the full 
 foo.BarLib    # <- Include the class foo.BarLib
 
 -js bin/lib.js    # <- Compile the library, in this case to JavaScript
-
 ```
 
 ### Compile the library
@@ -60,7 +59,7 @@ foo_BarLib.prototype = {
 ```
 
 You can include more than one package if needed:
-```haxe
+```
 # build.hxml
 -cp src 
 
