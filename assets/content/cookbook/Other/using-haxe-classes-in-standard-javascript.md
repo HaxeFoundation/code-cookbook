@@ -62,8 +62,8 @@ However, the MyUtils class is also exposed to the global scope, and this makes i
 <body>
   <script src="app.js"></script>
   <script>		
-    // standar javascript instantiating the 
-    // Haxe-generated MyUtils class:
+    // Using the Haxe-generated MyUtils class
+    // from standard javascript
     var utils = new foo.MyUtils();
     console.log(utils.multiply(2.2, 3.3));			
   </script>
