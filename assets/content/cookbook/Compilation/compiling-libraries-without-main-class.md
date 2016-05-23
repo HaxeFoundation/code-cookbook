@@ -27,7 +27,7 @@ class BarLib {
 
 ### Create a build.hxml without -main
 Now, we can create a **build.hxml** *without* specifying the Main class `-main Main` the way we usually do. 
-Instead we use `--macro "include('package.path.to.lib.classes')"` to include the packages we want:
+Instead we add the classes that we want to include, one per row, using the full class name including package path:
 
 ```haxe
 # build.hxml
