@@ -11,7 +11,7 @@ Here's an example of a simple utility class, where we use the ```@:expose``` met
 package foo;
 
 @:expose  // <- makes the class reachable from standard javascript
-@:keep    // <- avoids accidental removing by dead code elimination
+@:keep    // <- avoids accidental removal by dead code elimination
 class MyUtils 
 {
   public function new() { }	
