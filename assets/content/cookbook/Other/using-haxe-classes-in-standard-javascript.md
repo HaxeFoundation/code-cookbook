@@ -30,14 +30,14 @@ class Main
   }	
 }	
 ```
-...and after compiling it with the following **build.hxml**...
+...and after compiling it with something like the following **build.hxml**...
 ```haxe
 -cp src
 -main Main
 -js bin/app.js
 -dce full
 ```
-...and run in an **index.html** like the following...
+...and run in an **index.html** like the this one...
 
 ```html
 <!DOCTYPE html>
@@ -50,7 +50,7 @@ class Main
 </body>
 </html>
 ```
-...it traces the result to the browser console.
+...it traces the multiplied result to the browser console.
 
 However, the MyUtils class is also exposed to the global scope, and this makes it possible to use it for example in this way:
 ```html
