@@ -73,7 +73,7 @@ Config        # include class Config
 
 ### Caution with dead code elimination
 
-[Dead code elimination](http://haxe.org/manual/cr-dce.html) is a great Haxe compiler feature that lets the compiler remove code that isn't used by the program. In this case, when dealing with libraries, this might cause unwantede results: If you compile the examples above with full dead code elimination (using the compilation flag ```-dce full```), all your library code will be stripped away! To avoid a class being stripped away like this, use the metadata ```@:keep``` before the class definition:
+[Dead code elimination](http://haxe.org/manual/cr-dce.html) is a great Haxe compiler feature that lets the compiler remove code that isn't used by the program. In this case, when dealing with libraries, this might cause unwanted results: If you compile the examples above with full dead code elimination (using the compilation flag ```-dce full```), all your library code will be stripped away! To avoid a class being stripped away like this, use the metadata ```@:keep``` before the class definition:
 
 ```haxe
 // foo.BarLib.hx
