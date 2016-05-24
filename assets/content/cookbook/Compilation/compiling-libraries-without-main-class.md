@@ -20,7 +20,7 @@ class BarLib {
   public function new()  {}
 
   public function test() {
-    return 'Hello from BarLib!';
+    return "Hello from BarLib!";
   }
 }
 ```
@@ -58,7 +58,7 @@ foo_BarLib.prototype = {
 })(typeof console != "undefined" ? console : {log:function(){}});
 ```
 
-You can include more than one package if needed:
+You can include more than one package/class if needed:
 ```
 # build.hxml
 -cp src 
@@ -84,14 +84,14 @@ class BarLib {
   public function new()  {}
 
   public function test() {
-    return 'Hello from BarLib!';
+    return "Hello from BarLib!";
   }
 }
 ```
-
+**Note:** This works (as you would expect) the same for all Haxe targets.
 
 ### Exposing Haxe classes for JavaScript
 
-If you are writing libraries for JavaScript, you might want to use the `@:expose` metadata to make your code available in the global namespace. You can [read more about that in the Haxe manual](http://haxe.org/manual/target-javascript-expose.html).
+If you are writing libraries for JavaScript, you might want to use the `@:expose` metadata to make your code available in the global namespace. You can [read more about that in the Haxe manual](http://haxe.org/manual/target-javascript-expose.html) or in [this snippet](../other/using-haxe-classes-in-javascript.html).
 
 > Author: [Jonas Nyström](https://github.com/cambiata)
