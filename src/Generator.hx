@@ -47,7 +47,7 @@ class Generator {
         
         var data = {
           title: '${page.title} $titlePostFix', 
-          year: Date.now().getFullYear, // we're professional now
+          year: Date.now().getFullYear(), // we're professional now
           lastUpdated: DateTools.format(Date.now(), "%d-%m-%Y"),
           baseHref: getBaseHref(page),
           pages: _pages,
