@@ -4,7 +4,7 @@ While there is no named parameter support in Haxe, anonymous structures can be u
 
 
 
-As noted, in the haxe documentation ["Impact on Performance" section](http://haxe.org/manual/types-structure-performance.html), this will have a negative impact on static targets due to an additional dynamic lookup, though. Your mileage may vary but I suppose this is ok to use for not too often called functions with lots of parameters.
+As noted, in the haxe documentation ["Impact on Performance" section](http://haxe.org/manual/types-structure-performance.html), this will have a negative impact on static targets due to an additional dynamic lookup, though. If your application can live with that it can make your code more readable.
 
 ## Usage
 ```haxe
