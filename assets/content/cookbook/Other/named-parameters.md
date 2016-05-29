@@ -22,4 +22,4 @@ class Test {
 
 > More on this topic: <http://haxe.org/manual/types-anonymous-structure.html>
 > 
-> Author: [x2f](http://github.com/x2f)
+> Author: x2f
