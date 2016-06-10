@@ -175,7 +175,7 @@ class Generator {
   
   private function replaceTryHaxeTags(content:String) {
     //[tryhaxe](http://try.haxe.org/embed/ae6ef)
-    return  ~/(\[tryhaxe\])(\()(.+?)(\))/.replace(content, '<iframe src="$3" class="try-haxe"><a href="$3">Try Haxe!</a></iframe>');
+    return  ~/(\[tryhaxe\])(\()(.+?)(\))/g.replace(content, '<iframe src="$3" class="try-haxe"><a href="$3">Try Haxe!</a></iframe>');
   }
   
   private function getCategory(sitemap:Array<Category>, page:Page):Category {
