@@ -3,7 +3,7 @@
 # Using Haxe classes in JavaScript
 
 Normally, when compiling Haxe to JavaScript, the resulting code is kept away from the global scope. This means that you can't reach the Haxe generated code from other scripts. 
-To make that possible, there's the ```@:expose``` metadata that can be used on a class. This makes the class "exposed" to the global scope, and therefore possible to use in plain JavaScript.
+To make that possible, there's the `@:expose` metadata that can be used on a class. This makes the class "exposed" to the global scope, and therefore possible to use in plain JavaScript.
 
 Here's an example of a simple utility class, where we use the `@:expose` metadata. To make sure that the class isn't accidentally stripped away by [dead code elimination](http://haxe.org/manual/cr-dce.html), we also add the `@:keep` metadata:
 	

@@ -41,6 +41,6 @@ class Test {
 
 Using this, you can add all kinds of interesting extensions to pre-existing classes (eg. core Haxe classes, or classes from other Haxe libraries). 
 
-> More on this topic: <haxe.org/manual/lf-static-extension.html>
+> More on this topic: <http://haxe.org/manual/lf-static-extension.html>
 > 
 > Author: [ashes999](http://github.com/ashes999)

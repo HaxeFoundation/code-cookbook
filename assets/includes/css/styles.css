@@ -45,7 +45,7 @@ article h2 {
   border-bottom:1px dotted #aaa;
 }
 
-a, a:hover {
+a, a:hover, a > code {
   color: #257fc2;
 }
 

@@ -81,10 +81,10 @@ Let's say that you need the possibility to round a float to two decimals. To mak
 a `FloatTools` class, and adding a `static public function` with the name `round2` to it:
 ```haxe
 class FloatTools {
-    static public function round2(f:Float) {
-        // The value 100 rounds to two decimals
-		    return Math.round(f * 100) / 100;        
-    }
+  static public function round2(f:Float) {
+    // The value 100 rounds to two decimals
+    return Math.round(f * 100) / 100;        
+  }
 }
 ```
 Note that the rounding method takes one parameter of the type float: `round2(f:Float)` - this is of course the value that we want back in rounded form.

@@ -4,9 +4,9 @@
 
 > Virtually adds this property to a class:
 > ```haxe
-> public function myVar(get, null):Float;
+> public var myVar(get, null):Float;
 > private inline function get_myVar():Float {
-> 	return 1.5;
+>   return 1.5;
 > }
 > ```
 
