@@ -1,0 +1,8 @@
+
+<section class="container">
+  <div id="result404"></div>
+  <script>
+    window.pages = [::foreach page pages::{url:"::page.outputPath::", title:"::page.title::"},::end::];
+  </script>
+  <script src="js/404.js"></script>
+</section>

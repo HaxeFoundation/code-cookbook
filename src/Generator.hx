@@ -121,10 +121,14 @@ class Generator {
   }
   
   private function addGeneralPages() {
-    var page = new Page("layout-page-main.mtt", "index.mtt", "index.html")
+    var homePage = new Page("layout-page-main.mtt", "index.mtt", "index.html")
                           .setTitle("Easy to read Haxe coding examples");
+                          
+    var errorPage = new Page("layout-page-main.mtt", "404.mtt", "404.html")
+                          .setTitle("Page not found");
       
-    addPage(page, "/home");
+    addPage(homePage, "/home");
+    addPage(errorPage, "/404");
   }
   
   private function addCookbookPages(documentationPath:String = "cookbook/") {
