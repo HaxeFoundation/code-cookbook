@@ -192,6 +192,9 @@ class Generator {
   }
   
   private function getBaseHref(page:Page) {
+    if (page.outputPath == "404.html") {
+      return basePath;
+    }
     var href = [for (s in page.outputPath.split("/")) ".."];
     href[0] = ".";
     return href.join("/");
