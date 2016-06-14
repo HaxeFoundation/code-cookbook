@@ -16,7 +16,7 @@
 	::end::
 	<hr/>
 	::foreach tag tags.keys()::
-		<span class="tag"><i class="fa fa-tag"></i>&nbsp;<a href="tag/::tag::.html">::tag::&nbsp;<small class="category-count">(::tags.get(tag).length::)</small></a></span>
+		<span class="tag"><i class="fa fa-tag"></i>&nbsp;<a href="tag/::tag::.html">::tag::</a>&nbsp;<small class="category-count">(::tags.get(tag).length::)</small></span>
 	::end::
 	<hr/>
   
