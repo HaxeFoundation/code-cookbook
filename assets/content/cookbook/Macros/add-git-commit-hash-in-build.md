@@ -3,7 +3,7 @@
 # Add git commit-hash in build
 
 This example executes a process on the system, compile-time. 
-This allows to run a git command `git rev-parse HEAD` and use it's result as value.
+This allows to run a git command `git rev-parse HEAD` and use its result as the value.
 
 ```haxe
 class MyMacros {
