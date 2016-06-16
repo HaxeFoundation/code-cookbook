@@ -68,7 +68,7 @@ Test.hx:6: Right now it's 1466034711, and this build is 6 seconds old
 Test.hx:32: Right now it's 1466034711, and this build is 6 seconds old
 ```
 
-Also, you can compile it to javascript and observe how the expressions the macro returned
+Also, you can compile it to JavaScript and observe how the expressions the macro returned
 are indeed inlined directly in the main() function. The `buildTime` timestamp is now
 simply a literal:
 
