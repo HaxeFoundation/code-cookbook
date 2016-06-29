@@ -1,6 +1,6 @@
 [tags]: / "arguments"
 
-# Named Parameters in Haxe
+# Named Parameters
 
 While there is no named parameter support in Haxe, anonymous structures can be used to obtain the same effect.
 
