@@ -40,6 +40,9 @@ class Generator {
     addCategoryPages(sitemap);
     addTagPages(tags);
     
+    // add tags to the home page
+    _pages[0].tags = [for (tag in tags.keys()) tag];
+    
     Timer.measure(function() {
       for(page in _pages) {
         // set the data for the page
