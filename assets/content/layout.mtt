@@ -12,7 +12,9 @@
 	<link rel="stylesheet" type="text/css" href="css/styles.min.css"/>
 	<link rel="icon" href="http://haxe.org/favicon.ico"/>
 
-	<meta name="keyword" content="::if (currentPage.tags!=null)::::foreach tag currentPage.tags::::tag::,::end::::end::,haxe,code,tutorial,snippet,example,demo" />
+	<meta name="keywords" content="::if (currentPage.tags!=null)::::foreach tag currentPage.tags::::tag::,::end::::end::haxe,code,tutorial,snippet,example,demo" />
+		
+	<meta name="description" content="::currentPage.description::" ::cond currentPage.description != null:: />
 
 	<!-- Twitter Card data -->
 	<meta name="twitter:creator" content="@haxe_org"/>

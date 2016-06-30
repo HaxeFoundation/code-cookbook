@@ -106,7 +106,8 @@ class Generator {
   private function addCategoryPages(sitemap:Array<Category>) {
     for (category in sitemap) {
       addPage(new Page("layout-page-sidebar.mtt",  "table-of-content.mtt",  'category/${category.id}/index.html')
-                        .setTitle('${category.title } - table of content')
+                        .setTitle('${category.title} - Table of content')
+                        .setDescription('Overview of ${category.title.toLowerCase()} snippets and tutorials')
                         .hidden(), category.folder);
     }
   }
@@ -116,14 +117,16 @@ class Generator {
       addPage(new Page("layout-page-sidebar.mtt",  "tags.mtt",  'tag/$tag.html')
                         .setTitle('Tag - ${tag}')
                         .setCustomData({tag:tag, pages: tags.get(tag)})
+                        .setDescription('Overview of snippets and tutorials tagged with ${tag}')
                         .hidden(), "tags");
     }
   }
   
   private function addGeneralPages() {
     var homePage = new Page("layout-page-main.mtt", "index.mtt", "index.html")
-                          .setTitle("Easy to read Haxe coding examples");
-                          
+                          .setTitle("Easy to read Haxe coding examples")
+                          .setDescription('The Haxe Code Cookbook is a central place with Haxe coding snippets and tutorials.');
+    
     var errorPage = new Page("layout-page-main.mtt", "404.mtt", "404.html")
                           .setTitle("Page not found");
       
@@ -279,8 +282,12 @@ class Generator {
               page.title = new markdown.HtmlRenderer().render(el.children);
               hasTitle = true;
               #if !generator_highlight 
-              break;
-              #end
+              continue;
+              #end 
+            }
+            if (hasTitle && el.tag == "p" && page.description == null) {
+              var description = new markdown.HtmlRenderer().render(el.children);
+              page.description = new EReg("<(.*?)>", "g").replace(description, "");
             }
             #if generator_highlight 
             else if (el.tag == "pre") {
@@ -334,6 +341,7 @@ class Generator {
 class Page { 
   public var visible:Bool = true;
   public var title:String;
+  public var description:String;
   public var templatePath:String;
   public var contentPath:String;
   public var outputPath:String;
@@ -355,6 +363,11 @@ class Page {
   
   public function setTitle(title:String):Page {
     this.title = title;
+    return this;
+  }
+  
+  public function setDescription(description:String):Page {
+    this.description = description;
     return this;
   }
   
