@@ -94,7 +94,7 @@ Looks descriptive, but useless until we implement step 3...
 ## Step 3. Using type parameter in a function
 
 Finally, let's make use of that type parameter `T` in our `setProperty` function.
-For that, we also parametrize the function and use the type parameter for the value instead of `Dynamic`:
+For that we also parametrize the function and use the type parameter for the value instead of `Dynamic`:
 
 ```haxe
 function setProperty<T>(property:Property<T>, value:T):Void;
