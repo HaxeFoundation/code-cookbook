@@ -2,7 +2,7 @@
 
 # Strict typing for stringly-typed extern code
 
-A common pattern, often found in (but not only in) dynamic languages is to denote the type of some object
+A common pattern, often found in (but not only in) dynamic languages, is to denote the type of some object
 with a string, for example:
 
 ```haxe
@@ -28,7 +28,7 @@ Let's examine the `setProperty` example from the code above...
 ## Step 1. Proper typing of string values
 
 Step 1 is to define a concrete type for our `property` argument, so we can't pass arbitrary string to it.
-But in run-time a string is still expected, so our type should be represented as strings in run-time, which is
+But at run-time a string is still expected, so our type should be represented as strings at run-time, which is
 exactly what [abstract types](http://haxe.org/manual/types-abstract.html) are for:
 
 ```haxe
