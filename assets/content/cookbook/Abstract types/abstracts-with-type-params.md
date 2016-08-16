@@ -155,4 +155,40 @@ console.log(playerName.toUpperCase());
 db.setProperty("playerLevel",1);
 ```
 
+## Typed event listeners example
+
+In the beginning of this article we also mentioned the `addEventListener` function, so for the sake of completeness, let's also apply our new knowledge to it. Here, we use type parameter to specify listener function type:
+
+```haxe
+import haxe.Constraints.Function;
+
+abstract Event<T:Function>(String) {
+  public inline function new(name) {
+    this = name;
+  }
+}
+
+extern class EventEmitter {
+  function new();
+  function addEventListener<T:Function>(event:Event<T>, listener:T):Void;
+}
+
+class Main {
+  static inline var EVENT_START = new Event<Array<String>->Void>("start");
+  static inline var EVENT_EXIT = new Event<Int->Void>("exit");
+
+  static function main() {
+    var emitter = new EventEmitter();
+
+    // arr is inferred as Array<String>
+    emitter.addEventListener(EVENT_START, function(arr) trace(arr));
+
+    // compile error: String -> Void should be Int -> Void
+    // emitter.addEventListener(EVENT_EXIT, function(s:String) {});
+  }
+}
+```
+
+Note how we also constrained our type parameter to the `haxe.Constraints.Function` which makes sure that we can only specify function types as event type parameter.
+
 > Author: [Dan Korostelev](https://github.com/nadako)
