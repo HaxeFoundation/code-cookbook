@@ -1,17 +1,12 @@
 language: haxe
 
-env:
-  global:
-    - secure: Ee7hOraOMq2oEmTuLFKv3v1ywPBCk7qAaH9tk2wMLqBfqVbE3kedXKlqxALEKaGZ0V8z3X0Okz7bcvx0a68kh/jLcVaFaZC4PYJUEFIQMkxjjq3TbXOBugFbgKkVytSxSyv7OQtxuliA5Zm1NiBPzw6LollUOX7FLBw72mRkD8Y5E7ET85vXstwQM8mWKE37n+pffZb4Qj49+Zosfk0Oz6fTjwHxC88djpCtlVqulmxtUusWIgnQT4bc0cRR7pPzyZoCIxFUW+rY00C/k+vtr5MpgeHBNTjj9EXmLi8JVPCGs+pXXL1DlfhJpO+gPNMxDL/wlUPHSh1ED1VKuZCRAN3gkz9AQ3oYYi5VyZ+o9CdDsr2kPsUv+ocLdES+gtp8FyhamcrwyWqb+2hMNGNcHmMPZl5BzbmCCWdUSjv9OTQ9Ra3MExRmtsDR+V41RnB5f3mMIk5usdbd04dvnFvrj9tSMH/eNytDzzFVaUC46G3dF6wEP366G2HOqXn/ocsArxZhJkaNY8KSFxc0SGycPGwptS9F6F1iDT+KQXlz1aJBmoNIGjsjFP5AyNIVcThZmFjCPEyo840z95F+CNql0VZAe+m1bucupIYWCpPyg60nIxTrV1O/oqjijKYdqSv1Fz6TCmNJ+Kqd0OwvQ6ykcyPANF0GFS/o2b1WOUZTNgQ=
-
 haxe:
   - "3.2.1"
   - development
 
-hxml:
-  - CodeCookBook.hxml
-
-after_script:
+install:
+  - yes | haxelib install CodeCookBook.hxml
+  - haxe CodeCookBook.hxml
   - npm install -g less
   - npm install -g less-plugin-clean-css
   - lessc assets/includes/css/github.css assets/includes/css/github.min.css --clean-css="--s1 --advanced"
@@ -19,7 +14,9 @@ after_script:
   - lessc assets/includes/css/styles.css assets/includes/css/styles.min.css --clean-css="--s1 --advanced"
   - mkdir output
   - neko CodeCookBook.n
-  - bash deploy.sh
+
+script:
+  - bash -v deploy.sh
 
 notifications:
   email: false
