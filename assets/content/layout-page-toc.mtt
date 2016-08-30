@@ -1,0 +1,39 @@
+::use 'layout.mtt'::
+<header class="hero-unit-small">
+	<div class="container">
+		<div class="row">
+			<h1>Haxe Code Cookbook</h1>
+		</div>
+	</div>
+</header>
+<main class="container">
+	<section class="row">
+		<nav class="span4 sidebar-toc" id="sidebar" ::cond currentPage.customData.tag==null ::>
+			<h3>Table of contents</h3>
+			<ul class="unstyled" itemscope="itemscope" itemtype="http://schema.org/BreadcrumbList">
+			::foreach category sitemap::
+				<li><a href="category/::category.id::/" ::attr class if(category==currentCategory) "active"::>::category.title::</a>
+					<ul class="unstyled" >
+					::foreach page category.pages::
+						<li ::cond page.visible:: ::attr class if(page==currentPage) "active":: itemprop="itemListElement" itemscope="itemscope" itemtype="http://schema.org/ListItem"><a href="::page.outputPath::" itemprop="item"><span itemprop="name">::page.title::</span></a></li>
+					::end::
+					</ul>
+				</li>
+				<br/>
+			::end::
+			</ul>
+		</nav>
+		<nav class="span4 sidebar-tags" id="sidebar" ::cond currentPage.customData.tag!=null::>
+			<h3>All tags</h3>
+			<ul class="unstyled" itemscope="itemscope" itemtype="http://schema.org/BreadcrumbList">
+			::foreach tag tags.keys()::
+				<li ::attr class if(tag==currentPage.customData.tag) "active":: itemprop="itemListElement" itemscope="itemscope" itemtype="http://schema.org/ListItem"><i class="fa fa-tag"></i> <a href="tag/::tag::.html" rel="tag" itemprop="item"><span itemprop="name">::tag::</span></a> <small class="category-count">(::tags.get(tag).length::)</small></li>
+			::end::
+			</ul>
+		</nav>
+		<article class="span8">
+				<div itemprop="articleBody">::raw pageContent::</div>
+		</article>
+</section>
+</main>
+::end::

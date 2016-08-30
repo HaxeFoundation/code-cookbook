@@ -1,13 +1,13 @@
-<h1><i class="fa fa-book"></i> ::currentCategory.title::</h1>
+<h1 itemprop="name"><i class="fa fa-book"></i> ::currentCategory.title::</h1>
 
 <ul>
 ::foreach page currentCategory.pages::
-	<li ::cond page.visible::><a href="::page.outputPath::">::page.title::</a></li>
+	<li ::cond page.visible:: itemscope="itemscope" itemtype="https://schema.org/Thing"><a href="::page.outputPath::" itemprop="url"><span itemprop="name">::page.title::</span></a></li>
 ::end::
 </ul>
 
 <hr/>
 
 <div class="contribution">
-	<i class="fa fa-plus-circle"></i> <a href="::addLinkUrl::">Add new snippet</a>
+	<i class="fa fa-plus-circle"></i> <a href="::addLinkUrl::" rel="external">Add new snippet</a>
 </div>

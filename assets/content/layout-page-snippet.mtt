@@ -1,0 +1,78 @@
+::use 'layout.mtt'::
+<header class="hero-unit-small">
+	<div class="container">
+		<div class="row">
+			<h1>Haxe Code Cookbook</h1>
+		</div>
+	</div>
+</header>
+<main class="container">
+	<section class="row">
+		<nav class="span4 sidebar-toc" id="sidebar">
+			<h3>Table of contents</h3>
+			<ul class="unstyled" itemscope="itemscope" itemtype="http://schema.org/BreadcrumbList">
+			::foreach category sitemap::
+				<li><a href="category/::category.id::/" ::attr class if(category==currentCategory) "active"::>::category.title::</a>
+					<ul class="unstyled" >
+					::foreach page category.pages::
+						<li ::cond page.visible:: ::attr class if(page==currentPage) "active":: itemprop="itemListElement" itemscope="itemscope" itemtype="http://schema.org/ListItem"><a href="::page.outputPath::" itemprop="item"><span itemprop="name">::page.title::</span></a></li>
+					::end::
+					</ul>
+				</li>
+				<br/>
+			::end::
+			</ul>
+		</nav>
+		
+		<article class="span8" itemscope="itemscope" itemtype="http://schema.org/Article">
+			<h1><a href="::absoluteUrl::" itemprop="url" class="anchorjs-icons"></a> <span itemprop="name">::currentPage.title::</span></h1>
+			<div itemprop="articleBody">::raw pageContent::</div>
+			<meta itemprop="dateModified" datetime="::stat.mtime::"/>
+			<meta itemprop="datePublished" datetime="::stat.ctime::"/>
+			<hr/>
+			<div>
+				Category:  &nbsp; 
+				<span itemprop="articleSection"><i class="fa fa-book"></i>&nbsp;<a href="category/::currentCategory.id::/">::currentCategory.title::</a></span>
+			</div>
+			<div class="tags" ::cond currentPage.visible && currentPage.tags!=null && currentPage.tags.length>0::>
+				Tags:  &nbsp; 
+				<span itemprop="keywords">
+				::foreach tag currentPage.tags::
+					<span class="tag"><i class="fa fa-tag"></i>&nbsp;<a href="tag/::tag::.html" rel="tag">::tag::</a><i class="semantic" ::cond !repeat.tag.last::>,</i></span>
+				::end::
+				</span>
+			</div>
+			<hr/>
+			<div class="contribution" ::cond currentPage.visible::>
+				<i class="fa fa-lightbulb-o"></i> <a href="::editUrl::" rel="external">Suggest improvement</a> | 
+				<i class="fa fa-exclamation-circle"></i> <a href="https://github.com/HaxeFoundation/code-cookbook/issues/new?title=[::currentPage.title::]&body=%0A%0ASources:%0A*%20::absoluteUrl::%0A*%20::contributionUrl::" rel="external">Report issue</a> |
+				<i class="fa fa-plus-circle"></i> <a href="::addLinkUrl::" rel="external">Add new snippet</a>
+			</div>
+			<hr/>
+			<div class="share-buttons">
+				<!-- G+ button code -->
+				<script src="https://apis.google.com/js/platform.js" async="async" defer="defer"></script>
+				<div class="g-plus" data-action="share" data-annotation="bubble"></div>
+				&nbsp; &nbsp;
+				
+				<!-- Twitter button code -->
+				<a href="https://twitter.com/share" class="twitter-share-button" data-show-count="false">Tweet</a>
+				<script async="async" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+				&nbsp; &nbsp;
+				<!-- Load Facebook SDK for JavaScript -->
+				<div id="fb-root"></div>
+				<script>(function(d, s, id) {
+					var js, fjs = d.getElementsByTagName(s)[0];
+					if (d.getElementById(id)) return;
+					js = d.createElement(s); js.id = id;
+					js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1";
+					fjs.parentNode.insertBefore(js, fjs);
+				}(document, 'script', 'facebook-jssdk'));</script>
+
+				<!-- FB like button code -->
+				<div class="fb-like" data-href="::absoluteUrl::" data-layout="standard" data-action="like" data-show-faces="true"></div>
+			</div>
+		</article>
+	</section>
+</main>
+::end::

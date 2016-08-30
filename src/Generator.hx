@@ -50,8 +50,7 @@ class Generator {
         
         var data = {
           title: '${page.title} $titlePostFix', 
-          year: Date.now().getFullYear(), // we're professional now
-          lastUpdated: DateTools.format(Date.now(), "%d-%m-%Y"),
+          now: Date.now(),
           baseHref: getBaseHref(page),
           pages: _pages,
           currentPage: page,
@@ -63,7 +62,10 @@ class Generator {
           sitemap: sitemap,
           tags: tags,
           pageContent: null,
+          stat: FileSystem.stat(contentPath + page.contentPath),
+          DateTools: DateTools,
         }
+        
         data.pageContent = page.pageContent != null ? page.pageContent : getContent(contentPath + page.contentPath, data);
         
         // execute the template
@@ -108,7 +110,7 @@ class Generator {
   
   private function addCategoryPages(sitemap:Array<Category>) {
     for (category in sitemap) {
-      addPage(new Page("layout-page-sidebar.mtt",  "table-of-content.mtt",  'category/${category.id}/index.html')
+      addPage(new Page("layout-page-toc.mtt",  "table-of-content.mtt",  'category/${category.id}/index.html')
                         .setTitle('${category.title} - Table of content')
                         .setDescription('Overview of ${category.title.toLowerCase()} snippets and tutorials')
                         .hidden(), category.folder);
@@ -117,7 +119,7 @@ class Generator {
   
   private function addTagPages(tags:StringMap<Array<Page>>) {
     for (tag in tags.keys()) {
-      addPage(new Page("layout-page-sidebar.mtt",  "tags.mtt",  'tag/$tag.html')
+      addPage(new Page("layout-page-toc.mtt",  "tags.mtt",  'tag/$tag.html')
                         .setTitle('Tag - ${tag}')
                         .setCustomData({tag:tag, pages: tags.get(tag)})
                         .setDescription('Overview of snippets and tutorials tagged with ${tag}')
@@ -140,7 +142,7 @@ class Generator {
   private function addCookbookPages(documentationPath:String = "cookbook/") {
     for (file in FileSystem.readDirectory(contentPath + documentationPath)) {
       if (!FileSystem.isDirectory(contentPath + documentationPath + file)) {
-        var page = new Page("layout-page-sidebar.mtt", 
+        var page = new Page("layout-page-snippet.mtt", 
                              documentationPath + file, 
                              documentationPath.replace('cookbook/', 'category/').toLowerCase().replace(" ", "-") + 
                                 getWithoutExtension(file).toLowerCase() + ".html");
@@ -186,6 +188,18 @@ class Generator {
   private function replaceTryHaxeTags(content:String) {
     //[tryhaxe](http://try.haxe.org/embed/ae6ef)
     return  ~/(\[tryhaxe\])(\()(.+?)(\))/g.replace(content, '<iframe src="$3" class="try-haxe"><a href="$3">Try Haxe!</a></iframe>');
+  }
+  
+  private function replaceAuthor(content:String) {
+    //Author: [name](url) / [name](url) 
+    if (content.indexOf("Author:") != -1) {
+      var authorLineOld = content.split("Author:").pop().split("\n").shift();
+      var authorline = ~/\[(.*?)\]\((.+?)\)/g.replace(authorLineOld, '<a href="$2" itemprop="url" rel="external"><span itemprop="name">$1</span></a>');
+      authorline = '<span itemprop="author" itemscope="itemscope" itemtype="https://schema.org/Person">$authorline</span>';
+      return  content.replace(authorLineOld, authorline);
+    } else {
+      return content;
+    }
   }
   
   private function getCategory(sitemap:Array<Category>, page:Page):Category {
@@ -257,8 +271,10 @@ class Generator {
   
   public function parseMarkdownContent(page:Page, file:String):String {
     var document = new Markdown.Document();
-    var markdown = replaceTryHaxeTags(File.getContent(contentPath + file));
-
+    var markdown = File.getContent(contentPath + file);
+    markdown = replaceTryHaxeTags(markdown);
+    markdown = replaceAuthor(markdown);
+    
     try {
       // replace windows line endings with unix, and split
       var lines = ~/(\r\n|\r)/g.replace(markdown, '\n').split("\n");
@@ -284,6 +300,7 @@ class Generator {
             if (!hasTitle && el.tag == "h1" && !el.isEmpty()) {
               page.title = new markdown.HtmlRenderer().render(el.children);
               hasTitle = true;
+              blocks.remove(block);
               #if !generator_highlight 
               continue;
               #end 

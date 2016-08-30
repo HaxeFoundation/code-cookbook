@@ -11,7 +11,8 @@
 	<link rel="stylesheet" type="text/css" href="http://haxe.org/css/bootstrap.min.css"/>
 	<link rel="stylesheet" type="text/css" href="css/styles.min.css"/>
 	<link rel="icon" href="http://haxe.org/favicon.ico"/>
-
+	<link rel="canonical" href="::absoluteUrl::" />
+		
 	<meta name="keywords" content="::if (currentPage.tags!=null)::::foreach tag currentPage.tags::::tag::,::end::::end::haxe,code,tutorial,snippet,example,demo" />
 		
 	<meta name="description" content="::currentPage.description::" ::cond currentPage.description != null:: />
@@ -22,7 +23,7 @@
 	<!-- Open Graph data -->
 	<meta property="og:title" content="::title::" />
 	<meta property="og:type" content="article" />
-	<meta property="og:url" content="http://code.haxe.org/" />
+	<meta property="og:url" content="::absoluteUrl::" />
 	<meta property="og:image" content="http://code.haxe.org/img/share.png" />
 
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic' rel='stylesheet' type='text/css'/>
@@ -132,10 +133,10 @@
 	<div class="container">
 		<div class="copyright">
 			<p>
-			&copy;::year::&nbsp;<a class="hf-link" href="http://haxe.org/foundation/" title="Haxe Foundation Website">Haxe Foundation</a> |
-			&nbsp;<a href="https://github.com/HaxeFoundation/code-cookbook" title="Haxe Code Cookbook on Github">Code Cookbook on Github</a> 
+			&copy;::DateTools.format(now, "%Y")::&nbsp;<a class="hf-link" href="http://haxe.org/foundation/" rel="external" title="Haxe Foundation Website">Haxe Foundation</a> |
+			&nbsp;<a href="https://github.com/HaxeFoundation/code-cookbook" title="Haxe Code Cookbook on Github" rel="external">Code Cookbook on Github</a> 
 			</p>
-			<p class="last-modified">Last modified: ::lastUpdated::</p>
+			<p class="last-modified">Last modified: ::DateTools.format(now, "%d-%m-%Y")::</p>
 		</div>
 	</div>
 </footer>
