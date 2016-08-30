@@ -52,25 +52,25 @@
 			<div class="share-buttons">
 				<!-- G+ button code -->
 				<script src="https://apis.google.com/js/platform.js" async="async" defer="defer"></script>
-				<div class="g-plus" data-action="share" data-annotation="bubble"></div>
+				<div class="g-plus" data-action="share" data-annotation="bubble" style="display:inline-block"></div>
 				&nbsp; &nbsp;
 				
 				<!-- Twitter button code -->
-				<a href="https://twitter.com/share" class="twitter-share-button" data-show-count="false">Tweet</a>
+				<a href="https://twitter.com/share" class="twitter-share-button" style="display:inline-block" data-show-count="false">Tweet</a>
 				<script async="async" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 				&nbsp; &nbsp;
 				<!-- Load Facebook SDK for JavaScript -->
-				<div id="fb-root"></div>
+				<div id="fb-root" style="display:inline-block"></div>
 				<script>(function(d, s, id) {
 					var js, fjs = d.getElementsByTagName(s)[0];
 					if (d.getElementById(id)) return;
 					js = d.createElement(s); js.id = id;
-					js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1";
+					js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
 					fjs.parentNode.insertBefore(js, fjs);
 				}(document, 'script', 'facebook-jssdk'));</script>
 
 				<!-- FB like button code -->
-				<div class="fb-like" data-href="::absoluteUrl::" data-layout="standard" data-action="like" data-show-faces="true"></div>
+				<div class="fb-like" data-href="::absoluteUrl::" style="display:inline-block; width:300px" data-layout="standard" data-action="like" data-show-faces="true"></div>
 			</div>
 		</article>
 	</section>
