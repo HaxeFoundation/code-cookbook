@@ -1,5 +1,3 @@
-
-
 # Factory 
 
 This is a basic example of the [Factory](https://en.wikipedia.org/wiki/Factory_pattern) design pattern in Haxe.
