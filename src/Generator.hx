@@ -62,7 +62,7 @@ class Generator {
           sitemap: sitemap,
           tags: tags,
           pageContent: null,
-          stat: FileSystem.stat(contentPath + page.contentPath),
+          stat: GitUtil.getStat(contentPath + page.contentPath),
           DateTools: DateTools,
         }
         
