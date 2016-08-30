@@ -13,7 +13,7 @@ package foo;
 @:expose  // <- makes the class reachable from plain JavaScript
 @:keep    // <- avoids accidental removal by dead code elimination
 class MyUtils {
-  public function new() { }	
+  public function new() { }
   public function multiply(a:Float, b:Float) return a * b;
 }
 ```
@@ -23,9 +23,9 @@ This class can of course be called from Haxe the standard way:
 class Main {
   static function main() {
     var utils = new foo.MyUtils();
-    trace(utils.multiply(1.1, 3.3));		
-  }	
-}	
+    trace(utils.multiply(1.1, 3.3));
+  }
+}
 ```
 ...and after compiling it with something like the following **build.hxml**:
 ```haxe
@@ -58,11 +58,11 @@ However, the MyUtils class is also exposed to the global scope and this makes it
 </head>
 <body>
   <script src="app.js"></script>
-  <script>		
+  <script>
     // Using the Haxe-generated MyUtils class
     // from standard JavaScript
     var utils = new foo.MyUtils();
-    console.log(utils.multiply(2.2, 3.3));			
+    console.log(utils.multiply(2.2, 3.3));
   </script>
 </body>
 </html>

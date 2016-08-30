@@ -64,7 +64,7 @@ You will need to create a `Dispatcher` base class.
 @:autoBuild(DispatchBuilder.build())
 class Dispatcher<T> {
   var listeners:Array<T>;
-	
+
   public function new() {
     listeners = [];
   }
