@@ -27,8 +27,6 @@
 		<article class="span8" itemscope="itemscope" itemtype="http://schema.org/Article">
 			<h1><a href="::absoluteUrl::" itemprop="url" class="anchorjs-icons"></a> <span itemprop="name">::currentPage.title::</span></h1>
 			<div itemprop="articleBody">::raw pageContent::</div>
-			<meta itemprop="dateModified" datetime="::stat.mtime::"/>
-			<meta itemprop="datePublished" datetime="::stat.ctime::"/>
 			<hr/>
 			<div>
 				Category:  &nbsp; 
