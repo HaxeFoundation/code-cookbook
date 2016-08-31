@@ -2,7 +2,7 @@
 <header class="hero-unit-small">
 	<div class="container">
 		<div class="row">
-			<h1>Haxe Code Cookbook</h1>
+			<div id="title">Haxe Code Cookbook</div>
 		</div>
 	</div>
 </header>

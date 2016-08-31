@@ -50,7 +50,7 @@ class Generator {
         var category = getCategory(sitemap, page);
         
         var data = {
-          title: '${page.title} $titlePostFix', 
+          title: category != null ? '${page.title} - ${category.title} $titlePostFix' : '${page.title} $titlePostFix', 
           now: Date.now(),
           pages: _pages,
           currentPage: page,
@@ -60,6 +60,7 @@ class Generator {
           tags: tags,
           pageContent: null,
           DateTools: DateTools,
+          getTagTitle:getTagTitle,
         }
         if (page.contentPath != null) 
         {
@@ -119,18 +120,19 @@ class Generator {
   private function addCategoryPages(sitemap:Array<Category>) {
     for (category in sitemap) {
       addPage(new Page("layout-page-toc.mtt",  "table-of-content.mtt",  'category/${category.id}/index.html')
-                        .setTitle('${category.title} - Table of content')
-                        .setDescription('Overview of ${category.title.toLowerCase()} snippets and tutorials')
+                        .setTitle('Haxe ${category.title} articles overview')
+                        .setDescription('Overview of Haxe ${category.title.toLowerCase()} snippets and tutorials.')
                         .hidden(), category.folder);
     }
   }
   
   private function addTagPages(tags:StringMap<Array<Page>>) {
     for (tag in tags.keys()) {
-      addPage(new Page("layout-page-toc.mtt",  "tags.mtt",  'tag/$tag.html')
-                        .setTitle('Tag - ${tag}')
+      var tagTitle = getTagTitle(tag);
+      addPage(new Page("layout-page-toc.mtt",  "tags.mtt", 'tag/$tag.html')
+                        .setTitle('Haxe $tagTitle articles overview')
                         .setCustomData({tag:tag, pages: tags.get(tag)})
-                        .setDescription('Overview of snippets and tutorials tagged with ${tag}')
+                        .setDescription('Overview of Haxe snippets and tutorials tagged with $tagTitle.')
                         .hidden(), "tags");
     }
   }
@@ -167,7 +169,11 @@ class Generator {
       }
     }
   }
-  
+
+  private function getTagTitle(tag:String):String {
+    return tag.replace("-", " ");
+  }
+
   // categorizes the folders 
   private function createSitemap():Array<Category> {
     var sitemap = [];
@@ -176,7 +182,7 @@ class Generator {
       structure.pop();
       var id = structure.pop();
       if (key.indexOf("cookbook/") == 0) {
-        var category = new Category(id.toLowerCase().replace(" ", "-"), id, key, _folders.get(key));
+        var category = new Category(id.toLowerCase().replace(" ", "-"), id.replace("-", " "), key, _folders.get(key));
         category.absoluteUrl = basePath + category.outputPath;
         sitemap.push(category);
       }

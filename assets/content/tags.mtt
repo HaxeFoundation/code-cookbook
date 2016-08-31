@@ -1,5 +1,5 @@
-<h1><i class="fa fa-tag"></i> Tagged with <em>::currentPage.customData.tag::</em></h1>
-
+<h1><i class="fa fa-tag"></i> ::getTagTitle(currentPage.customData.tag)::</h1>
+<p>::currentPage.description::</p>
 <ul itemscope="itemscope" itemtype="http://schema.org/BreadcrumbList">
 ::foreach page currentPage.customData.pages::
 	<li ::cond page.visible:: itemprop="itemListElement" itemscope="itemscope" itemtype="http://schema.org/ListItem"><a href="::page.outputPath::" rel="tag" itemprop="item"><span itemprop="name">::page.title::</span></a></li>

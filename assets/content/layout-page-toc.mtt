@@ -2,7 +2,7 @@
 <header class="hero-unit-small">
 	<div class="container">
 		<div class="row">
-			<h1>Haxe Code Cookbook</h1>
+			<div id="title">Haxe Code Cookbook</div>
 		</div>
 	</div>
 </header>
@@ -27,7 +27,7 @@
 			<h3>All tags</h3>
 			<ul class="unstyled" itemscope="itemscope" itemtype="http://schema.org/BreadcrumbList">
 			::foreach tag tags.keys()::
-				<li ::attr class if(tag==currentPage.customData.tag) "active":: itemprop="itemListElement" itemscope="itemscope" itemtype="http://schema.org/ListItem"><i class="fa fa-tag"></i> <a href="tag/::tag::.html" rel="tag" itemprop="item"><span itemprop="name">::tag::</span></a> <small class="category-count">(::tags.get(tag).length::)</small></li>
+				<li ::attr class if(tag==currentPage.customData.tag) "active":: itemprop="itemListElement" itemscope="itemscope" itemtype="http://schema.org/ListItem"><i class="fa fa-tag"></i> <a href="tag/::tag::.html" rel="tag" itemprop="item"><span itemprop="name">::getTagTitle(tag)::</span></a> <small class="category-count">(::tags.get(tag).length::)</small></li>
 			::end::
 			</ul>
 		</nav>
