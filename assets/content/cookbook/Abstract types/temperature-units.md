@@ -1,6 +1,6 @@
 [tags]: / "abstract-type"
 
-# Temperature units
+# Temperature units as abstract type
 
 The following Celcius and Fahrenheit [Abstract types](http://haxe.org/manual/types-abstract.html) are based on the underlying `Float` type, but sets the restriction that it can never hold values below absolute zero. 
 

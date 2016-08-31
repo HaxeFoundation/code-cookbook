@@ -1,6 +1,6 @@
 [tags]: / "abstract-type,math"
 
-# Rounded Float 
+# Rounded Float as abstract type
 
 This [abstract type](http://haxe.org/manual/types-abstract.html) is based on the underlying `Float` type, but
 whenever it is converted back to an actual `Float` it is rounded to avoid the famous [rounding errors](https://en.wikipedia.org/wiki/Round-off_error)

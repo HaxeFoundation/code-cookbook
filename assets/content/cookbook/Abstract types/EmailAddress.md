@@ -1,6 +1,6 @@
 [tags]: / "abstract-type,ereg,validation"
 
-# EmailAddress
+# Email address as abstract type
 
 The following EmailAddress [Abstract type](http://haxe.org/manual/types-abstract.html) example is based on the underlying standard `String` type, but sets the restriction that it can only represent a valid email address. If not, an exception will be thrown.
 
