@@ -9,5 +9,5 @@
 <hr/>
 
 <div class="contribution">
-	<i class="fa fa-plus-circle"></i> <a href="::addLinkUrl::" rel="external">Add new snippet</a>
+	<i class="fa fa-plus-circle"></i> <a href="::currentPage.addLinkUrl::" rel="external">Add new snippet</a>
 </div>

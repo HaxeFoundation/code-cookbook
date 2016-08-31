@@ -12,7 +12,7 @@
 			<h3>Table of contents</h3>
 			<ul class="unstyled" itemscope="itemscope" itemtype="http://schema.org/BreadcrumbList">
 			::foreach category sitemap::
-				<li><a href="category/::category.id::/" ::attr class if(category==currentCategory) "active"::>::category.title::</a>
+				<li><a href="::category.outputPath::" ::attr class if(category==currentCategory) "active"::>::category.title::</a>
 					<ul class="unstyled" >
 					::foreach page category.pages::
 						<li ::cond page.visible:: ::attr class if(page==currentPage) "active":: itemprop="itemListElement" itemscope="itemscope" itemtype="http://schema.org/ListItem"><a href="::page.outputPath::" itemprop="item"><span itemprop="name">::page.title::</span></a></li>

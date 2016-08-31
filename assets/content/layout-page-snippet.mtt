@@ -12,7 +12,7 @@
 			<h3>Table of contents</h3>
 			<ul class="unstyled" itemscope="itemscope" itemtype="http://schema.org/BreadcrumbList">
 			::foreach category sitemap::
-				<li><a href="category/::category.id::/" ::attr class if(category==currentCategory) "active"::>::category.title::</a>
+				<li><a href="::category.outputPath::" ::attr class if(category==currentCategory) "active"::>::category.title::</a>
 					<ul class="unstyled" >
 					::foreach page category.pages::
 						<li ::cond page.visible:: ::attr class if(page==currentPage) "active":: itemprop="itemListElement" itemscope="itemscope" itemtype="http://schema.org/ListItem"><a href="::page.outputPath::" itemprop="item"><span itemprop="name">::page.title::</span></a></li>
@@ -25,14 +25,14 @@
 		</nav>
 		
 		<article class="span8" itemscope="itemscope" itemtype="http://schema.org/Article">
-			<h1><a href="::absoluteUrl::" itemprop="url" class="anchorjs-icons"></a> <span itemprop="name">::currentPage.title::</span></h1>
+			<h1><a href="::currentPage.absoluteUrl::" itemprop="url" class="anchorjs-icons"></a> <span itemprop="name">::currentPage.title::</span></h1>
 			<div itemprop="articleBody">::raw pageContent::</div>
-			<time datetime="::stat.ctime::" itemprop="datePublished" class="semantic">::stat.ctime::</time>
-			<time datetime="::stat.mtime::" itemprop="dateModified" class="semantic">::stat.mtime::</time>
+			<time datetime="::currentPage.dates.created::" itemprop="datePublished" class="semantic">::currentPage.dates.created::</time>
+			<time datetime="::currentPage.dates.modified::" itemprop="dateModified" class="semantic">::currentPage.dates.modified::</time>
 			<hr/>
 			<div>
 				Category:  &nbsp; 
-				<span itemprop="articleSection"><i class="fa fa-book"></i>&nbsp;<a href="category/::currentCategory.id::/">::currentCategory.title::</a></span>
+				<span itemprop="articleSection"><i class="fa fa-book"></i>&nbsp;<a href="::currentCategory.outputPath::">::currentCategory.title::</a></span>
 			</div>
 			<div class="tags" ::cond currentPage.visible && currentPage.tags!=null && currentPage.tags.length>0::>
 				Tags:  &nbsp; 
@@ -43,10 +43,10 @@
 				</span>
 			</div>
 			<hr/>
-			<div class="contribution" ::cond currentPage.visible::>
-				<i class="fa fa-lightbulb-o"></i> <a href="::editUrl::" rel="external">Suggest improvement</a> | 
-				<i class="fa fa-exclamation-circle"></i> <a href="https://github.com/HaxeFoundation/code-cookbook/issues/new?title=[::currentPage.title::]&body=%0A%0ASources:%0A*%20::absoluteUrl::%0A*%20::contributionUrl::" rel="external">Report issue</a> |
-				<i class="fa fa-plus-circle"></i> <a href="::addLinkUrl::" rel="external">Add new snippet</a>
+			<div class="contribution">
+				<i class="fa fa-lightbulb-o"></i> <a href="::currentPage.editUrl::" rel="external">Suggest improvement</a> | 
+				<i class="fa fa-exclamation-circle"></i> <a href="https://github.com/HaxeFoundation/code-cookbook/issues/new?title=[::currentPage.title::]&body=%0A%0ASources:%0A*%20::currentPage.absoluteUrl::%0A*%20::currentPage.contributionUrl::" rel="external">Report issue</a> |
+				<i class="fa fa-plus-circle"></i> <a href="::currentPage.addLinkUrl::" rel="external">Add new snippet</a>
 			</div>
 			<hr/>
 			<div class="share-buttons">
@@ -70,7 +70,7 @@
 				}(document, 'script', 'facebook-jssdk'));</script>
 
 				<!-- FB like button code -->
-				<div class="fb-like" data-href="::absoluteUrl::" style="display:inline-block; width:300px" data-layout="standard" data-action="like" data-show-faces="true"></div>
+				<div class="fb-like" data-href="::currentPage.absoluteUrl::" style="display:inline-block; width:300px" data-layout="standard" data-action="like" data-show-faces="true"></div>
 			</div>
 		</article>
 	</section>

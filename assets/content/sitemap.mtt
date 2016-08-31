@@ -1,0 +1,28 @@
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+::foreach page pages::
+	<url ::cond page.visible::>
+		<loc>::page.absoluteUrl::</loc>
+		<lastmod ::cond page.dates.modified!=null::>::DateTools.format(page.dates.modified,"%Y-%m-%d")::</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>0.6</priority>
+	</url>
+::end::
+
+::foreach category sitemap::
+	<url>
+		<loc>::category.absoluteUrl::</loc>
+		<changefreq>weekly</changefreq>
+		<priority>0.4</priority>
+	</url>
+::end::
+
+::foreach tag tags.keys()::
+	<url>
+		<loc>::basePath::tag/::tag::.html</loc>
+		<changefreq>weekly</changefreq>
+		<priority>0.4</priority>
+	</url>
+::end::
+
+</urlset> 

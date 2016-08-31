@@ -6,6 +6,7 @@ import markdown.AST.TextNode;
 import sys.FileSystem;
 import sys.io.File;
 import templo.Template;
+import GitUtil.GitDates;
 using StringTools;
 
 /**
@@ -40,7 +41,7 @@ class Generator {
     addCategoryPages(sitemap);
     addTagPages(tags);
     
-    // add tags to the home page
+    // add tags to the home page (used for meta keywords)
     _pages[0].tags = [for (tag in tags.keys()) tag];
     
     Timer.measure(function() {
@@ -51,22 +52,20 @@ class Generator {
         var data = {
           title: '${page.title} $titlePostFix', 
           now: Date.now(),
-          baseHref: getBaseHref(page),
           pages: _pages,
           currentPage: page,
           currentCategory: category,
-          contributionUrl: getContributionUrl(page),
-          editUrl: getEditUrl(page),
-          addLinkUrl: (category != null) ? getAddLinkUrl(category) : getAddLinkUrl(page),
-          absoluteUrl: getAbsoluteUrl(page),
           sitemap: sitemap,
+          basePath: basePath,
           tags: tags,
           pageContent: null,
-          stat: GitUtil.getStat(contentPath + page.contentPath),
           DateTools: DateTools,
         }
-        
-        data.pageContent = page.pageContent != null ? page.pageContent : getContent(contentPath + page.contentPath, data);
+        if (page.contentPath != null) 
+        {
+          page.addLinkUrl = (category != null) ? getAddLinkUrl(category) : getAddLinkUrl(page);
+          data.pageContent = page.pageContent != null ? page.pageContent : getContent(contentPath + page.contentPath, data);
+        }
         
         // execute the template
         var template = Template.fromFile(contentPath + page.templatePath);
@@ -99,6 +98,15 @@ class Generator {
   
   private function addPage(page:Page, folder:String = null) {
     _pages.push(page);
+    
+    page.absoluteUrl = getAbsoluteUrl(page);
+    page.baseHref = getBaseHref(page);
+    
+    if (page.contentPath !=null) {
+      page.dates = GitUtil.getStat(contentPath + page.contentPath);
+      page.contributionUrl = getContributionUrl(page);
+      page.editUrl = getEditUrl(page);
+    }
     
     if (folder != null) {
       if (!_folders.exists(folder)) {
@@ -133,10 +141,16 @@ class Generator {
                           .setDescription('The Haxe Code Cookbook is a central place with Haxe coding snippets and tutorials.');
     
     var errorPage = new Page("layout-page-main.mtt", "404.mtt", "404.html")
+                          .hidden()
                           .setTitle("Page not found");
-      
+    
+    var sitemapPage = new Page("sitemap.mtt", null, "sitemap.xml")
+                          .hidden()
+                          .setTitle("Sitemap");
+    
     addPage(homePage, "/home");
     addPage(errorPage, "/404");
+    addPage(sitemapPage, "/sitemap");
   }
   
   private function addCookbookPages(documentationPath:String = "cookbook/") {
@@ -162,7 +176,9 @@ class Generator {
       structure.pop();
       var id = structure.pop();
       if (key.indexOf("cookbook/") == 0) {
-        sitemap.push(new Category(id.toLowerCase().replace(" ", "-"), id, key, _folders.get(key)));
+        var category = new Category(id.toLowerCase().replace(" ", "-"), id, key, _folders.get(key));
+        category.absoluteUrl = basePath + category.outputPath;
+        sitemap.push(category);
       }
     }
     return sitemap;
@@ -239,7 +255,7 @@ class Generator {
   }
   
   public inline function getAbsoluteUrl(page:Page) {
-    return basePath + page.outputPath;
+    return basePath + page.outputPath.replace("index.html","");
   }
   
   private static inline function getDirectoryPath(file:String) {
@@ -367,6 +383,12 @@ class Page {
   public var outputPath:String;
   public var customData:Dynamic;
   public var tags:Array<String>;
+  public var absoluteUrl:String;
+  public var editUrl:String;
+  public var addLinkUrl:String;
+  public var contributionUrl:String;
+  public var baseHref:String;
+  public var dates:GitDates;
   
   public var pageContent:String;
   
@@ -404,6 +426,8 @@ class Page {
 
 class Category {
   public var title:String;
+  public var outputPath:String;
+  public var absoluteUrl:String;
   public var id:String;
   public var folder:String;
   public var pages:Array<Page>;
@@ -413,6 +437,7 @@ class Category {
     this.title = title;
     this.folder = folder;
     this.pages = pages;
+    this.outputPath = 'category/$id/';
   }
   
   public function getPageCount():Int {

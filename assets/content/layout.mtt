@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" id="page">
-  <head>
+<head>
 	<meta charset='utf-8'/>
 	<meta name="viewport" content="width=device-width" />
 	<title>::title::</title>
 
-	<base href="::baseHref::"/>
+	<base href="::currentPage.baseHref::"/>
 
 	<!-- general css -->
 	<link rel="stylesheet" type="text/css" href="http://haxe.org/css/bootstrap.min.css"/>
 	<link rel="stylesheet" type="text/css" href="css/styles.min.css"/>
 	<link rel="icon" href="http://haxe.org/favicon.ico"/>
-	<link rel="canonical" href="::absoluteUrl::" />
+	<link rel="canonical" href="::currentPage.absoluteUrl::" />
 		
 	<meta name="keywords" content="::if (currentPage.tags!=null)::::foreach tag currentPage.tags::::tag::,::end::::end::haxe,code,tutorial,snippet,example,demo" />
 		
@@ -23,12 +23,12 @@
 	<!-- Open Graph data -->
 	<meta property="og:title" content="::title::" />
 	<meta property="og:type" content="article" />
-	<meta property="og:url" content="::absoluteUrl::" />
+	<meta property="og:url" content="::currentPage.absoluteUrl::" />
 	<meta property="og:image" content="http://code.haxe.org/img/share.png" />
 
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic' rel='stylesheet' type='text/css'/>
 	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400' rel='stylesheet' type='text/css'/>
-  </head>
+</head>
 <body>
 	<nav class="section nav dark">
 		<div class="navbar navbar-fixed-top navbar-inverse">
@@ -42,7 +42,7 @@
 					<li  class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book"></i> Browse <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							::foreach category sitemap::
-							<li ::attr class if(category==currentCategory) "active"::><a href="category/::category.id::/">::category.title:: <small class="category-count">(::category.getPageCount()::)</small></a></li>
+							<li ::attr class if(category==currentCategory) "active"::><a href="::category.outputPath::">::category.title:: <small class="category-count">(::category.getPageCount()::)</small></a></li>
 							::end::
 						</ul>
 					</li>
