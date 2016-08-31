@@ -70,7 +70,7 @@
 				}(document, 'script', 'facebook-jssdk'));</script>
 
 				<!-- FB like button code -->
-				<div class="fb-like" data-href="::currentPage.absoluteUrl::" style="display:inline-block; width:300px" data-layout="standard" data-action="like" data-show-faces="true"></div>
+				<div class="fb-like" data-href="::currentPage.absoluteUrl::" style="display:inline-block" data-layout="button_count" data-action="like" data-show-faces="true"></div>
 			</div>
 		</article>
 	</section>
