@@ -149,6 +149,7 @@
 <script src="http://haxe.org/js/jquery.min.js"></script>
 <script src="http://haxe.org/js/bootstrap.min.js"></script>
 
+<link rel="stylesheet" type="text/css" href="css/highlighter.min.css"/>
 <script src="js/highlighter.js"></script>
 
 <script>
