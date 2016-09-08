@@ -323,29 +323,12 @@ class Generator {
               page.title = new markdown.HtmlRenderer().render(el.children);
               hasTitle = true;
               blocks.remove(block);
-              #if !generator_highlight 
               continue;
-              #end 
             }
             if (hasTitle && el.tag == "p" && page.description == null) {
               var description = new markdown.HtmlRenderer().render(el.children);
               page.description = new EReg("<(.*?)>", "g").replace(description, "");
             }
-            #if generator_highlight 
-            else if (el.tag == "pre") {
-              var preNode = Std.instance(el.children[0], ElementNode);
-              if (preNode != null && preNode.attributes.exists("class")) {
-                var className = preNode.attributes.get("class");
-                if (className.indexOf("haxe") != -1 || className.indexOf("js") != -1) {
-                  var codeText = Std.instance(preNode.children[0], TextNode);
-                  if (codeText!=null) {
-                    codeText.text = Highlighter.syntaxHighlight(codeText.text);
-                    preNode.attributes.set("class", preNode.attributes.get("class")  + " highlighted");
-                  }
-                }
-              }
-            }
-            #end
           }
         }
       }
