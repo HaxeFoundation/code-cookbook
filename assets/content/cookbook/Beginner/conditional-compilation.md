@@ -35,7 +35,7 @@ class Main {
 
 Assume the following build file:
 
-```
+```hxml
 -main Main
 -neko main.n
 -D introduce

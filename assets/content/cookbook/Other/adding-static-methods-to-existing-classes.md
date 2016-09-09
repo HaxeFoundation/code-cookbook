@@ -9,15 +9,12 @@ Here's a class with a static method that adds a `randomBetween(a, b)` method to 
 ## Implementation
 
 ```haxe
-// MathExtensions.hx
-import Math;
-
 class MathExtensions {
-    /** Returns a random number between a (inclusive) and b (exclusive). */
-    public static function randomBetween(clazz:Class<Math>, a:Int, b:Int) {
-        var diff:Int = b - a;
-        return a + Math.floor(Math.random() * diff);
-    }
+  /** Returns a random number between a (inclusive) and b (exclusive). */
+  public static function randomBetween(clazz:Class<Math>, a:Int, b:Int) {
+    var diff:Int = b - a;
+    return a + Math.floor(Math.random() * diff);
+  }
 }
 ```
 
@@ -28,13 +25,12 @@ Note that the method is `public`, `static`, and the first parameter is `Class<Ma
 Here's how to consume the code:
 
 ```haxe
-// Main.hx
 using MathExtensions;
 
 class Test {
-    static function main() {
-        trace("Random value between 10 and 20:" + Math.randomBetween(10, 20));
-    }
+  static function main() {
+    trace("Random value between 10 and 20:" + Math.randomBetween(10, 20));
+  }
 }
 
 ```

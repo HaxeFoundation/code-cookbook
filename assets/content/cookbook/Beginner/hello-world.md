@@ -26,6 +26,6 @@ Save it as "HelloWorld.hx" anywhere you like.
 
 Open a command prompt and navigate directories to where you saved "HelloWorld.hx" to in the previous step. Afterwards, execute this command:
 
-```haxe
+```hxml
 haxe -main HelloWorld --interp
 ```

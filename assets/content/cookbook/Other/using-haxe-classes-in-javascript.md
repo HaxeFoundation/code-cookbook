@@ -28,7 +28,7 @@ class Main {
 }
 ```
 ...and after compiling it with something like the following **build.hxml**:
-```haxe
+```hxml
 -cp src
 -main Main
 -js bin/app.js

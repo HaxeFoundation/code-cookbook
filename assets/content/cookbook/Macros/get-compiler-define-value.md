@@ -54,7 +54,7 @@ class Main {
 
 Assume the following build file:
 
-```
+```hxml
 -main Main
 -neko main.n
 -D warning="Don't let the bed bugs bite!"

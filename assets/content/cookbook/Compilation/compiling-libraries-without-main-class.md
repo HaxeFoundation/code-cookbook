@@ -12,8 +12,6 @@ Here's how you can compile your code without having a Main class and a static en
 
 Let's create an library class called **BarLib** placed in a **foo** package: 
 ```haxe
-// foo.BarLib.hx
-
 package foo;
 
 class BarLib {
@@ -29,9 +27,7 @@ class BarLib {
 Now, we can create a **build.hxml** *without* specifying the Main class `-main Main` the way we usually do. 
 Instead we add the classes that we want to include, one per row, using the full class name including package path:
 
-```
-# build.hxml
-
+```hxml
 -cp src 
 
 # add the class(es) that you want to include the following way, one per line
@@ -46,7 +42,6 @@ Now, you can compile your library with `> haxe build.hxml`.
 
 If you compile to JavaScript, the result will be the following: 
 ```javascript
-// bin/lib.js
 (function (console) { "use strict";
 var foo_BarLib = function() {
 };
@@ -58,9 +53,8 @@ foo_BarLib.prototype = {
 })(typeof console != "undefined" ? console : {log:function(){}});
 ```
 
-You can include more than one package/class if needed:
-```
-# build.hxml
+You can include more than one package/class if needed in the build.hxml:
+```hxml
 -cp src 
 
 foo.BarLib    # include class foo.BarLib
@@ -75,8 +69,6 @@ Config        # include class Config
 [Dead code elimination](http://haxe.org/manual/cr-dce.html) is a great Haxe compiler feature that lets the compiler remove code that isn't used by the program. In this case, when dealing with libraries, this might cause unwanted results: If you compile the examples above with full dead code elimination (using the compilation flag `-dce full`), all your library code will be stripped away! To avoid a class being stripped away like this, use the metadata `@:keep` before the class definition:
 
 ```haxe
-// foo.BarLib.hx
-
 package foo;
 
 @:keep // <-- Avoid dead code elimination stripping this class away 

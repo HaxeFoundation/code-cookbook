@@ -50,7 +50,7 @@ class Test {
 
 Compile this example to Neko with:
 
-```
+```hxml
 haxe -main Test -neko test.n
 ```
 
