@@ -6,13 +6,9 @@ haxe:
 
 install:
   - yes | haxelib install CodeCookBook.hxml
-  - haxe CodeCookBook.hxml
   - npm install -g less
   - npm install -g less-plugin-clean-css
-  - lessc assets/includes/css/haxe-nav.css assets/includes/css/haxe-nav.min.css --clean-css="--s1 --advanced"
-  - lessc assets/includes/css/styles.css assets/includes/css/styles.min.css --clean-css="--s1 --advanced"
-  - mkdir output
-  - neko CodeCookBook.n
+  - haxe CodeCookBook.hxml
 
 script:
   - bash -v deploy.sh
