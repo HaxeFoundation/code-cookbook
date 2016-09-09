@@ -1,12 +1,11 @@
 package;
+import GitUtil.GitDates;
 import haxe.Timer;
 import haxe.ds.StringMap;
 import markdown.AST.ElementNode;
-import markdown.AST.TextNode;
 import sys.FileSystem;
 import sys.io.File;
 import templo.Template;
-import GitUtil.GitDates;
 using StringTools;
 
 /**
@@ -48,7 +47,6 @@ class Generator {
       for(page in _pages) {
         // set the data for the page
         var category = getCategory(sitemap, page);
-        
         var data = {
           title: category != null ? '${page.title} - ${category.title} $titlePostFix' : '${page.title} $titlePostFix', 
           now: Date.now(),
@@ -80,11 +78,13 @@ class Generator {
           //trace("optimized " + (Std.int(100 / length * (length - newLength) * 100) / 100) + "%");
         }
         
-        // write output into file
+        // make output directory if needed
         var targetDirectory = getDirectoryPath(outputPath + page.outputPath);
         if (!FileSystem.exists(targetDirectory)) {
           FileSystem.createDirectory(targetDirectory);
         }
+        
+        // write output to file
         File.saveContent(outputPath + page.outputPath, html);
       }
     });
