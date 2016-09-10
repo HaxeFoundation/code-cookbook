@@ -118,7 +118,8 @@ class Point {
 }
 
 // Create a new Value Int instance
-var myPoint = new Point(5, 2);
+var myPoint = new Point(100, 150);
+trace(myPoint.x);
 ```
 In JavaScript, this will be compiled (where possible) as:
 ```js
