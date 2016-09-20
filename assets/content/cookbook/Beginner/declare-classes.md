@@ -102,7 +102,7 @@ var myStringValue = new Value<String>("String");
 ```
 > See <http://haxe.org/manual/type-system-generic.html>
 
-### Declare a inline constructor 
+### Declare an inline constructor 
 
 Declare a new class with an inline constructor (`new()` function), create a new instance and reveal its effect.
 
@@ -118,7 +118,8 @@ class Point {
 }
 
 // Create a new Value Int instance
-var myPoint = new Point(5, 2);
+var myPoint = new Point(100, 150);
+trace(myPoint.x);
 ```
 In JavaScript, this will be compiled (where possible) as:
 ```js

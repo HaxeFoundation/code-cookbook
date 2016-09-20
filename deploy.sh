@@ -7,6 +7,9 @@ if ! [ "$TRAVIS_HAXE_VERSION" == "3.2.1" ]; then
 elif [ -z "$GHP_BOT_TOKEN" ]; then
     echo "Skipping pushing to GitHub pages - missing GHP_BOT_TOKEN (probably in a PR build).";
     exit 0;
+elif [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
+    echo "Skipping pushing to GitHub pages - it is a pull request.";
+    exit 0;
 elif [ "$TRAVIS_BRANCH" != "master" ]; then
     echo "Skipping pushing to GitHub pages - not master branch.";
     exit 0;
