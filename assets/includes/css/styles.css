@@ -340,3 +340,6 @@ code.prettyprint {
   box-shadow:0 0 2px #ccc;
   margin:15px 0;
 }
+
+.g-plus, #___plus_0 { vertical-align: text-bottom !important; }
+.twitter-share-button { vertical-align: text-bottom !important; }
