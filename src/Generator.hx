@@ -212,6 +212,11 @@ class Generator {
     return  ~/(\[tryhaxe\])(\()(.+?)(\))/g.replace(content, '<iframe src="$3" class="try-haxe"><a href="$3">Try Haxe!</a></iframe>');
   }
   
+  private function replaceHaxeOrgLinks(content:String) 
+  {
+    return content.split("http://haxe.org").join("https://haxe.org");
+  }
+  
   private function replaceAuthor(content:String) {
     //Author: [name](url) / [name](url) 
     if (content.indexOf("Author:") != -1) {
@@ -294,6 +299,7 @@ class Generator {
   public function parseMarkdownContent(page:Page, file:String):String {
     var document = new Markdown.Document();
     var markdown = File.getContent(contentPath + file);
+    markdown = replaceHaxeOrgLinks(markdown);
     markdown = replaceTryHaxeTags(markdown);
     markdown = replaceAuthor(markdown);
     
