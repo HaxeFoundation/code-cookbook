@@ -1,3 +1,5 @@
+[tags]: / "ereg"
+
 # Regular expressions
 
 In Haxe a [regular expression](https://en.wikipedia.org/wiki/Regular_expression) starts with `~/` and ends with a single `/` and is of type [`EReg`](http://api.haxe.org/EReg.html).
