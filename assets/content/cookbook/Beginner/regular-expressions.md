@@ -17,7 +17,7 @@ trace(regexp.match("hello"));
 Add flags with ending with adding the flag after the ending `/`.
 
 ```haxe
-var regexp:EReg = ~/world/i; // case insensitive matching
+var regexp:EReg = ~/world/ig; // case insensitive matching + global search
 
 trace(regexp.match("HELLO WORLD"));
 // true : 'world' was found in the string
