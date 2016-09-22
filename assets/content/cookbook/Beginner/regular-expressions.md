@@ -1,6 +1,6 @@
 # Regular expressions
 
-In Haxe a [regular expression](https://en.wikipedia.org/wiki/Regular_expression) starts with `~/` and ends with a single `/` and is of type [`Ereg`](http://api.haxe.org/EReg.html).
+In Haxe a [regular expression](https://en.wikipedia.org/wiki/Regular_expression) starts with `~/` and ends with a single `/` and is of type [`EReg`](http://api.haxe.org/EReg.html).
 
 ```haxe
 var regexp:EReg = ~/world/;
@@ -21,7 +21,7 @@ trace(regexp.match("HELLO WORLD"));
 // true : 'world' was found in the string
 ```
 
-String based regular expressions can be writting by creating an actual `EReg` instance:
+Regular expressions with a dynamic pattern can be created by using the `EReg` constructor as follows:
 
 ```haxe
 var regexp:EReg = new EReg("world", "i"); // case insensitive matching 
@@ -32,7 +32,7 @@ trace(regexp.match("HELLO WORLD"));
 
 ### Replacing text
 
-Simply replacing text can be done in several ways, even without regular expressions.
+Simple text replacement can be done in several ways, even without regular expressions.
 Take this example where we replace "hello world" to "happy world":
 
 ```haxe
@@ -106,5 +106,5 @@ trace(ereg.map(message, function(e) return "happy"));
 > * More tutorials on regular expressions can be found on [regular-expressions.info](http://www.regular-expressions.info/)
 >
 > **Haxe resources:**
-> * [Ereg API documentation](http://api.haxe.org/EReg.html)
+> * [EReg API documentation](http://api.haxe.org/EReg.html)
 > * [Regular Expressions in the Haxe Manual](http://haxe.org/manual/std-regex.html)
