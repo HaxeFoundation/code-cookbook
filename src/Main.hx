@@ -15,5 +15,8 @@ class Main {
     
     generator.build();
     generator.includeDirectory("assets/includes");
+    
+    
+    var keep:haxe.CallStack;
   }
 }
