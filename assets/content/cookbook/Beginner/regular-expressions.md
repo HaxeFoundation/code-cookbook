@@ -1,6 +1,6 @@
 [tags]: / "ereg"
 
-# Regular expressions
+# Using regular expressions
 
 In Haxe a [regular expression](https://en.wikipedia.org/wiki/Regular_expression) starts with `~/` and ends with a single `/` and is of type [`EReg`](http://api.haxe.org/EReg.html).
 
@@ -104,9 +104,11 @@ trace(ereg.map(message, function(e) return "happy"));
 ```
 
 > **External resources:**
-> * An excelent tool to test regular expressions can be found on [regexr.com](http://regexr.com/).
-> * More tutorials on regular expressions can be found on [regular-expressions.info](http://www.regular-expressions.info/)
+>
+>  * An excelent tool to test regular expressions can be found on [regexr.com](http://regexr.com/).
+>  * More tutorials on regular expressions can be found on [regular-expressions.info](http://www.regular-expressions.info/)
 >
 > **Haxe resources:**
-> * [EReg API documentation](http://api.haxe.org/EReg.html)
-> * [Regular Expressions in the Haxe Manual](http://haxe.org/manual/std-regex.html)
+>
+>  * [EReg API documentation](http://api.haxe.org/EReg.html)
+>  * [Regular Expressions in the Haxe Manual](http://haxe.org/manual/std-regex.html)
