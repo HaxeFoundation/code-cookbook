@@ -5,10 +5,10 @@ haxe:
   - development
 
 install:
-  - yes | haxelib install CodeCookBook.hxml
+  - yes | haxelib install CodeCookBookNodeJS.hxml
   - npm install -g less
   - npm install -g less-plugin-clean-css
-  - haxe CodeCookBook.hxml
+  - haxe CodeCookBookNodeJS.hxml
 
 script:
   - bash -v deploy.sh
