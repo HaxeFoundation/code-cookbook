@@ -105,7 +105,7 @@ trace(ereg.map(message, function(e) return "happy"));
 
 > **External resources:**
 >
->  * An excelent tool to test regular expressions can be found on [regexr.com](http://regexr.com/).
+>  * An excellent tool to test regular expressions can be found on [regexr.com](http://regexr.com/).
 >  * More tutorials on regular expressions can be found on [regular-expressions.info](http://www.regular-expressions.info/)
 >
 > **Haxe resources:**
