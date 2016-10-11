@@ -1,3 +1,5 @@
+[tags]: / "cppia"
+
 # Creating a cppia host
 
 ## What is cppia?
@@ -69,3 +71,5 @@ If you get the following message...
 > Error: [file_contents,./script.cppia]
 ```
 ...the host can't find the script file. Make sure that you have followed the **Creating a cppia script** tutorial, and that the **script.cppia** is placed in the same folder as your Host executable. 
+
+> Author: [Jonas Nyström](https://github.com/cambiata)
