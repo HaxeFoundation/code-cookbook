@@ -318,8 +318,8 @@ class Generator {
       
       // parse ast
       var blocks = document.parseLines(lines);
-      
       // pick first header, use it as title for the page
+      var titleBlock = null;
       if (page != null) {
         var hasTitle = false;
         for (block in blocks) {
@@ -328,16 +328,18 @@ class Generator {
             if (!hasTitle && el.tag == "h1" && !el.isEmpty()) {
               page.title = new markdown.HtmlRenderer().render(el.children);
               hasTitle = true;
-              blocks.remove(block);
+              titleBlock = block;
               continue;
             }
-            if (hasTitle && el.tag == "p" && page.description == null) {
+            if (hasTitle && el.tag != "pre" && page.description == null) {
               var description = new markdown.HtmlRenderer().render(el.children);
-              page.description = new EReg("<(.*?)>", "g").replace(description, "");
+              page.description = new EReg("<(.*?)>", "g").replace(description, "").replace('"', "").replace('\n', " ");
             }
           }
         }
       }
+      if (titleBlock != null) blocks.remove(titleBlock);
+
       return Markdown.renderHtml(blocks);
     } catch (e:Dynamic){
       return '<pre>$e</pre>';
