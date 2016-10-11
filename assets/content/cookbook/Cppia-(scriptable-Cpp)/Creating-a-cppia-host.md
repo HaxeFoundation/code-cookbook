@@ -1,4 +1,4 @@
-[tags]: / "cppia"
+[tags]: / "cppia,scripting"
 
 # Creating a cppia host
 
