@@ -1,3 +1,5 @@
+[tags]: / "cppia,scripting"
+
 # Creating a cppia script
 
 ## What is cppia?
@@ -55,3 +57,6 @@ This should output the following in the console:
 ```
 
 Now, we know that our script works and can be executed by an cppia host.
+
+> Author: [Jonas Nyström](https://github.com/cambiata)
+
