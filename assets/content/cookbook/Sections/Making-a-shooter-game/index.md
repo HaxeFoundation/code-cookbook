@@ -1,3 +1,5 @@
+[tags]: / "games, fun"
+
 # Making a shooter game
 
 Originally recorded at WWX 2018, this tutorial series will teach you how to create a 2 player (one keyboard) shooter game. 

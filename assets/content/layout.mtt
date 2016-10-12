@@ -43,14 +43,21 @@
 				<div class="nav-collapse collapse">
 				<ul class="nav">
 					<!-- required submenu  on every subsite -->
-					<li  class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book"></i> Browse <b class="caret"></b></a>
+					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book"></i> Browse <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							::foreach category sitemap::
-							<li ::attr class if(category==currentCategory) "active"::><a href="::category.outputPath::">::category.title:: <small class="category-count">(::category.getPageCount()::)</small></a></li>
+							<li ::attr class if(category==currentCategory) "active":: ::cond !category.isSection::><a href="::category.outputPath::">::category.title:: <small class="category-count">(::category.getPageCount()::)</small></a></li>
 							::end::
 						</ul>
 					</li>
-					<li  class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-tags"></i> Tags <b class="caret"></b></a>
+					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book"></i> Series <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							::foreach category sitemap::
+							<li ::attr class if(category==currentCategory) "active":: ::cond category.isSection::><a href="::category.outputPath::">::category.title:: <small class="category-count">(::category.getPageCount()::)</small></a></li>
+							::end::
+						</ul>
+					</li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-tags"></i> Tags <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							::foreach tag tags.keys()::<li ::cond tags.get(tag).length>1:: ::attr class if(tag==currentPage.customData.tag) "active"::><a href="tag/::tag::.html" rel="tag"><i class="fa fa-tag"></i> ::getTagTitle(tag):: <small class="category-count">(::tags.get(tag).length::)</small></a></li>::end::
 						</ul>

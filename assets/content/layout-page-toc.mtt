@@ -8,20 +8,29 @@
 </header>
 <main class="container">
 	<section class="row">
-		<nav class="span4 sidebar-toc" id="sidebar" ::cond currentPage.customData.tag==null ::>
-			<h3>Table of contents</h3>
-			<ul class="unstyled" itemscope="itemscope" itemtype="http://schema.org/BreadcrumbList">
-			::foreach category sitemap::
-				<li><a href="::category.outputPath::" ::attr class if(category==currentCategory) "active"::>::category.title::</a>
-					<ul class="unstyled" >
-					::foreach page category.pages::
-						<li ::cond page.visible:: ::attr class if(page==currentPage) "active":: itemprop="itemListElement" itemscope="itemscope" itemtype="http://schema.org/ListItem"><a href="::page.outputPath::" itemprop="item"><span itemprop="name">::page.title::</span></a></li>
+		<nav class="span4 sidebar-toc" id="sidebar" ::cond currentPage.customData.tag==null::>
+			::if currentPage.category.isSection::
+				<h3>::currentPage.category.title::</h3>
+				<ol itemscope="itemscope" itemtype="http://schema.org/BreadcrumbList">
+					::foreach page currentPage.category.pages::
+						<li ::cond page.visible && !page.isSectionHome():: ::attr class if(page==currentPage) "active":: itemprop="itemListElement" itemscope="itemscope" itemtype="http://schema.org/ListItem"><a href="::page.outputPath::" itemprop="item"><span itemprop="name">::page.title::</span></a></li>
 					::end::
-					</ul>
-				</li>
-				<br/>
+				</ol>
+			::else::
+				<h3>Table of contents</h3>
+				<ul class="unstyled" itemscope="itemscope" itemtype="http://schema.org/BreadcrumbList">
+				::foreach category sitemap::
+					<li ::cond !category.isSection::><a href="::category.outputPath::" ::attr class if(category==currentCategory) "active"::>::category.title::</a>
+						<ul class="unstyled" >
+						::foreach page category.pages::
+							<li ::cond page.visible:: ::attr class if(page==currentPage) "active":: itemprop="itemListElement" itemscope="itemscope" itemtype="http://schema.org/ListItem"><a href="::page.outputPath::" itemprop="item"><span itemprop="name">::page.title::</span></a></li>
+						::end::
+						</ul>
+					</li>
+					<br/>
+				::end::
+				</ul>
 			::end::
-			</ul>
 		</nav>
 		<nav class="span4 sidebar-tags" id="sidebar" ::cond currentPage.customData.tag!=null::>
 			<h3>All tags</h3>
@@ -31,6 +40,7 @@
 			::end::
 			</ul>
 		</nav>
+		
 		<article class="span8">
 				<div itemprop="articleBody">::raw pageContent::</div>
 		</article>

@@ -8,12 +8,12 @@
 </header>
 
 <hr/>
-  
+
 <section class="container">
 	<h3><i class="fa fa-book"></i> Start browsing..</h3>
 	<div itemscope="itemscope" itemtype="http://schema.org/BreadcrumbList">
 	::foreach category sitemap::
-		<span itemprop="itemListElement" itemscope="itemscope" itemtype="http://schema.org/ListItem"><a href="::category.outputPath::" class="btn btn-large" itemprop="item"><strong itemprop="name">::category.title::</strong> <small class="category-count">(::category.getPageCount()::)</small></a></span>
+		<span itemprop="itemListElement" itemscope="itemscope" itemtype="http://schema.org/ListItem" ::cond !category.isSection::><a href="::category.outputPath::" class="btn btn-large" itemprop="item"><strong itemprop="name">::category.title::</strong> <small class="category-count">(::category.getPageCount()::)</small></a></span>
 	::end::
 	</div>
 	<hr/>
@@ -29,7 +29,7 @@
 			<h3><i class="fa fa-big fa-book"></i> Newest articles</h3>
 		
 			<ul class="page-list unstyled">
-			::foreach page latestCreatedPages::
+			::foreach page latestCreatedPages(3)::
 					<li class="page-list-item">
 						<h4><small class="category-count" ::cond page.dates.created !=null::>::DateTools.format(page.dates.created, "%d-%m-%Y")::</small> 
 						::page.category.title:: <small class="category-count">/</small> <a href="::page.outputPath::" class="list-group-item">::page.title::</a></h4>

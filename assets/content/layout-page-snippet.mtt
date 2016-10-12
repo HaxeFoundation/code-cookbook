@@ -8,18 +8,35 @@
 </header>
 <main class="container">
 	<section class="row">
-		<nav class="span4 sidebar-toc" id="sidebar">
-			<h3>Table of contents</h3>
-			<ul class="unstyled" itemscope="itemscope" itemtype="http://schema.org/BreadcrumbList">
-			::foreach category sitemap::
-				<li><a href="::category.outputPath::" ::attr class if(category==currentCategory) "active"::>::category.title::</a>
-					<ul class="unstyled" >
-					::foreach page category.pages::
-						<li ::cond page.visible:: ::attr class if(page==currentPage) "active":: itemprop="itemListElement" itemscope="itemscope" itemtype="http://schema.org/ListItem"><a href="::page.outputPath::" itemprop="item"><span itemprop="name">::page.title::</span></a></li>
+		<nav class="span4 sidebar-toc" id="sidebar" ::cond currentPage.customData.tag==null::>
+			::if currentPage.category.isSection::
+				<h3><a href="::currentPage.category.outputPath::">::currentPage.category.title::</a></h3>
+				<ol itemscope="itemscope" itemtype="http://schema.org/BreadcrumbList">
+					::foreach page currentPage.category.pages::
+						<li ::cond page.visible && !page.isSectionHome():: ::attr class if(page==currentPage) "active":: itemprop="itemListElement" itemscope="itemscope" itemtype="http://schema.org/ListItem"><a href="::page.outputPath::" itemprop="item"><span itemprop="name">::page.title::</span></a></li>
 					::end::
-					</ul>
-				</li>
-				<br/>
+				</ol>
+			::else::
+				<h3>Table of contents</h3>
+				<ul class="unstyled" itemscope="itemscope" itemtype="http://schema.org/BreadcrumbList">
+				::foreach category sitemap::
+					<li ::cond !category.isSection::><a href="::category.outputPath::" ::attr class if(category==currentCategory) "active"::>::category.title::</a>
+						<ul class="unstyled" >
+						::foreach page category.pages::
+							<li ::cond page.visible:: ::attr class if(page==currentPage) "active":: itemprop="itemListElement" itemscope="itemscope" itemtype="http://schema.org/ListItem"><a href="::page.outputPath::" itemprop="item"><span itemprop="name">::page.title::</span></a></li>
+						::end::
+						</ul>
+					</li>
+					<br/>
+				::end::
+				</ul>
+			::end::
+		</nav>
+		<nav class="span4 sidebar-tags" id="sidebar" ::cond currentPage.customData.tag!=null::>
+			<h3>All tags</h3>
+			<ul class="unstyled" itemscope="itemscope" itemtype="http://schema.org/BreadcrumbList">
+			::foreach tag tags.keys()::
+				<li ::attr class if(tag==currentPage.customData.tag) "active":: itemprop="itemListElement" itemscope="itemscope" itemtype="http://schema.org/ListItem"><i class="fa fa-tag"></i> <a href="tag/::tag::.html" rel="tag" itemprop="item"><span itemprop="name">::getTagTitle(tag)::</span></a> <small class="category-count">(::tags.get(tag).length::)</small></li>
 			::end::
 			</ul>
 		</nav>
@@ -30,7 +47,14 @@
 			<time datetime="::currentPage.dates.created::" itemprop="datePublished" class="semantic">::currentPage.dates.created::</time>
 			<time datetime="::currentPage.dates.modified::" itemprop="dateModified" class="semantic">::currentPage.dates.modified::</time>
 			<hr/>
-			<div>
+			<div ::cond (currentPage.next!=null || currentPage.prev!=null)::>
+				<ul class="pager">
+					<li class="previous" ::cond currentPage.prev!=null::><a href="::currentPage.prev.outputPath::">&larr; ::currentPage.prev.title::</a></li>
+					<li class="next" ::cond currentPage.next!=null::><a href="::currentPage.next.outputPath::">::currentPage.next.title:: &rarr;</a></li>
+				</ul>
+			</div>
+			
+			<div ::cond !currentPage.category.isSection::>
 				Category:  &nbsp; 
 				<span itemprop="articleSection"><i class="fa fa-book"></i>&nbsp;<a href="::currentCategory.outputPath::">::currentCategory.title::</a></span>
 			</div>
@@ -44,9 +68,9 @@
 			</div>
 			<hr/>
 			<div class="contribution">
-				<i class="fa fa-lightbulb-o"></i> <a href="::currentPage.editUrl::" rel="external">Suggest improvement</a> | 
-				<i class="fa fa-exclamation-circle"></i> <a href="https://github.com/HaxeFoundation/code-cookbook/issues/new?title=[::currentPage.title::]&body=%0A%0ASources:%0A*%20::currentPage.absoluteUrl::%0A*%20::currentPage.contributionUrl::" rel="external">Report issue</a> |
-				<i class="fa fa-plus-circle"></i> <a href="::currentPage.addLinkUrl::" rel="external">Add new snippet</a>
+				<span><i class="fa fa-lightbulb-o"></i> <a href="::currentPage.editUrl::" rel="external">Suggest improvement</a></span> 
+				<span>| <i class="fa fa-exclamation-circle"></i> <a href="https://github.com/HaxeFoundation/code-cookbook/issues/new?title=[::currentPage.title::]&body=%0A%0ASources:%0A*%20::currentPage.absoluteUrl::%0A*%20::currentPage.contributionUrl::" rel="external">Report issue</a></span> 
+				<span ::cond !currentPage.category.isSection::>| <i class="fa fa-plus-circle"></i> <a href="::currentPage.addLinkUrl::" rel="external">Add new snippet</a></span> 
 			</div>
 			<hr/>
 			<div class="share-buttons">
