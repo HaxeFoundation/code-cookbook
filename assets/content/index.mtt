@@ -17,9 +17,29 @@
 	::end::
 	</div>
 	<hr/>
-	::foreach tag tags.keys()::
-		<span class="tag"><i class="fa fa-tag"></i>&nbsp;<a href="tag/::tag::.html">::tag::</a>&nbsp;<small class="category-count">(::tags.get(tag).length::)</small></span>
-	::end::
+	
+	<div class="row">
+		<div class="span6">
+			<h3><i class="fa fa-big fa-tags"></i> Tags</h3>
+			::foreach tag tags.keys()::
+				<span class="tag"><i class="fa fa-tag"></i>&nbsp;<a href="tag/::tag::.html">::tag::</a>&nbsp;<small class="category-count">(::tags.get(tag).length::)</small></span>
+			::end::
+		</div>
+		<div class="span6">
+			<h3><i class="fa fa-big fa-book"></i> Newest articles</h3>
+		
+			<ul class="page-list unstyled">
+			::foreach page latestCreatedPages::
+					<li class="page-list-item">
+						<h4><small class="category-count" ::cond page.dates.created !=null::>::DateTools.format(page.dates.created, "%d-%m-%Y")::</small> 
+						::page.category.title:: <small class="category-count">/</small> <a href="::page.outputPath::" class="list-group-item">::page.title::</a></h4>
+						<p>::page.description::..</p>
+					</li>
+			::end::
+			</ul>
+		</div>
+	</div>
+	
 	<hr/>
   
 	<div class="row">
@@ -41,8 +61,8 @@
 			<h3><i class="fa fa-big fa-globe"></i> Contribution is easy</h3>
 			<p>The project is being developed on GitHub. Feel free to contribute code snippets.</p>
 			<p><i class="fa fa-github"></i> <a href="https://github.com/HaxeFoundation/code-cookbook" rel="external">Haxe Code Cookbook on Github</a></p>
-		
 		</div>
 	</div>
+	
 </section>
 

@@ -75,10 +75,6 @@ a, a:hover, a > code {
     margin-left: 0;
     margin-right: 0;
   }
-  .fa.fa-big {
-    display:block;
-  }
-  
   
   main.container section {
     display: flex;
@@ -322,10 +318,10 @@ code.prettyprint {
 }
 
 .fa-big {
-  font-size:38px;
+  font-size:32px;
   color:#555;
-  padding-left:25px;
-  padding-right:25px;
+  padding-left:15px;
+  padding-right:15px;
 }
 
 .btn {
@@ -339,6 +335,14 @@ code.prettyprint {
   border-radius:4px;
   box-shadow:0 0 2px #ccc;
   margin:15px 0;
+}
+
+.page-list-item:not(last-child) {
+	margin-bottom:20px;
+}
+
+.page-list-item p {
+	margin-left:10px;
 }
 
 .g-plus, #___plus_0 { vertical-align: text-bottom !important; }

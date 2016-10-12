@@ -1,9 +1,12 @@
 <h1 itemprop="name"><i class="fa fa-book"></i> ::currentCategory.title::</h1>
 <p>::currentPage.description::</p>
 
-<ul>
+<ul class="page-list unstyled">
 ::foreach page currentCategory.pages::
-	<li ::cond page.visible:: itemscope="itemscope" itemtype="https://schema.org/Thing"><a href="::page.outputPath::" itemprop="url"><span itemprop="name">::page.title::</span></a></li>
+	<li class="page-list-item" itemscope="itemscope" itemtype="https://schema.org/Thing" ::cond page.visible::>
+		<h3><a href="::page.outputPath::" class="list-group-item" itemprop="url"><span itemprop="name">::page.title::</span></a></h3>
+		<p><em>::page.description::..</em></p>
+	</li>
 ::end::
 </ul>
 

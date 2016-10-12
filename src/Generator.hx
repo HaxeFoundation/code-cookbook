@@ -1,7 +1,9 @@
 package;
+
 import GitUtil.GitDates;
 import haxe.Timer;
 import haxe.ds.StringMap;
+import haxe.io.Path;
 import markdown.AST.ElementNode;
 import sys.FileSystem;
 import sys.io.File;
@@ -40,9 +42,20 @@ class Generator {
     addCategoryPages(sitemap);
     addTagPages(tags);
     
+    // assign page.category
+    for (page in _pages) page.category = getCategory(sitemap, page);
+    
     // add tags to the home page (used for meta keywords)
     _pages[0].tags = [for (tag in tags.keys()) tag];
     
+    // sort pages by date; get most recent pages
+    var latestCreatedPages = [for (p in _pages) if (p != null && p.visible && p.dates != null && p.dates.created != null) p];
+    latestCreatedPages.sort(function(a, b) {
+      var a = a.dates.created.getTime(), b = b.dates.created.getTime();
+      return if (a > b) -1 else if (a < b) 1 else 0;
+    });
+    var latestCreatedPages = [for (i in 0...3) latestCreatedPages[i]];
+
     Timer.measure(function() {
       for(page in _pages) {
         // set the data for the page
@@ -59,6 +72,7 @@ class Generator {
           pageContent: null,
           DateTools: DateTools,
           getTagTitle:getTagTitle,
+          latestCreatedPages: latestCreatedPages,
         }
         if (page.contentPath != null) 
         {
@@ -79,7 +93,7 @@ class Generator {
         }
         
         // make output directory if needed
-        var targetDirectory = getDirectoryPath(outputPath + page.outputPath);
+        var targetDirectory = Path.directory(outputPath + page.outputPath);
         if (!FileSystem.exists(targetDirectory)) {
           FileSystem.createDirectory(targetDirectory);
         }
@@ -239,10 +253,10 @@ class Generator {
   }
   
   private function getBaseHref(page:Page) {
-    if (page.outputPath == "404.html") {
+    if (page.outputPath.file == "404.html") {
       return basePath;
     }
-    var href = [for (s in page.outputPath.split("/")) ".."];
+    var href = [for (s in page.outputPath.toString().split("/")) ".."];
     href[0] = ".";
     return href.join("/");
   }
@@ -258,35 +272,24 @@ class Generator {
   public function getAddLinkUrl(category:Category  = null, page:Page = null) {
     var fileNameHint = "/snippet-name.md/?filename=snippet-name.md";
     var directory = if (category != null) {
-      getDirectoryPath(category.pages[0].contentPath);
+      category.pages[0].contentPath.dir;
     } else {
-      getDirectoryPath(page.contentPath);
+      page.contentPath.dir;
     }
     return '${repositoryUrl}new/master/${contentPath}${directory}${fileNameHint}';
   }
   
   public inline function getAbsoluteUrl(page:Page) {
-    return basePath + page.outputPath.replace("index.html","");
+    return basePath + page.outputPath.dir;
   }
   
-  private static inline function getDirectoryPath(file:String) {
-    var paths = file.split("/");
-    paths.pop();
-    return paths.join("/");
-  }
-  
-  private static inline function getExtension(file:String) {
-    return file.split(".").pop();
-  }
   
   private static inline function getWithoutExtension(file:String) {
-    var path = file.split(".");
-    path.pop();
-    return path.join(".");
+    return Path.withoutDirectory(Path.withoutExtension(file));
   }
   
   private function getContent(file:String, data:Dynamic) {
-    return switch(getExtension(file)) {
+    return switch(Path.extension(file)) {
       case "md": 
         parseMarkdownContent(null, file);
       case "mtt": 
@@ -316,7 +319,7 @@ class Generator {
         page.tags = (link != null) ? link.title.split(",").map(function(a) return a.toLowerCase().trim()) : null;
       }
       
-      // parse ast
+      // parse ast      
       var blocks = document.parseLines(lines);
       // pick first header, use it as title for the page
       var titleBlock = null;
@@ -375,9 +378,9 @@ class Page {
   public var visible:Bool = true;
   public var title:String;
   public var description:String;
-  public var templatePath:String;
-  public var contentPath:String;
-  public var outputPath:String;
+  public var templatePath:Path;
+  public var contentPath:Path;
+  public var outputPath:Path;
   public var customData:Dynamic;
   public var tags:Array<String>;
   public var absoluteUrl:String;
@@ -386,13 +389,14 @@ class Page {
   public var contributionUrl:String;
   public var baseHref:String;
   public var dates:GitDates;
+  public var category:Category;
   
   public var pageContent:String;
   
   public function new(templatePath:String, contentPath:String, outputPath:String) {
-    this.templatePath = templatePath;
-    this.contentPath = contentPath;
-    this.outputPath = outputPath;
+    this.templatePath = new Path(templatePath);
+    this.contentPath = contentPath!= null ? new Path(contentPath) : null;
+    this.outputPath = new Path(outputPath);
   }
   
   public function setCustomData(data:Dynamic):Page {
