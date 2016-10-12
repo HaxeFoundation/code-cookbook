@@ -8,34 +8,36 @@ This project contains a static website generator, it is mixing templates and mar
 
 ## Structure
 
- * The actual code snippets are in [assets/content/cookbook](assets/content/cookbook), organized per folder.
+ * The actual articles are in [assets/content/cookbook](assets/content/cookbook), organized per folder.
  * The template files are in [assets/content/](assets/content).
  * The static files (css, js, images) files are in [assets/includes/](assets/includes).
  * The Haxe source files of the generator are in [src/](src).
  * The website-generated content will output in `output`.
 
-## Contributing snippets
+## Contributing articles
 
-Please add/edit the code snippets (markdown files) in the [assets folder](assets/content/cookbook) and do a pull request.
+Please add/edit the articles (markdown files) in the [assets folder](assets/content/cookbook) and do a pull request.
 
-##### Formatting snippets
+##### Formatting 
 
 It would be nice if you keep the formatting of the code in the same style as used already:
 
- * braces on same line
- * two-space indentation
- * no type-hints for local variables and function return unless it's instructive
- * type-hints for fields
- * type-hints for function arguments unless it's very obvious
- * judicious use of extra line-breaks to avoid ugly automatic breaks (check the output)
+ * Braces on same line
+ * Two-space indentation
+ * No type-hints for local variables and function return unless it's instructive
+ * Type-hints for fields
+ * Type-hints for function arguments unless it's very obvious
+ * Judicious use of extra line-breaks to avoid ugly automatic breaks (check the output)
 
 ##### Other remarks
  
- * the first heading is used in the navigation. Keep this title short.
- * tag the snippet using `[tags]: / "tag1,tag2"` (no spaces). Try to use [an existing tag](http://code.haxe.org/).
- * mention the author / sources at the bottom of the page.
- * if possible, link to related pages in the [Haxe Manual](http://haxe.org/manual) / [API documentation](http://api.haxe.org)
- * if you want to use images, upload them in the <assets/includes/img> folder.
+ * The first heading is used in the navigation. Keep this title short.
+ * The first paragraph is used as description. Describe what the content of the article is about.
+ * Tag the article using `[tags]: / "tag1,tag2"` (no spaces). Try to use [an existing tag](http://code.haxe.org/).
+ * Mention the author / sources at the bottom of the page.
+ * If you want to include a [try.haxe.org](http://try.haxe.org) code snippet use `[tryhaxe](http://try.haxe.org/embed/76f24)`.
+ * If possible, link to related pages in the [Haxe Manual](https://haxe.org/manual) / [API documentation](http://api.haxe.org).
+ * If you want to use images or other includes, create a folder called _assets_ in the same directory as the article and link to that.
 
 This would be a typical template to use. Use <code>```haxe</code> for syntax highlighting:
  
@@ -60,26 +62,25 @@ class Test {
 }
 &grave;&grave;&grave;
 
-&gt; More on this topic: &lt;http://haxe.org/manual/class-field.html&gt;
+&gt; More on this topic: &lt;https://haxe.org/manual/class-field.html&gt;
 &gt; 
-&gt; Author: &lbrack;Name&rbrack;(http://github.com/username)
+&gt; Author: &lbrack;Name&rbrack;(https://github.com/username)
 </pre>
 
 ## Running a local copy
 
-To run the project you need [Haxe](http://haxe.org).
+To run the project you need [Haxe](https://haxe.org).
 
 Call `build-site.bat` to re-generate the output files.
 
 ## Contributing to the generator
 
-You need [Haxe](http://haxe.org) 3.2+ installed.
+You need [Haxe 3.2+](https://haxe.org/download/list/) installed.
 
-The static site generator source depends on [hxtemplo](http://lib.haxe.org/p/hxtemplo) and [markdown](http://lib.haxe.org/p/markdown).
+The static site generator source depends on [hxtemplo](https://lib.haxe.org/p/hxtemplo) and [markdown](https://lib.haxe.org/p/markdown).
 Install from haxelib:
 ```
-haxelib install hxtemplo
-haxelib install markdown
+haxelib install CodeCookBook.hxml
 ```
 The CSS files are compressed using [less](http://lesscss.org/#using-less). 
 Install from npm:
