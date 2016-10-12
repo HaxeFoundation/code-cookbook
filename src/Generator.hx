@@ -20,6 +20,7 @@ class Generator {
   public var repositoryBranch = "";
   public var basePath = "";
   public var titlePostFix = "";
+  public var cookbookFolder = "cookbook/";
   public var assetsFolderName = "assets";
   
   private var _pages:Array<Page> = new Array<Page>();
@@ -35,7 +36,7 @@ class Generator {
     initTemplate();
     
     addGeneralPages();
-    addCookbookPages();
+    addCookbookPages(cookbookFolder);
     
     // after all other pages are added
     var tags:StringMap<Array<Page>> = collectTags();
@@ -134,10 +135,18 @@ class Generator {
   
   private function addCategoryPages(sitemap:Array<Category>) {
     for (category in sitemap) {
-      addPage(new Page("layout-page-toc.mtt",  "table-of-content.mtt",  'category/${category.id}/index.html')
-                        .setTitle('Haxe ${category.title} articles overview')
-                        .setDescription('Overview of Haxe ${category.title.toLowerCase()} snippets and tutorials.')
-                        .hidden(), category.folder);
+      var page = new Page("layout-page-toc.mtt",  "table-of-content.mtt",  'category/${category.id}/index.html')
+          .setTitle('Haxe ${category.title} articles overview')
+          .setDescription('Overview of Haxe ${category.title.toLowerCase()} snippets and tutorials.')
+          .hidden();
+      
+      var isSection = category.folder.toLowerCase().indexOf("sections") != -1;
+      if (isSection) {
+          page.description = null; // clear description
+          category.content = parseMarkdownContent(page, category.folder + "index.md", false);
+      }
+      
+      addPage(page, category.folder);
     }
   }
   
@@ -170,22 +179,23 @@ class Generator {
     addPage(sitemapPage, "/sitemap");
   }
   
-  private function addCookbookPages(documentationPath:String = "cookbook/") {
+  private function addCookbookPages(documentationPath:String) {
     for (file in FileSystem.readDirectory(contentPath + documentationPath)) {
+      if (file == "index.md") continue;
       if (!FileSystem.isDirectory(contentPath + documentationPath + file)) {
         var page = new Page("layout-page-snippet.mtt", 
                              documentationPath + file, 
-                             documentationPath.replace('cookbook/', 'category/').toLowerCase().replace(" ", "-") + 
+                             documentationPath.replace(cookbookFolder, 'category/').toLowerCase().replace(" ", "-") + 
                                 getWithoutExtension(file).toLowerCase() + ".html");
         page.pageContent = parseMarkdownContent(page, documentationPath + file);
         addPage(page, documentationPath);
       } else {
         if (file == assetsFolderName) {
           // when assets folder name is found, dont recurse but include directory in output
-          includeDirectory(contentPath + documentationPath + file, outputPath + documentationPath.replace('cookbook/', 'category/').toLowerCase().replace(" ", "-") + file);
+          includeDirectory(contentPath + documentationPath + file, outputPath + documentationPath.replace(cookbookFolder, 'category/').toLowerCase().replace(" ", "-") + file);
         } else {
           // recursive
-          addCookbookPages(documentationPath + file + "/" );
+          addCookbookPages(documentationPath + file + "/");
         }
       }
     }
@@ -202,7 +212,7 @@ class Generator {
       var structure = key.split("/");
       structure.pop();
       var id = structure.pop();
-      if (key.indexOf("cookbook/") == 0) {
+      if (key.indexOf(cookbookFolder) == 0) {
         var category = new Category(id.toLowerCase().replace(" ", "-"), id.replace("-", " "), key, _folders.get(key));
         category.absoluteUrl = basePath + category.outputPath;
         sitemap.push(category);
@@ -306,7 +316,7 @@ class Generator {
     }
   }
   
-  public function parseMarkdownContent(page:Page, file:String):String {
+  public function parseMarkdownContent(page:Page, file:String, setTitle:Bool = true):String {
     var document = new Markdown.Document();
     var markdown = File.getContent(contentPath + file);
     markdown = replaceHaxeOrgLinks(markdown);
@@ -336,7 +346,7 @@ class Generator {
           var el = Std.instance(block, ElementNode);
           if (el != null) {
             if (!hasTitle && el.tag == "h1" && !el.isEmpty()) {
-              page.title = new markdown.HtmlRenderer().render(el.children);
+              if (setTitle) page.title = new markdown.HtmlRenderer().render(el.children);
               hasTitle = true;
               titleBlock = block;
               continue;
@@ -348,7 +358,7 @@ class Generator {
           }
         }
       }
-      if (titleBlock != null) blocks.remove(titleBlock);
+      if (setTitle && titleBlock != null) blocks.remove(titleBlock);
 
       return Markdown.renderHtml(blocks);
     } catch (e:Dynamic){
@@ -440,6 +450,8 @@ class Category {
   public var id:String;
   public var folder:String;
   public var pages:Array<Page>;
+
+  public var content:String;
   
   public function new(id:String, title:String, folder:String, pages:Array<Page>){
     this.id = id;

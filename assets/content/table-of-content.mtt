@@ -1,5 +1,6 @@
 <h1 itemprop="name"><i class="fa fa-book"></i> ::currentCategory.title::</h1>
-<p>::currentPage.description::</p>
+<p ::cond category.content==null::>::currentPage.description::</p>
+<p ::cond category.content!=null::>::raw category.content::</p>
 
 <ul class="page-list unstyled">
 ::foreach page currentCategory.pages::
