@@ -20,6 +20,7 @@ class Generator {
   public var repositoryBranch = "";
   public var basePath = "";
   public var titlePostFix = "";
+  public var assetsFolderName = "assets";
   
   private var _pages:Array<Page> = new Array<Page>();
   private var _folders:StringMap<Array<Page>> = new StringMap<Array<Page>>();
@@ -179,7 +180,13 @@ class Generator {
         page.pageContent = parseMarkdownContent(page, documentationPath + file);
         addPage(page, documentationPath);
       } else {
-        addCookbookPages(documentationPath + file + "/" );
+        if (file == assetsFolderName) {
+          // when assets folder name is found, dont recurse but include directory in output
+          includeDirectory(contentPath + documentationPath + file, outputPath + documentationPath.replace('cookbook/', 'category/').toLowerCase().replace(" ", "-") + file);
+        } else {
+          // recursive
+          addCookbookPages(documentationPath + file + "/" );
+        }
       }
     }
   }
@@ -351,8 +358,9 @@ class Generator {
   
   public function includeDirectory(dir:String, ?path:String) {
     if (path == null) path = outputPath;
+		else FileSystem.createDirectory(path);
     trace("include directory: " + path);
-    
+		
     for (file in FileSystem.readDirectory(dir)) {
       var srcPath = '$dir/$file';
       var dstPath = '$path/$file';
