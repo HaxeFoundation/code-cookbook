@@ -69,7 +69,7 @@ class Generator {
     // add tags to the home page (used for meta keywords)
     _pages[0].tags = [for (tag in tags.keys()) tag];
     addTagPages(tags);
-		
+
     // sort pages by date; get most recent pages
     var latestCreatedPages = [for (p in _pages) {
       if (p != null && p.visible && p.dates != null && p.dates.created != null && (p.category == null || !p.category.isSection)) p;
@@ -78,6 +78,9 @@ class Generator {
       var a = a.dates.created.getTime(), b = b.dates.created.getTime();
       return if (a > b) -1 else if (a < b) 1 else 0;
     });
+    
+    // TODO: when we have much, figure out date for page
+    var sectionPages = [for (p in _pages) if (p != null && p.visible && p.isSectionHome()) p];
 
     Timer.measure(function() {
       for(page in _pages) {
@@ -95,7 +98,8 @@ class Generator {
           pageContent: null,
           DateTools: DateTools,
           getTagTitle:getTagTitle,
-          latestCreatedPages: function(amount) return [for (i in 0...amount) latestCreatedPages[i]],
+          latestCreatedPages: function(amount) return [for (i in 0...min(amount, latestCreatedPages.length)) latestCreatedPages[i]],
+          sectionPages: function(amount) return [for (i in 0...min(amount, sectionPages.length)) sectionPages[i]],
         }
         if (page.contentPath != null) 
         {
@@ -133,7 +137,7 @@ class Generator {
     trace(allTags.length + " tags");
     trace(_pages.length + " pages done!");
   }
-  
+
   private function addPage(page:Page, folder:String = null) {
     _pages.push(page);
     
@@ -193,6 +197,7 @@ class Generator {
   
   private function addGeneralPages() {
     var homePage = new Page("layout-page-main.mtt", "index.mtt", "index.html")
+                          .hidden()
                           .setTitle("Easy to read Haxe coding examples")
                           .setDescription('The Haxe Code Cookbook is a central place with Haxe coding snippets and tutorials.');
     
@@ -422,6 +427,8 @@ class Generator {
       Template.fromFile(contentPath + "layout.mtt").execute({});
     } catch(e:Dynamic) { }
   }
+  
+  static inline private function min(a:Int, b:Int) return Std.int(Math.min(a, b));
 }
 
 class Page { 
