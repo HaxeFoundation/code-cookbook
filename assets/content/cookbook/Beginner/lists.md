@@ -10,27 +10,29 @@ Lists can only be created through the use of a constructor. The constructor requ
 
 ```haxe
 var listOfInts = new List<Int>();
-var listOfStrings = new List<String();
-var listOfMyType = new List<MyType>();
 var listOfListsOfMyType = new List<List<MyType>>();
 ```
 
 ### Adding elements
 
-List elements can be appended to the end (tail) of the list, or prepended to the beginning (head) of the list. Elements cannot be inserted into a specific place in the list.
+An element can be appended to the end (tail) of the list, or prepended to the beginning (head) of the list. Elements cannot be inserted into a specific place in the list.
 
 ```haxe
-listOfInts.add(1);      // Adds 1 to the tail of the list
-listOfInts.push(2);     // Adds 2 to the head of the list
+// Adds 1 to the tail of the list
+listOfInts.add(1); 
+// Adds 2 to the head of the list
+listOfInts.push(2);
 ```
 
 ### Removing elements
 
-List elements can be removed by passing a reference or value of the list element to be removed. In that case, the first occurence of the passed element wiill be removed to the list. List elements can also be instantly removed from the top of the list.
+Elements can be removed by passing a reference or value of the list element to be removed. In that case, the first occurence of the passed element will be removed from the list. List elements can also be instantly removed from the top of the list.
 
 ```haxe
-listOfInts.remove(1);   // Removes first occurence of 1 in list
-listOfInts.pop();       // Removes and returns the head element of the list
+// Removes first occurence of 1 in list
+listOfInts.remove(1);
+// Removes and returns the head element of the list
+listOfInts.pop();
 ```
 
 ### Retrieving elements
@@ -38,8 +40,10 @@ listOfInts.pop();       // Removes and returns the head element of the list
 Only the first (head) and last (tail) element of the list can be directly retrieved.
 
 ```haxe
-listOfInts.first();     // Returns the head element of the list
-listOfInts.last();      // Returns the tail element of the list
+// Returns the head element of the list
+listOfInts.first();
+// Returns the tail element of the list
+listOfInts.last();
 ```
 
 ### Iteration
@@ -54,15 +58,20 @@ for (item in listOfInts) {
 
 ### Operations
 
-List elements can be mapped to a new list of elements via a mapping function. The mapping is bijective, and every element from the inital list will have its mapping in the new list.
+#### Filter
 
-List elements can also be filtered into a new list via a filtering function. Every list element for which the filtering function returns `true` is added to a new list.
+List elements can be filtered into a new list via a filtering function. Every list element for which the filtering function returns `true` is added to a new list.
 
 ```haxe
-// Returns a new list of elements processed by provided mapping function
-var listOfIntsAsStrings = listOfInts.map(function (e) return Std.string(e));
-// Returns a new list of elements for which the filter function returns true
 var listOfEvenInts = listOfInts.filter(function (e) return e % 2 == 0);
+```
+
+#### Map
+
+List elements can be mapped to a new list of elements via a mapping function. The mapping is bijective, and every element from the inital list will have its mapping in the new list.
+
+```haxe
+var listOfIntsAsStrings = listOfInts.map(function (e) return Std.string(e));
 ```
 
 ### Displaying list contents

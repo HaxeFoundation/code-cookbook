@@ -72,11 +72,15 @@ for (item in arrayOfStrings) {
 
 ### Operations
 
+#### Copy
+
 Array elements can be copied into a new array.
 
 ```haxe
 var newArrayOfStrings = arrayOfStrings.copy();
 ```
+
+#### Filter
 
 Array elements can be filtered into a new array with a filtering function. Every array element for which the filtering function returns `true` is added to a new array.
 
@@ -84,11 +88,15 @@ Array elements can be filtered into a new array with a filtering function. Every
 var noEmptyStrings = arrayOfStrings.filter(function (e) return e != "");
 ```
 
+#### Map
+
 Array elements can be mapped into a new array with a mapping function. The mapping is bijective, and every element from the initial array will have its mapping in the new array.
 
 ```haxe
 var upperCaseStrings = arrayOfStrings.map(function (e) return e.toUpperCase());
 ```
+
+#### Reverse
 
 The order of elements in an array can be reversed.
 
@@ -96,11 +104,15 @@ The order of elements in an array can be reversed.
 arrayOfStrings.reverse();
 ```
 
+#### Slice
+
 A specific range of array elements from a starting index up to (excluding) an end index can be copied to a new array.
 
 ```haxe
 var stringsThreeAndFour = arrayOfStrings.slice(3, 5);
 ``` 
+
+#### Sort
 
 Array elements can be sorted according to a comparison function. The comparison function compares two elements (the predecessor and the successor), and must return an `Int`. A return value of 0 indicates the elements are equivalent, a positive return value gives way to the successor, and a negative return value gives way to the predecessor.
 
