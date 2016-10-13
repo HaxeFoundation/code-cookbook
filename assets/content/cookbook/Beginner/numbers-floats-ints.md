@@ -35,7 +35,7 @@ var value = 0.1 + 0.2; // 0.30000000000000004
 ```
 
 Creating random numbers:
-```
+```haxe
 Std.random(10); // a random Int between 0 (included) and 10 (excluded)
 Math.random();  // a random Float between 0.0 (included) and 1.0 (excluded)
 ```

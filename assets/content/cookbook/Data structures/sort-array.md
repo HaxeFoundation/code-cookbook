@@ -27,7 +27,11 @@ haxe.ds.ArraySort.sort(myArray, function(a, b):Int {
 
 ## Usage
 
-[tryhaxe](http://try.haxe.org/embed/aE8c8)
+### Simple array with ints
+[tryhaxe](http://try.haxe.org/embed/D7880)
+  
+### Array with objects
+[tryhaxe](http://try.haxe.org/embed/76f24)
 
 Notice how the second array, when using `haxe.ds.ArraySort`, keeps the order of the elements with equal `i`. The sorting is stable.
 

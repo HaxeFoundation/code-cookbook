@@ -1,4 +1,4 @@
-[tags]: / "other"
+[tags]: / "javascript,canvas,binary"
 
 # VGA text renderer
 
