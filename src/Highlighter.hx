@@ -39,7 +39,7 @@ class Highlighter {
     
     html = ~/("[^"]*")/g.replace(html, "<span class='str'>$1</span>");
     html = ~/(\/\/.+?)(\n|$)/g.replace(html, "<span class='cmt'>$1</span>$2");
-    html = ~/(\/\*\*?[^*]*\*?\*\/)/g.replace(html, "<span class='cmt'>$1</span>");
+    html = ~/(\/\*\*?(.|\n)+?*\*?\*\/)/g.replace(html, "<span class='cmt'>$1</span>");
     
     return html;
   }
