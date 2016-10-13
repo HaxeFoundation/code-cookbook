@@ -26,7 +26,7 @@
 	</div>
 	<hr/>
 	
-	<h3><i class="fa  fa-book"></i> Newest snippets</h3>
+	<h3><i class="fa  fa-book"></i> Newest articles</h3>
 	<div class="row">
 	::foreach page latestCreatedPages(3)::
 			<div class="span4">
@@ -39,18 +39,6 @@
 	</div>
 	<hr/>
 	
-	<h3><i class="fa  fa-book"></i> Newest articles series</h3>
-	::foreach page sectionPages(3)::
-		<div class="row">
-			<div class="span8">
-				<h4><a href="::page.outputPath::" class="list-group-item">::page.title::</a></h4>
-				<p>::page.description::..</p>
-				<a href="::page.outputPath::" class="btn btn-small btn-default" title="Read ::page.title::">Read &raquo;</a>
-			</div>
-		</div>
-	::end::
-	<hr/>
-  
 	<div class="row">
 		<div class="span4">
 			<h3><i class="fa fa-big fa-rocket"></i> Learning by example</h3>

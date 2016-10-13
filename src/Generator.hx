@@ -54,14 +54,29 @@ class Generator {
         else 0;
     });
     
-    // assign prev/next pages (for sections)
+    
+    // TODO: when we have much, figure out date for page
+    var seriePages = [for (p in _pages) if (p != null && p.visible && p.isSerieHome()) p];
+    
+    // Add serie pages as if they are normal pages in the category
+    for (category in sitemap) {
+      if (!category.isSerie) {
+        for (page in seriePages) {
+          if (page.category.id.indexOf(category.id) == 0) {
+            category.pages.push(page);
+          }
+        }
+      }
+    }
+    
+    // assign prev/next pages (for series)
     for (page in _pages) {
-      if (page.visible && page.category != null && page.category.isSection) {
+      if (page.visible && page.category != null && page.category.isSerie) {
         var index = page.category.pages.indexOf(page);
         page.prev = page.category.pages[index - 1];
-        if (page.prev != null && (!page.prev.visible || page.prev.isSectionHome())) page.prev = null;
+        if (page.prev != null && (!page.prev.visible || page.prev.isSerieHome())) page.prev = null;
         page.next = page.category.pages[index + 1];
-        if (page.next != null && (!page.next.visible || page.next.isSectionHome())) page.next = null;
+        if (page.next != null && (!page.next.visible || page.next.isSerieHome())) page.next = null;
       }
     }
     
@@ -72,16 +87,14 @@ class Generator {
 
     // sort pages by date; get most recent pages
     var latestCreatedPages = [for (p in _pages) {
-      if (p != null && p.visible && p.dates != null && p.dates.created != null && (p.category == null || !p.category.isSection)) p;
+      if (p != null && p.visible && p.dates != null && p.dates.created != null && (p.category == null || !p.category.isSerie)) p;
     }];
     latestCreatedPages.sort(function(a, b) {
       var a = a.dates.created.getTime(), b = b.dates.created.getTime();
       return if (a > b) -1 else if (a < b) 1 else 0;
     });
     
-    // TODO: when we have much, figure out date for page
-    var sectionPages = [for (p in _pages) if (p != null && p.visible && p.isSectionHome()) p];
-
+    
     Timer.measure(function() {
       for(page in _pages) {
         // set the data for the page
@@ -99,7 +112,7 @@ class Generator {
           DateTools: DateTools,
           getTagTitle:getTagTitle,
           latestCreatedPages: function(amount) return [for (i in 0...min(amount, latestCreatedPages.length)) latestCreatedPages[i]],
-          sectionPages: function(amount) return [for (i in 0...min(amount, sectionPages.length)) sectionPages[i]],
+          seriePages: function(amount) return [for (i in 0...min(amount, seriePages.length)) seriePages[i]],
         }
         if (page.contentPath != null) 
         {
@@ -160,28 +173,24 @@ class Generator {
   
   private function addCategoryPages(sitemap:Array<Category>) {
     for (category in sitemap) {
-      category.isSection = isSection(category.folder);
-      var page = if (category.isSection) 
-                  new Page("layout-page-toc.mtt",  "table-of-content.mtt", 'sections/${category.id}/index.html')
+      category.isSerie = isSerie(category);
+      var page = if (category.isSerie) 
+                  new Page("layout-page-toc.mtt",  "table-of-content-serie.mtt", 'category/${category.id}/index.html')
                  else 
-                  new Page("layout-page-toc.mtt",  "table-of-content.mtt", 'category/${category.id}/index.html')
+                  new Page("layout-page-toc.mtt",  "table-of-content-category.mtt", 'category/${category.id}/index.html')
                     .setTitle('Haxe ${category.title} articles overview')
                     .setDescription('Overview of Haxe ${category.title.toLowerCase()} snippets and tutorials.')
                     .hidden();
      
-      if (category.isSection) {
+      if (category.isSerie) {
         category.content = parseMarkdownContent(page, category.folder + "index.md");
-        category.outputPath = 'sections/${category.id}/';
-      } else {
-        category.outputPath = 'category/${category.id}/';
-			}
+      } 
       addPage(page, category.folder);
     }
   }
   
-  static inline function isSection(path:String) 
-  {
-    return path.toLowerCase().indexOf("sections") != -1;
+  static inline function isSerie(category:Category) {
+    return category.pages[0].level == 2;
   }
   
   private function addTagPages(tags:StringMap<Array<Page>>) {
@@ -214,15 +223,15 @@ class Generator {
     addPage(sitemapPage, "/sitemap");
   }
   
-  private function addCookbookPages(documentationPath:String) {
+  private function addCookbookPages(documentationPath:String, level:Int = 0) {
     for (file in FileSystem.readDirectory(contentPath + documentationPath)) {
-      var isSection = isSection(contentPath + documentationPath + file);
-      var outputPathReplace = isSection ? "" : 'category/';
-      if (file == "index.md") continue;
+      var outputPathReplace = 'category/';
+      if (file == "index.md") continue; // skip this index page, its used for landingspages of series
       if (!FileSystem.isDirectory(contentPath + documentationPath + file)) {
         var pageOutputPath = documentationPath.replace(cookbookFolder, outputPathReplace);
         pageOutputPath = pageOutputPath.toLowerCase().replace(" ", "-") + getWithoutExtension(file).toLowerCase() + ".html";
         var page = new Page("layout-page-snippet.mtt",  documentationPath + file, pageOutputPath);
+        page.level = level;
         page.pageContent = parseMarkdownContent(page, documentationPath + file);
         addPage(page, documentationPath);
       } else {
@@ -231,7 +240,7 @@ class Generator {
           includeDirectory(contentPath + documentationPath + file, outputPath + documentationPath.replace(cookbookFolder, outputPathReplace).toLowerCase().replace(" ", "-") + file);
         } else {
           // recursive
-          addCookbookPages(documentationPath + file + "/");
+          addCookbookPages(documentationPath + file + "/", level+1);
         }
       }
     }
@@ -247,9 +256,12 @@ class Generator {
     for (key in _folders.keys()) {
       var structure = key.split("/");
       structure.pop();
-      var id = structure.pop();
       if (key.indexOf(cookbookFolder) == 0) {
-        var category = new Category(id.toLowerCase().replace(" ", "-"), id.replace("-", " "), key, _folders.get(key));
+        var isSerie = _folders.get(key)[0].level == 2;
+        var id = structure.pop();
+        var categoryId = isSerie ? structure.pop() + "/" + id : id;
+        categoryId = categoryId.toLowerCase().replace(" ", "-");
+        var category = new Category(categoryId, id.replace("-", " "), key, _folders.get(key));
         category.absoluteUrl = basePath + category.outputPath;
         sitemap.push(category);
       }
@@ -448,7 +460,9 @@ class Page {
   public var dates:GitDates;
   public var category:Category;
   
-  //only available in sections
+  public var level:Int;
+  
+  //only available in series
   public var next:Page;
   public var prev:Page;
   
@@ -485,7 +499,7 @@ class Page {
     return this;
   }
 
-  public function isSectionHome():Bool {
+  public function isSerieHome():Bool {
     return outputPath.toString().indexOf("index.html") != -1;
   }
 }
@@ -497,7 +511,7 @@ class Category {
   public var id:String;
   public var folder:String;
   public var pages:Array<Page>;
-  public var isSection:Bool;
+  public var isSerie:Bool;
 
   public var content:String;
   
@@ -506,9 +520,10 @@ class Category {
     this.title = title;
     this.folder = folder;
     this.pages = pages;
+    this.outputPath = 'category/$id/';
   }
   
   public function getPageCount():Int {
-    return [for (page in pages) if (page.visible && !page.isSectionHome()) page].length;
+    return [for (page in pages) if (page.visible && !page.isSerieHome()) page].length;
   }
 }
