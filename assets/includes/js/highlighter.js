@@ -5,19 +5,26 @@ var EReg = function(r,opt) {
 };
 var Highlighter = function() { };
 Highlighter.main = function() {
-	js.JQuery("code.prettyprint").each(function() {
-		var el = js.JQuery(this);
-		var tmp;
-		if(!el.hasClass("highlighted")) {
-			var tmp1;
-			if(!el.hasClass("haxe")) tmp1 = el.hasClass("js"); else tmp1 = true;
-			if(!tmp1) tmp = el.hasClass("javascript"); else tmp = true;
-		} else tmp = false;
-		if(tmp) {
-			el.html(Highlighter.syntaxHighlight(el.html()));
-			el.addClass("highlighted");
+	var _g = 0;
+	var _g1 = window.document.getElementsByTagName("code");
+	while(_g < _g1.length) {
+		var el = _g1[_g];
+		++_g;
+		if(Highlighter.hasClass(el,"prettyprint")) {
+			if(!Highlighter.hasClass(el,"highlighted")) {
+				if(Highlighter.hasClass(el,"haxe") || Highlighter.hasClass(el,"js") || Highlighter.hasClass(el,"javascript")) {
+					el.innerHTML = Highlighter.syntaxHighlight(el.innerHTML);
+					el.className += " highlighted";
+				} else if(Highlighter.hasClass(el,"hxml")) {
+					el.innerHTML = Highlighter.syntaxHighlightHXML(el.innerHTML);
+					el.className += " highlighted";
+				}
+			}
 		}
-	});
+	}
+};
+Highlighter.hasClass = function(el,className) {
+	return el.className.indexOf(className) != -1;
 };
 Highlighter.syntaxHighlight = function(html) {
 	var kwds = ["abstract","trace","break","case","cast","class","continue","default","do","dynamic","else","enum","extends","extern","for","function","if","implements","import","in","inline","interface","macro","new","override","package","private","public","return","static","switch","throw","try","typedef","untyped","using","var","while"];
@@ -33,8 +40,8 @@ Highlighter.syntaxHighlight = function(html) {
 	tmp = html.replace(_this.r,"<span class='str'>$1</span>");
 	html = tmp;
 	var tmp1;
-	var _this1 = new EReg("(//.+\n)","g");
-	tmp1 = html.replace(_this1.r,"<span class='cmt'>$1</span>");
+	var _this1 = new EReg("(//.+?)(\n|$)","g");
+	tmp1 = html.replace(_this1.r,"<span class='cmt'>$1</span>$2");
 	html = tmp1;
 	var tmp2;
 	var _this2 = new EReg("(/\\*\\*?[^*]*\\*?\\*/)","g");
@@ -42,8 +49,24 @@ Highlighter.syntaxHighlight = function(html) {
 	html = tmp2;
 	return html;
 };
-var q = window.jQuery;
-var js = js || {}
-js.JQuery = q;
+Highlighter.syntaxHighlightHXML = function(html) {
+	var tmp;
+	var _this = new EReg("\\b(haxe)\\b","g");
+	tmp = html.replace(_this.r,"<span class='kwd'>$1</span>");
+	html = tmp;
+	var tmp1;
+	var _this1 = new EReg("(\"[^\"]*\")","g");
+	tmp1 = html.replace(_this1.r,"<span class='str'>$1</span>");
+	html = tmp1;
+	var tmp2;
+	var _this2 = new EReg("(--?.+?)(\\s)","g");
+	tmp2 = html.replace(_this2.r,"<span class='val'>$1</span>$2");
+	html = tmp2;
+	var tmp3;
+	var _this3 = new EReg("(#.+?)(\n|$)","g");
+	tmp3 = html.replace(_this3.r,"<span class='cmt'>$1</span>$2");
+	html = tmp3;
+	return html;
+};
 Highlighter.main();
 })(typeof console != "undefined" ? console : {log:function(){}});

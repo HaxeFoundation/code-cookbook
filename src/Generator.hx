@@ -1,7 +1,9 @@
 package;
+
 import GitUtil.GitDates;
 import haxe.Timer;
 import haxe.ds.StringMap;
+import haxe.io.Path;
 import markdown.AST.ElementNode;
 import sys.FileSystem;
 import sys.io.File;
@@ -18,6 +20,8 @@ class Generator {
   public var repositoryBranch = "";
   public var basePath = "";
   public var titlePostFix = "";
+  public var cookbookFolder = "cookbook/";
+  public var assetsFolderName = "assets";
   
   private var _pages:Array<Page> = new Array<Page>();
   private var _folders:StringMap<Array<Page>> = new StringMap<Array<Page>>();
@@ -32,16 +36,64 @@ class Generator {
     initTemplate();
     
     addGeneralPages();
-    addCookbookPages();
+    addCookbookPages(cookbookFolder);
     
     // after all other pages are added
-    var tags:StringMap<Array<Page>> = collectTags();
     var sitemap:Array<Category> = createSitemap();
     addCategoryPages(sitemap);
-    addTagPages(tags);
     
+    // assign page.category
+    for (page in _pages) page.category = getCategory(sitemap, page);
+    
+    // sort category pages by filename
+    for (category in sitemap) category.pages.sort(function(a, b) {
+      var a = a.outputPath.file;
+      var b = b.outputPath.file;
+      return if (a < b) -1;
+        else if (a > b) 1;
+        else 0;
+    });
+    
+    
+    // TODO: when we have much, figure out date for page
+    var seriePages = [for (p in _pages) if (p != null && p.visible && p.isSerieHome()) p];
+    
+    // Add serie pages as if they are normal pages in the category
+    for (category in sitemap) {
+      if (!category.isSerie) {
+        for (page in seriePages) {
+          if (page.category.id.indexOf(category.id) == 0) {
+            category.pages.push(page);
+          }
+        }
+      }
+    }
+    
+    // assign prev/next pages (for series)
+    for (page in _pages) {
+      if (page.visible && page.category != null && page.category.isSerie) {
+        var index = page.category.pages.indexOf(page);
+        page.prev = page.category.pages[index - 1];
+        if (page.prev != null && (!page.prev.visible || page.prev.isSerieHome())) page.prev = null;
+        page.next = page.category.pages[index + 1];
+        if (page.next != null && (!page.next.visible || page.next.isSerieHome())) page.next = null;
+      }
+    }
+    
+    var tags:StringMap<Array<Page>> = collectTags();
     // add tags to the home page (used for meta keywords)
     _pages[0].tags = [for (tag in tags.keys()) tag];
+    addTagPages(tags);
+
+    // sort pages by date; get most recent pages
+    var latestCreatedPages = [for (p in _pages) {
+      if (p != null && p.visible && p.dates != null && p.dates.created != null && (p.category == null || !p.category.isSerie)) p;
+    }];
+    latestCreatedPages.sort(function(a, b) {
+      var a = a.dates.created.getTime(), b = b.dates.created.getTime();
+      return if (a > b) -1 else if (a < b) 1 else 0;
+    });
+    
     
     Timer.measure(function() {
       for(page in _pages) {
@@ -59,6 +111,8 @@ class Generator {
           pageContent: null,
           DateTools: DateTools,
           getTagTitle:getTagTitle,
+          latestCreatedPages: function(amount) return [for (i in 0...min(amount, latestCreatedPages.length)) latestCreatedPages[i]],
+          seriePages: function(amount) return [for (i in 0...min(amount, seriePages.length)) seriePages[i]],
         }
         if (page.contentPath != null) 
         {
@@ -79,7 +133,7 @@ class Generator {
         }
         
         // make output directory if needed
-        var targetDirectory = getDirectoryPath(outputPath + page.outputPath);
+        var targetDirectory = Path.directory(outputPath + page.outputPath);
         if (!FileSystem.exists(targetDirectory)) {
           FileSystem.createDirectory(targetDirectory);
         }
@@ -96,14 +150,14 @@ class Generator {
     trace(allTags.length + " tags");
     trace(_pages.length + " pages done!");
   }
-  
+
   private function addPage(page:Page, folder:String = null) {
     _pages.push(page);
     
     page.absoluteUrl = getAbsoluteUrl(page);
     page.baseHref = getBaseHref(page);
     
-    if (page.contentPath !=null) {
+    if (page.contentPath != null) {
       page.dates = GitUtil.getStat(contentPath + page.contentPath);
       page.contributionUrl = getContributionUrl(page);
       page.editUrl = getEditUrl(page);
@@ -119,11 +173,24 @@ class Generator {
   
   private function addCategoryPages(sitemap:Array<Category>) {
     for (category in sitemap) {
-      addPage(new Page("layout-page-toc.mtt",  "table-of-content.mtt",  'category/${category.id}/index.html')
-                        .setTitle('Haxe ${category.title} articles overview')
-                        .setDescription('Overview of Haxe ${category.title.toLowerCase()} snippets and tutorials.')
-                        .hidden(), category.folder);
+      category.isSerie = isSerie(category);
+      var page = if (category.isSerie) 
+                  new Page("layout-page-toc.mtt",  "table-of-content-serie.mtt", 'category/${category.id}/index.html')
+                 else 
+                  new Page("layout-page-toc.mtt",  "table-of-content-category.mtt", 'category/${category.id}/index.html')
+                    .setTitle('Haxe ${category.title} articles overview')
+                    .setDescription('Overview of Haxe ${category.title.toLowerCase()} snippets and tutorials.')
+                    .hidden();
+     
+      if (category.isSerie) {
+        category.content = parseMarkdownContent(page, category.folder + "index.md");
+      } 
+      addPage(page, category.folder);
     }
+  }
+  
+  static inline function isSerie(category:Category) {
+    return category.pages[0].level == 2;
   }
   
   private function addTagPages(tags:StringMap<Array<Page>>) {
@@ -139,6 +206,7 @@ class Generator {
   
   private function addGeneralPages() {
     var homePage = new Page("layout-page-main.mtt", "index.mtt", "index.html")
+                          .hidden()
                           .setTitle("Easy to read Haxe coding examples")
                           .setDescription('The Haxe Code Cookbook is a central place with Haxe coding snippets and tutorials.');
     
@@ -155,17 +223,25 @@ class Generator {
     addPage(sitemapPage, "/sitemap");
   }
   
-  private function addCookbookPages(documentationPath:String = "cookbook/") {
+  private function addCookbookPages(documentationPath:String, level:Int = 0) {
     for (file in FileSystem.readDirectory(contentPath + documentationPath)) {
+      var outputPathReplace = 'category/';
+      if (file == "index.md") continue; // skip this index page, its used for landingspages of series
       if (!FileSystem.isDirectory(contentPath + documentationPath + file)) {
-        var page = new Page("layout-page-snippet.mtt", 
-                             documentationPath + file, 
-                             documentationPath.replace('cookbook/', 'category/').toLowerCase().replace(" ", "-") + 
-                                getWithoutExtension(file).toLowerCase() + ".html");
+        var pageOutputPath = documentationPath.replace(cookbookFolder, outputPathReplace);
+        pageOutputPath = pageOutputPath.toLowerCase().replace(" ", "-") + getWithoutExtension(file).toLowerCase() + ".html";
+        var page = new Page("layout-page-snippet.mtt",  documentationPath + file, pageOutputPath);
+        page.level = level;
         page.pageContent = parseMarkdownContent(page, documentationPath + file);
         addPage(page, documentationPath);
       } else {
-        addCookbookPages(documentationPath + file + "/" );
+        if (file == assetsFolderName) {
+          // when assets folder name is found, dont recurse but include directory in output
+          includeDirectory(contentPath + documentationPath + file, outputPath + documentationPath.replace(cookbookFolder, outputPathReplace).toLowerCase().replace(" ", "-") + file);
+        } else {
+          // recursive
+          addCookbookPages(documentationPath + file + "/", level+1);
+        }
       }
     }
   }
@@ -180,9 +256,12 @@ class Generator {
     for (key in _folders.keys()) {
       var structure = key.split("/");
       structure.pop();
-      var id = structure.pop();
-      if (key.indexOf("cookbook/") == 0) {
-        var category = new Category(id.toLowerCase().replace(" ", "-"), id.replace("-", " "), key, _folders.get(key));
+      if (key.indexOf(cookbookFolder) == 0) {
+        var isSerie = _folders.get(key)[0].level == 2;
+        var id = structure.pop();
+        var categoryId = isSerie ? structure.pop() + "/" + id : id;
+        categoryId = categoryId.toLowerCase().replace(" ", "-");
+        var category = new Category(categoryId, id.replace("-", " "), key, _folders.get(key));
         category.absoluteUrl = basePath + category.outputPath;
         sitemap.push(category);
       }
@@ -239,10 +318,10 @@ class Generator {
   }
   
   private function getBaseHref(page:Page) {
-    if (page.outputPath == "404.html") {
+    if (page.outputPath.file == "404.html") {
       return basePath;
     }
-    var href = [for (s in page.outputPath.split("/")) ".."];
+    var href = [for (s in page.outputPath.toString().split("/")) ".."];
     href[0] = ".";
     return href.join("/");
   }
@@ -258,35 +337,24 @@ class Generator {
   public function getAddLinkUrl(category:Category  = null, page:Page = null) {
     var fileNameHint = "/snippet-name.md/?filename=snippet-name.md";
     var directory = if (category != null) {
-      getDirectoryPath(category.pages[0].contentPath);
+      category.pages[0].contentPath.dir;
     } else {
-      getDirectoryPath(page.contentPath);
+      page.contentPath.dir;
     }
     return '${repositoryUrl}new/master/${contentPath}${directory}${fileNameHint}';
   }
   
   public inline function getAbsoluteUrl(page:Page) {
-    return basePath + page.outputPath.replace("index.html","");
+    return basePath + page.outputPath.dir;
   }
   
-  private static inline function getDirectoryPath(file:String) {
-    var paths = file.split("/");
-    paths.pop();
-    return paths.join("/");
-  }
-  
-  private static inline function getExtension(file:String) {
-    return file.split(".").pop();
-  }
   
   private static inline function getWithoutExtension(file:String) {
-    var path = file.split(".");
-    path.pop();
-    return path.join(".");
+    return Path.withoutDirectory(Path.withoutExtension(file));
   }
   
   private function getContent(file:String, data:Dynamic) {
-    return switch(getExtension(file)) {
+    return switch(Path.extension(file)) {
       case "md": 
         parseMarkdownContent(null, file);
       case "mtt": 
@@ -316,7 +384,7 @@ class Generator {
         page.tags = (link != null) ? link.title.split(",").map(function(a) return a.toLowerCase().trim()) : null;
       }
       
-      // parse ast
+      // parse ast      
       var blocks = document.parseLines(lines);
       // pick first header, use it as title for the page
       var titleBlock = null;
@@ -334,6 +402,7 @@ class Generator {
             if (hasTitle && el.tag != "pre" && page.description == null) {
               var description = new markdown.HtmlRenderer().render(el.children);
               page.description = new EReg("<(.*?)>", "g").replace(description, "").replace('"', "").replace('\n', " ");
+              break;
             }
           }
         }
@@ -348,6 +417,7 @@ class Generator {
   
   public function includeDirectory(dir:String, ?path:String) {
     if (path == null) path = outputPath;
+    else FileSystem.createDirectory(path);
     trace("include directory: " + path);
     
     for (file in FileSystem.readDirectory(dir)) {
@@ -369,15 +439,17 @@ class Generator {
       Template.fromFile(contentPath + "layout.mtt").execute({});
     } catch(e:Dynamic) { }
   }
+  
+  static inline private function min(a:Int, b:Int) return Std.int(Math.min(a, b));
 }
 
 class Page { 
   public var visible:Bool = true;
   public var title:String;
   public var description:String;
-  public var templatePath:String;
-  public var contentPath:String;
-  public var outputPath:String;
+  public var templatePath:Path;
+  public var contentPath:Path;
+  public var outputPath:Path;
   public var customData:Dynamic;
   public var tags:Array<String>;
   public var absoluteUrl:String;
@@ -386,13 +458,20 @@ class Page {
   public var contributionUrl:String;
   public var baseHref:String;
   public var dates:GitDates;
+  public var category:Category;
+  
+  public var level:Int;
+  
+  //only available in series
+  public var next:Page;
+  public var prev:Page;
   
   public var pageContent:String;
   
   public function new(templatePath:String, contentPath:String, outputPath:String) {
-    this.templatePath = templatePath;
-    this.contentPath = contentPath;
-    this.outputPath = outputPath;
+    this.templatePath = new Path(templatePath);
+    this.contentPath = contentPath != null ? new Path(contentPath) : null;
+    this.outputPath = outputPath != null ? new Path(outputPath) : null;
   }
   
   public function setCustomData(data:Dynamic):Page {
@@ -419,6 +498,10 @@ class Page {
     visible = false;
     return this;
   }
+
+  public function isSerieHome():Bool {
+    return outputPath.toString().indexOf("index.html") != -1;
+  }
 }
 
 class Category {
@@ -428,6 +511,9 @@ class Category {
   public var id:String;
   public var folder:String;
   public var pages:Array<Page>;
+  public var isSerie:Bool;
+
+  public var content:String;
   
   public function new(id:String, title:String, folder:String, pages:Array<Page>){
     this.id = id;
@@ -438,6 +524,6 @@ class Category {
   }
   
   public function getPageCount():Int {
-    return [for (page in pages) if (page.visible) page].length;
+    return [for (page in pages) if (page.visible && !page.isSerieHome()) page].length;
   }
 }

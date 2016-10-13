@@ -1,0 +1,24 @@
+<h1 itemprop="name"><i class="fa fa-book"></i> ::currentCategory.title:: </h1>
+<p>::raw currentCategory.content::</p>
+<hr/>
+<small>This article consist of ::currentCategory.pages.length-1:: pages:</small>
+<ol class="page-list">
+::foreach page currentCategory.pages::
+	<li class="page-list-item" itemscope="itemscope" itemtype="https://schema.org/Thing" ::cond page.visible && !page.isSerieHome() ::>
+		<h3><a href="::page.outputPath::" class="list-group-item" itemprop="url"><span itemprop="name">::page.title::</span></a></h3>
+		<p><em>::page.description::..</em></p>
+	</li>
+::end::
+</ol>
+
+<hr/>
+
+<div class="tags" ::cond currentPage.tags!=null && currentPage.tags.length>0::>
+	Tags:  &nbsp; 
+	<span itemprop="keywords">
+	::foreach tag currentPage.tags::
+		<span class="tag"><i class="fa fa-tag"></i>&nbsp;<a href="tag/::tag::.html" rel="tag">::tag::</a><i class="semantic" ::cond !repeat.tag.last::>,</i></span>
+	::end::
+	</span>
+<hr/>
+</div>
