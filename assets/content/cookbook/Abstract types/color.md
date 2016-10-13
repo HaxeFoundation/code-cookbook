@@ -137,27 +137,6 @@ trace(StringTools.hex(fromFloatComponents));
 
 ## Compiler output
 
-JavaScript output from Haxe 3.2.1 with flags `-DCE full -D analyzer` is given below:
-
-```js
-var red = -65536;
-var fromInt = -1737075662;
-var tmp;
-var argb = Std.parseInt("0xffeeddcc");
-tmp = argb;
-var fromString = tmp;
-var fromIntComponents = -8559566;
-var fromFloatComponents = (255. | 0) << 24 | (76.5 | 0) << 16 | (178.5 | 0) << 8 | (51. | 0);
-var ri = red >> 16 & 255;
-fromIntComponents = (fromIntComponents >> 24 & 255) << 24 | ri << 16 | (fromIntComponents >> 8 & 255) << 8 | fromIntComponents & 255;
-fromString = (255. | 0) << 24 | ((fromString >> 16 & 255) / 255 * 255 | 0) << 16 | ((fromString >> 8 & 255) / 255 * 255 | 0) << 8 | ((fromString & 255) / 255 * 255 | 0);
-console.log(StringTools.hex(red));
-console.log(StringTools.hex(fromInt));
-console.log(StringTools.hex(fromString));
-console.log(StringTools.hex(fromIntComponents));
-console.log(StringTools.hex(fromFloatComponents));
-```
-
 JavaScript output from Haxe 3.3.0-rc.1 with flags `-DCE full -D analyzer` is given below:
 
 ```js
