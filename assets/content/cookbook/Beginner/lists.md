@@ -1,4 +1,4 @@
-[tags]: / "math"
+[tags]: / "collections, data-structures"
 
 # Using lists
 
