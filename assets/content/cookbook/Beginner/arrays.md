@@ -1,4 +1,4 @@
-[tags]: / "math"
+[tags]: / "collections, data-structures"
 
 # Using arrays
 
@@ -117,7 +117,7 @@ var stringsThreeAndFour = arrayOfStrings.slice(3, 5);
 Array elements can be sorted according to a comparison function. The comparison function compares two elements (the predecessor and the successor), and must return an `Int`. A return value of 0 indicates the elements are equivalent, a positive return value gives way to the successor, and a negative return value gives way to the predecessor.
 
 ```haxe
-var sortedStrings = arrayOfStrings.sort(function (a, b) return a.charCodeAt(0) - b.charCodeAt(0));
+arrayOfStrings.sort(function (a, b) return a.charCodeAt(0) - b.charCodeAt(0));
 ```
 
 ### Displaying contents
