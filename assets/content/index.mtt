@@ -34,7 +34,7 @@
 					::if page.isSerieHome()::
 						::page.category.parent.title:: 
 					::else::
-						::page.category.title::
+						::page.category.title:: 
 					::end::
 					<small class="category-count">/</small> <a href="::page.outputPath::" class="list-group-item">::page.title::</a>
 				</h4>
