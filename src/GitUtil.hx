@@ -9,13 +9,12 @@ class GitUtil
 {
   static function getCreationDate(path:String):Date {
     #if !display
-      var process = new sys.io.Process('git', ['log','--diff-filter=A','--follow','--date=format:"%Y-%m-%d %H:%M:%S"','--format=%ad', '-1', '--', path]);
+      var process = new sys.io.Process('git', ['log','--diff-filter=A','--follow','--date=format:short','--format=%ad', '-1', '--', path]);
       if (process.exitCode() != 0) throw process.stderr.readAll().toString();
       var dateString = process.stdout.readAll().toString();
       trace(haxe.Json.stringify(dateString));
       dateString = dateString.replace("\n", "").replace("\r", "");
       return Date.fromString(dateString);
-    
     #else 
     return null;
     #end
@@ -23,18 +22,11 @@ class GitUtil
   
   static function getModificationDate(path:String):Date {
     #if !display
-    try {
-      var process = new sys.io.Process('git', ['log','--date=format:"%Y-%m-%d %H:%M:%S"','--format=%ad', '-1', '--', path]);
+      var process = new sys.io.Process('git', ['log','--date=format:short','--format=%ad', '-1', '--', path]);
       if (process.exitCode() != 0) throw process.stderr.readAll().toString();
       var dateString = process.stdout.readAll().toString();
       dateString = dateString.replace("\n", "").replace("\r", "");
       return Date.fromString(dateString);
-    }
-    catch (e:Dynamic) 
-    {
-      trace("error: " + e);
-      return null;
-    }
     #else 
     return null;
     #end
