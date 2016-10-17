@@ -55,8 +55,19 @@ class Generator {
     });
     
     
-    // TODO: when we have much, figure out date for page
+    // find serie pages
     var seriePages = [for (p in _pages) if (p != null && p.visible && p.isSerieHome()) p];
+   
+    for (page in seriePages) {
+      // add dates to table-of-content (to be used on homepage)
+      page.dates = page.category.pages[0].dates;
+      
+      // find+assign parent category
+      var ids = page.category.folder.replace(cookbookFolder, "").split("/");
+      var parentId = ids.shift();
+      parentId = parentId.toLowerCase().replace(" ", "-");
+      page.category.parent = getCategoryById(sitemap, parentId);
+    }
     
     // Add serie pages as if they are normal pages in the category
     for (category in sitemap) {
@@ -87,7 +98,7 @@ class Generator {
 
     // sort pages by date; get most recent pages
     var latestCreatedPages = [for (p in _pages) {
-      if (p != null && p.visible && p.dates != null && p.dates.created != null && (p.category == null || !p.category.isSerie)) p;
+      if (p != null && p.category != null && p.visible && p.dates != null && p.dates.created != null && (!p.category.isSerie || p.isSerieHome())) p;
     }];
     latestCreatedPages.sort(function(a, b) {
       var a = a.dates.created.getTime(), b = b.dates.created.getTime();
@@ -317,6 +328,15 @@ class Generator {
     return null;
   }
   
+  private function getCategoryById(sitemap:Array<Category>, id:String):Category {
+    for (category in sitemap) {
+      if (category.id == id) {
+        return category;
+      }
+    }
+    return null;
+  }
+  
   private function getBaseHref(page:Page) {
     if (page.outputPath.file == "404.html") {
       return basePath;
@@ -505,6 +525,7 @@ class Page {
 }
 
 class Category {
+  public var parent:Category;
   public var title:String;
   public var outputPath:String;
   public var absoluteUrl:String;

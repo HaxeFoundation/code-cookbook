@@ -31,7 +31,14 @@
 	::foreach page latestCreatedPages(3)::
 			<div class="span4">
 				<h4><small class="category-count" ::cond page.dates.created !=null::>::DateTools.format(page.dates.created, "%d-%m-%Y")::</small> 
-					::page.category.title:: <small class="category-count">/</small> <a href="::page.outputPath::" class="list-group-item">::page.title::</a></h4>
+					::if page.isSerieHome()::
+						::page.category.parent.title:: 
+					::else::
+						::page.category.title::
+					::end::
+					<small class="category-count">/</small> <a href="::page.outputPath::" class="list-group-item">::page.title::</a>
+				</h4>
+				<p ::cond page.isSerieHome()::><small class="category-count">This article consist of ::page.category.pages.length-1:: pages</small></p>
 				<p>::page.description::..</p>
 				<a href="::page.outputPath::" class="btn btn-small btn-default" title="Read ::page.title::">Read &raquo;</a>
 			</div>
