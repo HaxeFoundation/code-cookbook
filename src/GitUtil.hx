@@ -12,11 +12,14 @@ class GitUtil
     try {
       var process = new sys.io.Process('git', ['log','--diff-filter=A','--follow','--date=format:%Y-%m-%d %H:%M:%S','--format=%ad', '-1', '--', path]);
       if (process.exitCode() != 0) throw process.stderr.readAll().toString();
-      return Date.fromString(process.stdout.readAll().toString().replace("\n","").replace("\r",""));
+      var dateString = process.stdout.readAll().toString();
+      trace(haxe.Json.stringify(dateString));
+      dateString = dateString.replace("\n", "").replace("\r", "");
+      return Date.fromString(dateString);
     } 
     catch (e:Dynamic) 
     {
-      trace("GitUtil error: " + e);
+      trace("error: " + e);
       return null;
     }
     #else 
@@ -29,11 +32,13 @@ class GitUtil
     try {
       var process = new sys.io.Process('git', ['log','--date=format:%Y-%m-%d %H:%M:%S','--format=%ad', '-1', '--', path]);
       if (process.exitCode() != 0) throw process.stderr.readAll().toString();
-      return Date.fromString(process.stdout.readAll().toString().replace("\n","").replace("\r",""));
+      var dateString = process.stdout.readAll().toString();
+      dateString = dateString.replace("\n", "").replace("\r", "");
+      return Date.fromString(dateString);
     }
     catch (e:Dynamic) 
     {
-      trace("GitUtil error: " + e);
+      trace("error: " + e);
       return null;
     }
     #else 
