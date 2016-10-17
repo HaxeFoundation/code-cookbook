@@ -12,7 +12,10 @@ class GitUtil
       trace(path, process.exitCode(), process.stdout.readLine(),  Date.fromString(process.stdout.readLine()));
       if (process.exitCode() != 0) throw process.stderr.readAll().toString();
       return Date.fromString(process.stdout.readLine());
-    } catch (e:Dynamic) return null;
+    } catch (e:Dynamic) {
+	trace("error: " +  e);    
+	return null;
+    }
     #else 
     return null;
     #end
