@@ -26,7 +26,7 @@
 	</div>
 	<hr/>
 	
-	<!--h3><i class="fa  fa-book"></i> Newest articles</h3>
+	<h3><i class="fa  fa-book"></i> Newest articles</h3>
 	<div class="row">
 	::foreach page latestCreatedPages(3)::
 			<div class="span4">
@@ -37,7 +37,7 @@
 			</div>
 	::end::
 	</div>
-	<hr/-->
+	<hr/>
 	
 	<div class="row">
 		<div class="span4">
