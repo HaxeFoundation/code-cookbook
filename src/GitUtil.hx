@@ -1,5 +1,7 @@
 package;
 
+using StringTools;
+
 /**
  * @author Mark Knol
  */
@@ -9,12 +11,13 @@ class GitUtil
     #if !display
     try {
       var process = new sys.io.Process('git', ['log','--diff-filter=A','--follow','--date=format:%Y-%m-%d %H:%M:%S','--format=%ad', '-1', '--', path]);
-      trace(path, process.exitCode(), process.stdout.readLine(),  Date.fromString(process.stdout.readLine()));
       if (process.exitCode() != 0) throw process.stderr.readAll().toString();
-      return Date.fromString(process.stdout.readLine());
-    } catch (e:Dynamic) {
-	trace("error: " +  e);    
-	return null;
+      return Date.fromString(process.stdout.readAll().toString().replace("\n","").replace("\r",""));
+    } 
+    catch (e:Dynamic) 
+    {
+      trace("GitUtil error: " + e);
+      return null;
     }
     #else 
     return null;
@@ -26,8 +29,13 @@ class GitUtil
     try {
       var process = new sys.io.Process('git', ['log','--date=format:%Y-%m-%d %H:%M:%S','--format=%ad', '-1', '--', path]);
       if (process.exitCode() != 0) throw process.stderr.readAll().toString();
-      return Date.fromString(process.stdout.readLine());
-    } catch (e:Dynamic) return null;
+      return Date.fromString(process.stdout.readAll().toString().replace("\n","").replace("\r",""));
+    }
+    catch (e:Dynamic) 
+    {
+      trace("GitUtil error: " + e);
+      return null;
+    }
     #else 
     return null;
     #end
@@ -38,10 +46,10 @@ class GitUtil
       modified: getModificationDate(path),
       created: getCreationDate(path),
     }
-	}
+  }
 }
 
 typedef GitDates = {
-	modified: Date,
-	created: Date,
+  modified: Date,
+  created: Date,
 }
