@@ -9,6 +9,7 @@ class GitUtil
     #if !display
     try {
       var process = new sys.io.Process('git', ['log','--diff-filter=A','--follow','--date=format:%Y-%m-%d %H:%M:%S','--format=%ad', '-1', '--', path]);
+      trace(path, process.exitCode(), process.stdout.readLine(),  Date.fromString(process.stdout.readLine()));
       if (process.exitCode() != 0) throw process.stderr.readAll().toString();
       return Date.fromString(process.stdout.readLine());
     } catch (e:Dynamic) return null;
