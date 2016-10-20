@@ -1,4 +1,4 @@
-[tags]: / "reflection"
+[tags]: / "reflection,dead-code-elimination"
 
 # Using a string as a variable (with reflection)
 
