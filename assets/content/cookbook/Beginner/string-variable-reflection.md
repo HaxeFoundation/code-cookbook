@@ -6,14 +6,9 @@ This snippet shows how to use a string as a variable identifier using reflection
 
 ## Implementation
 ```haxe
-class ReflectionTest {
-  @:keep var ref:String = "This is Reflection Test";
+class MyObject {
+  @:keep var myField:String = "This is Reflection Test";
   
-  public function test() {
-    var t:String = Reflect.field(this, "ref");
-    trace(t);
-  }
-	
   public function new() { }
 }
 ```
@@ -22,13 +17,16 @@ class ReflectionTest {
 ```haxe
 class Main {
   static public function main():Void {
-    var r:ReflectionTest = new ReflectionTest();
-    r.test();
+    var myObject = new MyObject();
+    
+    var fieldName = "myField";
+    var myField:String = Reflect.field(myObject, fieldName);
+    trace(myField); // "This is Reflection Test";
   }
 }
 ```
 
-Haxe has [dead code elimination](https://haxe.org/manual/cr-dce.html) (DCE) enabled by default. This compiler feature identifies and eliminates all unused code during compilation. In the example above, the variable `ref` is referenced only through reflection and not directly. Because of that, it will be marked for removal by DCE. To keep it from being eliminated, we need to add `@:keep` [compiler metadata](https://haxe.org/manual/cr-metadata.html) to the `ref` field. Note that `@:keep` could also be added to classes and functions. If you want to keep the class and its sub-classes, use `@:keepSub`.
+Haxe has [dead code elimination](https://haxe.org/manual/cr-dce.html) (DCE). This compiler feature identifies and eliminates all unused code during compilation. In the example above, the variable `myField` is referenced only through reflection and not directly. Because of that, it will be marked for removal by DCE. To keep it from being eliminated, we need to add `@:keep` [compiler metadata](https://haxe.org/manual/cr-metadata.html) to the `myField` field. Note that `@:keep` could also be added to classes and functions. If you want to keep the class and its sub-classes, use `@:keepSub`.
 
 **Tip:** Haxe has a wonderful type system, use this as much as possible. Reflection can be a powerful tool, but it's important to know it can be error prone, since the compiler can never validate if what you're doing makes sense and is also harder to optimize.
 
