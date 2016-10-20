@@ -1,8 +1,8 @@
-[tags]: / "beginner,other"
+[tags]: / "reflection"
 
-# Using string as variable (with reflection)
+# Using a string as a variable (with reflection)
 
-Extract variable name from string and using it as variable
+This snippet shows how to use a string as a variable identifier.
 
 ## Implementation
 ```haxe
@@ -26,13 +26,18 @@ class ReflectionTest {
 class Main {
   static public function main():Void {
     var r : ReflectionTest = new ReflectionTest();
-	r.show();
+    r.show();
   }
 }
 ```
 
-Haxe have dead-code elimination enabled by default.In the example, the variable 'ref' is not referenced anywhere, so it will be removed. We need to add @:keep to that field, because it's only referenced by reflection.
+Haxe has dead code elimination (DCE) enabled by default. This compiler feature identifies and eliminates all unused code during compilation. In the example above, the variable ref is referenced only through reflection and not directly. Because of that, it will be marked for removal by DCE. To keep it from being eliminated, we need to add @:keep compiler metadata to the ref field.
 
-> More on this topic: <http://haxe.org/manual/std-reflection.html>
+
+> [Reflection API documentation](http://haxe.org/manual/std-reflection.html)
 > 
+> [Dead Code Elimination](https://haxe.org/manual/cr-dce.html)
+>
+> [Built-in Compiler Metadata](https://haxe.org/manual/cr-metadata.html)
+>
 > Author: [MJ](https://github.com/flashultra)
