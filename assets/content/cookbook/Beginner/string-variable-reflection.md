@@ -1,8 +1,8 @@
 [tags]: / "reflection,dead-code-elimination"
 
-# Using a string as a variable (with reflection)
+# Access a field using a string
 
-This snippet shows how to use a string as a variable identifier.
+This snippet shows how to use a string as a variable identifier using reflection.
 
 ## Implementation
 ```haxe
