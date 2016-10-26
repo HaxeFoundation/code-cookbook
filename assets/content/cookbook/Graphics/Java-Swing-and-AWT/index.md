@@ -1,4 +1,4 @@
-[tags]: / "webgl"
+[tags]: / "java","swing","awt"
 
 # Java-Swing-and-AWT
 
