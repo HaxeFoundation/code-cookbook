@@ -36,14 +36,9 @@ var experience = RewardType.Experience(456);
 var item = RewardType.Item(ItemType.Key);
 ```
 
-Alternatively, instantiate the enum via methods from `haxe.EnumTools`.
+Alternatively, instantiate the enum via methods from `haxe.EnumTools`. Read more about it in the [Tooling](#enumtools) section.
 
 ```haxe
-// Use the `haxe.EnumTools` methods as static extensions
-using haxe.EnumTools;
-
-// Class boilerplate goes here
-
 // Creates Sword item type with name Slashy and strength 100
 var createdByName = ItemType.createByName("Sword", ["Slashy", 100]);
 // Creates Key item type, as it is the first constructor specified
@@ -80,15 +75,13 @@ switch(reward) {
 
 #### EnumTools
 
-The `haxe.EnumTools` module in the standard library contains several methods to help work with enums and enum constructors. They provide additional ways to create enum instances, as well as obtain information on enum constructors. These methods are best used as static extensions.
+The `haxe.EnumTools` module in the standard library contains several methods to help work with enums and enum constructors. They provide additional ways to create enum instances, as well as obtain information on enum constructors.
+
+These methods are automatically included in the module context when using enums, but usually they would be included explicitly through `using haxe.EnumTools;`.
 
 Some examples are presented below:
 
 ```haxe
-using haxe.EnumTools;
-
-// Class boilerplate goes here
-
 // Gets enum name, including path
 var enumName = ItemType.getName();
 // Gets array of constructor names for provided enum
@@ -97,15 +90,13 @@ var enumConstructorNames = ItemType.getNames();
 
 #### EnumValueTools
 
-The `haxe.EnumValueTools` module in the standard library contains several methods to help work with enum values. They provide additional ways to compare enum instances, and get their constructors and constructor arguments. These methods are best used as static extensions.
+The `haxe.EnumValueTools` module in the standard library contains several methods to help work with enum values. They provide additional ways to compare enum instances, and get their constructors and constructor arguments.
+
+These methods are automatically included in the module context when using enums, but usually they would be included explicitly through `using haxe.EnumValueTools;`.
 
 Some examples are presented below:
 
 ```haxe
-using haxe.EnumValueTools;
-
-// Class boilerplate goes here
-
 var item = ItemType.Shield("Shieldy", 100);
 // Gets enum instance constructor name
 var constructorName = item.getName();
