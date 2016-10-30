@@ -116,7 +116,6 @@ if (otherItem.match(ItemType.Shield(_, _)) trace("Other item is a shield!"));
 > 
 > * [Enum](https://haxe.org/manual/types-enum-instance.html)
 > * [Pattern Matching](https://haxe.org/manual/lf-pattern-matching.html)
-> * [Static Extension](https://haxe.org/manual/lf-static-extension.html)
 >
 > Read more in the Haxe API documentation:
 > 
