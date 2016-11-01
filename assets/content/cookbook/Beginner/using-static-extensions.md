@@ -71,8 +71,7 @@ class Main {
 ```
 Another class often used for static extension is the **[Lambda](http://api.haxe.org/Lambda.html)**, wich extends iterable types (arrays and lists) with functional methods.
 
-
-# Writing your own static extensions
+## Writing your own static extensions
 
 This concept of extending the functionality of Haxe types and objects using static extensions is very powerful. 
 It makes it very easy to create your own reusable libraries with the extensions that you need for the data that you use.
