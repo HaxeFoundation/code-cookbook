@@ -94,7 +94,7 @@ We can of course use this new method in the following way:
 var f = 0.119999;
 var rf = FloatTools.round2(f); // 0.12
 ```
-The use as static extension brings the functionality directly to any float type value or variable in the current module:
+The static extension brings the functionality directly to any float type value or variable in the current module:
 
 ```haxe
 using FloatTools; // Adding 'FloatTools' as a static extension
