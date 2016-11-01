@@ -22,7 +22,7 @@ however we often need to provide extern definitions for some code that follows t
 
 Good news are - with Haxe we can stay type-safe by using type parameters and abstracts!
 
-Let's examine the `setProperty` example from the code above...
+Let's examine the `setProperty` example from the code above.
 
 
 ## Step 1. Proper typing of string values
@@ -57,7 +57,7 @@ setProperty(playerName, "Dan");
 // setProperty("whatever", "Dan");
 ```
 
-However we still can pass any value as the `value` argument, since it's typed `Dynamic`...
+However we still can pass any value as the `value` argument, since it's typed `Dynamic`.
 
 
 ## Step 2. Binding value type to a property name
@@ -88,7 +88,7 @@ var playerLevel = new Property<Int>("playerLevel");
 var info = new Property<{age:Int, dead:Bool}>("info");
 ```
 
-Looks descriptive, but useless until we implement step 3...
+Looks descriptive, but useless until we implement step 3.
 
 
 ## Step 3. Using type parameter in a function

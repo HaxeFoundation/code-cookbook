@@ -39,7 +39,7 @@
 					<small class="category-count">/</small> <a href="::page.outputPath::" class="list-group-item">::page.title::</a>
 				</h4>
 				<p ::cond page.isSerieHome()::><small class="category-count">This article consist of ::page.category.pages.length-1:: pages</small></p>
-				<p>::page.description::..</p>
+				<p>::page.description::&#8229;</p>
 				<a href="::page.outputPath::" class="btn btn-small btn-default" title="Read ::page.title::">Read &raquo;</a>
 			</div>
 	::end::

@@ -13,13 +13,13 @@ Therefore, it might come as a surprise that you can't do the following in Haxe:
 var s = 'ABxD';
 var corr = s.replace('x', 'C'); // Causes an 'String has no field replace' compilation error
 ```
-Instead, the string replace method lives as a static method in a class called **[StringTools](http://api.haxe.org/StringTools.html)**. It can be used like this...
+Instead, the string replace method lives as a static method in a class called **[StringTools](http://api.haxe.org/StringTools.html)**. It can be used like this:
 ```haxe
 var str = 'ABxD';
 var corr = StringTools.replace(str, 'x', 'C');
 trace(corr); // ABCD
 ```
-...where the first parameter passed to the replace method is the string to be acted upon. This works, but it's **not** how we want to write our code. 
+The first parameter passed to the replace method is the string to be acted upon. This works, but it's **not** how we want to write our code. 
 
 ## Keyword 'using'
 
@@ -89,12 +89,12 @@ class FloatTools {
 ```
 Note that the rounding method takes one parameter of the type float: `round2(f:Float)` - this is of course the value that we want back in rounded form.
 
-We can of course use this new method in the following way...
+We can of course use this new method in the following way:
 ```haxe
 var f = 0.119999;
 var rf = FloatTools.round2(f); // 0.12
 ```
-...but the use as static extension brings the functionality directly to any float type value or variable in the current module:
+The use as static extension brings the functionality directly to any float type value or variable in the current module:
 
 ```haxe
 using FloatTools; // Adding 'FloatTools' as a static extension

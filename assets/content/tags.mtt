@@ -5,7 +5,7 @@
 ::foreach page currentPage.customData.pages::
 	<li class="page-list-item" itemscope="itemscope" itemtype="https://schema.org/Thing" ::cond page.visible::>
 		<h3><a href="::page.outputPath::" class="list-group-item" itemprop="url"><span itemprop="name">::page.title::</span></a></h3>
-		<p><em>::page.description::..</em></p>
+		<p><em>::page.description::&#8229;</em></p>
 	</li>
 ::end::
 </ul>
