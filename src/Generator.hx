@@ -106,53 +106,51 @@ class Generator {
     });
     
     
-    Timer.measure(function() {
-      for(page in _pages) {
-        // set the data for the page
-        var category = getCategory(sitemap, page);
-        var data = {
-          title: category != null ? '${page.title} - ${category.title} $titlePostFix' : '${page.title} $titlePostFix', 
-          now: Date.now(),
-          pages: _pages,
-          currentPage: page,
-          currentCategory: category,
-          sitemap: sitemap,
-          basePath: basePath,
-          tags: tags,
-          pageContent: null,
-          DateTools: DateTools,
-          getTagTitle:getTagTitle,
-          latestCreatedPages: function(amount) return [for (i in 0...min(amount, latestCreatedPages.length)) latestCreatedPages[i]],
-          seriePages: function(amount) return [for (i in 0...min(amount, seriePages.length)) seriePages[i]],
-        }
-        if (page.contentPath != null) 
-        {
-          page.addLinkUrl = (category != null) ? getAddLinkUrl(category) : getAddLinkUrl(page);
-          data.pageContent = page.pageContent != null ? page.pageContent : getContent(contentPath + page.contentPath, data);
-        }
-        
-        // execute the template
-        var template = Template.fromFile(contentPath + page.templatePath);
-        var html = Minifier.removeComments(template.execute(data));
-        
-        if (doMinify) {
-          // strip crap
-          var length = html.length;
-          html = Minifier.minify(html);
-          var newLength = html.length;
-          //trace("optimized " + (Std.int(100 / length * (length - newLength) * 100) / 100) + "%");
-        }
-        
-        // make output directory if needed
-        var targetDirectory = Path.directory(outputPath + page.outputPath);
-        if (!FileSystem.exists(targetDirectory)) {
-          FileSystem.createDirectory(targetDirectory);
-        }
-        
-        // write output to file
-        File.saveContent(outputPath + page.outputPath, html);
+    for(page in _pages) {
+      // set the data for the page
+      var category = getCategory(sitemap, page);
+      var data = {
+        title: category != null ? '${page.title} - ${category.title} $titlePostFix' : '${page.title} $titlePostFix', 
+        now: Date.now(),
+        pages: _pages,
+        currentPage: page,
+        currentCategory: category,
+        sitemap: sitemap,
+        basePath: basePath,
+        tags: tags,
+        pageContent: null,
+        DateTools: DateTools,
+        getTagTitle:getTagTitle,
+        latestCreatedPages: function(amount) return [for (i in 0...min(amount, latestCreatedPages.length)) latestCreatedPages[i]],
+        seriePages: function(amount) return [for (i in 0...min(amount, seriePages.length)) seriePages[i]],
       }
-    });
+      if (page.contentPath != null) 
+      {
+        page.addLinkUrl = (category != null) ? getAddLinkUrl(category) : getAddLinkUrl(page);
+        data.pageContent = page.pageContent != null ? page.pageContent : getContent(contentPath + page.contentPath, data);
+      }
+      
+      // execute the template
+      var template = Template.fromFile(contentPath + page.templatePath);
+      var html = Minifier.removeComments(template.execute(data));
+      
+      if (doMinify) {
+        // strip crap
+        var length = html.length;
+        html = Minifier.minify(html);
+        var newLength = html.length;
+        //trace("optimized " + (Std.int(100 / length * (length - newLength) * 100) / 100) + "%");
+      }
+      
+      // make output directory if needed
+      var targetDirectory = Path.directory(outputPath + page.outputPath);
+      if (!FileSystem.exists(targetDirectory)) {
+        FileSystem.createDirectory(targetDirectory);
+      }
+      
+      // write output to file
+      File.saveContent(outputPath + page.outputPath, html);
+    }
     
     var allTags = [for (tag in tags.keys()) tag];
     //File.saveContent("used-tags.txt", allTags.join("\r\n"));
