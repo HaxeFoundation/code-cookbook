@@ -6,7 +6,7 @@ In Haxe, the `Array` type represents a collection of elements ordered by their i
 
 ### Creation
 
-Arrays can be created by using the array syntax (`[]`), or by using a contructor. The constructor requires a type parameter to be passed, which specifies the type of the elements in the array. When the array syntax is used, the casting determines the type of array constructed.
+Arrays can be created by using the array syntax (`[]`), or by using a constructor. The constructor requires a type parameter to be passed, which specifies the type of the elements in the array. When the array syntax is used, the casting determines the type of array constructed.
 
 ```haxe
 // Creating an array using the constructor
