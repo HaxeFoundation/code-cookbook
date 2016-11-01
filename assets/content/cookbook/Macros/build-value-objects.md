@@ -2,6 +2,8 @@
 
 # Create value-objects
 
+This example generates a constructor-function for each field of a class to easily create value object classes.
+
 ```haxe
 import haxe.macro.Expr;
 import haxe.macro.Context;
@@ -41,7 +43,7 @@ class ValueClassImpl {
 }
 ```
 
-It is using an interface with `@:remove` and `extern` so that it is 100% compile time only.
+It is using an interface `ValueClass` marked with `@:remove` and `extern` so that it is 100% compile time only.
 
 ## Usage
 
