@@ -9,10 +9,12 @@ In Haxe, the `Array` type represents a collection of elements ordered by their i
 Arrays can be created by using the array syntax (`[]`), or by using a constructor. The constructor requires a type parameter to be passed, which specifies the type of the elements in the array. When the array syntax is used, the casting determines the type of array constructed.
 
 ```haxe
-// Creating an array using the constructor
-var arrayOfArrayOfMyType = new Array<Array<MyType>>();
 // Creating an array using array syntax
-var arrayOfStrings : Array<String> = [];
+var arrayOfStrings:Array<String> = [];
+// Creating an array with float values
+var arrayOfFloats = [10.2, 40.5, 60.3];
+// Creating an array using the constructor
+var arrayOfMyType = new Array<MyType>();
 ```
 
 ### Adding elements
@@ -126,9 +128,9 @@ Arrays can be prepared for printing by joining the elements together with a sepa
 
 ```haxe
 // Returns a string of array elements concatenated by separator string
-var withSeparator : String = arrayOfStrings.join(" / ");
+var withSeparator:String = arrayOfStrings.join(" / ");
 // Returns a string representation of the array structure
-var asStructure : String = arrayOfStrings.toString();
+var asStructure:String = arrayOfStrings.toString();
 ```
 
 > [Array API documentation](http://api.haxe.org/Array.html)
