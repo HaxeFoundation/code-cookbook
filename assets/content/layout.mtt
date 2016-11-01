@@ -11,7 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="http://haxe.org/css/bootstrap.min.css"/>
 	<link rel="stylesheet" type="text/css" href="css/styles.min.css"/>
 	<link rel="icon" href="http://haxe.org/favicon.ico"/>
-	<link rel="canonical" href="::currentPage.absoluteUrl::" />
+	<link rel="canonical" href="::currentPage.absoluteUrl::" ::cond currentPage.absoluteUrl != null:: />
 
 	<meta name="description" content="::currentPage.description::" ::cond currentPage.description != null:: />
 

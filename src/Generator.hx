@@ -230,6 +230,8 @@ class Generator {
     addPage(homePage, "/home");
     addPage(errorPage, "/404");
     addPage(sitemapPage, "/sitemap");
+    
+    errorPage.baseHref = "/";
   }
   
   private function addCookbookPages(documentationPath:String, level:Int = 0) {
