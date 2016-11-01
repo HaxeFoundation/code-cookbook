@@ -30,7 +30,9 @@ Haxe has [dead code elimination](https://haxe.org/manual/cr-dce.html) (DCE). Thi
 
 **Tip:** Haxe has a wonderful type system, use this as much as possible. Reflection can be a powerful tool, but it's important to know it can be error prone, since the compiler can never validate if what you're doing makes sense and is also harder to optimize.
 
-> [Reflection documentation](http://haxe.org/manual/std-reflection.html)  
-> [Reflect API Documentation](http://api.haxe.org/Reflect.html)  
+> **More information:**
+> 
+> * [Reflection documentation](http://haxe.org/manual/std-reflection.html)  
+> * [Reflect API Documentation](http://api.haxe.org/Reflect.html)  
 >
 > Author: [MJ](https://github.com/flashultra)
