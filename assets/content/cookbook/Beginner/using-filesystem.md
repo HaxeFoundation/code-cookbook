@@ -54,8 +54,8 @@ import sys.FileSystem;
 private function recursiveLoop(folder:String = "my_folder/") {
   if (FileSystem.exists(folder)) {
     trace("directory found: " + folder);
-    var path = folder + file;
     for (file in FileSystem.readDirectory(folder)) {
+      var path = folder + file;
       if (!FileSystem.isDirectory(path)) {
         trace("file found: " + path);
         // do something with file
