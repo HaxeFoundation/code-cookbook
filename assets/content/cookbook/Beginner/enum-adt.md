@@ -13,16 +13,16 @@ Enums are denoted by the `enum` keyword and contain one or more enum constructor
 ```haxe
 // Describes a type of item that can be rewarded
 enum ItemType {
-    Key;
-    Sword(name : String, attack : Int);
-    Shield(name : String, defense : Int);
+  Key;
+  Sword(name:String, attack:Int);
+  Shield(name:String, defense:Int);
 }
 
 // Describes a type of reward that can be given
 enum RewardType {
-    Gold(value : Int);
-    Experience(value : Int);
-    Item(type : ItemType);
+  Gold(value:Int);
+  Experience(value:Int);
+  Item(type:ItemType);
 }
 ```
 
@@ -53,19 +53,19 @@ Values passed to enum constructors can be obtained through pattern matching.
 var reward = RewardType.Item(ItemType.Sword("Slashy", 100));
 
 switch(reward) {
-    case RewardType.Gold(v):
-        trace('I got ${v} gold!');
-    case RewardType.Experience(v):
-        trace('I got ${v} experience!');
-    case RewardType.Item(t):
-        switch(t) {
-            case ItemType.Key:
-                trace('I got a key!');
-            case ItemType.Sword(n, a):
-                trace('I got "${n}", a sword with ${a} attack!');
-            case ItemType.Shield(n, d):
-                trace('I got "${n}", a shield with ${d} defense!');
-        }
+  case RewardType.Gold(value):
+    trace('I got $value gold!');
+  case RewardType.Experience(value):
+    trace('I got $value experience!');
+  case RewardType.Item(type):
+    switch(type) {
+      case ItemType.Key:
+        trace('I got a key!');
+      case ItemType.Sword(name, attack):
+        trace('I got "$name", a sword with $attack attack!');
+      case ItemType.Shield(name, defense):
+        trace('I got "$name", a shield with $defense defense!');
+    }
 }
 
 // Output: I got "Slashy", a sword with 100 attack!
