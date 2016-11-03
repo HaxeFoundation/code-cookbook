@@ -49,7 +49,7 @@ class MyMacro {
 ## Explanation in video
 _Start at 21:00_
 
-<iframe width="640" height="360" src="https://www.youtube.com/embed/SEYCmjtKlVw" frameborder="0" allowfullscreen></iframe>
+[youtube](https://www.youtube.com/embed/SEYCmjtKlVw)
 
 > More info: <http://haxe.org/blog/nicolas-about-haxe-3>  
 > Author: [Nicolas Cannasse](https://github.com/ncannasse)

@@ -44,7 +44,7 @@ Highlighter.syntaxHighlight = function(html) {
 	tmp1 = html.replace(_this1.r,"<span class='cmt'>$1</span>$2");
 	html = tmp1;
 	var tmp2;
-	var _this2 = new EReg("(/\\*\\*?[^*]*\\*?\\*/)","g");
+	var _this2 = new EReg("(/\\*\\*?(.|\n)+?\\*?\\*/)","g");
 	tmp2 = html.replace(_this2.r,"<span class='cmt'>$1</span>");
 	html = tmp2;
 	return html;

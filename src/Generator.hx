@@ -302,6 +302,11 @@ class Generator {
     return  ~/(\[tryhaxe\])(\()(.+?)(\))/g.replace(content, '<iframe src="$3" class="try-haxe"><a href="$3">Try Haxe!</a></iframe>');
   }
   
+  private function replaceYoutubeTags(content:String) {
+    //[youtube](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+    return  ~/(\[youtube\])(\()(.+?)(\))/g.replace(content, '<div class="flex-video widescreen"><iframe src="$3" frameborder="0" allowfullscreen=""></iframe></div>');
+  }
+  
   private function replaceHaxeOrgLinks(content:String) 
   {
     return content.split("http://haxe.org").join("https://haxe.org");
@@ -388,6 +393,7 @@ class Generator {
     var document = new Markdown.Document();
     var markdown = File.getContent(contentPath + file);
     markdown = replaceHaxeOrgLinks(markdown);
+    markdown = replaceYoutubeTags(markdown);
     markdown = replaceTryHaxeTags(markdown);
     markdown = replaceAuthor(markdown);
     

@@ -36,6 +36,7 @@ It would be nice if you keep the formatting of the code in the same style as use
  * Tag the article using `[tags]: / "tag1,tag2"` (no spaces). Try to use [an existing tag](http://code.haxe.org/).
  * Mention the author / sources at the bottom of the page.
  * If you want to include a [try.haxe.org](http://try.haxe.org) code snippet use `[tryhaxe](http://try.haxe.org/embed/76f24)`.
+ * If you want to include a YouTube video use `[youtube](https://www.youtube.com/watch?v=dQw4w9WgXcQ)`.
  * If possible, link to related pages in the [Haxe Manual](https://haxe.org/manual) / [API documentation](http://api.haxe.org).
  * If you want to use images or other includes, create a folder called _assets_ in the same directory as the article and link to that.
 
