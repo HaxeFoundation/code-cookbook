@@ -401,7 +401,7 @@ class Generator {
       // parse tags
       if (page != null) {
         var link = document.refLinks["tags"];
-        page.tags = (link != null) ? link.title.split(",").map(function(a) return a.toLowerCase().trim()) : null;
+        page.tags = link != null ? [for (a in link.title.split(",")) a.toLowerCase().trim()] : null;
       }
       
       // parse ast      
