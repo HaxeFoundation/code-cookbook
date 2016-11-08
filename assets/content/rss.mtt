@@ -2,7 +2,7 @@
 
 <channel>
 	<title>Haxe Code Cookbook</title>
-	<link>http://code.haxe.org</link>
+	<link>::basePath::</link>
 	<description>Easy to read Haxe coding examples.</description>
 	<managingEditor>contact@haxe.org (Haxe Foundation)</managingEditor>
 	<docs>http://blogs.law.harvard.edu/tech/rss</docs>
