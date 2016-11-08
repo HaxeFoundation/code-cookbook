@@ -120,6 +120,14 @@ class Generator {
         tags: tags,
         pageContent: null,
         DateTools: DateTools,
+        convertDate:function(date:Date) {
+          // American date format is retarded: "Wed, 02 Oct 2002 13:00:00 GMT"
+          var month = "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec".split(",")[date.getMonth()];
+          var dayName = "Sun,Mon,Tue,Wed,Thu,Fri,Sat".split(",")[date.getDay()];
+          var day = Std.string(date.getDate()).lpad("0", 2);
+          var time = Std.string(date.getHours()).lpad("0", 2) + ":" + Std.string(date.getMinutes()).lpad("0", 2)  + ":" + Std.string(date.getSeconds()).lpad("0", 2);
+          return '$dayName, $day $month ${date.getFullYear()} $time GMT';
+        },
         getTagTitle:getTagTitle,
         latestCreatedPages: function(amount) return [for (i in 0...min(amount, latestCreatedPages.length)) latestCreatedPages[i]],
         seriePages: function(amount) return [for (i in 0...min(amount, seriePages.length)) seriePages[i]],
@@ -227,6 +235,11 @@ class Generator {
                           .hidden()
                           .setTitle("Sitemap");
     
+    var rssPage = new Page("rss.mtt", null, "rss.xml")
+                          .hidden()
+                          .setTitle("RSS");
+    
+    addPage(rssPage, "/rss");
     addPage(homePage, "/home");
     addPage(errorPage, "/404");
     addPage(sitemapPage, "/sitemap");
@@ -370,9 +383,8 @@ class Generator {
   }
   
   public inline function getAbsoluteUrl(page:Page) {
-    return basePath + page.outputPath.dir;
+    return basePath + page.outputPath.toString();
   }
-  
   
   private static inline function getWithoutExtension(file:String) {
     return Path.withoutDirectory(Path.withoutExtension(file));

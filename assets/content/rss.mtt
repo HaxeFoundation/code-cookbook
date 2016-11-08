@@ -1,0 +1,24 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+
+<channel>
+	<title>Haxe Code Cookbook</title>
+	<link>http://code.haxe.org</link>
+	<description>Easy to read Haxe coding examples.</description>
+	<managingEditor>contact@haxe.org (Haxe Foundation)</managingEditor>
+	<docs>http://blogs.law.harvard.edu/tech/rss</docs>
+	<language>en</language>
+	<lastBuildDate>::convertDate(now)::</lastBuildDate>
+	<atom:link href="::currentPage.absoluteUrl::" rel="self" type="application/rss+xml" />
+
+::foreach page latestCreatedPages(20)::
+		<item ::cond page.visible && page.category != null ::>
+		<title>::page.title::</title>
+		<link>::page.absoluteUrl::</link>
+		<guid isPermaLink="true">::page.absoluteUrl::</guid>
+		<description>::page.description::</description>
+		<pubDate>::convertDate(page.dates.created)::</pubDate>
+		</item>
+::end::
+
+</channel>
+</rss>
