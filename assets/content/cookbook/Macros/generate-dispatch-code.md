@@ -26,8 +26,7 @@ class DispatchBuilder {
       // skip the constructor
       if (field.name == 'new') continue;
       
-      switch (field.kind) 
-      {
+      switch (field.kind) {
         case FieldType.FFun(fn):
           // skip non-empty functions
           if (!isEmpty(fn.expr)) continue;
