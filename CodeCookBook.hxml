@@ -19,6 +19,8 @@
 -neko CodeCookBook.n
 -main Main
 -dce no
+# for debug-only fast compile use:
+#-D disable_git_dates
 
 --next
 

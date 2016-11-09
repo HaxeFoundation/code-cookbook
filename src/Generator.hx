@@ -1,13 +1,14 @@
 package;
 
-import GitUtil.GitDates;
-import haxe.Timer;
+import data.Category;
+import data.Page;
 import haxe.ds.StringMap;
 import haxe.io.Path;
 import markdown.AST.ElementNode;
 import sys.FileSystem;
 import sys.io.File;
 import templo.Template;
+
 using StringTools;
 
 /**
@@ -25,6 +26,7 @@ class Generator {
   
   private var _pages:Array<Page> = new Array<Page>();
   private var _folders:StringMap<Array<Page>> = new StringMap<Array<Page>>();
+  private var _templates:StringMap<Template> = new StringMap<Template>();
   
   public function new() { }
   
@@ -139,13 +141,18 @@ class Generator {
       }
       
       // execute the template
-      var template = Template.fromFile(contentPath + page.templatePath);
-      var html = Minifier.removeComments(template.execute(data));
+      var templatePath = contentPath + page.templatePath;
+      if (!_templates.exists(templatePath)) {
+        _templates.set(templatePath, Template.fromFile(templatePath));
+      }
+      var template = _templates.get(templatePath);
+      
+      var html = util.Minifier.removeComments(template.execute(data));
       
       if (doMinify) {
         // strip crap
         var length = html.length;
-        html = Minifier.minify(html);
+        html = util.Minifier.minify(html);
         var newLength = html.length;
         //trace("optimized " + (Std.int(100 / length * (length - newLength) * 100) / 100) + "%");
       }
@@ -175,7 +182,7 @@ class Generator {
     page.baseHref = getBaseHref(page);
     
     if (page.contentPath != null) {
-      page.dates = GitUtil.getStat(contentPath + page.contentPath);
+      page.dates = util.GitUtil.getStat(contentPath + page.contentPath);
       page.contributionUrl = getContributionUrl(page);
       page.editUrl = getEditUrl(page);
     }
@@ -372,7 +379,7 @@ class Generator {
     return '${repositoryUrl}tree/${repositoryBranch}/${contentPath}${page.contentPath}';
   }
   
-  public function getAddLinkUrl(category:Category  = null, page:Page = null) {
+  public function getAddLinkUrl(category:Category = null, page:Page = null) {
     var fileNameHint = "/snippet-name.md/?filename=snippet-name.md";
     var directory = if (category != null) {
       category.pages[0].contentPath.dir;
@@ -475,94 +482,8 @@ class Generator {
     // the function fails, but i think internally Template can resolve paths now.
     try { 
       Template.fromFile(contentPath + "layout.mtt").execute({});
-    } catch(e:Dynamic) { }
+    } catch (e:Dynamic) { }
   }
   
   static inline private function min(a:Int, b:Int) return Std.int(Math.min(a, b));
-}
-
-class Page { 
-  public var visible:Bool = true;
-  public var title:String;
-  public var description:String;
-  public var templatePath:Path;
-  public var contentPath:Path;
-  public var outputPath:Path;
-  public var customData:Dynamic;
-  public var tags:Array<String>;
-  public var absoluteUrl:String;
-  public var editUrl:String;
-  public var addLinkUrl:String;
-  public var contributionUrl:String;
-  public var baseHref:String;
-  public var dates:GitDates;
-  public var category:Category;
-  
-  public var level:Int;
-  
-  //only available in series
-  public var next:Page;
-  public var prev:Page;
-  
-  public var pageContent:String;
-  
-  public function new(templatePath:String, contentPath:String, outputPath:String) {
-    this.templatePath = new Path(templatePath);
-    this.contentPath = contentPath != null ? new Path(contentPath) : null;
-    this.outputPath = outputPath != null ? new Path(outputPath) : null;
-  }
-  
-  public function setCustomData(data:Dynamic):Page {
-    this.customData = data;
-    return this;
-  }
-  
-  public function setTitle(title:String):Page {
-    this.title = title;
-    return this;
-  }
-  
-  public function setDescription(description:String):Page {
-    this.description = description;
-    return this;
-  }
-  
-  public function setTags(tags:Array<String>):Page {
-    this.tags = tags;
-    return this;
-  }
-  
-  public function hidden() {
-    visible = false;
-    return this;
-  }
-
-  public function isSerieHome():Bool {
-    return outputPath.toString().indexOf("index.html") != -1;
-  }
-}
-
-class Category {
-  public var parent:Category;
-  public var title:String;
-  public var outputPath:String;
-  public var absoluteUrl:String;
-  public var id:String;
-  public var folder:String;
-  public var pages:Array<Page>;
-  public var isSerie:Bool;
-
-  public var content:String;
-  
-  public function new(id:String, title:String, folder:String, pages:Array<Page>){
-    this.id = id;
-    this.title = title;
-    this.folder = folder;
-    this.pages = pages;
-    this.outputPath = 'category/$id/';
-  }
-  
-  public function getPageCount():Int {
-    return [for (page in pages) if (page.visible && !page.isSerieHome()) page].length;
-  }
 }

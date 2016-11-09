@@ -1,4 +1,4 @@
-package;
+package util;
 
 using StringTools;
 
@@ -32,10 +32,17 @@ class GitUtil
   }
   
   public static function getStat(path:String):GitDates {
+    #if disable_git_dates
+    return {
+      modified: Date.now(),
+      created: Date.now(),
+    }
+    #else
     return {
       modified: getModificationDate(path),
       created: getCreationDate(path),
     }
+    #end
   }
 }
 
