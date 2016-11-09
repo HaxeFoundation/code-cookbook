@@ -2,7 +2,7 @@
 	<div class="container">
 		<h1>Haxe Code Cookbook</h1>
 		<h3 class="lead">
-			Easy to read <a href="http://haxe.org/">Haxe</a> coding examples.
+			Easy to read <a href="https://haxe.org/">Haxe</a> coding examples.
 		</h3>
 	</div>
 </header>
@@ -55,7 +55,7 @@
 		<div class="span4">
 			<h3><i class="fa fa-big fa-gears"></i> More documentation</h3>
 			<p>
-				<p><i class="fa fa-external-link"></i> <a href="http://haxe.org/manual" rel="external">Haxe Manual</a></p>
+				<p><i class="fa fa-external-link"></i> <a href="https://haxe.org/manual" rel="external">Haxe Manual</a></p>
 				<p><i class="fa fa-external-link"></i> <a href="http://api.haxe.org" rel="external">Haxe API documentation</a></p>
 				<p>You can try Haxe in the browser! <a href="http://try.haxe.org" rel="external">try.haxe.org</a></p>
 			</p>
