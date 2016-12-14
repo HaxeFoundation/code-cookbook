@@ -16,7 +16,13 @@ import haxe.macro.Expr;
 
 class Match {
 	
-	public static macro function extract(value:Expr, pattern:Expr, ?ifNot:Expr) {
+	public static macro function extract(value:Expr, pattern:Expr, ifNot:Array<Expr>) {
+		var ifNot = switch(ifNot.length) {
+			case 0: macro throw "don't match";
+			case 1: ifNot[0];
+			default: Context.error('too much arguments', ifNot[1].pos);
+		}
+		
 		var params = [];
 		function getParamNames(expr:ExprDef) {
 			switch(expr) {
@@ -84,10 +90,10 @@ class MatchTest{
 		
 		//Array matching
 		var myArray = [1, 6];
-		assert(6 == Match.extract(myArray, [1, a], 0)); // 0 is return value if pattern don't match, if not specified it's null
+		assert(6 == Match.extract(myArray, [1, a])); 
 		
-		//Or patterns, Extractors
-		assert(6 == Match.extract(7, (6 => a) | (7 => a)));
+		//Or patterns
+		assert(2 == Match.extract(Node(Node(null, null), Leaf(2)), (Node(Leaf(s), _)|Node(_, Leaf(s)))));
 		
 		//Guards - not supported due to haxe macro syntax limitations
 		//var result = Match.extract(myArray, [a, b] if a < b);
@@ -98,13 +104,11 @@ class MatchTest{
 		var result = Match.extract(([1, false, "foo"]:Array<Dynamic>), [a, b, c]);
 		assert(result.a == 1 && result.b == false && result.c == "foo");
 		
-		//throw if not match
-		try {
-			Match.extract(Leaf(0), Node(_ => firstLeaf, _), throw 'no match');
-			assert(false);
-		}
-		catch (_:Dynamic) {
-		}
+		//Extractors
+		assert('foo' == Match.extract(Leaf('Foo'), Leaf(_.toLowerCase() => r)));
+		
+		//default value if not match
+		assert(3 == Match.extract(myArray, [a, -1], 3));
 		
 		trace('ok');
 	}
