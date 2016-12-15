@@ -1,4 +1,4 @@
-[tags]: / "collections, data-structures"
+[tags]: / "array, collections, data-structures"
 
 # Using arrays
 
@@ -10,11 +10,12 @@ Arrays can be created by using the array syntax (`[]`), or by using a constructo
 
 ```haxe
 // Creating an array using array syntax
-var arrayOfStrings:Array<String> = [];
+var arrayOfStrings:Array<String> = ["Apple", "Pear", "Banana"];
+trace(arrayOfStrings);
+
 // Creating an array with float values
 var arrayOfFloats = [10.2, 40.5, 60.3];
-// Creating an array using the constructor
-var arrayOfMyType = new Array<MyType>();
+trace(arrayOfFloats);
 ```
 
 ### Adding elements

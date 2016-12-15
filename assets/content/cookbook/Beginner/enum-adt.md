@@ -1,4 +1,4 @@
-[tags]: / "enum"
+[tags]: / "enum, data-structures"
 
 # Using enum / ADT
 
