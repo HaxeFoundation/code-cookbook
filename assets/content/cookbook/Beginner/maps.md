@@ -1,6 +1,6 @@
 [tags]: / "collections, data-structures"
 
-# Using Maps
+# Using maps
 
 In Haxe, `Map` (also known as dictionary) allows key to value mapping for arbitrary value types and many key types. 
 
@@ -25,7 +25,7 @@ The specialized maps can be found in the [`haxe.ds` package](http://api.haxe.org
 
 Since `Map` is the easiest to work with, we'll use it in this article and start with creating a map with strings as keys and integers as values.
 
-If you are using `Map` you can use array access to get values `map[key]`, otherwise you have to use `map.get(key)`. Another reason to use `Map` as much as possible.
+If you are using `Map` you can use array access to set values `map[key] = value`, otherwise you have to use `map.set(key, value)`. Another reason to use `Map` as much as possible.
 
 ```haxe
 var ageByUser = new Map<String, Int>(); 
@@ -42,8 +42,7 @@ ageByUser.set("Peter", 17);
 ageByUser.set("Mark", 32);
 ```
 
-> The naming convention of the map variable is _"value meaning by key meaning"_.
-
+> The naming convention of the map variable is _"meaning of value by meaning of key"_.
 
 A different way to create a map with values directly is using the [comprehension syntax](http://haxe.org/manual/lf-array-comprehension.html) (`key1 => value1, key2 => value2`):
 
@@ -67,7 +66,7 @@ To give a quick visual of what we've just created above, this would be the data 
 
 Now we know how to create a map and set values, let's get a value and trace it:
 
-As explained earlier, if you are using `Map` you can use array access to set values `map[key] = value`, otherwise you have to use `map.set(key, value)`. 
+As explained earlier, if you are using `Map` you can use array access to get values `map[key]`, otherwise you have to use `map.get(key)`. 
 
 ```haxe
 var ageOfMark = ageByUser["Mark"];
@@ -95,40 +94,38 @@ if (ageByUser.exists(user)) {
 
 ### Removing values
 
-You can remove values using the `map.remove` function. Note: make sure you check if the key exists.
+You can remove values using the `map.remove` function. 
 
 ```haxe
 var user = "John";
-if (ageByUser.exists(user)) {
-  ageByUser.remove(user);
-  trace('$user is removed');
-}
+ageByUser.remove(user);
 
 // double check
+trace(ageByUser.exists(user)); // false
 trace(ageByUser.get(user)); // null
 ```
 
 ### Iteration
 
-To iterate over all keys, use `for (value in map)`.  
+To iterate over all values of the map, use `for (value in map)`.  
+In our example the values are defining the user's age, let's trace all ages.
 
-In our example the values are defining the user's age, lets trace all ages.
 ```haxe
 for (age in ageByUser) {
   trace(age);
 }
 ```
 
-To iterate over the keys of the map, use `for (key in map.keys())`.
+To iterate over the keys of the map, use `for (key in map.keys())`.  
+In our example the keys are user names, let's trace all names.
 
-In our example the keys are user names, lets trace all names.
 ```haxe
 for (user in ageByUser.keys()) {
   trace(user);
 }
 ```
 
-Of course this can be combined, lets trace the user and its age:
+Of course this can be combined, let's trace the user and its age:
 
 ```haxe
 for (user in ageByUser.keys()) {
@@ -137,7 +134,7 @@ for (user in ageByUser.keys()) {
 }
 ```
 
-The order of both values and keys in any type of map is undefined, therefore you shouldnt rely it. If order is important (when the map needs to be sorted for example), convert it to an Array. 
+The order of both values and keys in any type of map is undefined, therefore you shouldn't rely it. If order is important (when the map needs to be sorted for example), convert it to an Array. 
 This can be easily done with [`Lamba.array(map)`](http://api.haxe.org/Lambda.html#array) to get the values as Array or `Lambda.array(map.keys())` if you want the keys as Array.
 
 > **More information:**
