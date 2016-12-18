@@ -47,51 +47,48 @@ import haxe.macro.Context;
 import haxe.macro.Expr;
 import haxe.macro.Type;
 
-class CompareMacro
-{
-  macro static public function matchAllFromAnon(reference:Expr, shouldHave:Expr):Expr
-	{
-		var conds:Array<Expr> = [];
-		var curPos = Context.currentPos();
-		
-		var fieldsToCheck = [];
-		
-		var typeOfReference = Context.typeof(reference);
-		switch(typeOfReference) {
-			case TAnonymous(anon):
-				for (field in anon.get().fields) {
-					fieldsToCheck.push(field.name);
-				}
-			case TType(type, _):
-				switch(type.get().type) {
-					case TAnonymous(typeanon):
-						for ( field in typeanon.get().fields) {
-							fieldsToCheck.push(field.name);
-						}
-					default:
-						throw new Error('Could not extract TAnonymous from $typeOfReference!', reference.pos);
-				}
-			default:
-				throw new Error('Expected TAnonymous instead of $typeOfReference!', reference.pos);
-		}
-		
-		for (field in fieldsToCheck) {
-			conds.push( { expr : EBinop(OpEq,
-							{ expr : EField(reference, field.toString()) , pos : curPos},
-							{ expr : EField(shouldHave, field.toString()), pos : curPos})
-						, pos : curPos} );
-		}
-		
-		function makeAnd(conds:Array<Expr>):Expr {
-			var elem = conds.pop();
-			if (conds.length == 0)
-				return elem;
-			else
-				return { expr : EBinop(OpBoolAnd, elem, makeAnd(conds)), pos : curPos};
-		}
-		
-		return makeAnd(conds);
-	}
+class CompareMacro {
+  macro static public function matchAllFromAnon(reference:Expr, shouldHave:Expr):Expr {
+    var conds:Array<Expr> = [];
+    var curPos = Context.currentPos();
+    
+    var fieldsToCheck = [];
+    var typeOfReference = Context.typeof(reference);
+    switch(typeOfReference) {
+      case TAnonymous(anon):
+        for (field in anon.get().fields) {
+          fieldsToCheck.push(field.name);
+        }
+      case TType(type, _):
+        switch(type.get().type) {
+          case TAnonymous(typeanon):
+            for ( field in typeanon.get().fields) {
+              fieldsToCheck.push(field.name);
+            }
+          default:
+            throw new Error('Could not extract TAnonymous from $typeOfReference!', reference.pos);
+        }
+      default:
+        throw new Error('Expected TAnonymous instead of $typeOfReference!', reference.pos);
+    }
+
+    for (field in fieldsToCheck) {
+      conds.push( { expr : EBinop(OpEq,
+                    { expr : EField(reference, field.toString()) , pos : curPos},
+                    { expr : EField(shouldHave, field.toString()), pos : curPos})
+                  , pos : curPos} );
+    }
+    
+    function makeAnd(conds:Array<Expr>):Expr {
+      var elem = conds.pop();
+      if (conds.length == 0)
+        return elem;
+      else
+        return { expr : EBinop(OpBoolAnd, elem, makeAnd(conds)), pos : curPos};
+    }
+    
+    return makeAnd(conds);
+  }
 }
 ```
 
