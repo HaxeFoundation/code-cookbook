@@ -1,3 +1,5 @@
+[tags]: / "enum,pattern-matching,functional-programming"
+
 # Enums as GADTs
 
 As [already established](http://code.haxe.org/category/beginner/enum-adt.html) Haxe enums are a form of algebraic data types. In fact, they may even serve as so called "*generalized* algebraic data types" - GADTs for short. While for an "ordinary" enum every constructor yields the same type, with an GADT each constructor may yield a different type. 
