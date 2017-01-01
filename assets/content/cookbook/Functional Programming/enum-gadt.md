@@ -1,6 +1,6 @@
 # Enums as GADTs
 
-As [already established](http://code.haxe.org/category/beginner/enum-adt.html) Haxe enums are a form of algebraic data types. In fact, they may even serve as "*generalized* algebraic data types" - GADTs for short. While for an "ordinary" every constructor yields the same type, with an GADT each constructor may yield a different type. 
+As [already established](http://code.haxe.org/category/beginner/enum-adt.html) Haxe enums are a form of algebraic data types. In fact, they may even serve as so called "*generalized* algebraic data types" - GADTs for short. While for an "ordinary" enum every constructor yields the same type, with an GADT each constructor may yield a different type. 
 
 To illustrate that, let's define a little language for arithmetic expressions:
 
@@ -23,10 +23,10 @@ enum Expr<T> {
 
 So now we can say: I want a numeric expression or a boolean one, by either saying `Expression<Float>` or `Expression<Bool>`.
 
-The last two constructors are particularly interesting:
+The last two constructors in the example are particularly interesting:
 
 - `Const` may accept a value of any type and becomes and `Expr` of that type. 
-- `Equals` has a type parameter. This is actually not GADT specific. Ordinary enums may have this too, because each constructor is ultimately a function and functions may be parametrized. In the case of `Equals` it is the type of the `Expr` being compared. It is arbitrary, but still must be equal for both operands. The result will always be boolean.
+- `Equals` has a type parameter. This is actually not GADT specific. Ordinary enum constructors may have this too, because at the bottom line they are functions and may therefore be parametrized. In the case of `Equals` it is the type of the `Expr` being compared. It is arbitrary, but still must be equal for both operands and the result will always be boolean. This models very closely how `==` works.
 
 For example `1 + 1 == 2` could be written as `Equals(Sum(Const(1) + Const(1)), Const(2))` and will compile, as opposed to `Equals(Const(3.14), Const('test'))` which will fail with `String should be Float` exactly as `3.14 == 'test'`. 
 
@@ -44,7 +44,7 @@ function valueOf(f:Expression<Float>):Float
   }
 ```
 
-And that's that. Try omitting any constructor that can return `Expression<Float>` (which does include `Const` for which that is just a special case) and Haxe's exhaustiveness check will tell you a case is not covered. Check against a constructor that is `Expression<Bool>` and Haxe will tell you this:
+That's it already. Try omitting any constructor that can return `Expression<Float>` (which does include `Const` for which that is just a special case) and Haxe's exhaustiveness check will tell you a case is not covered. Check against a constructor that is `Expression<Bool>` and Haxe will tell you this:
   
 > Expression<Bool> should be Expression<Float>
 > Type parameters are invariant
