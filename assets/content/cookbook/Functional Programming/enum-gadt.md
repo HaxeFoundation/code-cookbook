@@ -23,7 +23,7 @@ enum Expr<T> {
 }
 ```
 
-So now we can say: I want a numeric expression or a boolean one, by either saying `Expression<Float>` or `Expression<Bool>`.
+So now we can say: I want a numeric expression or a boolean one, by either saying `Expr<Float>` or `Expr<Bool>`.
 
 The last two constructors in the example are particularly interesting:
 
@@ -37,7 +37,7 @@ The compiler performs the desired type checks when constructing GADTs. It does t
 To see that in action, let's have a look at how we would evaluate a numeric expression:
 
 ```haxe
-function valueOf(f:Expression<Float>):Float
+function valueOf(f:Expr<Float>):Float
   return switch f {
     case Const(v): v;
     case Sum(a, b): valueOf(a) + valueOf(b);
@@ -46,9 +46,9 @@ function valueOf(f:Expression<Float>):Float
   }
 ```
 
-That's it already. Try omitting any constructor that can return `Expression<Float>` (which does include `Const` for which that is just a special case) and Haxe's exhaustiveness check will tell you a case is not covered. Check against a constructor that is `Expression<Bool>` and Haxe will tell you this:
+That's it already. Try omitting any constructor that can return `Expr<Float>` (which does include `Const` for which that is just a special case) and Haxe's exhaustiveness check will tell you a case is not covered. Check against a constructor that is `Expr<Bool>` and Haxe will tell you this:
   
-> Expression<Bool> should be Expression<Float>  
+> Expr<Bool> should be Expr<Float>  
 > Type parameters are invariant  
 > Bool should be Float  
 
