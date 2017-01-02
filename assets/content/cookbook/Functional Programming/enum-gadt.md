@@ -30,7 +30,7 @@ The last two constructors in the example are particularly interesting:
 - `Const` may accept a value of any type and becomes and `Expr` of that type. 
 - `Equals` has a type parameter. This is actually not GADT specific. Ordinary enum constructors may have this too, because at the bottom line they are functions and may therefore be parametrized. In the case of `Equals` it is the type of the `Expr` being compared. It is arbitrary, but still must be equal for both operands and the result will always be boolean. This models very closely how `==` works.
 
-For example `1 + 1 == 2` could be written as `Equals(Sum(Const(1) + Const(1)), Const(2))` and will compile, as opposed to `Equals(Const(3.14), Const('test'))` which will fail with `String should be Float` exactly as `3.14 == 'test'`. 
+For example `1.0 + 1.0 == 2` could be written as `Equals(Sum(Const(1.0), Const(1.0)), Const(2.0))` and will compile, as opposed to `Equals(Const(3.14), Const('test'))` which will fail with `String should be Float` exactly as `3.14 == 'test'`. 
 
 The compiler performs the desired type checks when constructing GADTs. It does the same when deconstructing them. 
 
