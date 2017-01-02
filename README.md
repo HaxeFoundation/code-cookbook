@@ -43,7 +43,7 @@ It would be nice if you keep the formatting of the code in the same style as use
 This would be a typical template to use. Use <code>```haxe</code> for syntax highlighting:
  
 <pre>
-&lbrack;tags&rbrack;: / "enum,pattern-matching,macro,macro-function"
+&lbrack;tags&rbrack;: / "class,array,json,building-fields"
 
 # Title of the page
 
@@ -63,7 +63,9 @@ class Test {
 }
 &grave;&grave;&grave;
 
-&gt; More on this topic: &lt;https://haxe.org/manual/class-field.html&gt;
+&gt; More on this topic: 
+&gt; 
+&gt; * &lbrack;Class field in Haxe Manual&rbrack;(https://haxe.org/manual/class-field.html)
 &gt; 
 &gt; Author: &lbrack;Name&rbrack;(https://github.com/username)
 </pre>
