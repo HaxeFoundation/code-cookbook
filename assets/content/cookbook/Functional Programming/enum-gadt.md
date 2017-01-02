@@ -48,9 +48,9 @@ function valueOf(f:Expression<Float>):Float
 
 That's it already. Try omitting any constructor that can return `Expression<Float>` (which does include `Const` for which that is just a special case) and Haxe's exhaustiveness check will tell you a case is not covered. Check against a constructor that is `Expression<Bool>` and Haxe will tell you this:
   
-> Expression<Bool> should be Expression<Float>
-> Type parameters are invariant
-> Bool should be Float
+> Expression<Bool> should be Expression<Float>  
+> Type parameters are invariant  
+> Bool should be Float  
 
 So if we pick the type parameter, Haxe will reduce the number of cases for us. If we leave the parameter unbound, we must treat all cases:
   
