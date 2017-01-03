@@ -8,7 +8,6 @@ To illustrate that, let's define a little language for arithmetic expressions:
 
 ```haxe
 enum Expr<T> {
-
   Sum(a:Expr<Float>, b:Expr<Float>):Expr<Float>; 
   Product(a:Expr<Float>, b:Expr<Float>):Expr<Float>;
   Power(a:Expr<Float>, b:Expr<Float>):Expr<Float>; // <-- this constructor returns an Expr<Float> ...
@@ -37,25 +36,26 @@ The compiler performs the desired type checks when constructing GADTs. It does t
 To see that in action, let's have a look at how we would evaluate a numeric expression:
 
 ```haxe
-function valueOf(f:Expr<Float>):Float
+function valueOf(f:Expr<Float>):Float {
   return switch f {
     case Const(v): v;
     case Sum(a, b): valueOf(a) + valueOf(b);
     case Product(a, b): valueOf(a) * valueOf(b);
     case Power(a, b): Math.pow(valueOf(a), valueOf(b));
   }
+}
 ```
 
 That's it already. Try omitting any constructor that can return `Expr<Float>` (which does include `Const` for which that is just a special case) and Haxe's exhaustiveness check will tell you a case is not covered. Check against a constructor that is `Expr<Bool>` and Haxe will tell you this:
   
-> Expr<Bool> should be Expr<Float>  
+> `Expr<Bool>` should be `Expr<Float>`  
 > Type parameters are invariant  
-> Bool should be Float  
+> `Bool` should be `Float`  
 
 So if we pick the type parameter, Haxe will reduce the number of cases for us. If we leave the parameter unbound, we must treat all cases:
   
 ```haxe
-function eval<V>(e:Expr<V>):V
+function eval<V>(e:Expr<V>):V {
   return switch e {
     case Const(v): 
       $type(e); // Expr<eval.V>
@@ -80,6 +80,7 @@ function eval<V>(e:Expr<V>):V
     case And(a, b): 
       eval(a) && eval(b);
   }
+}
 ```
 
 Notice how in each case `Expr.T` may assume a different type. In the first case it remains unbound, in the second it becomes `Float` and further below it is `Bool`. Try returning `5` in the first case and the compiler will tell you `Int` should be `eval.V`.
