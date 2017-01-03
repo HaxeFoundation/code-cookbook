@@ -103,7 +103,7 @@ The return type of this `getPoints` function is `Expr`. For readability you can 
 class Macros {
   public static macro function getPoints() {
     // make array with Point instances
-    var points:Array<Point> = [for (x in 0...10) new Point(x, 0)]];
+    var points:Array<Point> = [for (x in 0...10) new Point(x, 0)];
 
     // convert to expressions
     var exprs = [];
