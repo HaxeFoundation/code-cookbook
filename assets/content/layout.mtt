@@ -60,7 +60,7 @@
 					<li class="divider"></li>
 					<!-- required submenu  on every subsite, put class="active" on   -->
 					<li class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="/documentation/">Learn Haxe <b class="caret"></b></a>
+						<a class="dropdown-toggle" data-toggle="dropdown" href="https://haxe.org/documentation/">Learn Haxe <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li>
 								<a href="https://haxe.org/documentation/" rel="external">Introduction</a>
