@@ -9,7 +9,7 @@ In this article you will find out how to build arrays and return them as express
 ## Introduction
 
 Before we dive into macros, its good to first start with creating a normal function that illustrates what we expect our function to do.
-Take a look at this Test class. It has a function `getFloats()` which returns an array of ten float values.
+Take a look at this Test class. It has a function `getFloats()` which returns an array of ten float values. Note that the `points` array variable we create here can be any array and just serves as example.
 
 The return type of this `getFloats` function is `Array<Float>`. You can keep it blank to leave it up to the compiler.
 
@@ -103,7 +103,7 @@ The return type of this `getPoints` function is `Expr`. For readability you can 
 class Macros {
   public static macro function getPoints() {
     // make array with Point instances
-    var points:Array<Point> = [for (x in 0...10) new Point(x, 0)]];
+    var points:Array<Point> = [for (x in 0...10) new Point(x, 0)];
 
     // convert to expressions
     var exprs = [];
@@ -146,7 +146,7 @@ class Macros {
     var exprs = [];
     for (row in points) {
       // convert to expressions
-      var list = [for (point in row) macro new com.utils($v{point.x}, $v{point.y})];
+      var list = [for (point in row) macro new com.utils.Point($v{point.x}, $v{point.y})];
       
       // store as Array<Expr>
       exprs.push(macro $a{list});
