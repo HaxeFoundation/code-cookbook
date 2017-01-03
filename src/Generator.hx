@@ -37,28 +37,30 @@ class Generator {
   public function build (doMinify:Bool = false) {
     initTemplate();
     
-    addGeneralPages();
     addCookbookPages(cookbookFolder);
+    trace(_pages.length + " articles");
+    
+    addGeneralPages();
     
     // create list of categories (after all other pages are added)
     var sitemap:Array<Category> = createSitemap();
-	
-	// sort categories on name for display
-	sitemap.sort(function(a, b) return a.title > b.title ? 1 : -1);
-	
-	// put category "other" as last item
-	var beginnerCategory = sitemap.filter(function(c) return c.title.toLowerCase() == "beginner")[0];
+    
+    // sort categories on name for display
+    sitemap.sort(function(a, b) return a.title > b.title ? 1 : -1);
+    
+    // put category "other" as last item
+    var beginnerCategory = sitemap.filter(function(c) return c.title.toLowerCase() == "beginner")[0];
     sitemap.remove(beginnerCategory);
-	sitemap.unshift(beginnerCategory);
-	
-	// put category "other" as last item
-	var otherCategory = sitemap.filter(function(c) return c.title.toLowerCase() == "other")[0];
+    sitemap.unshift(beginnerCategory);
+    
+    // put category "other" as last item
+    var otherCategory = sitemap.filter(function(c) return c.title.toLowerCase() == "other")[0];
     sitemap.remove(otherCategory);
-	sitemap.push(otherCategory);
-	
-	// add overview page for each category
+    sitemap.push(otherCategory);
+    
+    // add overview page for each category
     addCategoryPages(sitemap);
-	
+    
     // assign page.category
     for (page in _pages) page.category = getCategory(sitemap, page);
     
