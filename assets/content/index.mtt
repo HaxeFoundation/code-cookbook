@@ -20,7 +20,7 @@
 	
 	<h3><i class="fa  fa-tags"></i> Tags</h3>
 	<div>
-		::foreach tag tags.keys()::
+		::foreach tag getSortedTags()::
 			<span class="tag"><i class="fa fa-tag"></i>&nbsp;<a href="tag/::tag::.html">::tag::</a>&nbsp;<small class="category-count">(::tags.get(tag).length::)</small></span>
 		::end::
 	</div>

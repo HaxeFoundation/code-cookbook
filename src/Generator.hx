@@ -145,6 +145,7 @@ class Generator {
           var time = Std.string(date.getHours()).lpad("0", 2) + ":" + Std.string(date.getMinutes()).lpad("0", 2)  + ":" + Std.string(date.getSeconds()).lpad("0", 2);
           return '$dayName, $day $month ${date.getFullYear()} $time GMT';
         },
+        getSortedTags: getSortedTags.bind(tags),
         getTagTitle:getTagTitle,
         latestCreatedPages: function(amount) return [for (i in 0...min(amount, latestCreatedPages.length)) latestCreatedPages[i]],
         seriePages: function(amount) return [for (i in 0...min(amount, seriePages.length)) seriePages[i]],
@@ -290,6 +291,12 @@ class Generator {
         }
       }
     }
+  }
+
+  private function getSortedTags(a:StringMap<Array<Page>>) {
+    var keys = [for(key in a.keys()) {tag:key, total:a.get(key).length}];
+    keys.sort(function(a, b) return a.total == b.total ? 0 :(a.total > b.total ? -1 : 1));
+    return [for (key in keys) key.tag];
   }
 
   private function getTagTitle(tag:String):String {

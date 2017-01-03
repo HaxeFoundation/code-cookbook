@@ -32,7 +32,7 @@
 		<nav class="span4 sidebar-tags" id="sidebar" ::cond currentPage.customData.tag!=null::>
 			<h3>All tags</h3>
 			<ul class="unstyled" itemscope="itemscope" itemtype="http://schema.org/BreadcrumbList">
-			::foreach tag tags.keys()::
+			::foreach tag getSortedTags()::
 				<li ::attr class if(tag==currentPage.customData.tag) "active":: itemprop="itemListElement" itemscope="itemscope" itemtype="http://schema.org/ListItem"><i class="fa fa-tag"></i> <a href="tag/::tag::.html" rel="tag" itemprop="item"><span itemprop="name">::getTagTitle(tag)::</span></a> <small class="category-count">(::tags.get(tag).length::)</small></li>
 			::end::
 			</ul>
