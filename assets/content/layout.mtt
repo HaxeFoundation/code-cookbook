@@ -1,39 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" id="page">
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
-	<meta charset='utf-8'/>
+	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width" />
 	<title>::title::</title>
 
-	<base href="::currentPage.baseHref::"/>
+	<base href="::currentPage.baseHref::" />
 
 	<!-- general css -->
-	<link rel="stylesheet" type="text/css" href="https://haxe.org/css/bootstrap.min.css"/>
-	<link rel="stylesheet" type="text/css" href="css/styles.min.css"/>
-	<link rel="stylesheet" type="text/css" href="css/haxe-nav.min.css"/>
-	<link rel="icon" href="https://haxe.org/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="https://haxe.org/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/styles.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/haxe-nav.min.css" />
+	<link rel="icon" href="https://haxe.org/favicon.ico" />
 	<link rel="canonical" href="::currentPage.absoluteUrl::" ::cond currentPage.absoluteUrl != null:: />
 	<link href="::basePath::rss.xml" rel="alternate" type="application/atom+xml" title="RSS Feed Haxe Code Cookbook" />
 
 	<meta name="description" content="::currentPage.description::" ::cond currentPage.description != null:: />
 
 	<!-- Twitter Card data -->
-	<meta name="twitter:creator" content="@haxe_org"/>
+	<meta name="twitter:creator" content="@haxe_org" />
 
 	<!-- Open Graph data -->
 	<meta property="og:title" content="::title::" />
-	<meta property="og:description" content="::currentPage.description::" />
+	<meta property="og:description" content="::currentPage.description::" ::cond currentPage.description != null:: />
 	<meta property="og:type" content="article" />
 	<meta property="og:url" content="::currentPage.absoluteUrl::" />
 	<meta property="og:image" content="::basePath::img/share.png" />
 	<meta property="article:publisher" content="haxe.org" />
-	<meta property="article:published_time" content="::currentPage.dates.created::" ::cond currentPage.dates!=null && currentPage.dates.created!=null :: />
+	<meta property="article:published_time" content="::currentPage.dates.created::" ::cond currentPage.dates!=null && currentPage.dates.created!=null:: />
 	<meta property="article:modified_time" content="::currentPage.dates.modified::" ::cond currentPage.dates!=null && currentPage.dates.modified!=null:: />
-	<meta property="article:section " content="technology" />
+	<meta property="article:section" content="technology" />
 	<meta property="article:tag" content="::currentPage.tags.join(',')::" ::cond currentPage.tags!=null:: />
 	
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic' rel='stylesheet' type='text/css'/>
-	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400' rel='stylesheet' type='text/css'/>
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic"  />
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400" />
 </head>
 <body>
 	<nav class="section nav dark">
@@ -147,13 +147,13 @@
 	</div>
 </footer>
 
-<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css"/>
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" />
 
 
 <script src="https://haxe.org/js/jquery.min.js"></script>
 <script src="https://haxe.org/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" type="text/css" href="css/highlighter.min.css"/>
+<link rel="stylesheet" type="text/css" href="css/highlighter.min.css" />
 <script src="js/highlighter.js"></script>
 
 <script>
