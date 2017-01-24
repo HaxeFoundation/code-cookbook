@@ -43,7 +43,7 @@ This example writes an object `person` to a json file:
 ```haxe
 var user = {name:"Mark", age:31};
 var content:String = haxe.Json.stringify(user);
-sys.io.File.saveContent(content, 'my_folder/my_file.json');
+sys.io.File.saveContent('my_folder/my_file.json',content);
 ```
 > Api documentation: <http://api.haxe.org/sys/io/File.html>
 
