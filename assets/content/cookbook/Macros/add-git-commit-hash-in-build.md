@@ -6,14 +6,14 @@ This example executes a process on the system, compile-time.
 This allows to run a git command `git rev-parse HEAD` and use its result as the value.
 
 ```haxe
-class MyMacros {
-  public static macro function getGitCommitHash():haxe.macro.ExprOf<String> {
+class Version {
+  public static macro function getGitCommitHash():haxe.macro.Expr.ExprOf<String> {
     #if !display
     var process = new sys.io.Process('git', ['rev-parse', 'HEAD']);
     if (process.exitCode() != 0) {
       var message = process.stderr.readAll().toString();
       var pos = haxe.macro.Context.currentPos();
-      Context.error("Cannot execute `git rev-parse HEAD`. " + message, pos);
+      haxe.macro.Context.error("Cannot execute `git rev-parse HEAD`. " + message, pos);
     }
     
     // read the output of the process
