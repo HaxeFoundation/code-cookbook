@@ -5,6 +5,7 @@ import data.Page;
 import haxe.ds.StringMap;
 import haxe.io.Path;
 import markdown.AST.ElementNode;
+import markdown.AST.TextNode;
 import sys.FileSystem;
 import sys.io.File;
 import templo.Template;
@@ -471,7 +472,21 @@ class Generator {
             if (hasTitle && el.tag != "pre" && page.description == null) {
               var description = new markdown.HtmlRenderer().render(el.children);
               page.description = new EReg("<(.*?)>", "g").replace(description, "").replace('"', "").replace('\n', " ");
-              break;
+            }
+            if (el.tag == "pre") {
+              var preNode = Std.instance(el.children[0], ElementNode);
+              if (preNode != null && preNode.attributes.exists("class")) {
+                var className = preNode.attributes.get("class");
+                if (className.indexOf("haxe") != -1) {
+                  var codeText = Std.instance(preNode.children[0], TextNode);
+                  if (codeText != null) {
+                    // validate text
+                    if (!Validator.validateSource(codeText.text)) {
+                      throw 'Code in ${page.contentPath} doesn\'t validate, please fix:\n' + codeText;
+                    }
+                  }
+                }
+              }
             }
           }
         }
