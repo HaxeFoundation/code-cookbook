@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Page has moved</title>
+	<link rel="canonical" href="::redirectionLink::" />
+</head>
+<body>
+	<div class="section">
+		<div class="container">
+			<script type="text/javascript">window.location = "::redirectionLink::";</script>
+			<noscript><meta http-equiv="refresh" content="0; url=::redirectionLink::" /></noscript>
+			<p class="alert alert-info">
+				If you are not redirected automatically please <a href="::redirectionLink::">click here</a>.
+			</p>
+		</div>
+	</div>
+</body>
+</html>
