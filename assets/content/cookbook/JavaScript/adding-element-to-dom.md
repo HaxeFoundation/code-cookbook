@@ -114,5 +114,7 @@ You can download jQuery from <https://jquery.com/> or use CDN as illustrated in 
 </html>
 ```
 
+## Running the example
+
 Open the index.html in your favorite browser. It should display the text "DOM ready". Using the browser devtools (F12) you can inspect the DOM which shows the text is created inside a paragraph `<p>` element.
 
