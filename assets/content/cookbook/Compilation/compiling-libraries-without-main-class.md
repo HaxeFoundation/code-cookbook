@@ -84,6 +84,6 @@ class BarLib {
 
 ### Exposing Haxe classes for JavaScript
 
-If you are writing libraries for JavaScript, you might want to use the `@:expose` metadata to make your code available in the global namespace. You can [read more about that in the Haxe manual](http://haxe.org/manual/target-javascript-expose.html) or in [this snippet](../other/using-haxe-classes-in-javascript.html).
+If you are writing libraries for JavaScript, you might want to use the `@:expose` metadata to make your code available in the global namespace. You can [read more about that in the Haxe manual](http://haxe.org/manual/target-javascript-expose.html) or in [this snippet](category/other/using-haxe-classes-in-javascript.html).
 
 > Author: [Jonas Nyström](https://github.com/cambiata)
