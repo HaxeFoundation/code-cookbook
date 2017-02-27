@@ -4,6 +4,8 @@
 
 This is an example to add a paragraph element to the HTML page when the DOM is ready. This tutorial contains two methodes; with and without jQuery.
 
+> Haxe can compile to many targets, this example is specific for the Haxe/JavaScript target only.
+
 ## Structure of this example
 
 Create a folder named **example** and create folders **bin** and **src**.
