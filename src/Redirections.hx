@@ -22,7 +22,8 @@ class Redirections
 			"category/other/sort-array.html" => "/category/data-structures/sort-array.html",
 			"category/other/using-filesystem.html" => "/category/beginner/using-filesystem.html",
 			"category/beginner/everything-is-an-expression.html" => "/category/principles/everything-is-an-expression.html",
-			"other/using-haxe-classes-in-javascript.html" => "/category/other/using-haxe-classes-in-javascript.html",
+			"category/other/using-haxe-classes-in-javascript.html" => "/category/javascript/using-haxe-classes-in-javascript.html",
+			"other/using-haxe-classes-in-javascript.html" => "/category/javascript/using-haxe-classes-in-javascript.html",
 			"tag/clas.html" => "/tag/class.html",
 			"tag/arra.html" => "/tag/array.html",
 		];
