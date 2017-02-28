@@ -13,9 +13,9 @@ Create a folder named **example** and create folders **bin** and **src**.
 See example below:
 
 ```
-+ example
-  + bin
-  + src
++ example/
+  + bin/
+  + src/
     - Main.hx
   - build.hxml
 ```
@@ -75,7 +75,9 @@ class Main {
 }
 ```
 
-## Haxe build file, build.hxml
+## Compile
+
+Compile the example with `haxe -cp src -main Main -js bin/example.js -dce full`.
 
 There are a lot of different arguments that you are able to pass to the Haxe compiler.
 These arguments can be placed in a text file which has the file-extension _.hxml_. 
