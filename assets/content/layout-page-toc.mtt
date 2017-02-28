@@ -25,7 +25,7 @@
 					::end::
 					</ul>
 				</li>
-				<br/>
+				<br ::cond !category.isSerie::/>
 				::end::
 			</ul>
 		</nav>
