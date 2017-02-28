@@ -286,7 +286,7 @@ class Generator {
       } else {
         if (file == assetsFolderName) {
           // when assets folder name is found, dont recurse but include directory in output
-          includeDirectory(contentPath + documentationPath + file, outputPath + documentationPath.replace(cookbookFolder, outputPathReplace).toLowerCase().replace(" ", "-") + file);
+          includeDirectory(contentPath + documentationPath + file, outputPath + file);
         } else {
           // recursive
           addCookbookPages(documentationPath + file + "/", level+1);
