@@ -2,9 +2,9 @@
 
 [![Build Status](https://travis-ci.org/HaxeFoundation/code-cookbook.svg?branch=master)](https://travis-ci.org/HaxeFoundation/code-cookbook)
 
-> Sources for the [Haxe Code Cookbook](http://code.haxe.org) site
+> Sources for the [Haxe Code Cookbook](http://code.haxe.org) site, a community driven resource website for learning Haxe in practise.
 
-This project contains a static website generator, it is mixing templates and markdown files into plain HTML files.
+The repository contains a static website generator, which converts markdown articles into a website. The project is being developed here on GitHub, feel free to contribute Haxe related code snippets and tutorials.
 
 ## Structure
 
