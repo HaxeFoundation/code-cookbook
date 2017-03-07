@@ -11,9 +11,9 @@
 
 <section class="container">
 	<h3><i class="fa  fa-book"></i> Start browsing..</h3>
-	<div itemscope="itemscope" itemtype="http://schema.org/BreadcrumbList">
+	<div>
 	::foreach category sitemap::
-		<span itemprop="itemListElement" itemscope="itemscope" itemtype="http://schema.org/ListItem" ::cond !category.isSerie::><a href="::category.outputPath::" class="btn btn-large" itemprop="item"><strong itemprop="name">::category.title::</strong> <small class="category-count">(::category.getPageCount()::)</small></a></span>
+		<span ::cond !category.isSerie::><a href="::category.outputPath::" class="btn btn-large"><strong>::category.title::</strong> <small class="category-count">(::category.getPageCount()::)</small></a></span>
 	::end::
 	</div>
 	<hr/>
