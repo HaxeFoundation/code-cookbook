@@ -1,4 +1,4 @@
-[tags]: / "macro-function,building-fields"
+[tags]: / "expression-macro,building-fields"
 
 # Add parameters as fields
 
