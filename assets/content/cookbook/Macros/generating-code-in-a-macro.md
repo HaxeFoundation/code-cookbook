@@ -1,4 +1,4 @@
-[tags]: / "macro-function"
+[tags]: / "expression-macro"
 
 # Generating code in a macro
 
