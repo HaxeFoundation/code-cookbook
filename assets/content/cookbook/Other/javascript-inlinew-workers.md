@@ -7,7 +7,7 @@ Javascript workers make it possible to perform costly calculations (media decodi
 - [Mozilla MDN - Using web workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers)
 - [Html5Rocks - The basics of web workers](https://www.html5rocks.com/en/tutorials/workers/basics/)
 
-Web workers normally require the workers to be defined in separate scripts. This is fully doable using Haxe, but requires a tow step compilation process. Using some clever javascript tricks, we can define the worker code AND the parent code in the same project. This is called "inline workers". You can read more about [javascript inline workers here](https://www.html5rocks.com/en/tutorials/workers/basics/#toc-inlineworkers).
+Web workers normally require the workers to be defined in separate scripts. This is fully doable using Haxe, but requires a two step compilation process. Using some clever javascript tricks, we can define the worker code AND the parent code in the same project. This is called "inline workers". You can read more about [javascript inline workers here](https://www.html5rocks.com/en/tutorials/workers/basics/#toc-inlineworkers).
 
 ### Different inline worker approaches
 Inline workers can be created in different ways. The method that's chosen here uses the same script read twice, once when the page is rendered and one when the worker is instantiated. This has the advantage that the parent and the worker share all dependencies. (Just keep in mind that they run in different threads, and that the worker can't access the DOM.)
