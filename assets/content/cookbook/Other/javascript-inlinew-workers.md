@@ -159,5 +159,5 @@ class Main {
 }
 
 ```
-
+> Author: [Jonas Nyström](https://github.com/cambiata)
 
