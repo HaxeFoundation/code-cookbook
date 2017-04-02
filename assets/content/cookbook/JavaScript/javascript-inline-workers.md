@@ -1,18 +1,18 @@
 [tags]: / "javascript,workers,multi-threading"
 
-# Javascript inline web workers in Haxe
+# JavaScript inline web workers in Haxe
 
-Javascript workers make it possible to perform costly calculations (media decoding etc, crypt calculations etc.) in a background thread, without blocking the main UI. There are lots of articles about workers on the net:
+JavaScript workers make it possible to perform costly calculations (media decoding etc, crypt calculations etc.) in a background thread, without blocking the main UI. There are lots of articles about workers on the net:
 
 - [Mozilla MDN - Using web workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers)
 - [Html5Rocks - The basics of web workers](https://www.html5rocks.com/en/tutorials/workers/basics/)
 
-Web workers normally require the workers to be defined in separate scripts. This is fully doable using Haxe, but requires a two step compilation process. Using some clever javascript tricks, we can define the worker code AND the parent code in the same project. This is called "inline workers". You can read more about [javascript inline workers here](https://www.html5rocks.com/en/tutorials/workers/basics/#toc-inlineworkers).
+Web workers normally require the workers to be defined in separate scripts. This is fully doable using Haxe, but requires a two step compilation process. Using some clever js tricks, we can define the worker code AND the parent code in the same project. This is called "inline workers". You can read more about [JavaScript inline workers here](https://www.html5rocks.com/en/tutorials/workers/basics/#toc-inlineworkers).
 
 ### Different inline worker approaches
 Inline workers can be created in different ways. The method that's chosen here uses the same script read twice, once when the page is rendered and one when the worker is instantiated. This has the advantage that the parent and the worker share all dependencies. (Just keep in mind that they run in different threads, and that the worker can't access the DOM.)
 
-Another approach is to create the worker script by using ```window.URL.createObjectURL```. However, it's harder to share dependencies between parent and worker that way.
+Another approach is to create the worker script by using `window.URL.createObjectURL`. However, it's harder to share dependencies between parent and worker that way.
 
 The solution presented in this example here is inspired by this [StackOverflow answer](http://stackoverflow.com/a/10136565/146400) by [Delan Azabani](http://stackoverflow.com/users/330644/delan-azabani).
 
@@ -27,9 +27,9 @@ Instead of creating a worker by just asking for another external script, the sam
 ### Processing the data
 The data is passed back and forth between the parent and the worker via messages, and these messages are taken care of in message handlers on each side. In this example, this handler is very simple:
 
-The message passed to the handler is of the type ```js.html.MessageEvent```, and this has a ```.data``` property that carries the actual data.
+The message passed to the handler is of the type `js.html.MessageEvent`, and this has a `.data` property that carries the actual data.
 
-In this example we know that the data is of the type ```ArrayBuffer``` so we can just cast it to a ```Uint8Array``` and do our simple processing (increasing every array item value by one). Now, we can simply post the altered data back to the parent:
+In this example we know that the data is of the type `ArrayBuffer` so we can just cast it to a `Uint8Array` and do our simple processing (increasing every array item value by one). Now, we can simply post the altered data back to the parent:
 
 ```haxe
     // Handle message from parent to worker
@@ -47,12 +47,12 @@ In this example we know that the data is of the type ```ArrayBuffer``` so we can
 ```
 ## Running the example
 
-The example code below should be saved in a file called ```Main.hx```;
-Compile this into a js file called ```app.js``` using the following command:
+The example code below should be saved in a file called `Main.hx`;
+Compile this into a js file called `app.js` using the following command:
 
 ```> haxe -main Main -js app.js -dce full```
 
-Create a file called ```index.html``` with the following content
+Create a file called `index.html` with the following content
 ```html
 <html>
     <head>
@@ -64,7 +64,7 @@ Create a file called ```index.html``` with the following content
     </body>
 </html>
 ```
-Open the ```index.html``` in a browser window, and check the javascript console output.
+Open the `index.html` in a browser window, and check the JavaScript console output.
 You should see something like:
 ```code
 > Original data: 0,1,2...  
@@ -76,13 +76,13 @@ You should see something like:
 
 ## Note regarding transferrable object data
 
-In this example, we are using ```transferrable object``` to speed up passing the data back and forth between the parent and the worker. Try replacing the following lines in the example code...
+In this example, we are using `transferrable object` to speed up passing the data back and forth between the parent and the worker. Try replacing the `postMessage` calls in the example code...
 
-```untyped self.postMessage(uInt8View.buffer, [uInt8View.buffer]);```
+```.postMessage(uInt8View.buffer, [uInt8View.buffer]);```
 
 with this:
 
-```untyped self.postMessage(uInt8View.buffer);```
+```.postMessage(uInt8View.buffer);```
 
 This gives you standard object copying, instead of transferrable objects. When you run the example again, you should notice a significant increase in runtrip time. (On Firefox, this is something like 10x slower.)
 
