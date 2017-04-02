@@ -42,7 +42,7 @@ In this example we know that the data is of the type ```ArrayBuffer``` so we can
         for (i in 0 ... uInt8View.length) uInt8View[i] += 1;
       
         // Post altered data back to parent
-        untyped self.postMessage(uInt8View.buffer, [uInt8View.buffer]);
+        workerScope.postMessage(uInt8View.buffer, [uInt8View.buffer]);
     }
 ```
 ## Running the example
@@ -104,10 +104,13 @@ class Main {
     }
 
     //=========================================================
+    // Initialization
+
+    static var workerScope:js.html.DedicatedWorkerGlobalScope;
 
     static function initAsWorker() {
         // Find the worker "self"
-        var workerScope:js.html.DedicatedWorkerGlobalScope = untyped self;
+        workerScope = untyped self;
 
         // Setup the worker message handler:        
         workerScope.onmessage = onMessageFromParent;
@@ -126,7 +129,7 @@ class Main {
         // create 64Mb data to play with
         var uInt8View = new js.html.Uint8Array(new js.html.ArrayBuffer(1024 * 1024 * 64));
         for (i in 0 ... uInt8View.length) uInt8View[i] = i;
-        trace('Original data: ' + uInt8View.subarray(0, 3) + '...');
+        trace('Original data: [' + uInt8View.subarray(0, 3) + '...]');
 
         start = Date.now().getTime();
         worker.postMessage(uInt8View.buffer, [uInt8View.buffer]);  
@@ -135,9 +138,10 @@ class Main {
     static var start:Float = 0;
 
     //=========================================================
+    // Message handlers for processing data
 
-    // Handle message from parent to worker
-    static function onMessageFromParent(e) {
+    // Handle message passed from parent to worker
+    static function onMessageFromParent(e:js.html.MessageEvent) {
         trace('Worker recieved data from Client: ' + e.data);
         var uInt8View = new js.html.Uint8Array(cast e.data);
                
@@ -146,17 +150,18 @@ class Main {
         for (i in 0 ... uInt8View.length) uInt8View[i] += 1;
       
         // Post altered data back to parent
-        untyped self.postMessage(uInt8View.buffer, [uInt8View.buffer]);
+        workerScope.postMessage(uInt8View.buffer, [uInt8View.buffer]);
     }
     
-    // Handle message from worker to parent
-    static function onMessageFromWorker(e) {
+    // Handle message passed from worker to parent
+    static function onMessageFromWorker(e:js.html.MessageEvent) {
         trace('Parent recieved data from Worker: ' + e.data);
         trace('Roundtrip time: ' + (Date.now().getTime() - start) + ' ms');            
         var uInt8View = new js.html.Uint8Array(cast e.data);
-        trace('Data altered by worker: ' + uInt8View.subarray(0, 3) + '...');
+        trace('Data altered by worker: [' + uInt8View.subarray(0, 3) + '...]');
     }
 }
+
 
 ```
 > Author: [Jonas Nyström](https://github.com/cambiata)
