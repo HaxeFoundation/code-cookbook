@@ -35,14 +35,14 @@ In this example we know that the data is of the type `ArrayBuffer` so we can jus
     // Handle message from parent to worker
     static function onMessageFromParent(e:js.html.MessageEvent) {
         trace('Worker recieved data from Client: ' + e.data);
-        var uInt8View = new js.html.Uint8Array(cast e.data);
+        var uint8View = new js.html.Uint8Array(cast e.data);
                
         // Do fancy stuff with data...
         // Here we just add one to each array item
-        for (i in 0 ... uInt8View.length) uInt8View[i] += 1;
+        for (i in 0 ... uint8View.length) uint8View[i] += 1;
       
         // Post altered data back to parent
-        workerScope.postMessage(uInt8View.buffer, [uInt8View.buffer]);
+        workerScope.postMessage(uint8View.buffer, [uint8View.buffer]);
     }
 ```
 ## Running the example
@@ -78,11 +78,11 @@ You should see something like:
 
 In this example, we are using `transferrable object` to speed up passing the data back and forth between the parent and the worker. Try replacing the `postMessage` calls in the example code...
 
-```.postMessage(uInt8View.buffer, [uInt8View.buffer]);```
+```.postMessage(uint8View.buffer, [uint8View.buffer]);```
 
 with this:
 
-```.postMessage(uInt8View.buffer);```
+```.postMessage(uint8View.buffer);```
 
 This gives you standard object copying, instead of transferrable objects. When you run the example again, you should notice a significant increase in runtrip time. (On Firefox, this is something like 10x slower.)
 
@@ -127,12 +127,12 @@ class Main {
         worker.onmessage = onMessageFromWorker;        
 
         // create 64Mb data to play with
-        var uInt8View = new js.html.Uint8Array(new js.html.ArrayBuffer(1024 * 1024 * 64));
-        for (i in 0 ... uInt8View.length) uInt8View[i] = i;
-        trace('Original data: [' + uInt8View.subarray(0, 3) + '...]');
+        var uint8View = new js.html.Uint8Array(new js.html.ArrayBuffer(1024 * 1024 * 64));
+        for (i in 0 ... uint8View.length) uint8View[i] = i;
+        trace('Original data: [' + uint8View.subarray(0, 3) + '...]');
 
         start = Date.now().getTime();
-        worker.postMessage(uInt8View.buffer, [uInt8View.buffer]);  
+        worker.postMessage(uint8View.buffer, [uint8View.buffer]);  
     }
 
     static var start:Float = 0;
@@ -143,22 +143,22 @@ class Main {
     // Handle message passed from parent to worker
     static function onMessageFromParent(e:js.html.MessageEvent) {
         trace('Worker recieved data from Client: ' + e.data);
-        var uInt8View = new js.html.Uint8Array(cast e.data);
+        var uint8View = new js.html.Uint8Array(cast e.data);
                
         // Do fancy stuff with data...
         // Here we just add one to each array item
-        for (i in 0 ... uInt8View.length) uInt8View[i] += 1;
+        for (i in 0 ... uint8View.length) uint8View[i] += 1;
       
         // Post altered data back to parent
-        workerScope.postMessage(uInt8View.buffer, [uInt8View.buffer]);
+        workerScope.postMessage(uint8View.buffer, [uint8View.buffer]);
     }
     
     // Handle message passed from worker to parent
     static function onMessageFromWorker(e:js.html.MessageEvent) {
         trace('Parent recieved data from Worker: ' + e.data);
         trace('Roundtrip time: ' + (Date.now().getTime() - start) + ' ms');            
-        var uInt8View = new js.html.Uint8Array(cast e.data);
-        trace('Data altered by worker: [' + uInt8View.subarray(0, 3) + '...]');
+        var uint8View = new js.html.Uint8Array(cast e.data);
+        trace('Data altered by worker: [' + uint8View.subarray(0, 3) + '...]');
     }
 }
 
