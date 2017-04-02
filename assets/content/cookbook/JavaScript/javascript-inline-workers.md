@@ -106,8 +106,30 @@ class Main {
     //=========================================================
 
     static function initAsWorker() {
-        // Setup the worker message handler:
-        untyped __js__('self').onmessage = onMessageFromParent;
+        // Find the worker "self"
+        var workerScope:js.html.DedicatedWorkerGlobalScope = untyped self;
+
+        // Setup the worker message handler:        
+        workerScope.onmessage = onMessageFromParent;
+    }
+
+    static function initAsParent() {
+        // Find the path of the currently running script
+        var scriptPath = cast(js.Browser.document.currentScript, js.html.ScriptElement).src;        
+        
+        // Create the worker
+        var worker = new js.html.Worker(scriptPath);
+
+        // Setup the parent message handler:
+        worker.onmessage = onMessageFromWorker;        
+
+        // create 64Mb data to play with
+        var uInt8View = new js.html.Uint8Array(new js.html.ArrayBuffer(1024 * 1024 * 64));
+        for (i in 0 ... uInt8View.length) uInt8View[i] = i;
+        trace('Original data: ' + uInt8View.subarray(0, 3) + '...');
+
+        start = Date.now().getTime();
+        worker.postMessage(uInt8View.buffer, [uInt8View.buffer]);  
     }
 
     static function initAsParent() {
