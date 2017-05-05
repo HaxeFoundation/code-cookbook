@@ -63,13 +63,13 @@ class User {
   public var name:String;
   private var age:Int;
   
-  public function new(name:String, age:Float) {
+  public function new(name:String, age:Int) {
     this.name = name;
     this.age = age;
   }
 }
 
-// Create a new Dog instance
+// Create a new User instance
 var user = new User("Mark", 31);
 
 // We can also access it's public variables
