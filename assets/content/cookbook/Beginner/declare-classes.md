@@ -69,7 +69,7 @@ class User {
   }
 }
 
-// Create a new Dog instance
+// Create a new User instance
 var user = new User("Mark", 31);
 
 // We can also access it's public variables
