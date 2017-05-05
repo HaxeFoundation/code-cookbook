@@ -63,7 +63,7 @@ class User {
   public var name:String;
   private var age:Int;
   
-  public function new(name:String, age:Float) {
+  public function new(name:String, age:Int) {
     this.name = name;
     this.age = age;
   }
