@@ -107,14 +107,15 @@ function getMatches(ereg:EReg, input:String, index:Int = 0):Array<String> {
 }
 ```
 This would allow you to do this:
-```
+```haxe
 var message = "row row row your boat";
 var matches = getMatches(~/(row)/, message);
 trace(matches); // [row,row,row]
 trace(matches.length); // 3
 ```
 
-In the following example we replace using a map function on the message and replace it with the return value of the function:
+#### Mapping results
+In the following example we replace each match on a string using the `EReg.map` function and trace the replaced output.
 
 ```haxe
 var ereg:EReg = ~/(hello)/i;
