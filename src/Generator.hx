@@ -353,7 +353,9 @@ class Generator {
   
   private function replaceHaxeOrgLinks(content:String) 
   {
-    return content.split("http://haxe.org").join("https://haxe.org");
+    return content
+      .replace("http://haxe.org", "https://haxe.org")
+      .replace("http://try.haxe.org", "https://try.haxe.org");
   }
   
   private function replaceAuthor(content:String) {

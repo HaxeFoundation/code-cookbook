@@ -1,4 +1,4 @@
-[tags]: / "macro-function"
+[tags]: / "expression-macro"
 
 # Combine two or more structures
 

@@ -1,4 +1,4 @@
-[tags]: / "git,macro-function,process"
+[tags]: / "git,expression-macro,process"
 
 # Add git commit-hash in build
 

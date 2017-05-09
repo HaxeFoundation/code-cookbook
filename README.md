@@ -22,13 +22,13 @@ Please add/edit the articles (markdown files) in the [assets folder](assets/cont
 
 It would be nice if you keep the formatting of the code in the same style as used already:
 
- * Braces on same line
- * Two-space indentation
- * No type-hints for local variables and function return unless it's instructive
- * Type-hints for fields
- * Type-hints for function arguments unless it's very obvious
- * Judicious use of extra line-breaks to avoid ugly automatic breaks (check the output)
-
+ * Braces on same line.
+ * Two-space indentation.
+ * No type-hints for local variables and function return unless it's instructive.
+ * Type-hints for fields.
+ * Type-hints for function arguments unless it's very obvious.
+ * Judicious use of extra line-breaks to avoid ugly automatic breaks (check the output).
+ 
 ##### Other remarks
  
  * The first heading is used in the navigation. Keep this title short.

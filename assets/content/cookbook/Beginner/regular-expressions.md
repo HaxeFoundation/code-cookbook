@@ -66,20 +66,22 @@ trace(ereg.replace(message, "$2 and $1"));
 
 Sometimes you want to deal with the specific parts or even the parts left or right of the search:
 
+Note the `matched` function requires an index. Use `0` to match the whole substring, the index `1` and higher corresponds to the n-th set of parentheses in the regular expression. If no such sub-group exists in the pattern, an exception will be thrown.
+
 ```haxe
-var message = "important note: Haxe is great";
-var ereg:EReg = ~/(note:)/;
+var message = "important message: Haxe is great";
+var ereg:EReg = ~/(message).+?(is)/;
 
 if (ereg.match(message)) { 
-  trace(ereg.matched(1)); // note:
+  trace(ereg.matched(1)); // message
+  trace(ereg.matched(2)); // is
   trace(ereg.matchedLeft()); // important 
-  trace(ereg.matchedRight()); // Haxe is great
+  trace(ereg.matchedRight()); //  great
 }
 ```
 > Note that the `match` method modifies the internal state.
 
 The `matchedRight` can be very useful to iterate on the matches in case there are multiple results:
-
 
 ```haxe
 var message = "row row row your boat";
@@ -93,8 +95,27 @@ while (ereg.match(message)) {
 // row
 // row
 ```
+More convenient would be to wrap this in a utility function that returns the results as Array. This also allows you to count the results.
+```haxe
+function getMatches(ereg:EReg, input:String, index:Int = 0):Array<String> {
+  var matches = [];
+  while (ereg.match(input)) {
+    matches.push(ereg.matched(index)); 
+    input = ereg.matchedRight();
+  }
+  return matches;
+}
+```
+This would allow you to do this:
+```haxe
+var message = "row row row your boat";
+var matches = getMatches(~/(row)/, message);
+trace(matches); // [row,row,row]
+trace(matches.length); // 3
+```
 
-In this example we replace using a map function on the message and replace it with the return value of the function:
+#### Mapping results
+In the following example we replace each match on a string using the `EReg.map` function and trace the replaced output.
 
 ```haxe
 var ereg:EReg = ~/(hello)/i;

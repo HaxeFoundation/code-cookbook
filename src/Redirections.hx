@@ -26,6 +26,7 @@ class Redirections
 			"other/using-haxe-classes-in-javascript.html" => "/category/javascript/using-haxe-classes-in-javascript.html",
 			"tag/clas.html" => "/tag/class.html",
 			"tag/arra.html" => "/tag/array.html",
+			"tag/macro-function.html" => "tag/expression-macro.html",
 		];
 		
 		for (page in list.keys()) {

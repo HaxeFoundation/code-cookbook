@@ -7,7 +7,7 @@ This example uses `haxe.Http` to load external json file using and demonstrates 
 The following example loads your IP-address using a free-to-use web API. The service returns JSON formatted string `data`. 
 This string is parsed to an object `result` using the `haxe.Json.parse` function. After this, we trace the IP-address `result.ip`.
 
-```
+```haxe
 var http = new haxe.Http("http://ip.jsontest.com/");
 
 http.onData = function (data:String) {
