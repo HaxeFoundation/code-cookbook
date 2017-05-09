@@ -136,7 +136,7 @@ trace(StringTools.hex(fromFloatComponents));
 
 ## Compiler output
 
-JavaScript output from Haxe 3.3.0-rc.1 with flags `-DCE full -D analyzer` is given below:
+JavaScript output from Haxe 3.4 with flags `-dce full -D analyzer-optimize` is given below:
 
 ```js
 var red = -65536;
