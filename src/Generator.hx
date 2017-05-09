@@ -241,7 +241,7 @@ class Generator {
       addPage(new Page("layout-page-toc.mtt",  "tags.mtt", 'tag/$tag.html')
                         .setTitle('Haxe $tagTitle articles overview')
                         .setCustomData({tag:tag, pages: tags.get(tag)})
-                        .setDescription('Overview of Haxe snippets and tutorials tagged with $tagTitle.')
+                        .setDescription('Overview of Haxe code snippets, examples and tutorials tagged with $tagTitle.')
                         .hidden(), "tags");
     }
   }
@@ -249,8 +249,8 @@ class Generator {
   private function addGeneralPages() {
     var homePage = new Page("layout-page-main.mtt", "index.mtt", "index.html")
                           .hidden()
-                          .setTitle("Easy to read Haxe coding examples")
-                          .setDescription('The Haxe Code Cookbook is a central place with Haxe coding snippets and tutorials.');
+                          .setTitle("Learn with Haxe - Community driven Haxe code snippets, examples and tutorials.")
+                          .setDescription('The Haxe Code Cookbook is a central learning resource with Haxe code snippets, examples and tutorials.');
     
     var errorPage = new Page("layout-page-main.mtt", "404.mtt", "404.html")
                           .hidden()

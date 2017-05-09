@@ -351,6 +351,17 @@ code.prettyprint {
 	margin-left:10px;
 }
 
+.page-list h4 {
+	font-weight:normal;
+}
+
+.page-list-item {
+	padding: 1px 15px 15px 15px;
+	border: 1px solid #eeeeee;
+	border-radius: 5px;
+	background:#fdfdfd;
+}
+
 .g-plus, #___plus_0 { vertical-align: text-bottom !important; }
 .twitter-share-button { vertical-align: text-bottom !important; }
 

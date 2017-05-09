@@ -4,7 +4,19 @@
 <ul class="page-list unstyled">
 ::foreach page currentPage.customData.pages::
 	<li class="page-list-item" itemscope="itemscope" itemtype="https://schema.org/Thing" ::cond page.visible::>
-		<h3><a href="::page.outputPath::" class="list-group-item" itemprop="url"><span itemprop="name">::page.title::</span></a></h3>
+		<h4><small class="category-count" ::cond page.dates.created !=null::>::DateTools.format(page.dates.created, "%d-%m-%Y")::</small> 
+			::if page.isSerieHome()::
+				::page.category.parent.title:: 
+			::else::
+				::page.category.title:: 
+			::end::
+			<small class="category-count">/</small> <a href="::page.outputPath::" class="list-group-item" itemprop="url"><span itemprop="name">::page.title::</span></a>
+		</h4>
+		<p class="tags" ::cond page.visible && page.tags!=null && page.tags.length>0::>
+			::foreach tag page.tags::
+				<small class="tag"><i class="fa fa-tag"></i>&nbsp;::tag::</small>
+			::end::
+		</p>
 		<p><em>::page.description::&#8229;</em></p>
 	</li>
 ::end::
