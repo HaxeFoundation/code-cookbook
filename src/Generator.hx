@@ -40,7 +40,7 @@ class Generator {
     addCookbookPages(cookbookFolder);
     trace(_pages.length + " articles");
     
-    addGeneralPages();
+    var homePage = addGeneralPages();
     
     // create list of categories (after all other pages are added)
     var sitemap:Array<Category> = createSitemap();
@@ -112,7 +112,8 @@ class Generator {
     
     var tags:StringMap<Array<Page>> = collectTags();
     // add tags to the home page (used for meta keywords)
-    _pages[0].tags = [for (tag in tags.keys()) tag];
+    homePage.tags = [for (tag in tags.keys()) tag];
+	trace(homePage.title);
     addTagPages(tags);
 
     // sort pages by date; get most recent pages
@@ -246,7 +247,7 @@ class Generator {
     }
   }
   
-  private function addGeneralPages() {
+  private function addGeneralPages():Page {
     var homePage = new Page("layout-page-main.mtt", "index.mtt", "index.html")
                           .hidden()
                           .setTitle("Learn with Haxe - Community driven Haxe code snippets, examples and tutorials.")
@@ -270,6 +271,8 @@ class Generator {
     addPage(sitemapPage, "/sitemap");
     
     errorPage.baseHref = "/";
+    
+    return homePage;
   }
   
   private function addCookbookPages(documentationPath:String, level:Int = 0) {
