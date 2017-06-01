@@ -44,6 +44,17 @@ class MyMacro {
 
 ## Usage
 
+```haxe
+@:build(MyMacro.build("http://www.msn.com/en-us/"))
+class Main {
+  static function main() {
+    Main.gids; // auto-complete here
+  }
+}
+```
+
+## Demo
+
 <img src="img/completion-from-url.gif" alt="Code completion from URL"/>
 
 ## Explanation in video
