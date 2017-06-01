@@ -44,9 +44,9 @@ Training the next turtle: Michelangelo
 Training the next turtle: Donatello
 ```
 
-But what if it was all turtles all the way down? We could have not just an array of turtles, but we could have turtles built out of turtles! Whenever we step on these multi-part turtles, we will just train each one of them as if they were a single turtle.
+But what if it was turtles all the way down? We could have not just an array of turtles, but we could have turtles built out of turtles! Whenever we step on these multi-part turtles, we will just train each one of them as if they were a single turtle.
 
-We also need to remember which was the turtle we were training after we deal with the complex one. This calls for having a stack of iterators. The initial array iterator will be the first one that will be pushed. Whenever we find a complex turtle, let's push the iterator onto the stack. After we finish the complex turtle, pop it back and continue with the previous iterator. Haxe has a [GenericStack](http://api.haxe.org/haxe/ds/GenericStack.html) in its API, so let's use it. 
+We also need to remember which turtle we were supposed to train after we deal with the complex one. This calls for having a stack of iterators. The initial array iterator will be the first one that will be pushed. Whenever we find a complex turtle, let's push the iterator onto the stack. After we finish the complex turtle, pop it back and continue with the previous iterator. Haxe has a [GenericStack](http://api.haxe.org/haxe/ds/GenericStack.html) in its API, so let's use it. 
 
 Let's add a new value in our enum type.
 
@@ -108,7 +108,7 @@ Build failure
 Test.hx:13: characters 26-57 : Type parameter must be a class or enum instance (found { next : Void -> Turtles, hasNext : Void -> Bool })
 ```
 
-What happened? Turns out that only types can be used as parameters, and an Iterator is a structure. This is a limitation when you want to use it as the parameter for a generic type.
+What happened? Turns out that only types can be used as parameters, and Iterators are structures. This is a limitation when you want to use it as the parameter for a generic type.
 
 Javascript is quite flexible and is able to accept a structure as a type parameter quite happily, but it is not the same case for most of the rest of the targets. The cpp target, for instance, will complain the same way as it did for the swf target.
 
@@ -186,4 +186,4 @@ class Test {
 }
 ```
 
-Remember this is only necessary if you are targeting a static target (cpp, Java, etc.), rather than a dynamic target, but it also shows you the power of abstract types in Haxe, and how could you use them to specialize basic types.
+Remember this is only necessary if you are targeting a static target (cpp, Java, etc.), rather than a dynamic target. This code also shows you the power of abstract types in Haxe, and how could you use them to specialize basic types.
