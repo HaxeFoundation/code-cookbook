@@ -1,13 +1,3 @@
-2 space for indenting
-missing var in code
-link yo current lib mooncore version
-javascript target, not html5
-specific example with moon-core
-why is flash mentioned
-prefer copy paste examples
-for loop example
-
-
 [tags]: / "abstract-type,type-params,iterator"
 
 # Using Iterators as Generic Type Parameters
