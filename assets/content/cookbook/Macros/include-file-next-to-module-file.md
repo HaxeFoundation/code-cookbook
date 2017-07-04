@@ -2,7 +2,7 @@
 
 # Include a file next to a Haxe module file
 
-This example lets you take a file next to the current module _.hx_ file and include its file content. That can be very useful if you want to separate (for example) view templates, shader sources or other multiline texts from the Haxe source. The articles demonstrates how to do it with a expression macro but also with a build macro. 
+This example lets you take a file next to the current module _.hx_ file and include its file content. That can be very useful if you want to separate (for example) view templates, shader sources or other multiline texts from the Haxe source. The articles demonstrates how to do it with an expression macro but also with a build macro.
 
 ## Preparation
 
@@ -26,9 +26,9 @@ This object contains a `file` property which refers to the path of the module fi
 
 ---
 
-# Using a expression macro
+# Using an expression macro
 
-In this example we use a expression macro, these are used as normal functions and are written as `macro function`. The function will return a expression of a type String.
+In this example we use an expression macro, these are used as normal functions and are written as `macro function`. The function will return an expression of a type String.
 
 #### Implementation
 
@@ -75,7 +75,6 @@ class Macros {
 This is an example of how to use the macro function, this will be the content of the "MyComponent" class:
 
 ```haxe
-
 class MyComponent {
   public static var TEMPLATE:String = Macros.getTemplate();
   public function new() {
