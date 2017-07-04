@@ -1,5 +1,5 @@
 <small itemscope="itemscope" itemtype="http://schema.org/BreadcrumbList">
-	<span itemprop="itemListElement" itemscope="itemscope" itemtype="http://schema.org/ListItem"><a itemprop="name" href="/">Cookbook</a> › </span>
+	<span itemprop="itemListElement" itemscope="itemscope" itemtype="http://schema.org/ListItem"><a itemprop="name" href="/">Haxe programming cookbook</a> › </span>
 	<span itemprop="itemListElement" itemscope="itemscope" itemtype="http://schema.org/ListItem" ::cond currentPage.category.parent!=null ::><a itemprop="name" href="::currentPage.category.parent.outputPath::">::currentPage.category.parent.title::</a> › </span>
 	<span itemprop="itemListElement" itemscope="itemscope" itemtype="http://schema.org/ListItem"><a itemprop="name" href="::currentPage.outputPath::">::currentCategory.title::</a></span>
 </small>

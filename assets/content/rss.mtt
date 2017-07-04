@@ -1,9 +1,9 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 
 <channel>
-	<title>Haxe Code Cookbook</title>
+	<title>Haxe programming language - Code Cookbook</title>
 	<link>::basePath::</link>
-	<description>Easy to read Haxe coding examples.</description>
+	<description>Easy to read Haxe programming language examples.</description>
 	<managingEditor>contact@haxe.org (Haxe Foundation)</managingEditor>
 	<docs>http://blogs.law.harvard.edu/tech/rss</docs>
 	<language>en</language>
