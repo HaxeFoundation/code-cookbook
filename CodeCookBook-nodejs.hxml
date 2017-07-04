@@ -1,0 +1,8 @@
+CodeCookBook.hxml
+
+-lib hxnodejs
+-js CodeCookBook.js
+
+--next
+
+-cmd node CodeCookBook.js

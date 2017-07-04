@@ -2,17 +2,17 @@
 <project version="2">
   <!-- Output SWF options -->
   <output>
-    <movie outputType="Application" />
+    <movie outputType="CustomBuild" />
     <movie input="" />
-    <movie path="CodeCookBook.n" />
+    <movie path="CodeCookBook-interp.hxml" />
     <movie fps="0" />
     <movie width="0" />
     <movie height="0" />
     <movie version="0" />
     <movie minorVersion="0" />
-    <movie platform="Custom" />
+    <movie platform="hxml" />
     <movie background="#FFFFFF" />
-    <movie preferredSDK="Haxe 3.4.2;3.4.2;" />
+    <movie preferredSDK="Haxe 4.0.0;4.0.0;" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
@@ -20,18 +20,16 @@
   </classpaths>
   <!-- Build options -->
   <build>
-    <option directives="" />
+    <option directives="analyzer" />
     <option flashStrict="False" />
     <option noInlineOnDebug="False" />
-    <option mainClass="Main" />
+    <option mainClass="Highlighter" />
     <option enabledebug="False" />
-    <option additional="-dce no" />
+    <option additional="-dce full&#xA;--interp" />
   </build>
   <!-- haxelib libraries -->
   <haxelib>
-    <library name="markdown" />
-    <library name="hxtemplo" />
-    <library name="hxparse" />
+    <!-- example: <library name="..." /> -->
   </haxelib>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
@@ -42,7 +40,7 @@
     <hidden path="obj" />
   </hiddenPaths>
   <!-- Executed before build -->
-  <preBuildCommand>haxe CodeCookBook.hxml</preBuildCommand>
+  <preBuildCommand>haxe CodeCookBook-$(TargetBuild).hxml</preBuildCommand>
   <!-- Executed after build -->
   <postBuildCommand alwaysRun="False" />
   <!-- Other project options -->

@@ -16,13 +16,8 @@
 -lib hxtemplo
 -lib hxparse
 -cp src
--neko CodeCookBook.n
 -main Main
 -dce no
+
 # for debug-only fast compile use:
 #-D disable_git_dates
-
-
---next
-
--cmd neko CodeCookBook.n
