@@ -13,6 +13,7 @@ class GitUtil
       if (process.exitCode() != 0) throw process.stderr.readAll().toString();
       var dateString = process.stdout.readAll().toString();
       dateString = dateString.replace("\n", "").replace("\r", "");
+      if (dateString == null || dateString.length < 8) return null;
       return Date.fromString(dateString);
     #else 
     return null;
@@ -25,6 +26,7 @@ class GitUtil
       if (process.exitCode() != 0) throw process.stderr.readAll().toString();
       var dateString = process.stdout.readAll().toString();
       dateString = dateString.replace("\n", "").replace("\r", "");
+      if (dateString == null || dateString.length < 8) return null;
       return Date.fromString(dateString);
     #else 
     return null;
