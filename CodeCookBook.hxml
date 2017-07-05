@@ -3,6 +3,7 @@
 -main Highlighter
 -dce full
 -D analyzer
+-D analyzer-optimize
 
 --next 
 
@@ -18,6 +19,8 @@
 -cp src
 -main Main
 -dce no
+-D analyzer
+-D analyzer-optimize
 
 # for debug-only fast compile use:
 #-D disable_git_dates
