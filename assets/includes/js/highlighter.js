@@ -7,12 +7,12 @@ Highlighter.main = function() {
 	while(_g < _g1.length) {
 		var el = _g1[_g];
 		++_g;
-		if(Highlighter.hasClass(el,"prettyprint")) {
-			if(!Highlighter.hasClass(el,"highlighted")) {
-				if(Highlighter.hasClass(el,"haxe") || Highlighter.hasClass(el,"js") || Highlighter.hasClass(el,"javascript")) {
+		if(el.className.indexOf("prettyprint") != -1) {
+			if(el.className.indexOf("highlighted") == -1) {
+				if(el.className.indexOf("haxe") != -1 || el.className.indexOf("js") != -1 || el.className.indexOf("javascript") != -1) {
 					el.innerHTML = Highlighter.syntaxHighlight(el.innerHTML);
 					el.className += " highlighted";
-				} else if(Highlighter.hasClass(el,"hxml")) {
+				} else if(el.className.indexOf("hxml") != -1) {
 					el.innerHTML = Highlighter.syntaxHighlightHXML(el.innerHTML);
 					el.className += " highlighted";
 				}
@@ -20,15 +20,11 @@ Highlighter.main = function() {
 		}
 	}
 };
-Highlighter.hasClass = function(el,className) {
-	return el.className.indexOf(className) != -1;
-};
 Highlighter.syntaxHighlight = function(html) {
-	var kwds = ["abstract","trace","break","case","cast","class","continue","default","do","dynamic","else","enum","extends","extern","for","function","if","implements","import","in","inline","interface","macro","new","override","package","private","public","return","static","switch","throw","try","typedef","untyped","using","var","while"];
-	var kwds_r = new RegExp("\\b(" + kwds.join("|") + ")\\b","g".split("u").join(""));
-	var vals = ["null","true","false","this"];
-	var vals_r = new RegExp("\\b(" + vals.join("|") + ")\\b","g".split("u").join(""));
+	var kwds_r = new RegExp("\\b(" + ["abstract","trace","break","case","cast","class","continue","default","do","dynamic","else","enum","extends","extern","for","function","if","implements","import","in","inline","interface","macro","new","override","package","private","public","return","static","switch","throw","try","typedef","untyped","using","var","while"].join("|") + ")\\b","g".split("u").join(""));
+	var vals_r = new RegExp("\\b(" + ["null","true","false","this"].join("|") + ")\\b","g".split("u").join(""));
 	var types_r = new RegExp("\\b([A-Z][a-zA-Z0-9]*)\\b","g".split("u").join(""));
+	html = StringTools.replace(html,"\t","  ");
 	html = html.replace(kwds_r,"<span class='kwd'>$1</span>");
 	html = html.replace(vals_r,"<span class='val'>$1</span>");
 	html = html.replace(types_r,"<span class='type'>$1</span>");
@@ -50,6 +46,10 @@ Highlighter.syntaxHighlightHXML = function(html) {
 	var _this_r3 = new RegExp("(#.+?)(\n|$)","g".split("u").join(""));
 	html = html.replace(_this_r3,"<span class='cmt'>$1</span>$2");
 	return html;
+};
+var StringTools = function() { };
+StringTools.replace = function(s,sub,by) {
+	return s.split(sub).join(by);
 };
 Highlighter.main();
 })();

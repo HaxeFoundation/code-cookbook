@@ -1,6 +1,7 @@
 package;
 import js.Browser.document;
 import js.html.Element;
+using StringTools;
 
 /**
  * @author Mark Knol
@@ -22,7 +23,7 @@ class Highlighter {
     }
   }
 
-  static function hasClass(el:Element, className:String) return el.className.indexOf(className) != -1;
+  inline static function hasClass(el:Element, className:String) return el.className.indexOf(className) != -1;
 
   static function syntaxHighlight(html:String) {
     var kwds = ["abstract", "trace", "break", "case", "cast", "class", "continue", "default", "do", "dynamic", "else", "enum", "extends", "extern", "for", "function", "if", "implements", "import", "in", "inline", "interface", "macro", "new", "override", "package", "private", "public", "return", "static", "switch", "throw", "try", "typedef", "untyped", "using", "var", "while" ];
@@ -33,6 +34,7 @@ class Highlighter {
 
     var types = ~/\b([A-Z][a-zA-Z0-9]*)\b/g;
 
+	html = html.replace("\t", "  "); // indent with two spaces
     html = kwds.replace(html, "<span class='kwd'>$1</span>");
     html = vals.replace(html, "<span class='val'>$1</span>");
     html = types.replace(html, "<span class='type'>$1</span>");
