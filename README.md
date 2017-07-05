@@ -9,10 +9,10 @@ The repository contains a static website generator, which converts markdown arti
 ## Structure
 
  * The actual articles are in [assets/content/cookbook](assets/content/cookbook), organized per folder.
- * The template files are in [assets/content/](assets/content).
+ * The html template files are in [assets/content/](assets/content).
  * The static files (css, js, images) files are in [assets/includes/](assets/includes).
  * The Haxe source files of the generator are in [src/](src).
- * The website-generated content will output in `output`.
+ * The website-generated content will output in `output/` (excluded from git).
 
 ## Contributing articles
 
@@ -57,6 +57,9 @@ class Main {
 &grave;&grave;&grave;
 
 ## Usage
+
+Description of how to use/test the code.
+
 &grave;&grave;&grave;haxe
 class Test {
   // Code here
@@ -72,18 +75,19 @@ class Test {
 
 ## Running a local copy
 
-To run the project you need [Haxe](https://haxe.org).
+To run the project you can use Neko:
 
-Call `build-site.bat` to re-generate the output files.
+Call `neko CodeCookBook.n` to re-generate the output files.
 
 ## Contributing to the generator
 
 You need [Haxe 3.2+](https://haxe.org/download/list/) installed.
 
-The static site generator source depends on [hxtemplo](https://lib.haxe.org/p/hxtemplo) and [markdown](https://lib.haxe.org/p/markdown).
-Install from haxelib:
+The static site generator source depends on [hxtemplo](https://lib.haxe.org/p/hxtemplo) and [haxe-markdown](https://lib.haxe.org/p/markdown).
+
+Install the libraries using haxelib, run the following command in the root of the project:
 ```
-haxelib install CodeCookBook.hxml
+haxelib install all
 ```
 The CSS files are compressed using [less](http://lesscss.org/#using-less). 
 Install from npm:
