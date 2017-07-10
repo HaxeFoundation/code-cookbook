@@ -7,15 +7,20 @@ These are the Haxe targets that can directly access the filesystem:
 Name | Access to filesystem
 --- | --- | 
 C++ | Yes 
-Neko | Yes 
+C#  | Yes 
 PHP | Yes 
 Java  | Yes
-C#  | Yes 
 Python  | Yes 
+Lua | Yes 
+Macro | Yes 
+HL (HashLink) | Yes 
+Neko | Yes 
 JavaScript | No 
 NodeJS (using [hxnodejs](http://lib.haxe.org/p/hxnodejs/)) | Yes 
 ActionScript 3  | No 
 Flash | No 
+
+> Note that in macros you can access file system. 
 
 ### Check if FileSystem is available
 
