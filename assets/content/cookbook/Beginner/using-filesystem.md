@@ -2,7 +2,7 @@
 
 # Using the file system
 
-These are the Haxe targets that can directly access the filesystem:
+Using file system in Haxe is made easy because of the  [`sys` package](http://api.haxe.org/sys/). These are the Haxe targets that can directly access the filesystem:
 
 Name | Access to filesystem
 --- | --- | 
@@ -52,24 +52,48 @@ sys.io.File.saveContent('my_folder/my_file.json',content);
 ```
 > Api documentation: <http://api.haxe.org/sys/io/File.html>
 
+### Cross platform paths
+
+Dealing with paths, directories, slashes, extensions on multiple platforms or OSes can be slightly awkward. Haxe provides the `haxe.io.Path` class which supports the common path formats.
+
+Extracting info from a path:
+```haxe
+var location = "path/to/file.txt";
+var path = new Path(location);
+trace(path.dir); // path/to
+trace(path.file); // file
+trace(path.ext); // txt
+```
+
+Combining info into a new path:
+```haxe
+var directory = "path/to/";
+var file = "./file.txt";
+trace(Path.join([directory, file])); // path/to/file.txt
+```
+
+> Api documentation: <http://api.haxe.org/haxe/io/Path.html>
+
 ### Recursive loop through all directories / files
 ```haxe
 import sys.FileSystem;
 
-private function recursiveLoop(folder:String = "my_folder/") {
-  if (FileSystem.exists(folder)) {
-    trace("directory found: " + folder);
-    for (file in FileSystem.readDirectory(folder)) {
-      var path = folder + file;
+private function recursiveLoop(directory:String = "path/to/") {
+  if (FileSystem.exists(directory)) {
+    trace("directory found: " + directory);
+    for (file in FileSystem.readDirectory(directory)) {
+      var path = Path.join([directory, file]);
       if (!FileSystem.isDirectory(path)) {
         trace("file found: " + path);
         // do something with file
       } else {
-        recursiveLoop(path + "/");
+        var directory = Path.addTrailingSlash(path);
+        trace("directory found: " + directory);
+        recursiveLoop(directory);
       }
     }
   } else {
-    trace('"$folder" does not exists');
+    trace('"$directory" does not exists');
   }
 }
 ```
@@ -87,3 +111,4 @@ trace("The user id: " + stat.uid);
 trace("File size: " + stat.size);
 ```
 > Api documentation: <http://api.haxe.org/sys/FileStat.html>
+
