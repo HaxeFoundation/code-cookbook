@@ -41,4 +41,4 @@ class Main {
 }
 ```
 
-> Author: [Mark Knol](http://github.com/markknol)
+> Author: [Mark Knol](https://github.com/markknol)

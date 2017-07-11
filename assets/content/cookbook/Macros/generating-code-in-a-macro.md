@@ -83,4 +83,4 @@ Test.main = function() {
 };
 ```
 
-> Author: [Jeff Ward](http://github.com/jcward) / [@jeff__ward](http://twitter.com/jeff__ward)
+> Author: [Jeff Ward](https://github.com/jcward) / [@jeff__ward](http://twitter.com/jeff__ward)

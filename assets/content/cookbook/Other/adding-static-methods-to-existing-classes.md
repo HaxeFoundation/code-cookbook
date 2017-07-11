@@ -39,4 +39,4 @@ Using this, you can add all kinds of interesting extensions to pre-existing clas
 
 > More on this topic: <http://haxe.org/manual/lf-static-extension.html>
 > 
-> Author: [ashes999](http://github.com/ashes999)
+> Author: [ashes999](https://github.com/ashes999)

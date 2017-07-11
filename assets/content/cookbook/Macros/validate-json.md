@@ -51,4 +51,4 @@ class Test {
 ```
 
 > Source: <https://gist.github.com/markknol/59f0ede823f7d511362b>  
-> Author: [Mark Knol](http://github.com/markknol)
+> Author: [Mark Knol](https://github.com/markknol)

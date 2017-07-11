@@ -179,4 +179,4 @@ You've just tasted the different macro "flavors". As you could see they don't di
 Now you have this base to work on, it is also possible to parse/process the template compile time or do other things with it, change it to other data structures etc. 
 It opens several possibilities.
 
-> Author: [Mark Knol](http://github.com/markknol)
+> Author: [Mark Knol](https://github.com/markknol)

@@ -318,8 +318,4 @@ class Test {
 
 > Read more about VGA fonts [here](http://int10h.org/oldschool-pc-fonts/fontlist/).
 >
-> Author: anniz (Original Flash code)
->
-> Author: [Mark Knol](http://github.com/markknol) (Canvas port)
->
-> Author: [Domagoj Štrekelj](http://github.com/dstrekelj) (Cookbook entry)
+> Author: [anniz (Original Flash code)](https://github.com/anniz) / [Domagoj Štrekelj](https://github.com/dstrekelj) / [Mark Knol](http://github.com/markknol)

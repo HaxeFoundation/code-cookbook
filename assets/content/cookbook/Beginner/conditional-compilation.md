@@ -52,4 +52,4 @@ Welcome, super user!
 > * Learn about conditional compilation here: <http://haxe.org/manual/lf-condition-compilation.html>
 > * Learn about available global compiler flags here: <http://haxe.org/manual/compiler-usage-flags.html>
 >
-> Author: [Domagoj Štrekelj](http://github.com/dstrekelj)
+> Author: [Domagoj Štrekelj](https://github.com/dstrekelj)

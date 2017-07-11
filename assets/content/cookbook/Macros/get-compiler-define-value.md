@@ -73,4 +73,4 @@ The last line may differ depending on the Haxe version and compilation options, 
 >
 > Learn about available global compiler flags here: <https://haxe.org/manual/compiler-usage-flags.html>
 >
-> Author: [Domagoj Štrekelj](http://github.com/dstrekelj)
+> Author: [Domagoj Štrekelj](https://github.com/dstrekelj)

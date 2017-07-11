@@ -60,4 +60,4 @@ class Main {
 
 > Learn about macros here: <http://haxe.org/manual/macro.html>
 > 
-> Author: [Domagoj Štrekelj](http://github.com/dstrekelj)
+> Author: [Domagoj Štrekelj](https://github.com/dstrekelj)
