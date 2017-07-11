@@ -95,6 +95,7 @@ while (ereg.match(message)) {
 // row
 // row
 ```
+
 More convenient would be to wrap this in a utility function that returns the results as Array. This also allows you to count the results.
 ```haxe
 function getMatches(ereg:EReg, input:String, index:Int = 0):Array<String> {
@@ -105,13 +106,38 @@ function getMatches(ereg:EReg, input:String, index:Int = 0):Array<String> {
   }
   return matches;
 }
-```
-This would allow you to do this:
-```haxe
+
+// Test it out
 var message = "row row row your boat";
 var matches = getMatches(~/(row)/, message);
 trace(matches); // [row,row,row]
 trace(matches.length); // 3
+```
+
+Let's take a more real-life example, you can make an array with objects out of the matches like this:
+```haxe
+// search for a number, then a space, then everything until newline character or end of input is found
+function getFruits(input:String):Array<{amount:Int, fruit:String}> {
+  var ereg = ~/(\d{1,2})\s(.+?)(\n|$)/g; 
+  var list = [];
+  while (ereg.match(input)) {
+    list.push({
+      amount: Std.parseInt(ereg.matched(1)),
+      fruit: ereg.matched(2),
+    }); 
+    input = ereg.matchedRight();
+  }
+  return list;
+}
+
+// Test it out with a multiline string
+var fruits = "1 Apple
+	2 Bananas
+   	3 Pears
+  	1 Tomato";
+
+trace(getFruits(fruits)); 
+// [{amount:1, fruit:Apple}, {amount:2, fruit:Bananas}, {amount:3, fruit:Pears}]
 ```
 
 #### Mapping results
