@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e # exit with nonzero exit code if anything fails
 
-if ! [ "$TRAVIS_HAXE_VERSION" == "3.2.1" ]; then
-    echo "Skipping pushing to GitHub pages - that is only done for Haxe 3.2.1.";
+if ! [ "$TRAVIS_HAXE_VERSION" == "3.4.2" ]; then
+    echo "Skipping pushing to GitHub pages - that is only done for Haxe 3.4.2.";
     exit 0;
 elif [ -z "$GHP_BOT_TOKEN" ]; then
     echo "Skipping pushing to GitHub pages - missing GHP_BOT_TOKEN (probably in a PR build).";
