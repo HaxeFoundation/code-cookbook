@@ -37,7 +37,7 @@ class GitUtil
   }
   
   public static function getAuthors(path:String, authorByName:StringMap<GitAuthorInfo>):Array<GitAuthorInfo> {
-    #if (!display && disable_git_authors)
+    #if (!display && !disable_git_authors)
       var tty = Sys.systemName() == 'Windows' ? 'CON' : '/dev/tty';
       var process = new sys.io.Process('git shortlog -snc --email "$path" < $tty');
       if (process.exitCode() != 0) throw process.stderr.readAll().toString();
