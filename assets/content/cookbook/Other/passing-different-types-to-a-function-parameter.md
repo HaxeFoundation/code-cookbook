@@ -193,5 +193,5 @@ Of course, you can always use [macros](http://haxe.org/manual/macro.html) to cre
 > * [Haxe abstract types](http://haxe.org/manual/types-abstract.html)
 > * [Type parameter constraints](http://haxe.org/manual/type-system-type-parameter-constraints.html)
 > 
-> Author: [Justo Delgado Baudí](https://github.com/mrcdk)
+> Author: [Justo Delgado](https://github.com/mrcdk)
 

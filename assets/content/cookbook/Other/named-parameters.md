@@ -68,4 +68,4 @@ private function _foo(x:Int, y:Float, z:String) return "$x, $y, $z";
 > - Anonymous structures in Haxe manual: <http://haxe.org/manual/types-anonymous-structure.html>
 > - Tinker Bell Language Extentions by back2dos provide a more integrated support for named parameters and discuss their usage: <https://github.com/haxetink/tink_lang#named-parameters>
 > 
-> Authors: [x2f](https://github.com/x2f), [back2dos](https://github.com/back2dos)
+> Author: [x2f](https://github.com/x2f), [back2dos](https://github.com/back2dos)
