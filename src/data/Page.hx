@@ -2,6 +2,7 @@ package data;
 
 import data.Category;
 import haxe.io.Path;
+import util.GitUtil.GitAuthorInfo;
 import util.GitUtil.GitDates;
 
 /**
@@ -18,11 +19,14 @@ class Page {
   public var tags:Array<String>;
   public var absoluteUrl:String;
   public var editUrl:String;
+  public var commitHistoryUrl:String;
   public var addLinkUrl:String;
   public var contributionUrl:String;
   public var baseHref:String;
   public var dates:GitDates;
   public var category:data.Category;
+  public var authors:Array<GitAuthorInfo> = [];
+  public var contributors:Array<GitAuthorInfo> = [];
   
   public var level:Int;
   

@@ -1,4 +1,7 @@
 package util;
+import haxe.crypto.Md5;
+import haxe.ds.StringMap;
+import haxe.io.Path;
 
 using StringTools;
 
@@ -33,6 +36,32 @@ class GitUtil
     #end
   }
   
+  public static function getAuthors(path:String, authorByName:StringMap<GitAuthorInfo>):Array<GitAuthorInfo> {
+    #if (!display ) // && disable_git_dates
+      var tty = Sys.systemName() == 'Windows' ? 'CON' : '/dev/tty';
+      var process = new sys.io.Process('git shortlog -snc --email "$path" < $tty');
+      if (process.exitCode() != 0) throw process.stderr.readAll().toString();
+      var log = process.stdout.readAll().toString();
+
+      if (log == null || log.length == 0) return [];
+      var ereg = ~/(\d{1,4})\t(.+?) <(.+?)>/g;
+      var authors:Array<GitAuthorInfo> = [];
+      while (ereg.match(log)) {
+        var name = ereg.matched(2);
+        var author:GitAuthorInfo = authorByName.exists(name) ? authorByName.get(name) : { name: name };
+        author.commits = Std.parseInt(ereg.matched(1));
+        author.email = ereg.matched(3);
+        author.hash = Md5.encode(ereg.matched(3).toLowerCase());
+		authors.push(author);
+		authorByName.set(name, author);
+        log = ereg.matchedRight();
+      }
+      return authors;
+    #else 
+    return [];
+    #end
+  }
+  
   public static function getStat(path:String):GitDates {
     #if disable_git_dates
     return {
@@ -51,4 +80,13 @@ class GitUtil
 typedef GitDates = {
   modified: Date,
   created: Date,
+}
+
+typedef GitAuthorInfo = {
+  ?username: String,
+  ?profileLink: String,
+  ?name: String,
+  ?email: String,
+  ?hash: String,
+  ?commits: Int,
 }

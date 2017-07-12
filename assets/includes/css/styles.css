@@ -73,6 +73,16 @@ a, a:hover, a > code {
   color: #999;
 }
 
+.authors img
+{
+    margin-bottom: 2px;
+}
+
+.contributors a
+{
+    margin-bottom: 2px;
+}
+
 @media (max-width: 767px) {
   body {padding:0}
   .container {

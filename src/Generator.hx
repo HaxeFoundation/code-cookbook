@@ -8,6 +8,7 @@ import markdown.AST.ElementNode;
 import sys.FileSystem;
 import sys.io.File;
 import templo.Template;
+import util.GitUtil.GitAuthorInfo;
 
 using StringTools;
 
@@ -27,6 +28,9 @@ class Generator {
   private var _pages:Array<Page> = new Array<Page>();
   private var _folders:StringMap<Array<Page>> = new StringMap<Array<Page>>();
   private var _templates:StringMap<Template> = new StringMap<Template>();
+  
+  // match authors by name. not fully correct but works good enough to link github names with git names
+  private var _authorByName:StringMap<GitAuthorInfo> = new StringMap<GitAuthorInfo>();
   
   public function new() { }
   
@@ -173,8 +177,10 @@ class Generator {
         var length = html.length;
         html = util.Minifier.minify(html);
         var newLength = html.length;
+		
         //trace("optimized " + (Std.int(100 / length * (length - newLength) * 100) / 100) + "%");
       }
+		html = html.replace("<blockquote></blockquote>",""); // remove empty blockquotes caused by removing authors
       
       // make output directory if needed
       var targetDirectory = Path.directory(outputPath + page.outputPath);
@@ -202,8 +208,10 @@ class Generator {
     
     if (page.contentPath != null) {
       page.dates = util.GitUtil.getStat(contentPath + page.contentPath);
+      page.contributors = util.GitUtil.getAuthors(contentPath + page.contentPath, _authorByName);
       page.contributionUrl = getContributionUrl(page);
       page.editUrl = getEditUrl(page);
+      page.commitHistoryUrl = getCommitHistoryUrl(page);
     }
     
     if (folder != null) {
@@ -284,8 +292,8 @@ class Generator {
         pageOutputPath = pageOutputPath.toLowerCase().replace(" ", "-") + getWithoutExtension(file).toLowerCase() + ".html";
         var page = new Page("layout-page-snippet.mtt",  documentationPath + file, pageOutputPath);
         page.level = level;
-        page.pageContent = parseMarkdownContent(page, documentationPath + file);
         addPage(page, documentationPath);
+        page.pageContent = parseMarkdownContent(page, documentationPath + file);
       } else {
         if (file == assetsFolderName) {
           // when assets folder name is found, dont recurse but include directory in output
@@ -361,13 +369,36 @@ class Generator {
       .replace("http://try.haxe.org", "https://try.haxe.org");
   }
   
-  private function replaceAuthor(content:String) {
+  private function replaceAuthor(page:Page, content:String) {
     //Author: [name](url) / [name](url) 
     if (content.indexOf("Author:") != -1) {
       var authorLineOld = content.split("Author:").pop().split("\n").shift();
-      var authorline = ~/\[(.*?)\]\((.+?)\)/g.replace(authorLineOld, '<a href="$2" itemprop="url" rel="external"><span itemprop="name">$1</span></a>');
-      authorline = '<span itemprop="author" itemscope="itemscope" itemtype="https://schema.org/Person">$authorline</span>';
-      return  content.replace(authorLineOld, authorline);
+	  
+	  var authorLine:String = authorLineOld;
+	  var ereg:EReg = ~/\[(.*?)\]\((.+?)\)/g;
+	  var authors:Array<GitAuthorInfo> = [];
+	  while (ereg.match(authorLine)) {
+			var name = ereg.matched(1);
+			
+			var author:GitAuthorInfo = _authorByName.exists(name) ? _authorByName.get(name) : { name: name };
+			author.profileLink = ereg.matched(2);
+			author.username = ereg.matched(2).split("/").pop();
+			authors.push(author);
+			_authorByName.set(name, author);
+			authorLine = ereg.matchedRight();
+		}
+	  
+	  // remove author from contributors (that otherwise looks like duplicates)
+	  for (author in authors) 
+	  {
+		  for (contributor in page.contributors.copy()) 
+		  {
+			  if (contributor.name == author.name) page.contributors.remove(contributor);
+		  }
+	  }
+	  page.authors = authors;
+	  
+      return ~/(Author:.+?(\n|\r|$))/g.replace(content, ""); 
     } else {
       return content;
     }
@@ -400,6 +431,10 @@ class Generator {
     return href.join("/");
   }
   
+  public inline function getCommitHistoryUrl(page:Page) {
+    return '${repositoryUrl}commits/${repositoryBranch}/${contentPath}${page.contentPath}';
+  }
+  
   public inline function getEditUrl(page:Page) {
     return '${repositoryUrl}edit/${repositoryBranch}/${contentPath}${page.contentPath}';
   }
@@ -419,7 +454,7 @@ class Generator {
   }
   
   public inline function getAbsoluteUrl(page:Page) {
-    return basePath + page.outputPath.toString();
+    return Path.normalize(basePath + page.outputPath.toString());
   }
   
   private static inline function getWithoutExtension(file:String) {
@@ -443,7 +478,7 @@ class Generator {
     markdown = replaceHaxeOrgLinks(markdown);
     markdown = replaceYoutubeTags(markdown);
     markdown = replaceTryHaxeTags(markdown);
-    markdown = replaceAuthor(markdown);
+    markdown = replaceAuthor(page, markdown);
     
     try {
       // replace windows line endings with unix, and split
