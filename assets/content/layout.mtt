@@ -142,7 +142,7 @@
 			&copy;::DateTools.format(now, "%Y")::&nbsp;<a class="hf-link" href="https://haxe.org/foundation/" rel="external" title="Haxe Foundation Website">Haxe Foundation</a> |
 			&nbsp;<a href="https://github.com/HaxeFoundation/code-cookbook" title="Haxe Code Cookbook on Github" rel="external">Code Cookbook on Github</a> 
 			</p>
-			<p class="last-modified">Last modified: ::DateTools.format(now, "%d-%m-%Y")::</p>
+			<p class="last-modified">Last deploy: ::DateTools.format(now, "%b %d, %Y")::</p>
 		</div>
 	</div>
 </footer>

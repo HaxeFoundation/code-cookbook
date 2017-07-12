@@ -61,6 +61,9 @@ var t = DateTools.format(Date.now(), "%T");
 
 DateTools.format(Date.now(), "%F");
 // 2018-07-08
+
+DateTools.format(Date.now(), "%b %d, %Y");
+// Jan 08, 2018
 ```
 
 > For a list of all strftime directives, check out <http://strftime.org>

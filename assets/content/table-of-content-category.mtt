@@ -10,7 +10,7 @@
 <ul class="page-list unstyled">
 ::foreach page currentCategory.pages::
 	<li class="page-list-item" itemscope="itemscope" itemtype="https://schema.org/Thing" ::cond page.visible ::>
-		<h4><small class="category-count" ::cond page.dates.created !=null::>::DateTools.format(page.dates.created, "%d-%m-%Y")::</small> 
+		<h4><small class="category-count" ::cond page.dates.created !=null::>::DateTools.format(page.dates.created, "%b %d, %Y")::</small> 
 			::if page.isSerieHome()::
 				::page.category.parent.title:: 
 			::else::

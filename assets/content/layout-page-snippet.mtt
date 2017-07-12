@@ -84,15 +84,15 @@
 					::end::
 					</div> 
 				</div>
-				<div class="row"><span class="span2">Last modified:</span><time class="span4" datetime="::currentPage.dates.modified::" itemprop="dateModified"><span class="fa fa-clock-o"></span> <a href="::currentPage.commitHistoryUrl::" rel="external">::DateTools.format(currentPage.dates.modified, "%Y-%m-%d")::</a></time></div>
-				<div class="row semantic"><span class="span2">Created:</span> <time class="span4" datetime="::currentPage.dates.created::" itemprop="datePublished"><span class="fa fa-clock-o"></span> ::DateTools.format(currentPage.dates.created, "%Y-%m-%d")::</time></div>
+				<div class="row"><span class="span2">Last modified:</span><time class="span4" datetime="::currentPage.dates.modified::" itemprop="dateModified"><span class="fa fa-clock-o"></span> <a href="::currentPage.commitHistoryUrl::" rel="external">::DateTools.format(currentPage.dates.modified, "%b %d, %Y")::</a></time></div>
+				<div class="row semantic"><span class="span2">Created:</span> <time class="span4" datetime="::currentPage.dates.created::" itemprop="datePublished"><span class="fa fa-clock-o"></span> ::DateTools.format(currentPage.dates.created, "%b %d, %Y")::</time></div>
 				<div ::cond !currentPage.category.isSerie:: class="row semantic">
 					<span class="span2">Category:</span> 
 					<span class="span4" itemprop="articleSection"><i class="fa fa-book"></i>&nbsp;<a href="::currentCategory.outputPath::">::currentCategory.title::</a></span>
 				</div>
 				<div class="row tags" ::cond currentPage.visible && currentPage.tags!=null && currentPage.tags.length>0::>
 				<span class="span2">Tags:</span> 
-				<div class="span5">
+				<div class="span4">
 					<span itemprop="keywords">
 					::foreach tag currentPage.tags::
 						<span class="tag"><i class="fa fa-tag"></i>&nbsp;<a href="tag/::tag::.html" rel="tag">::tag::</a><i class="semantic" ::cond !repeat.tag.last::>,</i></span>

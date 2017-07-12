@@ -37,7 +37,7 @@
 		<div class="span8">
 			<h3><a href="rss.xml"><i class="fa fa-rss"></i></a> Latest articles</h3>
 			::foreach page latestCreatedPages(4)::
-				<h4><small class="category-count" ::cond page.dates.created !=null::>::DateTools.format(page.dates.created, "%d-%m-%Y")::</small> 
+				<h4><small class="category-count" ::cond page.dates.created !=null::>::DateTools.format(page.dates.created, "%b %d, %Y")::</small> 
 					::if page.isSerieHome()::
 						::page.category.parent.title:: 
 					::else::
