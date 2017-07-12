@@ -81,7 +81,7 @@ Call `neko CodeCookBook.n` to re-generate the output files.
 
 ## Contributing to the generator
 
-You need [Haxe 3.2+](https://haxe.org/download/list/) installed.
+You need [Haxe 3.4.2+](https://haxe.org/download/list/) installed.
 
 The static site generator source depends on [hxtemplo](https://lib.haxe.org/p/hxtemplo) and [haxe-markdown](https://lib.haxe.org/p/markdown).
 
