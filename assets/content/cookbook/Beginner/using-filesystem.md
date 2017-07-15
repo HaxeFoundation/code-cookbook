@@ -106,7 +106,6 @@ var stat:FileStat = FileSystem.stat("myFile.txt");
 trace("Last access time: " + stat.atime);
 trace("Last modification time: " + stat.mtime);
 trace("Last status change time: " + stat.ctime);
-trace("Last status change time: " + stat.ctime);
 trace("The user id: " + stat.uid);
 trace("File size: " + stat.size);
 ```
