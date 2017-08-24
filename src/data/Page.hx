@@ -8,6 +8,7 @@ import util.GitUtil.GitDates;
 /**
  * @author Mark Knol
  */
+@:keep
 class Page { 
   public var visible:Bool = true;
   public var title:String;

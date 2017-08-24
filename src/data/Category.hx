@@ -3,6 +3,7 @@ package data;
 /**
  * @author Mark Knol
  */
+@:keep
 class Category {
   public var parent:Category;
   public var title:String;

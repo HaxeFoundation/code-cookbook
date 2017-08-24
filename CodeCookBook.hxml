@@ -18,7 +18,8 @@
 -lib hxparse
 -cp src
 -main Main
--dce no
+-dce full
+ --macro keep("DateTools")
 -D analyzer
 -D analyzer-optimize
 

@@ -2,6 +2,7 @@ package;
 
 import data.Category;
 import data.Page;
+import data.TemplateData;
 import haxe.ds.StringMap;
 import haxe.io.Path;
 import markdown.AST.ElementNode;
@@ -133,7 +134,7 @@ class Generator {
     for(page in _pages) {
       // set the data for the page
       var category = getCategory(sitemap, page);
-      var data = {
+      var data:TemplateData = {
         title: category != null ? '${page.title} - ${category.title} $titlePostFix' : '${page.title} $titlePostFix', 
         now: Date.now(),
         pages: _pages,
