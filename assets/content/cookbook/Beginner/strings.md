@@ -104,6 +104,18 @@ trace("Haxe is great!".toUpperCase()); // HAXE IS GREAT!
 trace("Haxe is great!".toLowerCase()); // haxe is great!
 ```
 
+### Reverse a string
+
+```haxe
+function reverse(a:String):String {
+  var arr = a.split('');
+  arr.reverse();
+  return arr.join('');
+}
+
+trace(reverse("Haxe is great!")); // !taerg si exaH
+```
+
 For more string methods, [`StringTools`](http://api.haxe.org/StringTools.html) in the Haxe Standard Library provides a lot more methods for Strings. Here are a few examples:
 
 ```haxe
