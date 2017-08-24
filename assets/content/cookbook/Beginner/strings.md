@@ -49,10 +49,10 @@ It is possible to use multiple operators on a string:
 
 ```haxe
 // add two strings
-trace("apple" + "peer"); // applepear
+trace("apple" + "pear"); // applepear
 
 // compare if both are the same
-trace("apple" == "peer"); // false
+trace("apple" == "pear"); // false
 trace("apple" == "apple"); // true
 
 // compare if both are different
