@@ -3,8 +3,8 @@
 Defining string literals take be done by wrapping text inside double or single quotes:
 
 ```haxe
-"string text"
-'string text'
+"string text";
+'string text';
 ```
 
 Assigning strings to variables:
@@ -26,7 +26,7 @@ trace(message); // output: hello world
 In Haxe string literals can also be [template literals](https://haxe.org/manual/lf-string-interpolation.html) using so-called string interpolation. This only works when you use _single quotes_.
 
 ```haxe
-var name = "Mark"
+var name = "Mark";
 var age = 33;
 var message = 'Hello, I am $name and my age is $age';
 trace(message); // output: Hello, I am Mark and my age is 33

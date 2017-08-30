@@ -109,7 +109,7 @@ var otherItem = ItemType.Sword("Slashy", 100);
 // Compares two enum instances recursively
 if (item.equals(otherItem)) trace("Items are equal!");
 // Matches enum instance against pattern
-if (otherItem.match(ItemType.Shield(_, _)) trace("Other item is a shield!"));
+if (otherItem.match(ItemType.Shield(_, _))) trace("Other item is a shield!");
 ```
 
 > Read more in the Haxe Manual:

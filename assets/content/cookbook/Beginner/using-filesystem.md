@@ -59,7 +59,7 @@ Dealing with paths, directories, slashes, extensions on multiple platforms or OS
 Extracting info from a path:
 ```haxe
 var location = "path/to/file.txt";
-var path = new Path(location);
+var path = new haxe.io.Path(location);
 trace(path.dir); // path/to
 trace(path.file); // file
 trace(path.ext); // txt
@@ -69,25 +69,23 @@ Combining info into a new path:
 ```haxe
 var directory = "path/to/";
 var file = "./file.txt";
-trace(Path.join([directory, file])); // path/to/file.txt
+trace(haxe.io.Path.join([directory, file])); // path/to/file.txt
 ```
 
 > Api documentation: <http://api.haxe.org/haxe/io/Path.html>
 
 ### Recursive loop through all directories / files
 ```haxe
-import sys.FileSystem;
-
-private function recursiveLoop(directory:String = "path/to/") {
-  if (FileSystem.exists(directory)) {
+function recursiveLoop(directory:String = "path/to/") {
+  if (sys.FileSystem.exists(directory)) {
     trace("directory found: " + directory);
-    for (file in FileSystem.readDirectory(directory)) {
-      var path = Path.join([directory, file]);
-      if (!FileSystem.isDirectory(path)) {
+    for (file in sys.FileSystem.readDirectory(directory)) {
+      var path = haxe.io.Path.join([directory, file]);
+      if (!sys.FileSystem.isDirectory(path)) {
         trace("file found: " + path);
         // do something with file
       } else {
-        var directory = Path.addTrailingSlash(path);
+        var directory = haxe.io.Path.addTrailingSlash(path);
         trace("directory found: " + directory);
         recursiveLoop(directory);
       }
@@ -102,7 +100,7 @@ private function recursiveLoop(directory:String = "path/to/") {
 ### Checking file attributes
 
 ```haxe
-var stat:FileStat = FileSystem.stat("myFile.txt");
+var stat:sys.FileStat = sys.FileSystem.stat("myFile.txt");
 trace("Last access time: " + stat.atime);
 trace("Last modification time: " + stat.mtime);
 trace("Last status change time: " + stat.ctime);

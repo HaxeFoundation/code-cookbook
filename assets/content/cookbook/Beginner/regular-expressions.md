@@ -39,7 +39,7 @@ Take this example where we replace "hello world" to "happy world":
 
 ```haxe
 var message = "hello world";
-trace(StringTools.replace(message, "hello", "happy"); 
+trace(StringTools.replace(message, "hello", "happy")); 
 // "happy world"
 ```
 

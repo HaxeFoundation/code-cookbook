@@ -94,7 +94,7 @@ Calculating degrees to radians and radians to degrees:
 ```haxe
 var radians = Math.PI * 2;
 var degrees = radians * 180 / Math.PI;
-var radians =  degrees * Math.PI / 180
+var radians =  degrees * Math.PI / 180;
 ```
 
 Using sinus and cosinus to set the position at a distance from the given angle:
