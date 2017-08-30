@@ -4,6 +4,9 @@ haxe:
   - "3.4.2"
   - development
 
+dist: trusty
+sudo: false
+
 install:
   - yes | haxelib install all --always
   - npm install -g less

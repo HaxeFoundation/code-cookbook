@@ -104,7 +104,7 @@ trace("Haxe is great!".toUpperCase()); // HAXE IS GREAT!
 trace("Haxe is great!".toLowerCase()); // haxe is great!
 ```
 
-### Reverse a string
+Reverse a string:
 
 ```haxe
 function reverse(a:String):String {
