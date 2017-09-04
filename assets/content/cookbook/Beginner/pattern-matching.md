@@ -2,18 +2,20 @@
 
 # Pattern matching
 
-This article helps to learn the syntax used in pattern matching to learn working with switch cases in practise. 
+This article helps to learn pattern matching and all of its type of matching in practise. The article covers basic matching, variable capture, guards, extractors and enum/structure matching.
 
 Switch statements in Haxe can improve readability and also help write less repetitive / redundant code. 
 You might have found code in the macro section and wonder what all those switches do, or what the difference would be compared to if/else statements.
 Some examples on this page don't improve readability directly, they are mostly to explain the syntax and demonstrate how pattern matching works. 
 At the end of the article there will be cases where its usecase will be more clear and readability/expressiveness is considered better compared to using plain if/else statements.
 
-To get started with [pattern matching in Haxe](https://haxe.org/manual/lf-pattern-matching.html), please consult the manual too.
+To get started with pattern matching in Haxe, please consult [the manual](https://haxe.org/manual/lf-pattern-matching.html) too.
 
 ### Basic matching and capturing variables
 
 Let's say we loop from 0 to 10 and log if we found a special number two or four.
+
+The matches can be written like `case <pattern>:`
 
 ```haxe
 for (value in 0...10) {
@@ -30,7 +32,7 @@ for (value in 0...10) {
 The underscore here means "anything" and works basically the same as `default` in this case. But it does not have a name assigned. This means you can't log it or pass it to something else for example.
 
 Now imaging we want to log what the "other number" actually is. 
-This can be done using [variable capture](https://haxe.org/manual/lf-pattern-matching-variable-capture.html). In our case we name it to `other`.
+This can be done using [variable capture](https://haxe.org/manual/lf-pattern-matching-variable-capture.html). In our case we name it `other`.
 
 ```haxe
 for (value in 0...10) {
@@ -45,8 +47,8 @@ for (value in 0...10) {
 }
 ```
 
-*Important note:* The order of the cases are important. For the sake of clarity, this will never log any special number, because it will match the "others" pattern first.
-Luckily, if we do write this, Haxe will give a compiler warning "This case is unused", since it knows it will never match our special numbers.
+*Important note:* The order of the cases are important. For the sake of clarity, the following code will never log any special number, because it will match the "others" pattern first.
+Luckily, if we do write such [useless cases](https://haxe.org/manual/lf-pattern-matching-unused.html), Haxe will give a compiler warning "This case is unused", since it knows it will never match our special numbers.
 
 ```haxe
 for (value in 0...10) {
@@ -151,14 +153,15 @@ Let's do a very simple example of an extractor first; check if the matched value
 
 ```haxe
 for(value in 0...10) {
-  switch input {
+  switch value {
+    // match if value equals two
     case _ => 2:
       trace("found special number");
   }
 }
 ```
 
-Now let's bring in a functions and capture the result as variable.
+Now let's bring in a function and capture the result as variable.
 
 ```haxe
 function add(a:Int, b:Int) return a + b;
@@ -217,8 +220,11 @@ function isEven(value:Float) return value % 2 == 0;
 
 for (value in 0...10) {
   switch value {
+    // match even numbers
     case isEven(_) => true: 
       trace("even");
+
+    // match anything
     case _: 
       trace("odd");
   }
@@ -232,10 +238,15 @@ function isEven(value:Float) return value % 2 == 0;
 
 for (value in 0...10) {
   switch value {
+    // match number 4
     case special = 4: 
       trace("special number: " + special);
+
+    // match even numbers
     case value = isEven(_) => true: 
       trace("even number: " + value);
+
+    // match anything
     case other:
       trace("other: " + other);
   }
@@ -257,21 +268,25 @@ even number: 8
 other: 9
 ```
 
-### Array matching
+### Matching on multiple values
 
-With [array pattern matching](https://haxe.org/manual/lf-pattern-matching-array.html) you can switch on multiple cases at the same time.
-This makes the cases easier to read and compare.
+It's possible to [match on multiple values](https://haxe.org/manual/lf-pattern-matching-tuples.html), by using `switch [expr, expr, ..]` which uses array syntax.
+The cases should contain an array of the same length. This type of matching makes it easier compare values between cases.
 
+This will trace 1 because `array[1]` matches 6, and `array[0]` is allowed to be anything.
 ```haxe
-for(input1 in 0...4) {
-  for(input2 in 0...4) {
-    switch [input1, input2] {
-      case [1, 1]: trace("one and one");
-      case [1, 2]: trace("two and two");
-      case [2, _]: trace("two and something else");
-      case [_, _]: trace("other", input1, input2);
-    }
-  }
+var myArray = [1, 6];
+switch(myArray) {
+  case [2, _]: 
+    trace("0");
+  case [_, 6]:
+    trace("1");
+  case []: 
+    trace("2");
+  case [_, _, _]: 
+    trace("3");
+  case _: 
+    trace("4");
 }
 ```
 
@@ -300,25 +315,7 @@ for (value in 1...101) { // from 1 to 100
 }
 ```
 
-We could rewrite this to something that switches on one of the two variables and check if those are true.
-If you remembered that extractors are `<expr> => <pattern>` it is possible to use `&&` in our first case.
-
-```haxe
-function isMultipleOf(value:Float, of:Float):Bool return value % of == 0;
-    
-for(value in 1...101) {
-  var multipleOf3 = isMultipleOf(value, 3);
-  var multipleOf5 = isMultipleOf(value, 5);
-  trace(switch value {
-    case multipleOf3 && multipleOf5 => true: "FizzBuzz";
-    case multipleOf3 => true: "Fizz";
-    case multipleOf5 => true: "Buzz";
-    case _: Std.string(value);
-  });
-}
-```
-
-If we would have use array matching here, our FizzBuzz code would look like:
+If we would match using multiple values here, our FizzBuzz code would look like demonstrated here. We basically do `switch [boolean, boolean]` here.
 
 ```haxe
 function isMultipleOf(value:Float, of:Float):Bool return value % of == 0;
@@ -335,9 +332,10 @@ for(value in 1...101) {
 
 ### Rock / Paper / Scissors
 
-Let's go into real live examples of array matching. They become powerful when bringing enums and more complex objects.
-Now readability is always debatable but this example shows how clear you can create a rock paper scissors game with array matching.
-Writing this code with if/else would have lot of `if(playerA.move == Paper && playerB.move == Paper) winner = playerB`. But as you can see the switch here directly returns the player who wins, or `null` when it is draw.
+Let's go into more practical examples of array matching. They become powerful when bringing enums and more complex objects.
+Now readability is always debatable but this example shows how clear you can create a rock paper scissors game with matching multiple values.
+Writing this code with if/else would have lot of `if(playerA.move == Paper && playerB.move == Paper) winner = playerB`. 
+As you can see the switch here directly returns the player who wins, or `null` when it is draw.
 
 ```haxe
 class Test {
@@ -374,51 +372,73 @@ enum Move {
   Rock; Paper; Scissors;
 }
 ```
+If we would use the OR pattern here, we could have written the cases like this:
+```
+var winner = switch [playerA.move, playerB.move] {
+  case [Rock, Scissors] | [Paper, Rock] | [Scissors, Paper]: playerA;
+  case [Rock, Paper] | [Paper, Scissors] | [Scissors, Rock]: playerB;
+  default: null;
+}
+```
 
-### Parsing input
+### Array matching
 
-Pattern matching can also be very useful when you want to parse/match input, e.g. for a text based game, bot or when building a command-line interface (CLI).
-In the following example we want to parse `"say {word} to {name}"`. If the input doesn't match, it says "unknown command". As you can see we use array matching and capture {word} and {name} as variables.
+[Array matching](https://haxe.org/manual/lf-pattern-matching-array.html) is looks similar as matching to multiple values, but this matches on actual arrays, not on multiple things which can be different types. 
+The cases can have different array length.
+It can also be very useful when you want to parse/match input, e.g. for a text based game, bot or when building a command-line interface (CLI).
+In the following example we want to parse `"say {word} to {name}"`. If the input doesn't match, it says "unknown command". As you can see we capture {word} and {name} as variables.
 
 ```haxe
 var input = "say hello to Dave";
 
 switch input.split(" ") {
-	case ["say", word, "to", name]: 
-		trace('"$word" to $name');
-	case _: 
-		trace("unknown command");
+  // match "say {word} to {name}"
+  case ["say", word, "to", name]: 
+    trace('"$word" to $name');
+
+  // match anything
+  case _: 
+    trace("unknown command");
 }
 // "hello" to Dave
 ```
 
 Of course you can bring the multiple cases here in too.
-Let's say our bot is a bit picky and only replies when you say something to Sophia, Emma or Olivia:
+Let's say our input command bot is a bit picky and replies different when you say specific to somebody called Sophia, Emma or Olivia. 
+Note that because the given name here is Mark, it will fall to the second case.
 
 ```haxe
 var input = "say hi to Mark";
 
 switch input.split(" ") {
-	case ["say", word, "to", name = "Sophia" | "Emma" | "Olivia"]: 
-		trace('I only want to say "$word" to you, $name');
-	case _: 
-		trace("unknown command");
+  // match "say {word} to {name}" where name is specific name
+  case ["say", word, "to", name = "Sophia" | "Emma" | "Olivia"]: 
+    trace('I only want to say "$word" to you, $name');
+
+  // match "say {word} to {name}"
+  case ["say", word, "to", name]: 
+    trace('"$word" to $name');
+
+  // match anything
+  case _: 
+    trace("unknown command");
 }
 ```
 
 ### Guards
 
-It is possible to restrict case using if statements. We call these [guards](https://haxe.org/manual/lf-pattern-matching-guards.html). They can be used with the `case ... if(condition):` syntax.
+It is possible to restrict case using if statements. We call these [guards](https://haxe.org/manual/lf-pattern-matching-guards.html). 
+They can be used with the `case ... if(condition):` syntax.
 For example, suppose you want to check whether an integer is greater than, less than, or equal to zero.
 
 ```haxe
 var value = 10;
 if (value > 0) {
-  print("positive: " + value);
+  trace("positive: " + value);
 } else if (value < 0) {
-  print("negative: " + value);
+  trace("negative: " + value);
 } else {
-  print("zero");
+  trace("zero");
 }
 ```
 
@@ -428,19 +448,24 @@ As you might notice we will capture a variable of value in the case (`case v`) a
 ```haxe
 var value = 10;
 switch value {
+  // match if v is bigger than 0
   case v if (v > 0): 
     trace("positive: " + v);
+
+  // match if v is smaller than 0
   case v if (v < 0): 
     trace("negative: " + v);
+
+  // matches anything
   case _: 
     trace("zero");
 }
 ```
 
-Now combine what we learned already learned so far and go back to our input command bot and make the input accept these cases:
+Now let's again combine what we learned already learned so far and go back to our input command bot and make the input accept these cases:
 
  - `"say {word}"`. 
- - `"say {word} to {name}`. When you use the {name} Sophia/Emma/Olivia it replies different.
+ - `"say {word} to {name}"`. When you use the {name} Sophia/Emma/Olivia it replies different.
  - `"say {word} {amount} times"`. {word} should be hello/hi/hey and {amount} should be a number.
  
 Since we are dealing with strings the example uses a regexp `^[0-9]+$` to validate if there is a number in the string, afterwards we parse it to an actual integer using `Std.parseInt`.
@@ -450,21 +475,155 @@ As might want to figure out, the following example would be hard to do with if/e
 var input = "say hello 3 times";
 
 switch input.split(" ") {
+  // match "say {word}"
   case ["say", word]: 
     trace(word);
-  
+
+  // match "say {word} to {name}" where name is specific name
   case ["say", word, "to", name = "Sophia" | "Emma" | "Olivia"]: 
     trace('I only say $word to you, $name');
-  
+
+  // match "say {word} to {name}"
   case ["say", word, "to", name]: 
     trace('$word to $name');
-  
+
+  // match "say {word} {amount} times" where {word} is a greeting and {amount} is a number.
   case [action = "say", word = "hello"|"hi"|"hey", amount, "times"] if (~/[0-9]{1,}/.match(amount)): 
     for (i in 0 ... Std.parseInt(amount)) {
       trace('$action $word');
     }
-  
+
+  // matches anything
   case _:
     trace("unknown command");
+}
+```
+
+### Matching on structures
+
+We've already learned many aspects so far, the is the next flavor in pattern matching; [matching on structures and instances](https://haxe.org/manual/lf-pattern-matching-structure.html).
+The matches can be written like `case { key: <pattern>, key: <pattern>, ..}:`.
+
+In the following example we match on these rules:
+
+1. Find someone who is older than 50
+1. Otherwise find someone named Jose who is 42
+1. Otherwise, log the name
+
+As you may notice we use acapture variables,
+
+```haxe
+var person = { name: "Mark", age: 33 };
+
+switch person {
+  // match person with age older than 50
+  case { age: _ > 50 => true}:
+    trace('found somebody older than 50');
+
+  // match on specific person named Jose who is 42
+  case { name: "Jose", age: 42  }:
+    trace('Found Jose, who is 42');
+
+  // match on name
+  case { name: name }:
+    trace('Found someone called $name');
+
+  // matches anything
+  case _:
+    trace("unknown");
+}
+```
+If we would like to trace the age of the person in the first case we could have written `case { age: age > 50 => true}: trace('found somebody older than 50, the age is $age')`.
+
+Of course object matching can be used with all other things we already used before.
+
+```haxe
+var person1 = { name: "Mark", age: 33 };
+var person2 = { name: "John", age: 45 };
+
+switch [person1, person2] {
+  // match if person1 is older than person2
+  case [{name:name1, age:age1}, {name:name2, age:age2}] if (age1 > age2):
+    trace('name1 is older than $name2');
+
+  // match on both persons names
+  case [{name:name1}, {name:name2}]:
+    trace('name1 is youngher than $name2');
+}
+```
+
+### Enum matching
+
+Haxe provides powerful [enumeration type](https://haxe.org/manual/types-enum-instance.html) (enum), which are actually an algebraic data type (ADT). 
+They are very useful for describing data structures and pattern matching works nicely together.
+We continue to the next flavour of pattern matching: [matching on enums](https://haxe.org/manual/lf-pattern-matching-enums.html). 
+
+The matches can be written like `case Enum(<pattern>, <pattern>, ..):` depending on the amount of parameters the enum has. 
+Of course the pattern may contain variable capture, extractors and match structures and can be restricted with guards etc. 
+
+
+```haxe
+class Game {
+  static function main() {
+    var event = WIN(1000);
+
+    switch (event) {
+      case START: 
+        trace('Game started');
+
+      case LOST:
+        trace('Game over. You lost..');
+
+      case WIN(score):
+        trace('Game over. You win! Score: $score!');
+    }
+  }
+}
+
+enum GameEvent {
+  START;
+  LOST;
+  WIN(score:Int);
+}
+```
+
+A nice thing to know is that "nested" enum instances can be mached in one case, which saves a lot of nested switches or if-conditions otherwise. 
+The syntax could be `case Enum(Enum(<pattern>, Enum(<pattern>), ..), <pattern>, ..):`, again depending on the amount of parameters the enum has.
+
+In the following (more complex) example our Tree enum has a Node that can contain a Leaf or another Node. This way you can make a big structure, since you can keep on nesting.
+It is possible to match on such enum structures too. Note that the switch returns the name of the matched leaf name and traces that afterwards.
+
+```haxe
+class Test {
+  static function main() {
+    var myTree = Node(
+      Leaf("RED"), 
+      Node(Leaf("ORANGE"), Leaf("GREEN"))
+    );
+
+    var match = switch(myTree) {
+      // matches any Node that has a Leaf on right-side
+      case Node(_, Leaf(name)): 'Node with leaf: $name';
+
+      // matches any Node that has another Node on right-side 
+      // which has Leaf("{name}") on left-side
+      // where name is uppercase
+      case Node(_, Node(Leaf(name), _)) if (name.toUpperCase() == name): 'Node with Node with leaf: $name';
+
+      // matches any Node that has another Node on right-side 
+      // which has Leaf("{name}") on left-side
+      case Node(_, Node(Leaf(name), _)): 'Node with Node with leaf: (case sensitive) $name';
+
+      // matches anything
+      case _: 'unknown';
+    }
+
+    trace(match); // "Node with Node wih leaf: ORANGE"
+  }
+}
+
+enum Tree<T> {
+  Leaf(v:T);
+  Node(l:Tree<T>, r:Tree<T>);
 }
 ```
