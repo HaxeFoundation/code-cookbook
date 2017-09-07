@@ -632,4 +632,3 @@ enum Tree<T> {
   Node(l:Tree<T>, r:Tree<T>);
 }
 ```
-Here we also introduced that a switch statement returns a value, which we assign to the variable `name`. A switch statement passes the value of the last expression in the case statement which was selected (though no `return` statements are used.) Here we return the name of the matched leaf, which we later trace.
