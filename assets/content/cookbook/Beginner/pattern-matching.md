@@ -2,7 +2,7 @@
 
 # Pattern matching
 
-This article helps to learn pattern matching and all of its type of matching in practise. The article covers basic matching, variable capture, guards, extractors and enum/structure matching.
+This article helps to learn pattern matching and all of its type of matching in practice. The article covers basic matching, variable capture, guards, extractors and enum/structure matching.
 
 Switch statements in Haxe can improve readability and also help write less repetitive / redundant code. 
 You might have found code in the macro section and wonder what all those switches do, or what the difference would be compared to if/else statements.
@@ -587,7 +587,7 @@ enum GameEvent {
 }
 ```
 
-A nice thing to know is that "nested" enum instances can be mached in one case, which saves a lot of nested switches or if-conditions otherwise. 
+A nice thing to know is that "nested" enum instances can be matched in one case, which saves a lot of nested switches or if-conditions otherwise. 
 The syntax could be `case Enum(Enum(<pattern>, Enum(<pattern>), ..), <pattern>, ..):`, again depending on the amount of parameters the enum has.
 
 In the following (more complex) example our Tree enum has a Node that can contain a Leaf or another Node. This way you can make a big structure, since you can keep on nesting.
