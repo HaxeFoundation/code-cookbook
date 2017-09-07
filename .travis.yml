@@ -8,7 +8,7 @@ dist: trusty
 sudo: false
 
 install:
-  - yes | haxelib install haxe CodeCookBook-neko.hxml --always
+  - yes | haxelib install CodeCookBook-neko.hxml --always
   - npm install -g less
   - npm install -g less-plugin-clean-css
   - haxe CodeCookBook-neko.hxml
