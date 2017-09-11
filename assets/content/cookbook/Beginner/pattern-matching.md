@@ -394,13 +394,13 @@ var input = "say hello to Dave";
 switch input.split(" ") {
   // match "say {word} to {name}"
   case ["say", word, "to", name]: 
-    trace('"$word" to $name');
+    trace('$word to $name');
 
   // match anything
   case _: 
     trace("unknown command");
 }
-// "hello" to Dave
+// hello to Dave
 ```
 
 Of course you can bring the multiple cases here in too.
@@ -413,11 +413,11 @@ var input = "say hi to Mark";
 switch input.split(" ") {
   // match "say {word} to {name}" where name is specific name
   case ["say", word, "to", name = "Sophia" | "Emma" | "Olivia"]: 
-    trace('I only want to say "$word" to you, $name');
+    trace('I only want to say $word to you, $name');
 
   // match "say {word} to {name}"
   case ["say", word, "to", name]: 
-    trace('"$word" to $name');
+    trace('$word to $name');
 
   // match anything
   case _: 
