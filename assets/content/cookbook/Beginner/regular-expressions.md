@@ -59,7 +59,7 @@ For example, lets convert "high to low" to "low and high". We search for "high" 
 var message = "high to low";
 var ereg:EReg = ~/(high).+?(low)/;
 trace(ereg.replace(message, "$2 and $1")); 
-// "high and low"
+// "low and high"
 ```
 
 ### Iterating on matched parts
