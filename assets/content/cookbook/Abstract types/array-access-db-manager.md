@@ -78,10 +78,10 @@ class Main {
     static function main() {
         Manager.cnx = Sqlite.open('array-access.db');
 
-        var userManager:UserManager = new UserManager();
-        if(!TableCreate.exists(userManager)) {
+        var users:UserManager = new UserManager();
+        if(!TableCreate.exists(users)) {
             Sys.println('Creating user table...');
-            TableCreate.create(userManager);
+            TableCreate.create(users);
         }
 
         var user:User = new User("Bob");
@@ -89,15 +89,15 @@ class Main {
         Sys.println('Created new user: ${user}');
 
         var uid:Int = user.id;
-        userManager[42] = new User("Douglas");
-        Sys.println('Created another new user: ${userManager[42]}');
+        users[42] = new User("Douglas");
+        Sys.println('Created another new user: ${users[42]}');
 
         var thirdUser = new User("Abed");
-        userManager[null] = thirdUser;
+        users[null] = thirdUser;
         Sys.println('Created yet another new user: ${thirdUser}');
 
         user.delete();
-        userManager[42].delete();
+        users[42].delete();
         thirdUser.delete();
     }
 }
