@@ -81,6 +81,6 @@ Let's slow him down...
 
 > More on this topic: 
 > 
-> * [Class field in Haxe Manual](https://haxe.org/manual/types-abstract-array-access.html)
+> * [Array Access in Haxe Manual](https://haxe.org/manual/types-abstract-array-access.html)
 > 
 > Author: [Kenton Hamaluik](https://github.com/FuzzyWuzzie/)
