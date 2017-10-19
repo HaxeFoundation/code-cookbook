@@ -2,11 +2,15 @@ language: haxe
 
 haxe:
   - "3.4.2"
-  - "3.4.3"
+  - "3.4.4"
   - development
 
 dist: trusty
 sudo: false
+
+matrix:
+  allow_failures:
+    - haxe: development
 
 install:
   - yes | haxelib install CodeCookBook-neko.hxml --always
