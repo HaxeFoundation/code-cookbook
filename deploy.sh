@@ -25,6 +25,10 @@ git init
 git config user.name "${GHP_BOT_NAME}"
 git config user.email "${GHP_BOT_EMAIL}"
 
+if [ -n "$GHP_CNAME" ]; then
+    echo "$GHP_CNAME" > CNAME;
+fi
+
 # The first and only commit to this new Git repo contains all the
 # files present with the commit message "Deploy to GitHub Pages".
 git add .
