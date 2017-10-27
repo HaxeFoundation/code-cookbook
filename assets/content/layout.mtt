@@ -36,6 +36,23 @@
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400" />
 </head>
 <body>
+	::if false::
+	<!--
+		Force redirect to the right origin.
+		It is needed to redirect `path` to `path/` with the correct domain name.
+		See the "Caveats" section of http://strd6.com/2016/02/github-pages-custom-domain-with-ssltls/.
+	-->
+	::end::
+	::if basePath != null && currentPage.absoluteUrl != null::
+	<script type="text/javascript">
+	function startsWith(str, searchString){
+		return str.substr(0, searchString.length) === searchString;
+	}
+	if (!startsWith(location.href, "::basePath::")) {
+		window.location.replace("::currentPage.absoluteUrl::");
+	}
+	</script>
+	::end::
 	<nav class="section nav dark">
 		<div class="navbar navbar-fixed-top navbar-inverse">
 			<div class="navbar-inner">
