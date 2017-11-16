@@ -21,9 +21,11 @@
 -dce full
  --macro keep("DateTools")
  --macro keep("haxe.ds.StringMap")
+#-D eval-stack
 -D analyzer
 -D analyzer-optimize
 
 # for debug-only fast compile use:
 #-D disable_git_dates
 #-D disable_git_authors
+#-D test_snippets
