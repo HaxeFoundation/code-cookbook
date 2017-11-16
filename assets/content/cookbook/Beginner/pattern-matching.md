@@ -2,7 +2,7 @@
 
 # Pattern matching
 
-This article helps to learn pattern matching and all of its type of matching in practise. The article covers basic matching, variable capture, guards, extractors and enum/structure matching.
+This article helps to learn pattern matching and all of its type of matching in practice. The article covers basic matching, variable capture, guards, extractors and enum/structure matching.
 
 Switch statements in Haxe can improve readability and also help write less repetitive / redundant code. 
 You might have found code in the macro section and wonder what all those switches do, or what the difference would be compared to if/else statements.
@@ -271,7 +271,7 @@ other: 9
 ### Matching on multiple values
 
 It's possible to [match on multiple values](https://haxe.org/manual/lf-pattern-matching-tuples.html), by using `switch [expr, expr, ..]` which uses array syntax.
-The cases should contain an array of the same length. This type of matching makes it easier compare values between cases.
+The cases should contain an array of the same length. This type of matching makes it easier to compare values between cases.
 
 This will trace 1 because `array[1]` matches 6, and `array[0]` is allowed to be anything.
 ```haxe
@@ -383,7 +383,7 @@ var winner = switch [playerA.move, playerB.move] {
 
 ### Array matching
 
-[Array matching](https://haxe.org/manual/lf-pattern-matching-array.html) is looks similar as matching to multiple values, but this matches on actual arrays, not on multiple things which can be different types. 
+[Array matching](https://haxe.org/manual/lf-pattern-matching-array.html) is looks similar to matching on multiple values, but this matches on actual arrays, not on multiple things which can be different types. 
 The cases can have different array length.
 It can also be very useful when you want to parse/match input, e.g. for a text based game, bot or when building a command-line interface (CLI).
 In the following example we want to parse `"say {word} to {name}"`. If the input doesn't match, it says "unknown command". As you can see we capture {word} and {name} as variables.
@@ -394,13 +394,13 @@ var input = "say hello to Dave";
 switch input.split(" ") {
   // match "say {word} to {name}"
   case ["say", word, "to", name]: 
-    trace('"$word" to $name');
+    trace('$word to $name');
 
   // match anything
   case _: 
     trace("unknown command");
 }
-// "hello" to Dave
+// hello to Dave
 ```
 
 Of course you can bring the multiple cases here in too.
@@ -413,11 +413,11 @@ var input = "say hi to Mark";
 switch input.split(" ") {
   // match "say {word} to {name}" where name is specific name
   case ["say", word, "to", name = "Sophia" | "Emma" | "Olivia"]: 
-    trace('I only want to say "$word" to you, $name');
+    trace('I only want to say $word to you, $name');
 
   // match "say {word} to {name}"
   case ["say", word, "to", name]: 
-    trace('"$word" to $name');
+    trace('$word to $name');
 
   // match anything
   case _: 
@@ -469,7 +469,7 @@ Now let's again combine what we learned already learned so far and go back to ou
  - `"say {word} {amount} times"`. {word} should be hello/hi/hey and {amount} should be a number.
  
 Since we are dealing with strings the example uses a regexp `^[0-9]+$` to validate if there is a number in the string, afterwards we parse it to an actual integer using `Std.parseInt`.
-As might want to figure out, the following example would be hard to do with if/else statements.
+As you can imagine, the following example would be hard to do with if/else statements.
 
 ```haxe
 var input = "say hello 3 times";
@@ -501,8 +501,8 @@ switch input.split(" ") {
 
 ### Matching on structures
 
-We've already learned many aspects so far, the is the next flavor in pattern matching; [matching on structures and instances](https://haxe.org/manual/lf-pattern-matching-structure.html).
-The matches can be written like `case { key: <pattern>, key: <pattern>, ..}:`.
+The next flavour of pattern matching is [matching on structures and instances](https://haxe.org/manual/lf-pattern-matching-structure.html).
+These matches can be written like `case { key: <pattern>, key: <pattern>, ..}:`.
 
 In the following example we match on these rules:
 
@@ -510,7 +510,7 @@ In the following example we match on these rules:
 1. Otherwise find someone named Jose who is 42
 1. Otherwise, log the name
 
-As you may notice we use acapture variables,
+As you may notice we use capture variables,
 
 ```haxe
 var person = { name: "Mark", age: 33 };
@@ -554,8 +554,8 @@ switch [person1, person2] {
 
 ### Enum matching
 
-Haxe provides powerful [enumeration type](https://haxe.org/manual/types-enum-instance.html) (enum), which are actually an algebraic data type (ADT). 
-They are very useful for describing data structures and pattern matching works nicely together.
+Haxe provides a powerful [enumeration type](https://haxe.org/manual/types-enum-instance.html) (enum), which are an algebraic data type (ADT). 
+They are very useful for describing data structures and work nicely with pattern matching.
 We continue to the next flavour of pattern matching: [matching on enums](https://haxe.org/manual/lf-pattern-matching-enums.html). 
 
 The matches can be written like `case Enum(<pattern>, <pattern>, ..):` depending on the amount of parameters the enum has. 
@@ -587,11 +587,10 @@ enum GameEvent {
 }
 ```
 
-A nice thing to know is that "nested" enum instances can be mached in one case, which saves a lot of nested switches or if-conditions otherwise. 
-The syntax could be `case Enum(Enum(<pattern>, Enum(<pattern>), ..), <pattern>, ..):`, again depending on the amount of parameters the enum has.
+A nice thing to know is that "nested" enum instances can be matched in one case, which saves a lot of nested switches or if-conditions otherwise. 
+The syntax could be `case Enum(Enum(<pattern>, Enum(<pattern>), ..), <pattern>, ..):`, again depending on the amount of parameters the enum has. For example, the Haxe macro printer matches expressions that are constant (EConst) Strings (CString) in one pattern: `case EConst(CString(s)):`
 
-In the following (more complex) example our Tree enum has a Node that can contain a Leaf or another Node. This way you can make a big structure, since you can keep on nesting.
-It is possible to match on such enum structures too. Note that the switch returns the name of the matched leaf name and traces that afterwards.
+In the following (more complex) example, a `Tree` enum consists of `Node`s and `Leaf`s, where `Node` has a left and right subtree. This way you can make a big structure, since you can keep on nesting. It is possible to use enum matching to match structures within this tree:
 
 ```haxe
 class Test {
@@ -600,6 +599,12 @@ class Test {
       Leaf("RED"), 
       Node(Leaf("ORANGE"), Leaf("GREEN"))
     );
+
+    //              Node
+    //           /        \
+    //  Leaf("RED")        Node
+    //                    /     \
+    //         Leaf("ORANGE")  Leaf("GREEN")
 
     var match = switch(myTree) {
       // matches any Node that has a Leaf on right-side

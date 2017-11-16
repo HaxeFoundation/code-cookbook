@@ -2,15 +2,20 @@ language: haxe
 
 haxe:
   - "3.4.2"
+  - "3.4.4"
   - development
 
 dist: trusty
 sudo: false
 
+matrix:
+  allow_failures:
+    - haxe: development
+
 install:
-  - yes | haxelib install all --always
-  - npm install -g less
-  - npm install -g less-plugin-clean-css
+  - yes | haxelib install CodeCookBook-neko.hxml --always
+  - npm install -g less@2.7
+  - npm install -g less-plugin-clean-css@1.5
   - haxe CodeCookBook-neko.hxml
 
 script:
