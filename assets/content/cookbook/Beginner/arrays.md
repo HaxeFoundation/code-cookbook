@@ -23,6 +23,7 @@ trace(arrayOfFloats);
 An element can be inserted into an array at a desired position, prepended to the start of the array, or appended to the end of the array. Multiple elements can be appended to an array through concatenation.
 
 ```haxe
+var arrayOfStrings:Array<String> = [];
 // Adds "Hello" at index 0, offsetting elements to the right by one position
 arrayOfStrings.insert(0, "Hello");
 // Prepends "Haxe" to the start of the array
@@ -38,6 +39,7 @@ arrayOfStrings = arrayOfStrings.concat(["foo", "bar"]);
 Elements can be removed from an array by removing a specific element of the array, a range of elements in the array, the first element of the array, or the last element of the array.
 
 ```haxe
+var arrayOfStrings:Array<String> = ["Hi", "Everyone", "Nice", "To", "Meet", "You"];
 // Removes first occurence of "Hello" in the array
 arrayOfStrings.remove("Hello");
 // Removes and returns three elements beginning with (and including) index 0
@@ -53,6 +55,7 @@ arrayOfStrings.pop();
 Array elements can be accessed through array notation, using the index of the element in the array.
 
 ```haxe
+var arrayOfStrings:Array<String> = ["first", "foo", "middle", "foo", "last"];
 // Retrieves first array element
 var first = arrayOfStrings[0];
 // Retrieves last array element
@@ -80,7 +83,11 @@ for (item in arrayOfStrings) {
 Array elements can be copied into a new array.
 
 ```haxe
+var arrayOfStrings:Array<String> = ["first", "second", "last"];
 var newArrayOfStrings = arrayOfStrings.copy();
+newArrayOfStrings.push("best");
+trace(arrayOfStrings); // ["first", "second", "last"];
+trace(newArrayOfStrings); // ["first", "second", "last", "best"];
 ```
 
 #### Filter
@@ -88,6 +95,7 @@ var newArrayOfStrings = arrayOfStrings.copy();
 Array elements can be filtered into a new array with a filtering function. Every array element for which the filtering function returns `true` is added to a new array.
 
 ```haxe
+var arrayOfStrings:Array<String> = ["first", "second", "last"];
 var noEmptyStrings = arrayOfStrings.filter(function (e) return e != "");
 ```
 
@@ -96,6 +104,7 @@ var noEmptyStrings = arrayOfStrings.filter(function (e) return e != "");
 Array elements can be mapped into a new array with a mapping function. The mapping is bijective, and every element from the initial array will have its mapping in the new array.
 
 ```haxe
+var arrayOfStrings:Array<String> = ["first", "second", "last"];
 var upperCaseStrings = arrayOfStrings.map(function (e) return e.toUpperCase());
 ```
 
@@ -104,6 +113,7 @@ var upperCaseStrings = arrayOfStrings.map(function (e) return e.toUpperCase());
 The order of elements in an array can be reversed.
 
 ```haxe
+var arrayOfStrings:Array<String> = ["first", "second", "last"];
 arrayOfStrings.reverse();
 ```
 
@@ -112,7 +122,8 @@ arrayOfStrings.reverse();
 A specific range of array elements from a starting index up to (excluding) an end index can be copied to a new array.
 
 ```haxe
-var stringsThreeAndFour = arrayOfStrings.slice(3, 5);
+var arrayOfStrings:Array<String> = ["first", "second", "last"];
+var stringsThreeAndFour = arrayOfStrings.slice(1, 2);
 ``` 
 
 #### Sort
@@ -120,6 +131,7 @@ var stringsThreeAndFour = arrayOfStrings.slice(3, 5);
 Array elements can be sorted according to a comparison function. The comparison function compares two elements (the predecessor and the successor), and must return an `Int`. A return value of 0 indicates the elements are equivalent, a positive return value gives way to the successor, and a negative return value gives way to the predecessor.
 
 ```haxe
+var arrayOfStrings:Array<String> = ["first", "second", "last"];
 arrayOfStrings.sort(function (a, b) return a.charCodeAt(0) - b.charCodeAt(0));
 ```
 
@@ -128,6 +140,7 @@ arrayOfStrings.sort(function (a, b) return a.charCodeAt(0) - b.charCodeAt(0));
 Arrays can be prepared for printing by joining the elements together with a separator character, or by using the string representation of the array structure.
 
 ```haxe
+var arrayOfStrings:Array<String> = ["first", "second", "last"];
 // Returns a string of array elements concatenated by separator string
 var withSeparator:String = arrayOfStrings.join(" / ");
 // Returns a string representation of the array structure

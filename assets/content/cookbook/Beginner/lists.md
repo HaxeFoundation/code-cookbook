@@ -18,6 +18,7 @@ var listOfListsOfMyType = new List<List<MyType>>();
 An element can be appended to the end (tail) of the list, or prepended to the beginning (head) of the list. Elements cannot be inserted into a specific place in the list.
 
 ```haxe
+var listOfInts = new List<Int>();
 // Adds 1 to the tail of the list
 listOfInts.add(1); 
 // Adds 2 to the head of the list
@@ -29,6 +30,7 @@ listOfInts.push(2);
 Elements can be removed by passing a reference or value of the list element to be removed. In that case, the first occurence of the passed element will be removed from the list. List elements can also be instantly removed from the top of the list.
 
 ```haxe
+var listOfInts = new List<Int>(1,2,3,4,5);
 // Removes first occurence of 1 in list
 listOfInts.remove(1);
 // Removes and returns the head element of the list
@@ -40,6 +42,7 @@ listOfInts.pop();
 Only the first (head) and last (tail) element of the list can be directly retrieved.
 
 ```haxe
+var listOfInts = new List<Int>(1,2,3,4,5);
 // Returns the head element of the list
 listOfInts.first();
 // Returns the tail element of the list

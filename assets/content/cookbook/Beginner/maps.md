@@ -69,6 +69,12 @@ Now we know how to create a map and set values, let's get a value and trace it:
 As explained earlier, if you are using `Map` you can use array access to get values `map[key]`, otherwise you have to use `map.get(key)`. 
 
 ```haxe
+var ageByUser = [
+  "John" => 26,
+  "Peter" => 17,
+  "Mark" => 32,
+];
+
 var ageOfMark = ageByUser["Mark"];
 trace(ageOfMark); 
 // output: 32
@@ -82,6 +88,12 @@ trace(ageOfMark);
 If the user "Mark" wouldn't exist in the map, the variable `ageOfMark` would be `null`. To be absolute sure if a certain _key_ exists, you can check it using the `map.exists` function.
 
 ```haxe
+var ageByUser = [
+  "John" => 26,
+  "Peter" => 17,
+  "Mark" => 32,
+];
+
 // Search for the user "Simon", which isn't defined in our map and trace its age.
 var user = "Simon";
 if (ageByUser.exists(user)) {
@@ -97,6 +109,12 @@ if (ageByUser.exists(user)) {
 You can remove values using the `map.remove` function. 
 
 ```haxe
+var ageByUser = [
+  "John" => 26,
+  "Peter" => 17,
+  "Mark" => 32,
+];
+
 var user = "John";
 ageByUser.remove(user);
 
@@ -111,6 +129,11 @@ To iterate over all values of the map, use `for (value in map)`.
 In our example the values are defining the user's age, let's trace all ages.
 
 ```haxe
+var ageByUser = [
+  "John" => 26,
+  "Peter" => 17,
+  "Mark" => 32,
+];
 for (age in ageByUser) {
   trace(age);
 }
@@ -120,6 +143,11 @@ To iterate over the keys of the map, use `for (key in map.keys())`.
 In our example the keys are user names, let's trace all names.
 
 ```haxe
+var ageByUser = [
+  "John" => 26,
+  "Peter" => 17,
+  "Mark" => 32,
+];
 for (user in ageByUser.keys()) {
   trace(user);
 }
@@ -128,6 +156,11 @@ for (user in ageByUser.keys()) {
 Of course this can be combined, let's trace the user and its age:
 
 ```haxe
+var ageByUser = [
+  "John" => 26,
+  "Peter" => 17,
+  "Mark" => 32,
+];
 for (user in ageByUser.keys()) {
   var age = ageByUser[user];
   trace('$user is $age years old');

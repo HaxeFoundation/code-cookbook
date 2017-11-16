@@ -5,6 +5,8 @@
 ### Sort an array of values
 
 ```haxe
+var myArray = [1,5,3,7,6,2,4];
+
 myArray.sort(function(a, b):Int {
   if (a < b) return -1;
   else if (a > b) return 1;
@@ -16,6 +18,8 @@ This method isn't [stable](https://en.wikipedia.org/wiki/Sorting_algorithm#Stabi
 ###  Using haxe.ds.ArraySort
 
 ```haxe
+var myArray = [1,5,3,7,6,2,4];
+
 haxe.ds.ArraySort.sort(myArray, function(a, b):Int {
   if (a < b) return -1;
   else if (a > b) return 1;
