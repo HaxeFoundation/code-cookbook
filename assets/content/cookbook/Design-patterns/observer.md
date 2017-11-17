@@ -26,7 +26,7 @@ class Observable
 
 ### Usage
   
-[Try Haxe sample](https://try.haxe.org/embed/0A807)
+[Try Haxe sample](https://try.haxe.org/embed/9d970)
 
 ### Notes
 
