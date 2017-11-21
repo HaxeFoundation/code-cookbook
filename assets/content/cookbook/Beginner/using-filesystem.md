@@ -38,7 +38,7 @@ Otherwise you will get the error:
 
 This example reads a text file:
 ```haxe
-var content:String = sys.io.File.readContent('my_folder/my_file.txt');
+var content:String = sys.io.File.getContent('my_folder/my_file.txt');
 trace(myContent);
 ```
 
