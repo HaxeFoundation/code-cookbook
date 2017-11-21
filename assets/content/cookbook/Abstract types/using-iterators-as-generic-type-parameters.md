@@ -187,3 +187,5 @@ class Test {
 ```
 
 Remember this is only necessary if you are targeting a static target (cpp, Java, etc.), rather than a dynamic target. This code also shows you the power of abstract types in Haxe, and how could you use them to specialize basic types.
+
+> Author: [Ciro Durán](https://github.com/chiguire)
