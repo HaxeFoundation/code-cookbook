@@ -50,7 +50,7 @@ In this example we know that the data is of the type `ArrayBuffer` so we can jus
 The example code below should be saved in a file called `Main.hx`;
 Compile this into a js file called `app.js` using the following command:
 
-```> haxe -main Main -js app.js -dce full```
+`haxe -main Main -js app.js -dce full`
 
 Create a file called `index.html` with the following content
 ```html
@@ -76,15 +76,9 @@ You should see something like:
 
 ## Note regarding transferrable object data
 
-In this example, we are using `transferrable object` to speed up passing the data back and forth between the parent and the worker. Try replacing the `postMessage` calls in the example code...
+In this example, we are using `transferrable object` to speed up passing the data back and forth between the parent and the worker. Try replacing the `postMessage` calls in the example code from `postMessage(uint8View.buffer, [uint8View.buffer]);` to `postMessage(uint8View.buffer);`
 
-```.postMessage(uint8View.buffer, [uint8View.buffer]);```
-
-with this:
-
-```.postMessage(uint8View.buffer);```
-
-This gives you standard object copying, instead of transferrable objects. When you run the example again, you should notice a significant increase in runtrip time. (On Firefox, this is something like 10x slower.)
+This gives you standard object copying, instead of transferrable objects. When you run the example again, you should notice a significant increase in runtrip time. (On Firefox, this is something like 10x slower)
 
 You can read more about [transferrable objects here](https://www.html5rocks.com/en/tutorials/workers/basics/#toc-transferrables).
 
