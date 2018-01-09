@@ -86,3 +86,5 @@ function eval<V>(e:Expr<V>):V {
 Notice how in each case `Expr.T` may assume a different type. In the first case it remains unbound, in the second it becomes `Float` and further below it is `Bool`. Try returning `5` in the first case and the compiler will tell you `Int` should be `eval.V`.
 
 All in all, this is a very powerful feature, capable of expressing extremely complex type structures.
+
+> Author: [back2dos](https://github.com/back2dos)
