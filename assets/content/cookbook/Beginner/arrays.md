@@ -18,6 +18,25 @@ var arrayOfFloats = [10.2, 40.5, 60.3];
 trace(arrayOfFloats);
 ```
 
+#### Array comprehension
+
+As an alternative, [array comprehension](https://haxe.org/manual/lf-array-comprehension.html) can be used. This makes it possible to use some programming logic in `for` or `while` expressions:
+
+```haxe
+var aInts = [for(i in 0...5) i];
+trace(aInts); // [0,1,2,3,4]
+
+var aEvens = [for(i in 0...5) i*2];
+trace(aEvens); // [0,2,4,6,8]
+
+var aChars = [for(c in 65...70) String.fromCharCode(c)];
+trace(aChars); // ['A','B','C','D','E']         
+
+var x = 1;
+var aBits = [while(x < 128) x = x * 2];
+trace(aBits); // [2,4,8,16,32,64,128]
+```
+
 ### Adding elements
 
 An element can be inserted into an array at a desired position, prepended to the start of the array, or appended to the end of the array. Multiple elements can be appended to an array through concatenation.

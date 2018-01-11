@@ -38,6 +38,10 @@ h3 code {
   font-size: 20px;
 }
 
+pre code {
+    font-size: 14px;
+}
+
 #title {
   font-size: 38.5px;
 }
