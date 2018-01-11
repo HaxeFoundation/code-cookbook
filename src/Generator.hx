@@ -356,18 +356,21 @@ class Generator {
 	
 	private function replaceTryHaxeTags(content:String) {
 		//[tryhaxe](http://try.haxe.org/embed/ae6ef)
-		return	~/(\[tryhaxe\])(\()(.+?)(\))/g.replace(content, '<iframe src="$3" class="try-haxe"><a href="$3">Try Haxe!</a></iframe>');
-	}
-	
-	private function replaceYoutubeTags(content:String) {
+		return  ~/(\[tryhaxe\])(\()(.+?)(\))/g.replace(content, '<iframe src="$3" class="try-haxe" sandbox="allow-scripts allow-popups" allow="geolocation; microphone; camera; midi; vr"><a href="$3">Try Haxe!</a></iframe>');
+	  }
+	  
+	  private function replaceYoutubeTags(content:String) {
 		//[youtube](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
-		return	~/(\[youtube\])(\()(.+?)(\))/g.replace(content, '<div class="flex-video widescreen"><iframe src="$3" frameborder="0" allowfullscreen=""></iframe></div>');
-	}
+		return  ~/(\[youtube\])(\()(.+?)(\))/g.replace(content, '<div class="flex-video widescreen"><iframe src="$3" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-forms" allow="autoplay; encrypted-media"></iframe></div>');
+	  }
 	
 	private function replaceHaxeOrgLinks(content:String) 
 	{
 		return content
 			.replace("http://haxe.org", "https://haxe.org")
+			.replace("http://code.haxe.org/", "https://code.haxe.org/")
+			.replace("http://api.haxe.org", "https://api.haxe.org")
+			.replace("http://lib.haxe.org", "https://lib.haxe.org")
 			.replace("http://try.haxe.org", "https://try.haxe.org");
 	}
 	
