@@ -356,7 +356,7 @@ class Generator {
 	
 	private function replaceTryHaxeTags(content:String) {
 		//[tryhaxe](http://try.haxe.org/embed/ae6ef)
-		return  ~/(\[tryhaxe\])(\()(.+?)(\))/g.replace(content, '<iframe src="$3" class="try-haxe" sandbox="allow-scripts allow-popups" allow="geolocation; microphone; camera; midi; vr"><a href="$3">Try Haxe!</a></iframe>');
+		return  ~/(\[tryhaxe\])(\()(.+?)(\))/g.replace(content, '<iframe src="$3" class="try-haxe" sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox" allow="geolocation; microphone; camera; midi; vr"><a href="$3">Try Haxe!</a></iframe>');
 	  }
 	  
 	  private function replaceYoutubeTags(content:String) {
