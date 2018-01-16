@@ -47,14 +47,16 @@ class GitUtil
 			var ereg = ~/(\d{1,4})\t(.+?) <(.+?)>/g;
 			var authors:Array<GitAuthorInfo> = [];
 			while (ereg.match(log)) {
+				log = ereg.matchedRight();
 				var name = ereg.matched(2);
+				if (name.toLowerCase() == "github") continue;
+				
 				var author:GitAuthorInfo = authorByName.exists(name) ? authorByName.get(name) : { name: name };
 				author.commits = Std.parseInt(ereg.matched(1));
 				author.email = ereg.matched(3);
 				author.hash = Md5.encode(ereg.matched(3).toLowerCase());
-		authors.push(author);
-		authorByName.set(name, author);
-				log = ereg.matchedRight();
+				authors.push(author);
+				authorByName.set(name, author);
 			}
 			return authors;
 		#else 
