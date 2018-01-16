@@ -30,3 +30,5 @@ class Observable {
 
 - Extra care has to be put into making sure that an observable cannot register the same observer twice.
 - The fact that `Observable` is a class can make it hard to use because Haxe does not allow for multiple inheritance. Instead, we used a static extension for convenient usage.
+
+> Author: [matrefeytontias](https://github.com/matrefeytontias)
