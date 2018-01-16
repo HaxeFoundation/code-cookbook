@@ -33,6 +33,7 @@ It would be nice if you keep the formatting of the code in the same style as use
  
  * The first heading is used in the navigation. Keep this title short.
  * The first paragraph is used as description. Describe what the content of the article is about.
+ * Use `> Author: [Name](https://github.com/username)` to mark yourself as author of the article. The other contributors are inferred from git commits.
  * Tag the article using `[tags]: / "tag1,tag2"` (no spaces). Try to use [an existing tag](http://code.haxe.org/).
  * Mention the author / sources at the bottom of the page.
  * If you want to include a [try.haxe.org](https://try.haxe.org) code snippet use `[tryhaxe](https://try.haxe.org/embed/76f24)`.
