@@ -1,6 +1,6 @@
 [tags]: / "reflection,dead-code-elimination"
 
-# Access a field using a string
+# Access a field by string
 
 This snippet shows how to use a string as a variable identifier using reflection.
 
