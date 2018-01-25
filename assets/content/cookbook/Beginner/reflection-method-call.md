@@ -18,7 +18,7 @@ class MyClass {
 class Main {
     static function main() {
         var myObject = new MyClass();
-        var f = Reflect.field(myObject, "yo");
+        var f = Reflect.field(myObject, "printName");
         Reflect.callMethod(myObject, cast f, []);
     }
 }
