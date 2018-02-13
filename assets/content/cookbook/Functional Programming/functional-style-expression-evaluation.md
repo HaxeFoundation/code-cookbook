@@ -1,4 +1,4 @@
-[tags]: / "functional, ADT, enum, parsing"
+[tags]: / "functional programming, ADT, enum, parsing"
 
 # ML-Style Parse Tree Evaluation
 
