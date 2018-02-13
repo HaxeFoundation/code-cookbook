@@ -5,7 +5,7 @@
 ML-like languages are great for creating interpreters or compilers, by virtue of Algebraic Data Types.
 Haxe's `enum` allow for writing similarly elegant code.
 
-Below is the Haxe version of F# code for a simple expression interpreter, described in [Programming Language Concepts](https://github.com/steshaw/plc-sestoft) (Sestoft). 
+Below is the Haxe version of F# code for a simple expression interpreter, described in [Programming Language Concepts](https://www.itu.dk/people/sestoft/plc/) (Sestoft). 
 
 ## Implementation
 
