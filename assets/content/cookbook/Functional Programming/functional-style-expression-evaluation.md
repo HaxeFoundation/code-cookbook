@@ -23,18 +23,18 @@ class Main {
       case Prim("-", e1, e2): return eval(e1) - eval(e2) ;
       case Prim("*", e1, e2): return eval(e1) * eval(e2) ;
       case Prim(_) : throw "Unknown primitive";
-      }
     }
+  }
  
     // Some simple tests.
-    static public function main():Void {
+  static public function main():Void {
 
-      // Evaluate the expression 23.
-      trace( eval( CstI(23) ) );
+    // Evaluate the expression 23.
+    trace( eval( CstI(23) ) );
 
-      // Evaluate the expression (7 * 9) + 10.
-      trace( eval( Prim("+", Prim("*", CstI(7), CstI(9)), CstI(10)) ) );
-    }
+    // Evaluate the expression (7 * 9) + 10.
+    trace( eval( Prim("+", Prim("*", CstI(7), CstI(9)), CstI(10)) ) );
+  }
 }
 
 /*  Algabreic Data Type for an arithmetic expression. In F# would be:
