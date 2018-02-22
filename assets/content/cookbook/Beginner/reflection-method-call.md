@@ -18,8 +18,8 @@ class MyClass {
 class Main {
     static function main() {
         var myObject = new MyClass();
-        var f = Reflect.field(myObject, "printName");
-        Reflect.callMethod(myObject, cast f, []);
+        var fn = Reflect.field(myObject, "printName");
+        Reflect.callMethod(myObject, fn, []);
     }
 }
 ```
