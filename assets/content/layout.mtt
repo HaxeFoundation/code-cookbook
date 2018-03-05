@@ -80,24 +80,27 @@
 						<a class="dropdown-toggle" data-toggle="dropdown" href="https://haxe.org/documentation/">Learn Haxe <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li>
-								<a href="https://haxe.org/documentation/" rel="external">Introduction</a>
+								<a href="https://haxe.org/documentation/introduction/" rel="external">Introduction</a>
 							</li>
-							<li class="divider"></li>
 							<li>
 								<a href="https://haxe.org/manual/" rel="external">Manual</a>
 							</li>
+							<li class="active">
+								<a href="https://code.haxe.org" rel="external">Code Cookbook</a>
+							</li>
 							<li>
-								<a href="http://api.haxe.org" rel="external">API Documentation</a>
+								<a href="https://api.haxe.org" rel="external">API Documentation</a>
 							</li>
 							<li class="divider"></li>
 							<li>
-								<a href="http://try.haxe.org" rel="external">Try Haxe</a>
+								<a href="https://haxe.org/videos" rel="external">Videos</a>
+							</li>
+							<li class="divider"></li>
+							<li>
+								<a href="https://try.haxe.org" rel="external">Try Haxe online</a>
 							</li>
 							<li>
 								<a href="https://lib.haxe.org" rel="external">Haxelib</a>
-							</li>
-							<li class="active">
-								<a href="http://code.haxe.org" rel="external">Code Cookbook</a>
 							</li>
 						</ul>
 				</li>
