@@ -120,7 +120,7 @@ var list:Array<String> = ["apple", "pear", "banana"];
 var filteredList = list.filter(function (v) return v == "banana");
 trace(filteredList); // banana
 ```
-You can also filter an array using the array comprehension:
+You can also filter an array using array comprehension:
 
 ```haxe
 var list:Array<String> = ["apple", "pear", "banana"];
@@ -138,7 +138,7 @@ var importantList = list.map(function (v) return v.toUpperCase());
 trace(importantList); // ["FIRST","SECOND","LAST"]
 ```
 
-You can also map an array using the array comprehension:
+You can also map an array using array comprehension:
 
 ```haxe
 var list:Array<String> = ["first", "second", "last"];
