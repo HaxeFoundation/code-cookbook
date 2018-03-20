@@ -51,7 +51,7 @@ listOfInts.last();
 
 ### Iteration
 
-The list defines an iterator, and its elements can therefore be iterateed over.
+The list defines an iterator, and its elements can therefore be iterated over.
 
 ```haxe
 for (item in listOfInts) {
