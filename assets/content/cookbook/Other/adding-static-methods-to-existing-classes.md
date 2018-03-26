@@ -11,14 +11,15 @@ Here's a class with a static method that adds a `randomBetween(a, b)` method to 
 ```haxe
 class MathExtensions {
   /** Returns a random number between a (inclusive) and b (exclusive). */
-  public static function randomBetween(clazz:Class<Math>, a:Int, b:Int) {
+  public static function randomBetween(cl:Class<Math>, a:Int, b:Int) {
     var diff:Int = b - a;
     return a + Math.floor(Math.random() * diff);
   }
 }
 ```
 
-Note that the method is `public`, `static`, and the first parameter is `Class<Math>`.
+Note that the method is `public static`, and the first parameter is `Class<Math>` as this is required for static extensions to work.
+Also note we used `cl` and not `class` as parameter because that is a reserved keyword in Haxe.
 
 ## Usage
 
@@ -32,7 +33,6 @@ class Test {
     trace("Random value between 10 and 20:" + Math.randomBetween(10, 20));
   }
 }
-
 ```
 
 Using this, you can add all kinds of interesting extensions to pre-existing classes (eg. core Haxe classes, or classes from other Haxe libraries). 

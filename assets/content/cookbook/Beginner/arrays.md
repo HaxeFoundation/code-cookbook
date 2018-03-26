@@ -102,11 +102,13 @@ for (item in arrayOfStrings) {
 Array elements can be copied into a new array.
 
 ```haxe
-var arrayOfStrings:Array<String> = ["first", "second", "last"];
-var newArrayOfStrings = arrayOfStrings.copy();
-newArrayOfStrings.push("best");
-trace(arrayOfStrings); // ["first", "second", "last"];
-trace(newArrayOfStrings); // ["first", "second", "last", "best"];
+var list:Array<String> = ["first", "second", "last"];
+var copiedList = list.copy();
+
+copiedList.push("best"); // add extra value to the copied list
+
+trace(list); // ["first", "second", "last"];
+trace(copiedList); // ["first", "second", "last", "best"];
 ```
 
 #### Filter
@@ -114,8 +116,16 @@ trace(newArrayOfStrings); // ["first", "second", "last", "best"];
 Array elements can be filtered into a new array with a filtering function. Every array element for which the filtering function returns `true` is added to a new array.
 
 ```haxe
-var arrayOfStrings:Array<String> = ["first", "second", "last"];
-var noEmptyStrings = arrayOfStrings.filter(function (e) return e != "");
+var list:Array<String> = ["apple", "pear", "banana"];
+var filteredList = list.filter(function (v) return v == "banana");
+trace(filteredList); // banana
+```
+You can also filter an array using array comprehension:
+
+```haxe
+var list:Array<String> = ["apple", "pear", "banana"];
+var filteredList = [for (v in list ) if (v == "banana") v];
+trace(filteredList); // banana
 ```
 
 #### Map
@@ -123,8 +133,17 @@ var noEmptyStrings = arrayOfStrings.filter(function (e) return e != "");
 Array elements can be mapped into a new array with a mapping function. The mapping is bijective, and every element from the initial array will have its mapping in the new array.
 
 ```haxe
-var arrayOfStrings:Array<String> = ["first", "second", "last"];
-var upperCaseStrings = arrayOfStrings.map(function (e) return e.toUpperCase());
+var list:Array<String> = ["first", "second", "last"];
+var importantList = list.map(function (v) return v.toUpperCase());
+trace(importantList); // ["FIRST","SECOND","LAST"]
+```
+
+You can also map an array using array comprehension:
+
+```haxe
+var list:Array<String> = ["first", "second", "last"];
+var importantList = [for(v in list) v.toUpperCase()];
+trace(importantList); // ["FIRST","SECOND","LAST"]
 ```
 
 #### Reverse
@@ -132,8 +151,9 @@ var upperCaseStrings = arrayOfStrings.map(function (e) return e.toUpperCase());
 The order of elements in an array can be reversed.
 
 ```haxe
-var arrayOfStrings:Array<String> = ["first", "second", "last"];
-arrayOfStrings.reverse();
+var list:Array<String> = ["first", "second", "last"];
+list.reverse();
+trace(list); // ["last","second","first"]
 ```
 
 #### Slice
@@ -141,8 +161,9 @@ arrayOfStrings.reverse();
 A specific range of array elements from a starting index up to (excluding) an end index can be copied to a new array.
 
 ```haxe
-var arrayOfStrings:Array<String> = ["first", "second", "last"];
-var stringsThreeAndFour = arrayOfStrings.slice(1, 2);
+var list:Array<String> = ["first", "second", "last"];
+var slicedList = list.slice(1, 2);
+trace(slicedList); // ["second"]
 ``` 
 
 #### Sort
@@ -150,8 +171,14 @@ var stringsThreeAndFour = arrayOfStrings.slice(1, 2);
 Array elements can be sorted according to a comparison function. The comparison function compares two elements (the predecessor and the successor), and must return an `Int`. A return value of 0 indicates the elements are equivalent, a positive return value gives way to the successor, and a negative return value gives way to the predecessor.
 
 ```haxe
-var arrayOfStrings:Array<String> = ["first", "second", "last"];
-arrayOfStrings.sort(function (a, b) return a.charCodeAt(0) - b.charCodeAt(0));
+var arrayOfInts:Array<Int> = [1,5,2,4,3];
+arrayOfInts.sort(function (a, b) return a - b);
+trace(arrayOfInts); // [1,2,3,4,5]
+```
+```haxe
+var arrayOfStrings:Array<String> = ["c", "a", "b"];
+arrayOfStrings.sort(function (a, b) return if (a < b) -1 else 1);
+trace(arrayOfStrings); // ["a","b","c"]
 ```
 
 ### Displaying contents
@@ -159,11 +186,14 @@ arrayOfStrings.sort(function (a, b) return a.charCodeAt(0) - b.charCodeAt(0));
 Arrays can be prepared for printing by joining the elements together with a separator character, or by using the string representation of the array structure.
 
 ```haxe
-var arrayOfStrings:Array<String> = ["first", "second", "last"];
+var list:Array<String> = ["first", "second", "last"];
 // Returns a string of array elements concatenated by separator string
-var withSeparator:String = arrayOfStrings.join(" / ");
+var listJoined:String = list.join(" / ");
+trace(listJoined); // "first / second / last"
+    
 // Returns a string representation of the array structure
-var asStructure:String = arrayOfStrings.toString();
+var listAsString:String = list.toString();
+trace(listAsString); // "first,second,last"
 ```
 
 > [Array API documentation](http://api.haxe.org/Array.html)
