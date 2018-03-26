@@ -77,13 +77,11 @@ a, a:hover, a > code {
   color: #999;
 }
 
-.authors img
-{
+.authors img {
     margin-bottom: 2px;
 }
 
-.contributors a
-{
+.contributors a {
     margin-bottom: 2px;
 }
 
@@ -242,10 +240,14 @@ footer {
 }
 
 blockquote {
-  margin-left: 20px;
-  border-left: 5px solid #eee;
+  margin-left: 30px;
+  border-left: 4px solid #eee;
   font-style: italic;
-  padding: 15px 30px;
+  padding: 15px 15px 15px 30px;
+}
+
+blockquote.author-info {
+  border-left: 4px solid #EA8220;
 }
 
 .dark a, .dark a:hover, .dark a:active {

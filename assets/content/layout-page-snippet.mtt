@@ -39,6 +39,7 @@
 		</nav>
 		
 		<article class="span8" itemscope="itemscope" itemtype="http://schema.org/Article">
+			<big class="pull-right"><a href="::currentPage.editUrl::?message=Update:%20::currentPage.title::&description=%0A%0ASources:%0A*%20::currentPage.absoluteUrl::%0A%0A::foreach author currentPage.authors::%40::author.username:: ::end::" title="Edit '::currentPage.title::' on GitHub" rel="external"><i class="fa fa fa-edit"></i></a></big> 
 			<small itemscope="itemscope" itemtype="http://schema.org/BreadcrumbList">
 				<span itemprop="itemListElement" itemscope="itemscope" itemtype="http://schema.org/ListItem"><a itemprop="name" href="/">Haxe programming cookbook</a> › </span>
 				<span itemprop="itemListElement" itemscope="itemscope" itemtype="http://schema.org/ListItem" ::cond currentPage.category.isSerie && !currentPage.isSerieHome() && currentPage.category.parent!=null ::><a itemprop="name" href="::currentPage.category.parent.outputPath::">::currentPage.category.parent.title::</a> › </span>
@@ -52,7 +53,7 @@
 			<div itemprop="articleBody">::raw pageContent::</div>
 			
 			<hr/>
-			<blockquote class="blockquote">
+			<blockquote class="blockquote author-info">
 				
 				<div ::cond currentPage.authors.length>0:: class="authors row" itemprop="author" itemscope="itemscope" itemtype="https://schema.org/Person">
 					<span class="span2">Author:</span> 
@@ -113,16 +114,18 @@
 			</div>
 			<hr/>
 			<div class="contribution">
-				<span><i class="fa fa fa-edit"></i> <a href="::currentPage.editUrl::?message=Update:%20::currentPage.title::&description=%0A%0ASources:%0A*%20::currentPage.absoluteUrl::%0A%0A::foreach author currentPage.authors::%40::author.username:: ::end::" rel="external">Edit page</a></span> 
-				<span>| <i class="fa fa-lightbulb-o"></i> <a href="https://github.com/HaxeFoundation/code-cookbook/issues/new?title=Suggestion:%20::currentPage.title::&body=%0A%0ASources:%0A*%20::currentPage.absoluteUrl::%0A*%20::currentPage.contributionUrl::%0A%0A::foreach author currentPage.authors::%40::author.username:: ::end::" rel="external">Suggest improvement / Report issue</a></span> 
-				<span ::cond !currentPage.category.isSerie::>| <i class="fa fa-plus-circle"></i> <a href="::currentPage.addLinkUrl::" rel="external">Add new snippet</a></span> 
+				<span><i class="fa fa fa-edit"></i> <a href="::currentPage.editUrl::?message=Update:%20::currentPage.title::&description=%0A%0ASources:%0A*%20::currentPage.absoluteUrl::%0A%0A::foreach author currentPage.authors::%40::author.username:: ::end::" title="Edit '::currentPage.title::' on GitHub" rel="external">Edit page</a></span> 
+				 ::if false::<span>| <i class="fa fa-lightbulb-o"></i> <a href="https://github.com/HaxeFoundation/code-cookbook/issues/new?title=Suggestion:%20::currentPage.title::&body=%0A%0ASources:%0A*%20::currentPage.absoluteUrl::%0A*%20::currentPage.contributionUrl::%0A%0A::foreach author currentPage.authors::%40::author.username:: ::end::" title="Create issue about '::currentPage.title::' on GitHub" rel="external">Suggest improvement / Report issue</a></span> ::end::
+				<span ::cond !currentPage.category.isSerie::>| <i class="fa fa-plus-circle"></i> <a href="::currentPage.addLinkUrl::" rel="external" title="Add new page in '::currentPage.category.title::' on Github">Add new page</a></span> 
 			</div>
 			<hr/>
-			<div class="share-buttons">
-				<a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="haxe">Tweet</a> 
+			<script src="https://utteranc.es/client.js" repo="HaxeFoundation/code-cookbook" branch="master" issue-term="Comments: ::currentPage.category.title:: - ::currentPage.title::" async="async"></script>
+			
+			<center class="share-buttons">
+				<a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="haxe" data-size="large">Tweet</a> 
 				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 				
-				&nbsp; &nbsp;
+				&nbsp; 
 				<!-- Load Facebook SDK for JavaScript -->
 				<div id="fb-root" style="display:inline-block"></div>
 				<script>(function(d, s, id) {
@@ -134,8 +137,8 @@
 				}(document, 'script', 'facebook-jssdk'));</script>
 
 				<!-- FB like button code -->
-				<div class="fb-like" data-href="::currentPage.absoluteUrl::" style="display:inline-block" data-layout="button_count" data-action="like" data-show-faces="true"></div>
-			</div>
+				<div class="fb-like" data-href="::currentPage.absoluteUrl::" style="display:inline-block" data-layout="button_count" data-action="like" data-show-faces="true" data-size="large"></div>
+			</center>
 		</article>
 	</section>
 </main>
