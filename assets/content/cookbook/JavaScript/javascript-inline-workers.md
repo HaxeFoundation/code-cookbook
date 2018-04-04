@@ -78,7 +78,7 @@ You should see something like:
 
 In this example, we are using `transferrable object` to speed up passing the data back and forth between the parent and the worker. Try replacing the `postMessage` calls in the example code from `postMessage(uint8View.buffer, [uint8View.buffer]);` to `postMessage(uint8View.buffer);`
 
-This gives you standard object copying, instead of transferrable objects. When you run the example again, you should notice a significant increase in runtrip time. (On Firefox, this is something like 10x slower)
+This gives you standard object copying, instead of transferrable objects. When you run the example again, you should notice a significant increase in roundtrip time. (On Firefox, this is something like 10x slower)
 
 You can read more about [transferrable objects here](https://www.html5rocks.com/en/tutorials/workers/basics/#toc-transferrables).
 
