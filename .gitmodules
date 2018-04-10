@@ -1,0 +1,9 @@
+[submodule "grammars/haxe-TmLanguage"]
+	path = grammars/haxe-TmLanguage
+	url = https://github.com/vshaxe/haxe-TmLanguage.git
+[submodule "grammars/language-javascript"]
+	path = grammars/language-javascript
+	url = https://github.com/atom/language-javascript.git
+[submodule "grammars/xml.tmbundle"]
+	path = grammars/xml.tmbundle
+	url = https://github.com/textmate/xml.tmbundle.git

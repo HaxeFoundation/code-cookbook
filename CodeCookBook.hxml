@@ -1,15 +1,5 @@
--cp src
--js assets/includes/js/highlighter.js
--main Highlighter
--dce full
--D analyzer
--D analyzer-optimize
-
---next 
-
 -cmd lessc assets/includes/css/haxe-nav.css assets/includes/css/haxe-nav.min.css --clean-css="--s1 --advanced"
 -cmd lessc assets/includes/css/styles.css assets/includes/css/styles.min.css --clean-css="--s1 --advanced"
--cmd lessc assets/includes/css/highlighter.css assets/includes/css/highlighter.min.css --clean-css="--s1 --advanced"
 
 --next
 

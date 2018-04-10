@@ -17,6 +17,9 @@ install:
   - npm install -g less@2.7
   - npm install -g less-plugin-clean-css@1.5
   - haxe CodeCookBook-neko.hxml
+  # Syntax highlighting
+  - npm install
+  - haxe highlighting.hxml
 
 script:
   - bash -v deploy.sh

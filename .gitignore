@@ -12,3 +12,10 @@ snippets/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+CodeCookBook.hl
+CodeCookBook.js
+CodeCookBook.py
+node_modules/
+bin/
+package-lock.json

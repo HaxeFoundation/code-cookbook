@@ -176,9 +176,9 @@ class Generator {
 			
 			if (doMinify) {
 				// strip crap
-				var length = html.length;
+				//var length = html.length;
 				html = util.Minifier.minify(html);
-				var newLength = html.length;
+				//var newLength = html.length;
 		
 				//trace("optimized " + (Std.int(100 / length * (length - newLength) * 100) / 100) + "%");
 			}

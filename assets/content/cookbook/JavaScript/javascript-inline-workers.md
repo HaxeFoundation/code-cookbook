@@ -66,7 +66,7 @@ Create a file called `index.html` with the following content
 ```
 Open the `index.html` in a browser window, and check the JavaScript console output.
 You should see something like:
-```code
+```
 > Original data: 0,1,2...  
 > Worker recieved data from Client: [object ArrayBuffer] 
 > Parent recieved data from Worker: [object ArrayBuffer] 
