@@ -21,6 +21,7 @@ install:
   # Syntax highlighting
   - haxelib install highlighter
   - haxelib git hxnodejs https://github.com/HaxeFoundation/hxnodejs
+  - haxelib git hxtemplo https://github.com/Simn/hxtemplo.git # To get nodejs fix
   - npm install
   - haxe highlighting.hxml
 
