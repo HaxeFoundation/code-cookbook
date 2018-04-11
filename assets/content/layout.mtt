@@ -32,7 +32,7 @@
 	<meta property="article:section" content="technology" />
 	<meta property="article:tag" content="::currentPage.tags.join(',')::" ::cond currentPage.tags!=null:: />
 	
-	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,400italic"  />
+	<link rel="stylesheet" type="text/css" href="https://haxe.org/css/open_sans.css" />
 </head>
 <body>
 	::if false::
@@ -141,7 +141,7 @@
 	</div>
 </footer>
 
-<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" />
+<link rel="stylesheet" type="text/css" href="https://haxe.org/css/font-awesome.css" />
 
 
 <script defer="defer" src="https://haxe.org/js/jquery.min.js"></script>
