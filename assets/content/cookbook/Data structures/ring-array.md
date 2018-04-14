@@ -88,7 +88,7 @@ A fixed ring array are especially useful when you need a hard upper bound for ho
 It's easy to implement `undo/redo` operations.
 
 ```haxe
-class History<T> {
+@:generic class History<T> {
   var re: Ring<T>;
   var un: Ring<T>;
   public function new(len){
