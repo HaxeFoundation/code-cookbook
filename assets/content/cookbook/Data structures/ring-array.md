@@ -5,8 +5,7 @@
 A fixed ring array are especially useful when you need a hard upper bound for how much data can be in the queue.
 
 ```haxe
-#if !js @:generic #end
-class Ring<T> {
+@:generic class Ring<T> {
   public var cap(get, never): Int;
   inline function get_cap() return a.length;
 
@@ -89,7 +88,6 @@ class Ring<T> {
 It's easy to implement `undo/redo` operations.
 
 ```haxe
-#if !js @:generic #end
 class History<T> {
   var re: Ring<T>;
   var un: Ring<T>;
