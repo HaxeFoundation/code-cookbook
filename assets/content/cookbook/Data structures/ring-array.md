@@ -55,7 +55,7 @@ class Ring<T> {
   public function remove(v: T) {
     var cap = this.cap;
     var max = this.len;
-    var j = 0, p = 0, t = 0;
+    var j = 0, p = 0;
     while (j < max) {
       p = (j + start) % cap;
       if (v == a[p]) {
