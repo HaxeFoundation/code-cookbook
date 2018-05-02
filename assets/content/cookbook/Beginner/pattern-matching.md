@@ -488,7 +488,7 @@ switch input.split(" ") {
     trace('$word to $name');
 
   // match "say {word} {amount} times" where {word} is a greeting and {amount} is a number.
-  case [action = "say", word = "hello"|"hi"|"hey", amount, "times"] if (~/[0-9]{1,}/.match(amount)): 
+  case [action = "say", word = "hello"|"hi"|"hey", amount, "times"] if (~/^[0-9]+$/.match(amount)): 
     for (i in 0 ... Std.parseInt(amount)) {
       trace('$action $word');
     }
