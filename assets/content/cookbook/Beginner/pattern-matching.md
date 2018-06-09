@@ -544,11 +544,11 @@ var person2 = { name: "John", age: 45 };
 switch [person1, person2] {
   // match if person1 is older than person2
   case [{name:name1, age:age1}, {name:name2, age:age2}] if (age1 > age2):
-    trace('name1 is older than $name2');
+    trace('$name1 is older than $name2');
 
   // match on both persons names
   case [{name:name1}, {name:name2}]:
-    trace('name1 is youngher than $name2');
+    trace('$name1 is younger than $name2');
 }
 ```
 
