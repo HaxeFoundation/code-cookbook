@@ -58,9 +58,9 @@ arrayOfStrings = arrayOfStrings.concat(["foo", "bar"]);
 Elements can be removed from an array by removing a specific element of the array, a range of elements in the array, the first element of the array, or the last element of the array.
 
 ```haxe
-var arrayOfStrings:Array<String> = ["Hi", "Everyone", "Nice", "To", "Meet", "You"];
-// Removes first occurence of "Hello" in the array
-arrayOfStrings.remove("Hello");
+var arrayOfStrings:Array<String> = ["first", "foo", "middle", "foo", "last"];
+// Removes first occurence of "middle" in the array
+arrayOfStrings.remove("middle");
 // Removes and returns three elements beginning with (and including) index 0
 arrayOfStrings.splice(0, 3);
 // Removes and returns first element of the array
