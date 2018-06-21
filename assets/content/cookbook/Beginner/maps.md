@@ -44,7 +44,7 @@ ageByUser.set("Mark", 32);
 
 > The naming convention of the map variable is _"meaning of value by meaning of key"_.
 
-A different way to create a map with values directly is using the [comprehension syntax](http://haxe.org/manual/lf-array-comprehension.html) (`key1 => value1, key2 => value2`):
+A different way to create a map with values directly is using the [comprehension syntax](https://haxe.org/manual/lf-map-comprehension.html) (`key1 => value1, key2 => value2`):
 
 ```haxe
 var ageByUser = [
