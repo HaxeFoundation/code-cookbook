@@ -12,7 +12,7 @@ To use a map you can use the convenient `Map` abstract class in the [`toplevel` 
 | `Map<Int, V>` | `Int` | `haxe.ds.IntMap` |
 | `Map<EnumValue, V>` | `EnumValue` | `haxe.ds.EnumValueMap` |
 | `Map<MyType, V>` | class or structure | `haxe.ds.ObjectMap` |
-| `Map<String, V>` | other type | compile-time error |
+| `Map<Dynamic, V>` | dynamic type | compile-time error |
 
 
 
