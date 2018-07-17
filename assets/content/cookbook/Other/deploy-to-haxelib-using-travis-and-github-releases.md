@@ -1,6 +1,6 @@
 [tags]: / "haxelib,github,travis,libraries,git"
 
-# Publish to Haxelib using Travis using Github Releases
+# Publish to Haxelib using Travis and Github Releases
 
 This tutorial will help you publish your library automatically to [lib.haxe.org](https://lib.haxe.org/) when you create a release on GitHub.
 
