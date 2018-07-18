@@ -29,20 +29,18 @@ Create a (useful) project and push it to GitHub.
 Create and push `haxelib.json`. This is your configuration for Haxelib projects.
 ```json
 {
-"name": "LIBNAME",
-"url": "https://github.com/GITHUB_USERNAME/LIBNAME",
-"license": "MIT",
-"tags": [],
-"description": "Cool Project",
-"version": "0.0.1",
-"classPath": "src/",
-"releasenote": "Initial release",
-"contributors": [
-	"markknol"
-],
-"dependencies": {
-
-}
+  "name": "LIBNAME",
+  "url": "https://github.com/GITHUB_USERNAME/LIBNAME",
+  "license": "MIT",
+  "tags": [],
+  "description": "Cool Project",
+  "version": "0.0.1",
+  "classPath": "src/",
+  "releasenote": "Initial release",
+  "contributors": ["markknol"],
+  "dependencies": {
+    
+  }
 }
 ```
 #### Add .travis.yml
