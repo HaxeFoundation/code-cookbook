@@ -130,7 +130,7 @@ These are the release steps you need to take from now on:
 
 <p><img src="assets/deploy-haxelib-using-travis-and-github.gif" style="box-shadow:0 0 10px #DDD" /></p>
 
-0. Update haxelib.json: Raise the `version` ([Haxelib uses a simplified version of SemVer](https://lib.haxe.org/documentation/creating-a-haxelib-package/#versioning) and change `releasenotes`.
+0. Update haxelib.json: Change `releasenotes` and raise the `version`. Note, [Haxelib uses SemVer](https://lib.haxe.org/documentation/creating-a-haxelib-package/#versioning).
 0. GitHub > Releases > Make new release <https://github.com/GITHUB_USERNAME/LIBNAME/releases/new>
 0. Enter release information:  
 
