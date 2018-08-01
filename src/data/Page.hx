@@ -72,4 +72,17 @@ class Page {
 	public function isSerieHome():Bool {
 		return outputPath.toString().indexOf("index.html") != -1;
 	}
+	
+	// Idea adapted from <https://blog.medium.com/read-time-and-you-bc2048ab620c>
+	// Read time (in minutes) is based on the average reading speed of an adult: 275 words per minute
+	public function getReadTime():Float {
+		if (pageContent == null) return 0.0;
+		var wordCount = pageContent.split(" ").length; // Dumb assumption, but seems to work
+		var minutes = wordCount / 275;
+		
+		return if (minutes < 5) 
+				Math.fround(minutes * 2) / 2; // round to half
+			else 
+				Math.round(minutes); // just round
+	}
 }

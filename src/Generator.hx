@@ -145,6 +145,7 @@ class Generator {
 				basePath: basePath,
 				tags: tags,
 				pageContent: null,
+				readingTime: 0.0,
 				DateTools: DateTools,
 				convertDate:function(date:Date) {
 					// American date format is retarded: "Wed, 02 Oct 2002 13:00:00 GMT"
@@ -164,6 +165,7 @@ class Generator {
 				page.addLinkUrl = (category != null) ? getAddLinkUrl(category) : getAddLinkUrl(page);
 				data.pageContent = page.pageContent != null ? page.pageContent : getContent(contentPath + page.contentPath, data);
 			}
+			data.readingTime = page.getReadTime();
 			
 			// execute the template
 			var templatePath = contentPath + page.templatePath;

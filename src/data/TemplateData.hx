@@ -13,6 +13,7 @@ class TemplateData {
 	public var pages : Array<data.Page>;
 	public var pageContent : String;
 	public var now : Date;
+	public var readingTime : Float;
 	public var latestCreatedPages :  Int -> Array<data.Page>;
 	public var getTagTitle : String -> String;
 	public var getSortedTags : Void -> Array<String>;

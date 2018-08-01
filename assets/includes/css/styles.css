@@ -238,6 +238,13 @@ footer {
   margin: 40px 0;
 }
 
+.reading-time {
+  position:relative;
+  top:-1em;
+  font-style:italic;
+  font-size: 90%;
+}
+
 blockquote {
   margin-left: 30px;
   border-left: 4px solid #eee;

@@ -48,7 +48,7 @@
 			</small>
 			
 			<h1><a href="::currentPage.absoluteUrl::" itemprop="url" class="anchorjs-icons"></a> <span itemprop="name">::currentPage.title::</span></h1>
-			
+			<p class="reading-time" ::cond (readingTime != 0)::>Reading time: ::readingTime:: minute::if (readingTime>1.5)::s::end::</p>
 		
 			<div itemprop="articleBody">::raw pageContent::</div>
 			
