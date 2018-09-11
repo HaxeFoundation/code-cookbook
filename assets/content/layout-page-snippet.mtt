@@ -119,7 +119,7 @@
 				<span ::cond !currentPage.category.isSerie::>| <i class="fa fa-plus-circle"></i> <a href="::currentPage.addLinkUrl::" rel="external" title="Add new page in '::currentPage.category.title::' on Github">Add new page</a></span> 
 			</div>
 			<hr/>
-			<script src="https://utteranc.es/client.js" repo="HaxeFoundation/code-cookbook" branch="master" issue-term="Comments: ::currentPage.category.title:: - ::currentPage.title::" async="async"></script>
+			<script src="https://utteranc.es/client.js" repo="HaxeFoundation/haxe.org-comments" branch="master" issue-term="[code.haxe.org] ::currentPage.category.title:: - ::currentPage.title::" async="async"></script>
 			
 			<center class="share-buttons">
 				<a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="haxe" data-size="large">Tweet</a> 
