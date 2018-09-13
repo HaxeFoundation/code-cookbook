@@ -55,10 +55,6 @@ haxe:
  - "3.4.7"
  - "development"
 
-matrix:
- allow_failures:
-   - haxe: development
-
 install:
  - haxelib dev LIBNAME .
 
