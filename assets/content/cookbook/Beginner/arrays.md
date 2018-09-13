@@ -206,7 +206,7 @@ The most simple type of multidimensional array is two-dimensional array.
 
 ```haxe
  var arrayTwoD : Array<Array<Int>> = [[0, 0, 0], [0, 0, 0] ];
- var arrayTwoD : Array<Array<Int>> = [for (x in 0...2) [for (y in 0...2) 0]];
+ var arrayTwoD : Array<Array<Int>> = [for (x in 0...2) [for (y in 0...3) 0]];
  ```
  
  ###  Create three dimensional array
@@ -222,7 +222,7 @@ The most simple type of multidimensional array is two-dimensional array.
 		  [0, 0, 0] 
 		]
 	];
-    var arrayThreeD : Array<Array<Int>> = [for (x in 0...2) [for (y in 0...2) [for (z in 0...2) 0]]];
+    var arrayThreeD : Array<Array<Array<Int>>> = [for (x in 0...2) [for (y in 0...3) [for (z in 0...3) 0]]];
  ```
  
  ### Retrieving array elements 
