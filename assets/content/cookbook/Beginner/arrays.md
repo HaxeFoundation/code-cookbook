@@ -196,6 +196,48 @@ var listAsString:String = list.toString();
 trace(listAsString); // "first,second,last"
 ```
 
+## Multidimensional arrays
+
+Multidimensional array is equivalent of spreadsheet with rows and columns and is represented by creating arrays within arrays.
+In other words we create an array that contains elements which are arrays ( nested arrays) 
+The most simple type of multidimensional array is two-dimensional array. 
+
+###  Create two dimensional array 
+
+```haxe
+ var arrayTwoD : Array<Array<Int>> = [[0, 0, 0], [0, 0, 0] ];
+ var arrayTwoD : Array<Array<Int>> = [for (x in 0...2) [for (y in 0...2) 0]];
+ ```
+ 
+ ###  Create three dimensional array
+
+```haxe
+ 	var arrayThreeD:Array<Array<Array<Int>>> = [
+		[ [0, 0, 0],
+		  [0, 0, 0],
+		  [0, 0, 0] 
+		],
+		[ [0, 0, 0],
+		  [0, 0, 0],
+		  [0, 0, 0] 
+		]
+	];
+    var arrayThreeD : Array<Array<Int>> = [for (x in 0...2) [for (y in 0...2) [for (z in 0...2) 0]]];
+ ```
+ 
+ ### Retrieving array elements 
+ 
+ We can receive  the whole row as array or only specific value from the array.
+ 
+ ```haxe
+ // Retrieves the array 
+var arrayOfInts:Array<Int> = arrayTwoD[0];
+var arrayOfArrayOfInts:Array<Array<Int>> = arrayThreeD[0];
+// Retrieves only first element 
+var firstTwoD = arrayTwoD[0][0];
+var firstThreeD = arrayThreeD[0][0][0];
+ ```
+ 
 > [Array API documentation](http://api.haxe.org/Array.html)
 > 
 > [Array manual entry](http://haxe.org/manual/std-Array.html)
