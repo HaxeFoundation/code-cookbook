@@ -1,4 +1,4 @@
-# Loading an external file
+# Loading a file from web
 
 This example uses `haxe.Http` to load external json file using and demonstrates how to handle the result.
 
