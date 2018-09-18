@@ -69,6 +69,14 @@ arrayOfStrings.shift();
 arrayOfStrings.pop();
 ```
 
+Modifying the array while iterating is so-called "undefined behavior", so it's not safe to do.
+
+That means these are your options:
+
+* [Reverse iterate](https://code.haxe.org/category/data-structures/reverse-iterator.html) and remove.
+* If you iterate by increment the index you can get away with not increment the index it in case of removal (using `while` loop).
+* Or sometimes you might prefer to just build a new array instead.
+
 ### Retrieving elements
 
 Array elements can be accessed through array notation, using the index of the element in the array.
