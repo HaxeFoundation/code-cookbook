@@ -138,7 +138,7 @@ trace(filteredList); // banana
 
 #### Map
 
-Array elements can be mapped into a new array with a mapping function. The mapping is bijective, and every element from the initial array will have its mapping in the new array.
+Array elements can be mapped into a new array with a mapping function. The mapping is bijective and every element from the initial array will have its mapping in the new array. The order of elements is preserved.
 
 ```haxe
 var list:Array<String> = ["first", "second", "last"];
@@ -152,6 +152,14 @@ You can also map an array using array comprehension:
 var list:Array<String> = ["first", "second", "last"];
 var importantList = [for(v in list) v.toUpperCase()];
 trace(importantList); // ["FIRST","SECOND","LAST"]
+```
+
+Mapping can be useful to translate an array to a different type of array.
+
+```haxe
+var list:Array<String> = ["1.1", "1.2", "1.3"];
+var listAsFloats:Array<Float> = list.map(Std.parseFloat);
+trace(listAsFloats); // [1.1, 1.2, 1.3]
 ```
 
 #### Reverse
