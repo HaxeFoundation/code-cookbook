@@ -81,12 +81,6 @@ zip -r library.zip src *.md *.json *.hxml run.n
 haxelib submit library.zip $HAXELIB_PWD --always
 ```
 
-#### On GitHub: Enable travis  
-
- - Go to <https://github.com/GITHUB_USERNAME/LIBNAME/settings/installations>
- - Add service: "Travis CI"
- - You can skip the details (user, token, domain), just press the green button "Add service". 
-	
 #### On Travis: Enable travis for project  
 
  - You need to have your GitHub account synced to Travis.
