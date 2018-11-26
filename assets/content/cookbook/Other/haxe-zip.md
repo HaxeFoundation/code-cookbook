@@ -2,7 +2,7 @@
 
 # Zip files
 
-The [haxe.zip](http://api.haxe.org/haxe/zip) package allows to zip and unzip files and directories using Haxe. This example shows how to use it.
+The [haxe.zip](http://api.haxe.org/haxe/zip/) package allows to zip and unzip files and directories using Haxe. This example shows how to use it.
 
 > **Note:** This only works on the [sys-targets](/category/beginner/using-filesystem.html).
 
@@ -40,3 +40,10 @@ var out = sys.io.File.write("output.zip", true);
 var zip = new haxe.zip.Writer(out);
 zip.write(getEntries("build/game/"));
 ```
+
+> **More information:**
+> 
+> * [haxe.zip API documentation](http://api.haxe.org/haxe/zip/)
+> * More [format libraries](https://github.com/HaxeFoundation/format)
+>
+> Author: [Mark Knol](https://github.com/markknol)
