@@ -12,8 +12,9 @@ The following example reads the directory "build/game/" with all of its content 
 
 ```haxe
 // recursive read a directory, add the file entries to the list
-function getEntries(dir:String, entries:List<haxe.zip.Entry>, inDir:Null<String> = null) {
-  if (inDir == null) inDir = dir;
+function getEntries(dir:String, entries:List<haxe.zip.Entry> = null, inDir:Null<String> = null) {
+	if (entries == null) entries = new List<haxe.zip.Entry>();
+	if (inDir == null) inDir = dir;
 	for(file in sys.FileSystem.readDirectory(dir)) {
 		var path = haxe.io.Path.join([dir, file]);
 		if (sys.FileSystem.isDirectory(path)) {
