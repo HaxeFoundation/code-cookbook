@@ -153,7 +153,7 @@ class MyComponent {
 }
 ```
 
-If you dislike decorating all your components with the `@:buid` metadata; you can also create an interface, add the metadata on that and implement the interface, as demonstrated here:
+If you dislike decorating all your components with the `@:build` metadata; you can also create an interface, add the metadata on that and implement the interface, as demonstrated here:
 
 ```haxe
 class MyComponent implements IComponent {
