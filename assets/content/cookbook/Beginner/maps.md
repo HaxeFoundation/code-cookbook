@@ -168,7 +168,7 @@ for (user in ageByUser.keys()) {
 ```
 
 The order of both values and keys in any type of map is undefined, therefore you shouldn't rely it. If order is important (when the map needs to be sorted for example), convert it to an Array. 
-This can be easily done with [`Lamba.array(map)`](http://api.haxe.org/Lambda.html#array) to get the values as Array or `var keys = [for(key in map.keys() key]` if you want the keys as Array.
+This can be easily done with [`Lamba.array(map)`](http://api.haxe.org/Lambda.html#array) to get the values as Array or `var keys = [for(key in map.keys()) key]` if you want the keys as Array.
 
 > **More information:**
 > 
