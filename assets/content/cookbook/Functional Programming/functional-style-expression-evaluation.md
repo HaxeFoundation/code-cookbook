@@ -17,11 +17,11 @@ class Main {
     represented by a parametized enum data data type. 
   **/
   static public function eval(e:Expr):Int {
-    switch e {
-      case CstI(x) : return x;
-      case Prim("+", e1, e2): return eval(e1) + eval(e2) ;
-      case Prim("-", e1, e2): return eval(e1) - eval(e2) ;
-      case Prim("*", e1, e2): return eval(e1) * eval(e2) ;
+    return switch e {
+      case CstI(x): x;
+      case Prim("+", e1, e2): eval(e1) + eval(e2) ;
+      case Prim("-", e1, e2): eval(e1) - eval(e2) ;
+      case Prim("*", e1, e2): eval(e1) * eval(e2) ;
       case Prim(_) : throw "Unknown primitive";
     }
   }
