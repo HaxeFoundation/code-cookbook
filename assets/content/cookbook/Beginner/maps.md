@@ -44,7 +44,7 @@ ageByUser.set("Mark", 32);
 
 > The naming convention of the map variable is _"meaning of value by meaning of key"_.
 
-A different way to create a map with values directly is using the [comprehension syntax](https://haxe.org/manual/lf-map-comprehension.html) (`key1 => value1, key2 => value2`):
+A different way to create a map with values directly is by using a map literal (`[key1 => value1, key2 => value2]`):
 
 ```haxe
 var ageByUser = [
@@ -167,8 +167,39 @@ for (user in ageByUser.keys()) {
 }
 ```
 
-The order of both values and keys in any type of map is undefined, therefore you shouldn't rely it. If order is important (when the map needs to be sorted for example), convert it to an Array. 
-This can be easily done with [`Lamba.array(map)`](http://api.haxe.org/Lambda.html#array) to get the values as Array or `var keys = [for(key in map.keys()) key]` if you want the keys as Array.
+Since Haxe 4.0 you can simplify the iteration on maps using the key-value iterator syntax `for (key => value in map)`.
+
+```haxe
+var ageByUser = [
+  "John" => 26,
+  "Peter" => 17,
+  "Mark" => 32,
+];
+for (user => age in ageByUser) {
+  trace('$user is $age years old');
+}
+```
+
+> The order of both values and keys in any type of map is undefined, therefore you shouldn't rely it. If order is important (when the map needs to be sorted for example), convert it to an Array. 
+> This can be easily done with [`Lamba.array(map)`](http://api.haxe.org/Lambda.html#array) to get the values as Array or `var keys = [for(key in map.keys()) key]` if you want the keys as Array.
+
+
+#### Clear map
+
+You can remove clear a map by iterating on all keys, and call remove from there.
+
+```haxe
+var ageByUser = [
+  "John" => 26,
+  "Peter" => 17,
+  "Mark" => 32,
+];
+
+// clear map
+for (user in ageByUser.keys()) {
+  ageByUser.remove(user);
+}
+```
 
 > **More information:**
 > 
