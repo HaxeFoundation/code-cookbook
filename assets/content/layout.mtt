@@ -11,6 +11,8 @@
 	<link rel="stylesheet" type="text/css" href="https://haxe.org/css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="css/styles.min.css" />
 	<link rel="stylesheet" type="text/css" href="css/haxe-nav.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/fonts.min.css" />
+	
 	<link rel="icon" href="https://haxe.org/favicon.ico" />
 	<link rel="canonical" href="::currentPage.absoluteUrl::" ::cond currentPage.absoluteUrl != null:: />
 	<link href="::basePath::rss.xml" rel="alternate" type="application/atom+xml" title="RSS Feed Haxe Code Cookbook" />
@@ -32,7 +34,6 @@
 	<meta property="article:section" content="technology" />
 	<meta property="article:tag" content="::currentPage.tags.join(',')::" ::cond currentPage.tags!=null:: />
 	
-	<link rel="stylesheet" type="text/css" href="https://haxe.org/css/open_sans.css" />
 </head>
 <body>
 	::if false::
@@ -141,7 +142,7 @@
 	</div>
 </footer>
 
-<link rel="stylesheet" type="text/css" href="https://haxe.org/css/font-awesome.css" />
+<link rel="stylesheet" type="text/css" href="css/font-awesome.css" />
 
 
 <script defer="defer" src="https://haxe.org/js/jquery.min.js"></script>
