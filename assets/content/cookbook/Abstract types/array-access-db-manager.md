@@ -117,4 +117,4 @@ Created yet another new user: Abed (43)
 > * [Array Access in Haxe Manual](https://haxe.org/manual/types-abstract-array-access.html)
 > * [record-macros library](https://github.com/HaxeFoundation/record-macros)
 > 
-> Author: [Kenton Hamaluik](https://github.com/FuzzyWuzzie)
+> Author: [Kenton Hamaluik](https://github.com/hamaluik)
