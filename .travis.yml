@@ -9,6 +9,7 @@ dist: trusty
 sudo: false
 
 install:
+  - git fetch --unshallow
   - yes | haxelib install CodeCookBook-neko.hxml --always
   - if [[ "$TRAVIS_HAXE_VERSION" == "development" ]]; then haxelib git hxparse https://github.com/Simn/hxparse.git ; fi
   - npm install -g less@2.7
