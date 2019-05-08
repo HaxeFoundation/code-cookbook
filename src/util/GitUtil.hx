@@ -1,61 +1,78 @@
 package util;
 import haxe.crypto.Md5;
+import haxe.ds.Map;
 import haxe.ds.StringMap;
 import haxe.io.Path;
 
 using StringTools;
+using Lambda;
 
 /**
  * @author Mark Knol
  */
 class GitUtil
 {
+	static var now = Date.now();
+	
+	static var dateStringCache:Map<String, String> = new Map();
+	
 	static function getCreationDate(path:String):Date {
-		#if !display
-			var process = new sys.io.Process('git', ['log','--diff-filter=A','--follow','--date=short','--format=%ad', '-1', '--', path]);
-			if (process.exitCode() != 0) throw process.stderr.readAll().toString();
-			var dateString = process.stdout.readAll().toString();
-			dateString = dateString.replace("\n", "").replace("\r", "");
-			if (dateString == null || dateString.length < 8) return Date.now();
-			return Date.fromString(dateString);
-		#else 
-		return Date.now();
-		#end
+		var dateString = getDateLog(path);
+		if (dateString == null) return now;
+		dateString = {
+			var lines = dateString.split("\n");
+			if (lines[lines.length - 1].length > 2) lines[lines.length - 1];
+			else lines[lines.length - 2]; // last line is sometimes empty
+		}
+		return parseDateString(dateString, now);
 	}
 	
 	static function getModificationDate(path:String):Date {
-		#if !display
-			var process = new sys.io.Process('git', ['log','--date=short','--format=%ad', '-1', '--', path]);
+		var dateString = getDateLog(path);
+		if (dateString == null) return now;
+		dateString = dateString.split("\n").shift();
+		return parseDateString(dateString, now);
+	}
+	
+	static function parseDateString(dateString:Null<String>, fallback:Date) {
+		if (dateString == null || dateString.length < 10) return fallback;
+		dateString = dateString.trim();
+		if (dateString.length != 10) throw 'invalid date: ' + dateString; // skip non-versioned files
+		var splitted = dateString.split("-");
+		return new Date(Std.parseInt(splitted[0]), Std.parseInt(splitted[1]), Std.parseInt(splitted[2]) - 1, 1, 1, 1);
+	}
+	
+	static function getDateLog(path:String):String {
+		return if (dateStringCache.exists(path)) {
+			dateStringCache[path];
+		} else {
+			var process = new sys.io.Process('git log --date=short --format=%ad --follow -- "$path"');
 			if (process.exitCode() != 0) throw process.stderr.readAll().toString();
 			var dateString = process.stdout.readAll().toString();
-			dateString = dateString.replace("\n", "").replace("\r", "");
-			if (dateString == null || dateString.length < 8) return Date.now();
-			return Date.fromString(dateString);
-		#else 
-		return Date.now();
-		#end
+			dateStringCache[path] = dateString;
+			dateString;
+		}
 	}
 	
 	public static function getAuthors(path:String, authorByName:StringMap<GitAuthorInfo>):Array<GitAuthorInfo> {
 		#if (!display && !disable_git_authors)
-			var tty = Sys.systemName() == 'Windows' ? 'CON' : '/dev/tty';
-			var process = new sys.io.Process('git shortlog -snc --email "$path" < $tty');
+			var process = new sys.io.Process('git log --follow --pretty=format:"%aN <%aE>" -- "$path"');
 			if (process.exitCode() != 0) throw process.stderr.readAll().toString();
 			var log = process.stdout.readAll().toString();
-
 			if (log == null || log.length == 0) return [];
-			var ereg = ~/(\d{1,4})\t(.+?) <(.+?)>/g;
+			var ereg = ~/(.+?) <(.+?)>/g;
 			var authors:Array<GitAuthorInfo> = [];
 			while (ereg.match(log)) {
 				log = ereg.matchedRight();
-				var name = ereg.matched(2);
+				var name = ereg.matched(1);
 				if (name.toLowerCase() == "github") continue;
 				
 				var author:GitAuthorInfo = authorByName.exists(name) ? authorByName.get(name) : { name: name };
-				author.commits = Std.parseInt(ereg.matched(1));
-				author.email = ereg.matched(3);
-				author.hash = Md5.encode(ereg.matched(3).toLowerCase());
-				authors.push(author);
+				author.email = ereg.matched(2);
+				author.hash = Md5.encode(ereg.matched(2).toLowerCase());
+				if (!authors.exists(function (a) return a.email == author.email)) {
+					authors.push(author);
+				}
 				authorByName.set(name, author);
 			}
 			return authors;
@@ -65,10 +82,10 @@ class GitUtil
 	}
 	
 	public static function getStat(path:String):GitDates {
-		#if disable_git_dates
+		#if (!display && disable_git_dates)
 		return {
-			modified: Date.now(),
-			created: Date.now(),
+			modified: now,
+			created: now,
 		}
 		#else
 		return {
@@ -90,5 +107,4 @@ typedef GitAuthorInfo = {
 	?name: String,
 	?email: String,
 	?hash: String,
-	?commits: Int,
 }
