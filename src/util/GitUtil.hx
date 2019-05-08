@@ -1,6 +1,5 @@
 package util;
 import haxe.crypto.Md5;
-import haxe.ds.Map;
 import haxe.ds.StringMap;
 import haxe.io.Path;
 
