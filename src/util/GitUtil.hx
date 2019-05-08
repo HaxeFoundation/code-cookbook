@@ -38,7 +38,7 @@ class GitUtil
 		dateString = dateString.trim();
 		if (dateString.length != 10) throw 'invalid date: ' + dateString; // skip non-versioned files
 		var splitted = dateString.split("-");
-		return new Date(Std.parseInt(splitted[0]), Std.parseInt(splitted[1]), Std.parseInt(splitted[2]) - 1, 1, 1, 1);
+		return new Date(Std.parseInt(splitted[0]), Std.parseInt(splitted[1]) - 1, Std.parseInt(splitted[2]), 1, 1, 1);
 	}
 	
 	static function getDateLog(path:String):String {
