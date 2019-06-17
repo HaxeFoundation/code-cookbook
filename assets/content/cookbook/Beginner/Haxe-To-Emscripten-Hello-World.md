@@ -16,7 +16,7 @@ resolving this.
    * Main.hx
    
     ```haxe
-             package;
+         package;
          @:buildXml("
          <linker id='exe' exe='em++'>
            <flag value='-s' />
@@ -31,14 +31,14 @@ resolving this.
          class Main 
          {
 
-          static function main() 
-          {
-           trace("Hello Wolrd CPP");
-          }
+           static function main() 
+           {
+              trace("Hello Wolrd CPP");
+           }
 
-         }
+        }
     ```
-
+ * The Link and build.hxml came from:- https://groups.google.com/forum/#!topic/haxelang/Pcm38LPFjW0
 
 For some odd reason for this to work. It need both copies of emsdk-1.35.0-full-64bit.msi and emsdk.zip 64bit version.
 
