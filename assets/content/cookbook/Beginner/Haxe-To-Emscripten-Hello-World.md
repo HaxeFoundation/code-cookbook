@@ -44,7 +44,7 @@ For some odd reason for this to work. It need both copies of emsdk-1.35.0-full-6
     * build.hxml
    ```
        # Windows maybe needs this define
-       -D EMSCRIPTEN_SDK
+       # -D EMSCRIPTEN_SDK
 
        # If you want the .html file showing how to embed the wasm
        -D HXCPP_LINK_EMSCRIPTEN_EXT=.html
@@ -56,6 +56,10 @@ For some odd reason for this to work. It need both copies of emsdk-1.35.0-full-6
        -main Main
     ```
  * The Link and build.hxml came from:- https://groups.google.com/forum/#!topic/haxelang/Pcm38LPFjW0
+ * comment out -D EMSCRIPTEN_SDK (for it to work in my case)
+ * It will then link Main.html
+ * Double click on it Main.html It will run in the broswer.
+ 
 
 
 > Author: [Fhalo](https://github.com/Fhalo48)
