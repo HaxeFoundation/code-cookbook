@@ -373,7 +373,7 @@ enum Move {
 }
 ```
 If we would use the OR pattern here, we could have written the cases like this:
-```
+```haxe
 var winner = switch [playerA.move, playerB.move] {
   case [Rock, Scissors] | [Paper, Rock] | [Scissors, Paper]: playerA;
   case [Rock, Paper] | [Paper, Scissors] | [Scissors, Rock]: playerB;
