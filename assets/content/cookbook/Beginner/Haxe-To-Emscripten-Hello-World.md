@@ -58,7 +58,7 @@ For some odd reason for this to work. It need both copies of emsdk-1.35.0-full-6
  * The Link and build.hxml came from:- https://groups.google.com/forum/#!topic/haxelang/Pcm38LPFjW0
  * comment out -D EMSCRIPTEN_SDK (for it to work in my case)
  * It will then link Main.html
- * Double click on it Main.html It will run in the broswer.
+ * Double click on it Main.html. It will run in the broswer.
  
 
 
