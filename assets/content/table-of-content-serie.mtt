@@ -21,7 +21,7 @@
 		</h4>
 		<p class="tags" ::cond page.visible && page.tags!=null && page.tags.length>0::>
 			::foreach tag page.tags::
-				<small class="tag"><i class="fa fa-tag"></i>&nbsp;::tag::</small>
+				<small class="tag"><i class="fa fa-tag"></i>&nbsp;<a href="tag/::tag::.html">::tag::</a></small>
 			::end::
 		</p>
 		
