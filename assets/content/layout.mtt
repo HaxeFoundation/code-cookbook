@@ -107,7 +107,7 @@
 				<li class=" dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">Connect <b class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li><a href="https://github.com/HaxeFoundation" rel="external"><i class="fa fa-github"></i> Github</a></li>
+						<li><a href="https://github.com/HaxeFoundation" rel="external"><i class="fa fa-github"></i> GitHub</a></li>
 						<li><a href="https://github.com/HaxeFoundation/haxe/issues" rel="external"><i class="fa fa-github"></i> Bug reports</a></li>
 						<li><a href="https://stackoverflow.com/questions/tagged/haxe" rel="external"><i class="fa fa-stack-overflow"></i> Stack Overflow</a></li>
 						<li><a href="http://community.haxe.org/" rel="external"><i class="fa fa-envelope-o"></i> Forums</a></li>
@@ -136,7 +136,7 @@
 		<div class="copyright">
 			<p>
 			&copy;::DateTools.format(now, "%Y")::&nbsp;<a class="hf-link" href="https://haxe.org/foundation/" rel="external" title="Haxe Foundation Website">Haxe Foundation</a> |
-			&nbsp;<a href="https://github.com/HaxeFoundation/code-cookbook" title="Haxe Code Cookbook on Github" rel="external">Code Cookbook on Github</a> 
+			&nbsp;<a href="https://github.com/HaxeFoundation/code-cookbook" title="Haxe Code Cookbook on GitHub" rel="external">Code Cookbook on GitHub</a> 
 			</p>
 			<p class="last-modified">Last deploy: ::DateTools.format(now, "%b %d, %Y")::</p>
 		</div>
