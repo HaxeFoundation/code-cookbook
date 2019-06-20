@@ -69,7 +69,7 @@ class Main
     var cert = Certificate.loadFile('my_chain.pem');
     listener_socket.setCA(cert);
     listener_socket.setCertificate(cert, 
-                                   Key.loadFile('my_key.key'));
+                                   Key.loadFile('my_private.key'));
     listener_socket.setHostname('foo.example.com');
 
     // e.g. for an application like an HTTPs server, the client
