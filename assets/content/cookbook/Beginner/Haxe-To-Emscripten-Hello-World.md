@@ -19,7 +19,7 @@ For this to work in my case. It needs both copies of emsdk-1.35.0-full-64bit.msi
    
    Update it to latest version and activate it to the latest version.  
    
-   Create a simple Hello world Haxe code.
+   Create a simple Hello World Haxe code.
    
    Main.hx
    
