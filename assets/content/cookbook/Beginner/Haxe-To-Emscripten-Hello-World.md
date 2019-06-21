@@ -35,7 +35,7 @@ package;
 
 class Main {
   static function main(){
-    trace("Hello Wolrd CPP");
+    trace("Haxe is great!");
   }
 }
 ```
