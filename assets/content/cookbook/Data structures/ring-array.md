@@ -2,84 +2,77 @@
 
 # A fixed ring array
 
-A fixed ring array are especially useful when you need a hard upper bound for how much data can be in the queue.
+A fixed ring array is especially useful when you need a hard upper bound for how much data can be in the queue.
 
 ```haxe
-@:generic class Ring<T> {
-  public var cap(get, never): Int;
-  inline function get_cap() return a.length;
+// reference https://github.com/torvalds/linux/blob/master/include/linux/circ_buf.h
+@:generic
+class Ring<T> {
 
-  public var len(get, never): Int;
-  inline function get_len() return i + left - start;
-
-  var i: Int;
-  var start: Int;
-  var left: Int;
+  var head: Int;
+  var tail: Int;
+  var cap: Int;
   var a: haxe.ds.Vector<T>;
 
   public function new(len) {
+    if (len < 4) {
+      len = 4;
+    } else if (len & len - 1 > 0) {
+      len--;
+      len |= len >> 1;
+      len |= len >> 2;
+      len |= len >> 4;
+      len |= len >> 8;
+      len |= len >> 16;
+      len++;       // power of 2
+    }
+    cap = len - 1; // only "len-1" available spaces
     a = new haxe.ds.Vector<T>(len);
     reset();
   }
-  public function pop(): Null<T> {
-    if (len <= 0) return null;
-    if (i == 0) {
-      i = cap;
-      left = 0;
-    }
-    return a[--i];
-  }
-  public function shift(): Null<T> {
-    if (len <= 0) return null;
-    if (start == cap) {
-      start = 0;
-      left = 0;
-    }
-    return a[start++];
-  }
-  public function push(v: T) {
-    if (i == cap) {
-      if (left > 0 && start == i) start = 0;
-      i = 0;
-      left = cap;
-    }
-    if (len == cap) start++;
-    a[i++] = v;
-  }
+
   public function reset() {
-    i = 0;
-    start = 0;
-    left = 0;
+    head = 0;
+    tail = 0;
   }
-  public function remove(v: T) {
-    var cap = this.cap;
-    var max = this.len;
-    var j = 0, p = 0;
-    while (j < max) {
-      p = (j + start) % cap;
-      if (v == a[p]) {
-        if (p == start) {
-          ++ start;
-        } else {
-          if (this.i == 0) {
-            this.i = cap;
-            this.left = 0;
-          }
-          -- max;
-          while (j < max) {
-            a[(j + start) % cap] = a[(j + start + 1) % cap];
-            ++ j;
-          }
-          -- this.i;
-        }
-        break;
-      }
-      ++ j;
+
+  public function push(v: T) {
+    if (space() == 0) tail = (tail + 1) & cap;
+    a[head] = v;
+    head = (head + 1) & cap;
+  }
+
+  public function shift(): Null<T> {
+    var ret:Null<T> = null;
+    if (count() > 0) {
+      ret = a[tail];
+      tail = (tail + 1) & cap;
     }
+    return ret;
   }
-  public inline function toString() {
-    return '[i: $i, start: $start, len: $len, left: $left]';
+
+  public function pop(): Null<T> {
+    var ret:Null<T> = null;
+    if (count() > 0) {
+      head = (head - 1) & cap;
+      ret = a[head];
+    }
+    return ret;
   }
+
+  public function unshift(v: T) {
+    if (space() == 0) head = (head - 1) & cap;
+    tail = (tail - 1) & cap;
+    a[tail] = v;
+  }
+
+  public function toString() {
+    return '[head: $head, tail: $tail, capacity: $cap]';
+  }
+
+  public inline function count() return (head - tail) & cap;
+
+  public inline function space() return (tail - head - 1) & cap;
 }
 ```
 
@@ -113,11 +106,11 @@ It's easy to implement `undo/redo` operations.
 
 class Main {
   static function main() {
-    var h = new History<Int>(3);
+    var h = new History<Int>(4);
     h.add(1);
     h.add(2);
     h.add(3);
-    h.add(4); // overrided
+    h.add(4); // overrides the 1
     h.add(5);
     eq(h.undo() == 5);
     eq(h.undo() == 4);
