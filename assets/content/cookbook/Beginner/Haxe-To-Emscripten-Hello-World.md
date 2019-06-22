@@ -1,7 +1,7 @@
 [tags]: / "Haxe, Emscripten"
 # Haxe to Emscripten
 
-This is a hello world example which will be comiled and linked to [Emscripten](https://emscripten.org/).
+This is a hello world example which will be compiled and linked to [Emscripten](https://emscripten.org/).
 
 ## Problem
 Unable to find the full path for emcc.
