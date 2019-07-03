@@ -13,21 +13,44 @@ be similar on OSX. Windows users will have to modify some commands. I used Haxe 
 
 ### Getting Started
 
-The first thing you'll need for playing with SSL is a certificate and a key file. There are
-apparently ways to make this work for localhost, but since the whole point of a cert is to
-prove domain ownership, I prefer to play with real certs. You
-can get them for free (for domains that you own and control -- you'll have to provide verification)
-from [letsencrypt.org](https://letsencrypt.org).
+The first thing you'll need for playing with SSL is a certificate and a key file.
+
+#### Test Certificates
+
+The OpenSSL project has some test certificates that you can use. You can download the certificate and key files
+directly from their github repo:
+
+https://raw.githubusercontent.com/openssl/openssl/master/test/certs/rootcert.pem
+https://raw.githubusercontent.com/openssl/openssl/master/test/certs/rootkey.pem
+
+These are not bound to any particular domain, so the server can use any `setHostname()`, and the
+client can access the server simply by IP address. The above files worked in the example code below.
+
+#### Real Certificates
+
+Often in the real world, you use certificates to prove domain ownership. You can get certificates
+for your domain for free from [letsencrypt.org](https://letsencrypt.org) -- you'll have to
+provide domain ownership verification.
 
 Notes on using cert files:
 - You may need to convert your files to PEM format (Google or `openssl` CLI tool may help you).
 - You may sometimes need to concatenate multiple intermediate / CA pem files into an overall `chain.pem` file.
-- If you can't get SSL certificates, you could comment out all the SSL bits, and just test the
-socket server, if you like.
 
 In the below example, I'm using `foo.example.com` as the hostname. Your hostname will vary and
 your cert files are bound to a specific hostname, such as `myhost.mydomain.com`. Some certs
 are valid for multiple hosts via a wildcard cert (e.g. `*.mydomain.com`).
+
+#### Testing your certs on localhost
+
+If you want to test a cert for `mydomain.com` on your local computer (without pushing your code to your live `mydomain.com` server), you can point `mydomain.com` at localhost by inserting a line into your `/etc/hosts` file:
+
+```
+127.0.0.1   mydomain.com
+```
+
+Now requests to `mydomain.com` will be redirected to 127.0.0.1 (aka, localhost, your computer). You may need to restart your browser or reboot for this change to take effect.
+
+You might generate a certificate for `test.mydomain.com` or `localhost.mydomain.com`, specifically for testing or development of SSL / HTTPS connections. You could use `/etc/hosts` entries on developers computers, or CI servers.
 
 ### cpp.Lib.stringReference note
 
