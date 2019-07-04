@@ -20,8 +20,8 @@ The first thing you'll need for playing with SSL is a certificate and a key file
 The OpenSSL project has some test certificates that you can use. You can download the certificate and key files
 directly from their github repo:
 
-https://raw.githubusercontent.com/openssl/openssl/master/test/certs/rootcert.pem
-https://raw.githubusercontent.com/openssl/openssl/master/test/certs/rootkey.pem
+* <https://raw.githubusercontent.com/openssl/openssl/master/test/certs/rootcert.pem>
+* <https://raw.githubusercontent.com/openssl/openssl/master/test/certs/rootkey.pem>
 
 These are not bound to any particular domain, so the server can use any `setHostname()`, and the
 client can access the server simply by IP address. The above files worked in the example code below.
