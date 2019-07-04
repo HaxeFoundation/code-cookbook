@@ -78,39 +78,35 @@ The server loads my private key and certificate chain files, and listens on port
 ```haxe
 import sys.net.Host;
 import sys.net.Socket;
-import sys.ssl.Socket as SocketSSL;  // aliased to avoid conflict with sys.net.Socket
+import sys.ssl.Socket as SocketSSL; // aliased to avoid conflict with sys.net.Socket
 import sys.ssl.Certificate;
 import sys.ssl.Key;
-
 import cpp.vm.Thread;
 
-class Main
-{
-  public static function main()
-  {
-    var listener_socket =  new SocketSSL();
+class Main {
+  public static function main() {
+    var listener_socket = new SocketSSL();
     var cert = Certificate.loadFile('my_chain.pem');
     listener_socket.setCA(cert);
-    listener_socket.setCertificate(cert, 
-                                   Key.loadFile('my_private.key'));
+    listener_socket.setCertificate(cert, Key.loadFile('my_private.key'));
     listener_socket.setHostname('foo.example.com');
 
     // e.g. for an application like an HTTPs server, the client
     // doesn't need to provide a certificate. Otherwise we get:
-    // Error: SSL - No client certification received from the client, but required by the authentication mode
+    // Error: SSL - No client certification received from the client, 
+    // but required by the authentication mode
     listener_socket.verifyCert = false;
 
     // Binding 0.0.0.0 means, listen on "any / all IP addresses on this host"
-    listener_socket.bind( new Host( '0.0.0.0' ), 8000);
-    listener_socket.listen( 9999 ); // big max connections
+    listener_socket.bind(new Host('0.0.0.0'), 8000);
+    listener_socket.listen(9999); // big max connections
 
-    while(true) {
-
+    while (true) {
       // Accepting socket
       trace('waiting to accept...');
       var peer_connection:SocketSSL = listener_socket.accept();
-      if ( peer_connection != null ) {
-        trace( 'got connection from : ' + peer_connection.peer() );
+      if (peer_connection != null) {
+        trace('got connection from : ' + peer_connection.peer());
         peer_connection.handshake(); // This may not be necessary, if !verifyCert
 
         // Spawn a reader thread for this connection:
@@ -119,24 +115,21 @@ class Main
         thrd.sendMessage(peer_connection);
         trace('ok...');
       }
-
     }
   }
 
-  static function reader()
-  {
+  static function reader() {
     var peer_connection:Socket = cast Thread.readMessage(true);
     trace('new reader thread...');
 
-    while(true) {
-
+    while (true) {
       try {
-        Sys.print( peer_connection.input.readString(1) );
-      } catch ( e:haxe.io.Eof ) {
+        Sys.print(peer_connection.input.readString(1));
+      } catch (e:haxe.io.Eof) {
         trace('Eof, reader thread exiting...');
         return;
-      } catch ( e:Dynamic ) {
-        trace('Uncaught: ${ e }'); // throw e;
+      } catch (e:Any) {
+        trace('Uncaught: ${e}'); // throw e;
       }
     }
   }
@@ -147,9 +140,9 @@ class Main
 
 So, let's see it in action!
 
-My project directory contains `Main.hx`, as well as my cert files, `my_chain.pem` and `my_private.key`.
+The project directory contains `Main.hx`, as well as my cert files, `my_chain.pem` and `my_private.key`.
 
-I compile and start the server in one terminal:
+Compile and start the server in one terminal:
 
 ```
 > haxe -main Main -debug -cpp out && ./out/Main-debug
@@ -157,7 +150,7 @@ I compile and start the server in one terminal:
 Main.hx:37: waiting to accept...
 ```
 
-And then I connect from another terminal with a client that's a command line utility for testing ssl connections:
+Now connect from another terminal with a client that's a command line utility for testing ssl connections:
 
 ```
 > openssl s_client -connect foo.example.com:8000
@@ -197,5 +190,4 @@ When you're ready to take your server past the prototype phase, you'll want to p
 thread to the reader threads (the same way the socket is passed, via `Thread.sendMessage()`.) Then when
 the reader receives data from a client, it would send that data to the data processor thread.
 
-```
 > Author: [Jeff Ward](https://github.com/jcward)
