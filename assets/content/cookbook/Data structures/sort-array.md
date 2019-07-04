@@ -7,6 +7,9 @@
 ```haxe
 var myArray = [1,5,3,7,6,2,4];
 
+myArray.sort(Reflect.compare);
+
+// Or, write your own comparison function.
 myArray.sort(function(a, b):Int {
   if (a < b) return -1;
   else if (a > b) return 1;
