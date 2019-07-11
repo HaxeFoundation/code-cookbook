@@ -98,9 +98,8 @@ a_bar = "world";
 ttrace(a_foo + ", " + a_bar + ", " + Std.string(["bar","foo"]));  
 ```
 
-Notice Notivide how properties are inlined at compile time and only those properties present on the object. Also notice how `set()` just generates a assignament statement and how `get()` generates a field access expression. 
+Notice how property names are inlined and only those properties present on the object. Also notice how `set()` just generates a assignament statement and how `get()` generates a field access expression. 
 
 Also notice that it was not our macro but the compiler optimizations that replaced objects properties with plain variables. 
 
-the statement `fb = {a: 111}.combine({b:13.1}, {bar: "happy hour"});` generates code like: `fb = {a: 111, b: 13.1, bar: "happy hour"};`. As you can see, the output code's variable declarations are assigned to values which are *already mixed* (at compile time).
 > Author: [Sebastián Gurin](https://github.com/cancerberosgx)
