@@ -82,4 +82,8 @@ class Main {
 }
 ```
 
+After compiling previous code, the statement `fb = {a: 111}.combine({b:13.1}, {bar: "happy hour"});` generates code like: `fb = {a: 111, b: 13.1, bar: "happy hour"};`. As you can see, the output code's variable declarations are assigned to values which are *already mixed* (at compile time).
+
+From performance point of view, this is optimal, even more than using native APIs, (like JavaScript's `Object.assign()` for example).
+  
 > Author: [Adrian Veith](https://github.com/AdrianV)
