@@ -1,6 +1,6 @@
 [tags]: / "expression-macro"
 
-# Accessing structures properties
+# Accessing structure properties
 
 Complementing [Combine two or more structures](combine-objects.html) which shows how to implement a `combine()` method to mix structure values, here we create three more methods to list structure properties, and get/set its values. It's used the same way as mentioned and it makes sense to have them all in the same utility class:
 
