@@ -16,7 +16,7 @@ The repository contains a static website generator, which converts markdown arti
 
 ## Contributing articles
 
-Please add/edit the articles (markdown files) in the [assets folder](assets/content/cookbook) and do a pull request.
+Please add/edit the articles (markdown files) in the [assets folder](assets/content/cookbook) and do a pull request. The scope of the cookbook includes the core language, the standard library, and also any libraries maintained by the Haxe Foundation.
 
 ##### Formatting 
 
