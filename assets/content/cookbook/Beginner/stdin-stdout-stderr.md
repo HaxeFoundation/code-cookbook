@@ -55,7 +55,7 @@ Sys.print("Hello, print!"); // no added newline
 ```
 
 You can also use `Sys.stdout()` to grab the stdout object and call its write
-methods (see [haxe.io.Output](https://api.haxe.org/haxe/io/Output.html).
+methods (see [haxe.io.Output](https://api.haxe.org/haxe/io/Output.html)).
 
 
 
