@@ -14,15 +14,15 @@ with any other command line utility.
 
 To read in one line:
 
-~~~haxe
+```haxe
 Sys.println("Enter your name:");
 var ans = Sys.stdin().readLine();
 // `ans` is just the text --- no newline
-~~~
+```
 
 If you want to iteratively read in lines:
 
-~~~haxe
+```haxe
 var line : String;
 var lines : Array<String> = [];
 try {
@@ -34,13 +34,13 @@ try {
 catch (e : haxe.io.Eof) {
     trace("done!");
 }
-~~~
+```
 
 You could also read in all the input in one shot:
 
-~~~haxe
+```haxe
 var content = Sys.stdin().readAll().toString();
-~~~
+```
 
 
 
@@ -48,11 +48,11 @@ var content = Sys.stdin().readAll().toString();
 
 There's a few ways to write to stdout:
 
-~~~haxe
+```haxe
 trace("Hello, trace!");
 Sys.println("Hello, println!");
 Sys.print("Hello, print!"); // no added newline
-~~~
+```
 
 You can also use `Sys.stdout()` to grab the stdout object and call its write
 methods (see [haxe.io.Output](https://api.haxe.org/haxe/io/Output.html).
@@ -63,6 +63,6 @@ methods (see [haxe.io.Output](https://api.haxe.org/haxe/io/Output.html).
 
 To write to stderr:
 
-~~~haxe
+```haxe
 Sys.stderr().writeString("Yow!\n");
-~~~
+```
