@@ -34,7 +34,7 @@ In this example we know that the data is of the type `ArrayBuffer` so we can jus
 ```haxe
     // Handle message from parent to worker
     static function onMessageFromParent(e:js.html.MessageEvent) {
-        trace('Worker recieved data from Client: ' + e.data);
+        trace('Worker received data from Client: ' + e.data);
         var uint8View = new js.html.Uint8Array(cast e.data);
                
         // Do fancy stuff with data...
@@ -68,8 +68,8 @@ Open the `index.html` in a browser window, and check the JavaScript console outp
 You should see something like:
 ```
 > Original data: 0,1,2...  
-> Worker recieved data from Client: [object ArrayBuffer] 
-> Parent recieved data from Worker: [object ArrayBuffer] 
+> Worker received data from Client: [object ArrayBuffer] 
+> Parent received data from Worker: [object ArrayBuffer] 
 > Roundtrip time: 283 ms  
 > Data altered by worker: 1,2,3...
 ```
@@ -136,7 +136,7 @@ class Main {
 
     // Handle message passed from parent to worker
     static function onMessageFromParent(e:js.html.MessageEvent) {
-        trace('Worker recieved data from Client: ' + e.data);
+        trace('Worker received data from Client: ' + e.data);
         var uint8View = new js.html.Uint8Array(cast e.data);
                
         // Do fancy stuff with data...
@@ -149,7 +149,7 @@ class Main {
     
     // Handle message passed from worker to parent
     static function onMessageFromWorker(e:js.html.MessageEvent) {
-        trace('Parent recieved data from Worker: ' + e.data);
+        trace('Parent received data from Worker: ' + e.data);
         trace('Roundtrip time: ' + (Date.now().getTime() - start) + ' ms');            
         var uint8View = new js.html.Uint8Array(cast e.data);
         trace('Data altered by worker: [' + uint8View.subarray(0, 3) + '...]');
