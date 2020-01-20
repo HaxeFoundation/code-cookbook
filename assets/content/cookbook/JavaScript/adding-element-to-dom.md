@@ -38,7 +38,7 @@ class Main {
     document.addEventListener("DOMContentLoaded", function(event) {
       trace("DOM ready");
 
-      // Shorthand for document.creaetElement("p");
+      // Shorthand for document.createElement("p");
       var p = document.createParagraphElement(); 
       p.innerText = 'DOM ready';
 
