@@ -103,6 +103,16 @@ for (item in arrayOfStrings) {
 }
 ```
 
+You can also iterate using the array index:
+
+```haxe
+var a1 = ["a", "b", "c"];
+var a2 = [11, 22, 33];
+for (i in 0...a1.length) {
+    trace(i + ", " + a1[i] + ", " + a2[i]);
+}
+```
+
 ### Operations
 
 #### Copy
