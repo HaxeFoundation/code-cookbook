@@ -137,7 +137,7 @@ var fruits = "1 Apple
   	1 Tomato";
 
 trace(getFruits(fruits)); 
-// [{amount:1, fruit:Apple}, {amount:2, fruit:Bananas}, {amount:3, fruit:Pears}]
+// [{amount:1, fruit:Apple}, {amount:2, fruit:Bananas}, {amount:3, fruit:Pears}, {amount:1, fruit:Tomato}]
 ```
 
 #### Mapping results
