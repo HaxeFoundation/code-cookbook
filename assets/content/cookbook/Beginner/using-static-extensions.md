@@ -2,7 +2,7 @@
 
 # Using static extensions
 
-The concept of [static extensions](http://haxe.org/manual/lf-static-extension.html) is a very poweful concept that gives the possibility of keeping types and objects lightweight, and extending them with functionality only when actually needed.
+The concept of [static extensions](http://haxe.org/manual/lf-static-extension.html) is a very powerful concept that gives the possibility of keeping types and objects lightweight, and extending them with functionality only when actually needed.
 Here we will have a look at how some commonly used methods for basic types are implemented as extension methods, and how you can write your own.
 
 ## Where is string replace?
