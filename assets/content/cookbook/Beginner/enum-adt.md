@@ -31,9 +31,9 @@ enum RewardType {
 To create an enum instance, call its constructor.
 
 ```haxe
-var gold = RewardType.Gold(123);
-var experience = RewardType.Experience(456);
-var item = RewardType.Item(ItemType.Key);
+var gold = Gold(123);
+var experience = Experience(456);
+var item = Item(Key);
 ```
 
 Alternatively, instantiate the enum via methods from `haxe.EnumTools`. Read more about it in the [Tooling](#enumtools) section.
@@ -50,20 +50,20 @@ var createdByIndex = ItemType.createByIndex(0);
 Values passed to enum constructors can be obtained through pattern matching.
 
 ```haxe
-var reward = RewardType.Item(ItemType.Sword("Slashy", 100));
+var reward = Item(Sword("Slashy", 100));
 
-switch(reward) {
-  case RewardType.Gold(value):
+switch (reward) {
+  case Gold(value):
     trace('I got $value gold!');
-  case RewardType.Experience(value):
+  case Experience(value):
     trace('I got $value experience!');
-  case RewardType.Item(type):
-    switch(type) {
-      case ItemType.Key:
+  case Item(type):
+    switch (type) {
+      case Key:
         trace('I got a key!');
-      case ItemType.Sword(name, attack):
+      case Sword(name, attack):
         trace('I got "$name", a sword with $attack attack!');
-      case ItemType.Shield(name, defense):
+      case Shield(name, defense):
         trace('I got "$name", a shield with $defense defense!');
     }
 }
@@ -97,7 +97,7 @@ These methods are automatically included in the module context when using enums,
 Some examples are presented below:
 
 ```haxe
-var item = ItemType.Shield("Shieldy", 100);
+var item = Shield("Shieldy", 100);
 // Gets enum instance constructor name
 var constructorName = item.getName();
 // Gets enum instance constructor index
@@ -105,11 +105,11 @@ var constructorIndex = item.getIndex();
 // Gets enum instance constructor arguments
 var constructorArguments = item.getParameters();
 
-var otherItem = ItemType.Sword("Slashy", 100);
+var otherItem = Sword("Slashy", 100);
 // Compares two enum instances recursively
 if (item.equals(otherItem)) trace("Items are equal!");
 // Matches enum instance against pattern
-if (otherItem.match(ItemType.Shield(_, _))) trace("Other item is a shield!");
+if (otherItem.match(Shield(_, _))) trace("Other item is a shield!");
 ```
 
 > Read more in the Haxe Manual:
