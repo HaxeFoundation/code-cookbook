@@ -58,7 +58,7 @@
 				<div ::cond currentPage.authors.length>0:: class="authors row" itemprop="author" itemscope="itemscope" itemtype="https://schema.org/Person">
 					<span class="span2">Author:</span> 
 					<div class="span4">::foreach author currentPage.authors::
-						<a href="::author.profileLink::"><img src="https://github.com/::author.username::.png?size=80" width="40" height="40" title="::author.name::" /></a> 
+						<a href="::author.profileLink::"><img src="https://github.com/::author.username::.png?size=80" loading="lazy" width="40" height="40" title="::author.name::" /></a> 
 						<a href="::author.profileLink::" itemprop="url" rel="external" class="author-name"><span itemprop="name">::author.name::</span></a><br/>
 					::end::
 					</div> 
@@ -68,12 +68,12 @@
 					<div class="span4">::foreach author currentPage.contributors::
 						::if author.profileLink != null::
 						<a href="::author.profileLink::" rel="external">
-							<img src="https://github.com/::author.username::.png?size=40" width="20" height="20" title="::author.name::" ::cond author.username != null:: /> 
-							<img src="https://www.gravatar.com/avatar/::author.hash::.jpg?s=40" width="20" height="20" title="::author.name::" ::cond author.username == null:: /> 
+							<img src="https://github.com/::author.username::.png?size=40" loading="lazy" width="20" height="20" title="::author.name::" ::cond author.username != null:: /> 
+							<img src="https://www.gravatar.com/avatar/::author.hash::.jpg?s=40" loading="lazy" width="20" height="20" title="::author.name::" ::cond author.username == null:: /> 
 						</a>
 						::else::
-						<img src="https://github.com/::author.username::.png?size=40" width="20" height="20" title="::author.name::" ::cond author.username != null:: /> 
-						<img src="https://www.gravatar.com/avatar/::author.hash::.jpg?s=40" width="20" height="20" title="::author.name::" ::cond author.username == null:: /> 
+						<img src="https://github.com/::author.username::.png?size=40" loading="lazy" width="20" height="20" title="::author.name::" ::cond author.username != null:: /> 
+						<img src="https://www.gravatar.com/avatar/::author.hash::.jpg?s=40" loading="lazy" width="20" height="20" title="::author.name::" ::cond author.username == null:: /> 
 						::end::
 						
 						::if author.profileLink != null::
