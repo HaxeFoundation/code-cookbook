@@ -2,7 +2,7 @@
 
 # Compiling c++ code on Windows using mingw
 
-On windows, the compiler by default expects an installation of Microsoft Visual Studio Community edition when targeting c++. 
+On Windows, the compiler by default expects an installation of Microsoft Visual Studio Community edition when targeting c++. 
 
 However, there's the possibility of using [mingw](http://www.mingw.org/) instead, wich is much more quick and lightweight when it comes to installation size and hazzle. 
 
@@ -33,6 +33,3 @@ You also have to add the `-D toolchain=mingw` to your project's .hxml file. Here
 That's it!
 
 > Author: [Jonas Nyström](https://github.com/cambiata)
-
-
-
