@@ -8,7 +8,7 @@ The following example loads your IP-address using a free-to-use web API. The ser
 This string is parsed to an object `result` using the `haxe.Json.parse` function. After this, we trace the IP-address `result.ip`.
 
 ```haxe
-var http = new haxe.Http("https://api.ipify.org?format=json");
+var http = new haxe.Http("https://api6.ipify.org?format=json");
 
 http.onData = function (data:String) {
   var result = haxe.Json.parse(data);
