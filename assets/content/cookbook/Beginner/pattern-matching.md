@@ -533,7 +533,7 @@ switch person {
     trace("unknown");
 }
 ```
-If we would like to trace the age of the person in the first case we could have written `case { age: age > 50 => true}: trace('found somebody older than 50, the age is $age')`.
+If we would like to trace the age of the person in the first case we could have written `case {age: age} if (age > 50): trace('found somebody older than 50, the age is $age.');`.
 
 Of course object matching can be used with all other things we already used before.
 
