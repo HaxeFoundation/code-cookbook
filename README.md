@@ -14,11 +14,37 @@ The repository contains a static website generator, which converts markdown arti
  * The Haxe source files of the generator are in [src/](src).
  * The website-generated content will output in `output/` (excluded from git).
 
-## Contributing articles
+## Contributing 
+
+## Contributing changes
+
+To contribute a change, you have to make a pull request. This can be done using the GitHub website or by fork/cloning the project.
+
+##### Contributing using GitHub as online editor 
+
+This is the easiest way of doing small changes:
+
+- Navigate to an article on <https://code.haxe.org> and press the edit button on any page: ![image](https://user-images.githubusercontent.com/576184/78226927-c544eb00-74cc-11ea-8d59-8658b017126f.png)
+- You are redirected to GitHub. Once you have an account and are logged in, you can make the change in the online editor.
+- Set the description / what you changed and press the _Request change_ button:
+![image](https://user-images.githubusercontent.com/576184/78226584-3506a600-74cc-11ea-878f-4070ca04107d.png)
+- A pull request will be created. GitHub makes a fork for you automatically.
+
+##### Contributing using a fork
+
+This would also allow to test/see the changes before submitting which is also useful when you want to add new pages.
+
+- Make a fork (on GitHub) of the project.
+- Checkout your repo on your machine, create a new branch for the pull request.
+- Make the changes in that new branch.
+- Push the commits (they go to your fork).
+- On GitHub, you make a pull request from your fork's branch to the original repo.
+
+## Creating articles
 
 Please add/edit the articles (markdown files) in the [assets folder](assets/content/cookbook) and do a pull request. The scope of the cookbook includes the core language, the standard library, and also any libraries maintained by the Haxe Foundation.
 
-##### Formatting 
+#### Formatting 
 
 It would be nice if you keep the formatting of the code in the same style as used already:
 
@@ -29,7 +55,7 @@ It would be nice if you keep the formatting of the code in the same style as use
  * Type-hints for function arguments unless it's very obvious.
  * Judicious use of extra line-breaks to avoid ugly automatic breaks (check the output).
  
-##### Other remarks
+#### Other remarks
  
  * The first heading is used in the navigation. Keep this title short.
  * The first paragraph is used as description. Describe what the content of the article is about.
