@@ -8,21 +8,17 @@ This example uses Haxe's Filesystem to recursively search for all files of certa
 ## Implementation
 ```hx
 import haxe.io.Path;
+import sys.FileSystem;
 
 static function recursiveSearch(directory:String = "path/to/", extension:String) {
     var files:Array<String> = [];
     
-    if (sys.FileSystem.exists(directory)) {
-      for (file in sys.FileSystem.readDirectory(directory)) {
+    if (FileSystem.exists(directory)) {
+      for (file in FileSystem.readDirectory(directory)) {
         var path = Path.join([directory, file]);
-        if (!sys.FileSystem.isDirectory(path)) {
-            // regex expression to search for files with a '.'
-            var re = ~/[^.]+$/;
-            if (re.match(path)) {
-                var ext = re.matched(0);
-                if (ext == extension)
+        if (!FileSystem.isDirectory(path)) {
+              if (Path.extension(path) == extension)
                     files.push(path);	
-            }
          } else {
           var directory = Path.addTrailingSlash(path);
           recursiveSearch(directory);
