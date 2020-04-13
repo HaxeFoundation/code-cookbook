@@ -1,7 +1,11 @@
+[tags]: / "filesystem, sys, file"
+
 # Search for all files of particular extension
 
 This example uses Haxe's Filesystem to recursively search for all files of certain extension. 
 
+
+## Implementation
 ```hx
 import haxe.io.Path;
 
@@ -38,3 +42,5 @@ static function recursiveSearch(directory:String = "path/to/", extension:String)
 var haxeFiles:Array<String> = recursiveSearch('path/to/files', 'hx');
 trace(haxeFiles); // ["path/to/files/Example.hx"]
 ```
+
+> Author: [Damilare Akinlaja](https://github.com/darmie)
