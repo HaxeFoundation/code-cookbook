@@ -1,14 +1,14 @@
 [tags]: / "static-extension"
 
-# A Trait Pattern
+# An Automatic Interface Implementation Pattern
 
-Haskell has typeclasses, Rust has traits.  Both provide a way to extend a type with a large number of methods that depend on just a few user-specified properties.  Additionally, systems that support the trait-like pattern allow the same underlying type to be extended by multiple unrelated traits.
+Interfaces are cool because they let us tell the compiler about a relationship between classes that we can rely on when designing programs.  However, it kind of stinks that we can't include method implementations in an interface declaration.
 
-You can emulate the trait-like pattern  in Haxe using  interfaces, static extensions, and the @:using metadata.
+Not to worry, Haxe has you covered. By using interfaces, static extensions, and the @:using metadata, you can implement functions that are automatically available for all implementors of your interface.
 
 ## An example:
 
-The following defines a "trait" for things that have a name. 
+The following defines an interface for things that have a name. 
 
 ```haxe
 // HasName.hx
@@ -32,7 +32,7 @@ class HasNameExt {
 With the above, any class that implements `HasName` will automatically have a
 `fullName` method defined for it.
 
-Similarly, here is a trait defining things that age:
+Similarly, here is an interface defining things that age:
 
 ```haxe
 // HasAge.hx
@@ -89,4 +89,5 @@ implements HasAge {
 This example was highly contrived, but hopefully you can see how you
 might extend the idea in your own real code.
 
+> Author: [Colin Okay](https://github.com/cbeo)
 
