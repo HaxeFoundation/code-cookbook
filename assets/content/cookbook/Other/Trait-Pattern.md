@@ -2,7 +2,7 @@
 
 # An Automatic Interface Implementation Pattern
 
-Interfaces are cool because they let us tell the compiler about a relationship between classes that we can rely on when designing programs.  However, it kind of stinks that we can't include method implementations in an interface declaration.
+Interfaces are cool because they let you tell the compiler about a relationship between classes that you can rely on when designing programs.  However, it kind of stinks that you can't include method implementations in an interface declaration.
 
 Not to worry, Haxe has you covered. By using interfaces, static extensions, and the @:using metadata, you can implement functions that are automatically available for all implementors of your interface.
 
