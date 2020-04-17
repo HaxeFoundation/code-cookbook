@@ -53,7 +53,7 @@ class HasAgeExt {
 
 ```
 
-## Using the "traits"
+## Using the interfaces
 
 To bring it all together, write a `Person` class that implements each of above interfaces:
 
