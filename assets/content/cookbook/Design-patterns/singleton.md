@@ -5,7 +5,7 @@ This is a basic example of the [Singleton](https://en.wikipedia.org/wiki/Singlet
 ```haxe
 class MySingleton {
   // read-only property
-  public static var instance(default, null):MySingleton = new MySingleton();
+  public static final instance(default, null):MySingleton = new MySingleton();
   
   private function new () {}  // private constructor
 }
