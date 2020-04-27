@@ -4,8 +4,11 @@ This is a basic example of the [Singleton](https://en.wikipedia.org/wiki/Singlet
 
 ```haxe
 class MySingleton {
-  // read-only property
+  // Haxe 3 - read-only property
   public static var instance(default, null):MySingleton = new MySingleton();
+  
+  // Haxe 4 - read-only property
+  public static final instance:MySingleton = new MySingleton();
   
   private function new () {}  // private constructor
 }
