@@ -23,15 +23,15 @@ var ans = Sys.stdin().readLine();
 If you want to iteratively read in lines:
 
 ```haxe
-var line : String;
-var lines : Array<String> = [];
+var line:String;
+var lines:Array<String> = [];
 try {
     while (true) {
         line = Sys.stdin().readLine();
         lines.push(line);
     }
 }
-catch (e : haxe.io.Eof) {
+catch (e:haxe.io.Eof) {
     trace("done!");
 }
 ```

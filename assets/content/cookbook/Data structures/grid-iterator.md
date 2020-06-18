@@ -46,4 +46,41 @@ Because of the used `js` package/features, it only compiles in the JavaScript ta
 
 [tryhaxe](http://try.haxe.org/embed/F80dA)
 
+---
+
+# Grid Key value iterator
+
+In Haxe 4, as alternative, you can also use a [key value iterator](https://haxe.org/manual/expression-for.html#key-value-iteration).
+
+```haxe
+class GridIterator {
+  var gridWidth:Int = 0;
+  var gridHeight:Int = 0;
+  var i:Int = -1;
+
+  public inline function new(gridWidth:Int, gridHeight:Int) {
+    this.gridWidth = gridWidth;
+    this.gridHeight = gridHeight;
+  }
+
+  public inline function hasNext() {
+    return i < gridWidth * gridHeight;
+  }
+
+  public inline function next() {
+    i++;
+    return { key: i, value: { x: i % gridWidth, y: Std.int(i / gridWidth) } }
+  }
+}
+```
+
+## Usage 
+
+```haxe
+for (idx => pos in new GridIterator(6, 5)) {
+  trace(idx, pos.x, pos.y);
+}
+```
+
+
 > Learn more about iterators here: <http://haxe.org/manual/lf-iterators.html>

@@ -1,7 +1,8 @@
 # Null safety
 
-Haxe doesn't provide built-in null-safety, however it's possible to write null-safe code without run-time overhead
-using abstract similar to the following:
+> **NOTE:** Since Haxe 4.0, the compiler provides a more natural compile-time checking for nullable values that is aware of the control flow. See [official documentation](https://haxe.org/manual/cr-null-safety.html) for more details. We're leaving this example for the curious as it illustrates how [abstract types](https://haxe.org/manual/types-abstract.html) can be used for such thing.
+
+It's possible to write null-safe code without run-time overhead using an abstract similar to the following:
 
 ```haxe
 abstract Maybe<T>(Null<T>) from Null<T> {
