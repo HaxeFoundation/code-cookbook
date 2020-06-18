@@ -38,13 +38,13 @@
 			</ul>
 		</nav>
 		
-		<article class="span8" itemscope="itemscope" itemtype="http://schema.org/Article">
+		<article class="span8" itemscope="itemscope" itemtype="https://schema.org/Article">
 			<big class="pull-right"><a href="::currentPage.editUrl::?message=Update:%20::currentPage.title::&description=%0A%0ASources:%0A*%20::currentPage.absoluteUrl::%0A%0A::foreach author currentPage.authors::%40::author.username:: ::end::" title="Edit '::currentPage.title::' on GitHub" rel="external"><i class="fa fa fa-edit"></i></a></big> 
-			<small itemscope="itemscope" itemtype="http://schema.org/BreadcrumbList">
-				<span itemprop="itemListElement" itemscope="itemscope" itemtype="http://schema.org/ListItem"><a itemprop="name" href="/">Haxe programming cookbook</a> › </span>
-				<span itemprop="itemListElement" itemscope="itemscope" itemtype="http://schema.org/ListItem" ::cond currentPage.category.isSerie && !currentPage.isSerieHome() && currentPage.category.parent!=null ::><a itemprop="name" href="::currentPage.category.parent.outputPath::">::currentPage.category.parent.title::</a> › </span>
-				<span itemprop="itemListElement" itemscope="itemscope" itemtype="http://schema.org/ListItem"><a itemprop="name" href="::currentPage.category.outputPath::">::currentPage.category.title::</a> › </span>
-				<span itemprop="itemListElement" itemscope="itemscope" itemtype="http://schema.org/ListItem"><a itemprop="name" href="::currentPage.outputPath::">::currentPage.title::</a></span>
+			<small itemscope="itemscope" itemtype="https://schema.org/BreadcrumbList">
+				<span itemprop="itemListElement" itemscope="itemscope" itemtype="https://schema.org/ListItem"><a itemprop="name" href="/">Haxe programming cookbook</a> › </span>
+				<span itemprop="itemListElement" itemscope="itemscope" itemtype="https://schema.org/ListItem" ::cond currentPage.category.isSerie && !currentPage.isSerieHome() && currentPage.category.parent!=null ::><a itemprop="name" href="::currentPage.category.parent.outputPath::">::currentPage.category.parent.title::</a> › </span>
+				<span itemprop="itemListElement" itemscope="itemscope" itemtype="https://schema.org/ListItem"><a itemprop="name" href="::currentPage.category.outputPath::">::currentPage.category.title::</a> › </span>
+				<span itemprop="itemListElement" itemscope="itemscope" itemtype="https://schema.org/ListItem"><a itemprop="name" href="::currentPage.outputPath::">::currentPage.title::</a></span>
 			</small>
 			
 			<h1><a href="::currentPage.absoluteUrl::" itemprop="url" class="anchorjs-icons"></a> <span itemprop="name">::currentPage.title::</span></h1>
