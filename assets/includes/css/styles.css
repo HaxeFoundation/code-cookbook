@@ -84,6 +84,10 @@ a, a:hover, a > code {
     margin-bottom: 2px;
 }
 
+.crumb span[itemprop="itemListElement"]:not(:last-child):after {
+	content: ' › ';
+}
+
 @media (max-width: 767px) {
   body {padding:0}
   .container {
