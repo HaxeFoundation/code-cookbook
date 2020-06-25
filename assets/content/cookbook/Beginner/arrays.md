@@ -123,7 +123,7 @@ for (item in items) {
 Using the `index => item` notation in the for loop is the simplest way to get the current item as well as its index:
 
 ```haxe
-var var items = ["a", "b", "c"];
+var items = ["a", "b", "c"];
 for (index => item in items) {
     trace('$index : $item');
 }
