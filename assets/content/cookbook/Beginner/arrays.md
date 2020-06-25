@@ -175,7 +175,7 @@ Array elements can be mapped into a new array with a mapping function. The mappi
 
 ```haxe
 var items:Array<String> = ["first", "second", "last"];
-var importantItems = list.map(function (v) return v.toUpperCase());
+var importantItems = list.map(item -> item.toUpperCase());
 trace(importantItems); // ["FIRST","SECOND","LAST"]
 ```
 
