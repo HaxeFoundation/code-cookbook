@@ -4,7 +4,7 @@
 
 In Haxe, the `Array` type represents a collection of elements ordered by their index (order number) in the collection.
 
-### Creation
+## Creation
 
 Arrays can be created by using the array syntax (`[]`), or by using a constructor. The constructor requires a type parameter to be passed, which specifies the type of the elements in the array. When the array syntax is used, the casting determines the type of array constructed.
 
@@ -19,7 +19,7 @@ var floats = [10.2, 40.5, 60.3];
 trace(floats);
 ```
 
-#### Array comprehension
+### Array comprehension
 
 As an alternative, [array comprehension](https://haxe.org/manual/lf-array-comprehension.html) can be used. This makes it possible to use some programming logic in `for` or `while` expressions:
 
@@ -38,7 +38,7 @@ var bits = [while(x <= 64) x = x * 2];
 trace(bits); // [2,4,8,16,32,64,128]
 ```
 
-## Adding elements
+# Adding elements
 
 An element can be inserted into an array at a desired position, prepended to the start of the array, or appended to the end of the array. Multiple elements can be appended to an array through concatenation.
 
@@ -58,7 +58,7 @@ strings.push("World");
 strings = strings.concat(["foo", "bar"]);
 ```
 
-## Removing elements
+# Removing elements
 
 Elements can be removed from an array by removing a specific element of the array, a range of elements in the array, the first element of the array, or the last element of the array.
 
@@ -86,7 +86,7 @@ That means these are your options:
 * If you iterate by increment the index you can get away with not increment the index it in case of removal (using `while` loop).
 * Or sometimes you might prefer to just build a new array instead.
 
-## Retrieving elements
+# Retrieving elements
 
 Array elements can be accessed through array notation, using the index of the element in the array.
 
@@ -106,7 +106,7 @@ var first = strings[strings.indexOf("foo")];
 var last = strings[strings.lastIndexOf("foo")];
 ```
 
-## Iteration
+# Iteration
 
 The array defines an iterator, and its elements can therefore be iterated over.
 
@@ -136,7 +136,7 @@ for (index => item in items.keyValueIterator()) {
 
 
 
-## Operations
+# Operations
 
 ### Copy
 
@@ -230,7 +230,7 @@ strings.sort(function (a, b) return if (a < b) -1 else 1);
 trace(strings); // ["a","b","c"]
 ```
 
-## Displaying contents
+# Displaying contents
 
 Arrays can be prepared for printing by joining the elements together with a separator character, or by using the string representation of the array structure.
 
@@ -245,7 +245,7 @@ var itemsAsString:String = items.toString();
 trace(itemsAsString); // "first,second,last"
 ```
 
-## Multidimensional arrays
+# Multidimensional arrays
 
 Multidimensional array is equivalent of spreadsheet with rows and columns and is represented by creating arrays within arrays.
 In other words we create an array that contains elements which are arrays (nested arrays) 
