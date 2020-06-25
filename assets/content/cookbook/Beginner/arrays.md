@@ -108,12 +108,28 @@ var last = strings[strings.lastIndexOf("foo")];
 
 # Iteration
 
-The array defines an iterator, and its elements can therefore be iterated over.
+The array defines an iterator, and its elements can therefore be iterated over in a for loop:
 
 ```haxe
+var items = ["a", "b", "c"];
 for (item in items) {
     trace(item);
 }
+// a
+// b
+// c
+```
+
+Using the `index => item` notation in the for loop is the simplest way to get the current item as well as its index:
+
+```haxe
+var var items = ["a", "b", "c"];
+for (index => item in items) {
+    trace('$index : $item');
+}
+// 0 : a
+// 1 : b
+// 2 : c
 ```
 
 You can also iterate using the array index:
@@ -124,17 +140,6 @@ for (index in 0...items.length) {
     trace('$index : ${items[index]}');
 }
 ```
-
-As an alternative, you can use the `keyValueIterator()` method to get indexes and values:
-
-```haxe
-var var items = ["a", "b", "c"];
-for (index => item in items.keyValueIterator()) {
-    trace('$index : $item');
-}
-```
-
-
 
 # Operations
 
