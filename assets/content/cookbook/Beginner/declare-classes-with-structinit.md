@@ -2,7 +2,7 @@
 
 # Declare classes using @:structInit
 
-Apart from the [traditional way of instatiating classes using the `new` keyword](/category/beginner/declare-classes.html) - wich resembles how it's done in most object oriented languages such as java or C# - Haxe gives you an alternative, using the `@:structInit` class metadata.
+As an alternative to the [traditional way of instantiating classes using the `new` keyword](/category/beginner/declare-classes.html) - wich is how it's done in most object oriented languages such as java or C# - you can use the `@:structInit` metadata when you declare the class.
 
 When a class is annotated with `@:structInit` metadata...
 
