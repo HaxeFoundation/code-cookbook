@@ -4,69 +4,78 @@
 
 In Haxe, the `Array` type represents a collection of elements ordered by their index (order number) in the collection.
 
-### Creation
+## Creation
 
 Arrays can be created by using the array syntax (`[]`), or by using a constructor. The constructor requires a type parameter to be passed, which specifies the type of the elements in the array. When the array syntax is used, the casting determines the type of array constructed.
 
 ```haxe
-// Creating an array using array syntax
-var arrayOfStrings:Array<String> = ["Apple", "Pear", "Banana"];
-trace(arrayOfStrings);
+// Creating an array using array syntax and explicit type definition Array<String>
+var strings:Array<String> = ["Apple", "Pear", "Banana"];
+trace(strings);
 
 // Creating an array with float values
-var arrayOfFloats = [10.2, 40.5, 60.3];
-trace(arrayOfFloats);
+// Here, the type definition Array<Float> is left out - it is infered by the compiler
+var floats = [10.2, 40.5, 60.3];
+trace(floats);
 ```
 
-#### Array comprehension
+### Array comprehension
 
 As an alternative, [array comprehension](https://haxe.org/manual/lf-array-comprehension.html) can be used. This makes it possible to use some programming logic in `for` or `while` expressions:
 
 ```haxe
-var aInts = [for(i in 0...5) i];
-trace(aInts); // [0,1,2,3,4]
+var ints = [for(i in 0...5) i];
+trace(ints); // [0,1,2,3,4]
 
-var aEvens = [for(i in 0...5) i*2];
-trace(aEvens); // [0,2,4,6,8]
+var evens = [for(i in 0...5) i*2];
+trace(evens); // [0,2,4,6,8]
 
-var aChars = [for(c in 65...70) String.fromCharCode(c)];
-trace(aChars); // ['A','B','C','D','E']         
+var chars = [for(c in 65...70) String.fromCharCode(c)];
+trace(chars); // ['A','B','C','D','E']         
 
 var x = 1;
-var aBits = [while(x < 128) x = x * 2];
-trace(aBits); // [2,4,8,16,32,64,128]
+var bits = [while(x <= 64) x = x * 2];
+trace(bits); // [2,4,8,16,32,64,128]
 ```
 
-### Adding elements
+# Adding elements
 
 An element can be inserted into an array at a desired position, prepended to the start of the array, or appended to the end of the array. Multiple elements can be appended to an array through concatenation.
 
 ```haxe
-var arrayOfStrings:Array<String> = [];
+var strings:Array<String> = [];
+
 // Adds "Hello" at index 0, offsetting elements to the right by one position
-arrayOfStrings.insert(0, "Hello");
+strings.insert(0, "Hello");
+
 // Prepends "Haxe" to the start of the array
-arrayOfStrings.unshift("Haxe");
+strings.unshift("Haxe");
+
 // Appends "World" to the end of the array 
-arrayOfStrings.push("World");
+strings.push("World");
+
 // Appends "foo", "bar" elements to the end of a copy of the array
-arrayOfStrings = arrayOfStrings.concat(["foo", "bar"]);
+strings = strings.concat(["foo", "bar"]);
 ```
 
-### Removing elements
+# Removing elements
 
 Elements can be removed from an array by removing a specific element of the array, a range of elements in the array, the first element of the array, or the last element of the array.
 
 ```haxe
-var arrayOfStrings:Array<String> = ["first", "foo", "middle", "foo", "last"];
+var strings:Array<String> = ["first", "foo", "middle", "foo", "last"];
+
 // Removes first occurence of "middle" in the array
-arrayOfStrings.remove("middle");
+strings.remove("middle");
+
 // Removes and returns three elements beginning with (and including) index 0
-arrayOfStrings.splice(0, 3);
+var sub = strings.splice(0, 3);
+
 // Removes and returns first element of the array
-arrayOfStrings.shift();
+var first = strings.shift();
+
 // Removes and returns last element of the array
-arrayOfStrings.pop();
+var last = strings.pop();
 ```
 
 Modifying the array while iterating is so-called "undefined behavior", so it's not safe to do.
@@ -77,152 +86,171 @@ That means these are your options:
 * If you iterate by increment the index you can get away with not increment the index it in case of removal (using `while` loop).
 * Or sometimes you might prefer to just build a new array instead.
 
-### Retrieving elements
+# Retrieving elements
 
 Array elements can be accessed through array notation, using the index of the element in the array.
 
 ```haxe
-var arrayOfStrings:Array<String> = ["first", "foo", "middle", "foo", "last"];
+var strings:Array<String> = ["first", "foo", "middle", "foo", "last"];
+
 // Retrieves first array element
-var first = arrayOfStrings[0];
+var first = strings[0];
+
 // Retrieves last array element
-var last = arrayOfStrings[arrayOfStrings.length - 1];
+var last = strings[strings.length - 1];
+
 // Retrieves first occurrence of "foo" string
-var firstOccurrence = arrayOfStrings[arrayOfStrings.indexOf("foo")];
+var first = strings[strings.indexOf("foo")];
+
 // Retrieves last occurrence of "foo" string
-var lastOccurrence = arrayOfStrings[arrayOfStrings.lastIndexOf("foo")];
+var last = strings[strings.lastIndexOf("foo")];
 ```
 
-### Iteration
+# Iteration
 
-The array defines an iterator, and its elements can therefore be iterated over.
+The array defines an iterator, and its elements can therefore be iterated over in a for loop:
 
 ```haxe
-for (item in arrayOfStrings) {
-    // do something
+var items = ["a", "b", "c"];
+for (item in items) {
+    trace(item);
 }
+// a
+// b
+// c
+```
+
+Using the `index => item` notation in the for loop is the simplest way to get the current item as well as its index:
+
+```haxe
+var items = ["a", "b", "c"];
+for (index => item in items) {
+    trace('$index : $item');
+}
+// 0 : a
+// 1 : b
+// 2 : c
 ```
 
 You can also iterate using the array index:
 
 ```haxe
-var a1 = ["a", "b", "c"];
-var a2 = [11, 22, 33];
-for (i in 0...a1.length) {
-    trace(i + ", " + a1[i] + ", " + a2[i]);
+var items = ["a", "b", "c"];
+for (index in 0...items.length) {
+    trace('$index : ${items[index]}');
 }
 ```
 
-### Operations
+# Operations
 
-#### Copy
+### Copy
 
 Array elements can be copied into a new array.
 
 ```haxe
-var list:Array<String> = ["first", "second", "last"];
-var copiedList = list.copy();
+var strings:Array<String> = ["first", "second", "last"];
+var stringsCopy = strings.copy();
 
-copiedList.push("best"); // add extra value to the copied list
+stringsCopy.push("best"); // add extra value to the copied list
 
-trace(list); // ["first", "second", "last"];
-trace(copiedList); // ["first", "second", "last", "best"];
+trace(strings); // ["first", "second", "last"];
+trace(stringsCopy); // ["first", "second", "last", "best"];
 ```
 
-#### Filter
+### Filter
 
 Array elements can be filtered into a new array with a filtering function. Every array element for which the filtering function returns `true` is added to a new array.
 
 ```haxe
-var list:Array<String> = ["apple", "pear", "banana"];
-var filteredList = list.filter(function (v) return v == "banana");
-trace(filteredList); // banana
+var fruits:Array<String> = ["apple", "pear", "banana"];
+var bananas = list.filter(item -> item == "banana");
+trace(bananas); // ["banana"]
 ```
 You can also filter an array using array comprehension:
 
 ```haxe
-var list:Array<String> = ["apple", "pear", "banana"];
-var filteredList = [for (v in list ) if (v == "banana") v];
-trace(filteredList); // banana
+var fruits:Array<String> = ["apple", "pear", "banana"];
+var bananas = [for (v in list ) if (v == "banana") v];
+trace(bananas); // ["banana"]
 ```
 
-#### Map
+### Map
 
 Array elements can be mapped into a new array with a mapping function. The mapping is bijective and every element from the initial array will have its mapping in the new array. The order of elements is preserved.
 
 ```haxe
-var list:Array<String> = ["first", "second", "last"];
-var importantList = list.map(function (v) return v.toUpperCase());
-trace(importantList); // ["FIRST","SECOND","LAST"]
+var items:Array<String> = ["first", "second", "last"];
+var importantItems = list.map(item -> item.toUpperCase());
+trace(importantItems); // ["FIRST","SECOND","LAST"]
 ```
 
 You can also map an array using array comprehension:
 
 ```haxe
-var list:Array<String> = ["first", "second", "last"];
-var importantList = [for(v in list) v.toUpperCase()];
-trace(importantList); // ["FIRST","SECOND","LAST"]
+var items:Array<String> = ["first", "second", "last"];
+var importantItems = [for(v in list) v.toUpperCase()];
+trace(importantItems); // ["FIRST","SECOND","LAST"]
 ```
 
 Mapping can be useful to translate an array to a different type of array.
 
 ```haxe
-var list:Array<String> = ["1.1", "1.2", "1.3"];
-var listAsFloats:Array<Float> = list.map(Std.parseFloat);
-trace(listAsFloats); // [1.1, 1.2, 1.3]
+var strings:Array<String> = ["1.1", "1.2", "1.3"];
+var floats:Array<Float> = strings.map(Std.parseFloat);
+trace(floats); // [1.1, 1.2, 1.3]
 ```
 
-#### Reverse
+### Reverse
 
 The order of elements in an array can be reversed.
 
 ```haxe
-var list:Array<String> = ["first", "second", "last"];
-list.reverse();
-trace(list); // ["last","second","first"]
+var items:Array<String> = ["first", "second", "last"];
+items.reverse();
+trace(items); // ["last","second","first"]
 ```
 
-#### Slice
+### Slice
 
 A specific range of array elements from a starting index up to (excluding) an end index can be copied to a new array.
 
 ```haxe
-var list:Array<String> = ["first", "second", "last"];
-var slicedList = list.slice(1, 2);
-trace(slicedList); // ["second"]
+var items:Array<String> = ["first", "second", "last"];
+var sub = list.slice(1, 2);
+trace(sub); // ["second"]
 ``` 
 
-#### Sort
+### Sort
 
 Array elements can be sorted according to a comparison function. The comparison function compares two elements (the predecessor and the successor), and must return an `Int`. A return value of 0 indicates the elements are equivalent, a positive return value gives way to the successor, and a negative return value gives way to the predecessor.
 
 ```haxe
-var arrayOfInts:Array<Int> = [1,5,2,4,3];
-arrayOfInts.sort(function (a, b) return a - b);
-trace(arrayOfInts); // [1,2,3,4,5]
+var ints:Array<Int> = [1,5,2,4,3];
+ints.sort(function (a, b) return a - b);
+trace(ints); // [1,2,3,4,5]
 ```
 ```haxe
-var arrayOfStrings:Array<String> = ["c", "a", "b"];
-arrayOfStrings.sort(function (a, b) return if (a < b) -1 else 1);
-trace(arrayOfStrings); // ["a","b","c"]
+var strings:Array<String> = ["c", "a", "b"];
+strings.sort(function (a, b) return if (a < b) -1 else 1);
+trace(strings); // ["a","b","c"]
 ```
 
-### Displaying contents
+# Displaying contents
 
 Arrays can be prepared for printing by joining the elements together with a separator character, or by using the string representation of the array structure.
 
 ```haxe
-var list:Array<String> = ["first", "second", "last"];
+var items:Array<String> = ["first", "second", "last"];
 // Returns a string of array elements concatenated by separator string
-var listJoined:String = list.join(" / ");
-trace(listJoined); // "first / second / last"
+var joinedItems:String = list.join(" / ");
+trace(joinedItems); // "first / second / last"
     
 // Returns a string representation of the array structure
-var listAsString:String = list.toString();
-trace(listAsString); // "first,second,last"
+var itemsAsString:String = items.toString();
+trace(itemsAsString); // "first,second,last"
 ```
 
-## Multidimensional arrays
+# Multidimensional arrays
 
 Multidimensional array is equivalent of spreadsheet with rows and columns and is represented by creating arrays within arrays.
 In other words we create an array that contains elements which are arrays (nested arrays) 
@@ -231,24 +259,24 @@ The most basic type of multidimensional array is two-dimensional array.
 ###  Create two dimensional array 
 
 ```haxe
-var arrayTwoD:Array<Array<Int>> = [[0, 0, 0], [0, 0, 0]];
+var array2d:Array<Array<Int>> = [[0, 0, 0], [0, 0, 0]];
 ```
 Or using array comprehension syntax:
 ```haxe
-var arrayTwoD:Array<Array<Int>> = [for (x in 0...2) [for (y in 0...3) 0]];
+var array2d:Array<Array<Int>> = [for (x in 0...2) [for (y in 0...3) 0]];
 ```
  
 ###  Create three dimensional array
 
 ```haxe
-var arrayThreeD:Array<Array<Array<Int>>> = [
+var array3d:Array<Array<Array<Int>>> = [
   [ [0, 0, 0], [0, 0, 0], [0, 0, 0], ],
   [ [0, 0, 0], [0, 0, 0], [0, 0, 0], ],
 ];
 ```
 Or using array comprehension syntax:
 ```haxe
-var arrayThreeD : Array<Array<Array<Int>>> = [for (x in 0...2) [for (y in 0...3) [for (z in 0...3) 0]]];
+var array3d : Array<Array<Array<Int>>> = [for (x in 0...2) [for (y in 0...3) [for (z in 0...3) 0]]];
 ```
  
 ### Retrieving array elements 
@@ -257,11 +285,11 @@ We can receive  the whole row as array or only specific value from the array.
  
 ```haxe
 // Retrieves the array 
-var arrayOfInts:Array<Int> = arrayTwoD[0];
-var arrayOfArrayOfInts:Array<Array<Int>> = arrayThreeD[0];
+var arrayOfInts:Array<Int> = array2d[0];
+var arrayOfArrayOfInts:Array<Array<Int>> = array3d[0];
 // Retrieves only first element 
-var firstTwoD = arrayTwoD[0][0];
-var firstThreeD = arrayThreeD[0][0][0];
+var first2d = array2d[0][0];
+var first3d = array3d[0][0][0];
 ```
  
 > [Array API documentation](http://api.haxe.org/Array.html)

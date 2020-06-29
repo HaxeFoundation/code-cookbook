@@ -2,9 +2,9 @@
 
 # Declare classes using @:structInit
 
-Apart from the [traditional way of instatiating classes using the `new` keyword](/category/beginner/declare-classes.html) - wich resembles how it's done in most object oriented languages such as java or C# - Haxe gives you an alternative, using the `@:structInit` class metadata.
+As an alternative to the [traditional way of instantiating classes using the `new` keyword](/category/beginner/declare-classes.html) - which is how it's done in most object oriented languages such as Java or C# - you can use the `@:structInit` metadata when you declare the class.
 
-When a class is annotated with `@:structInit` metadata...
+A class can be annotated with `@:structInit` metadata:
 
 ```haxe
 @:structInit class User {
@@ -20,13 +20,13 @@ When a class is annotated with `@:structInit` metadata...
 		trace( 'Hello, I\'m $name, and I\'m $age years old!');
 }
 ```
-...it can be instantiated traditionally, with the `new` keyword...
+Then it can be instantiated traditionally, with the `new` keyword:
 
 ```haxe
 var bob:User = new User('Bob', 32);
 ```
 
-...but it can also be instantiated using a compatible object structure, like the following:
+But it can also be instantiated using a compatible object structure, like the following:
 
 ```haxe
 var bob:User = {name: 'Bob', age: 32};
@@ -57,13 +57,9 @@ var bob:User = new User('Bob', 32);// gives error "User does not have a construc
 
 ### Simple typedef-like syntax but with full class power
 
-Typedefs might be the most common way to declare simple data objects, and @:structInit gives you a way to use the same simple syntax - but you also get all the bells and whistles of real classes: you can use `public` or `private` fields and methods, getters and setters etc. just like in any class.
+Typedefs might be the most common way to declare simple data objects, and `@:structInit` gives you a way to use the same simple syntax - but you also get all the bells and whistles of real classes: you can use `public` or `private` fields and methods, getters and setters etc. just like in any class.
 
 ### Performance gain on static targets
 
-Haxe might [perform better on static targets when using classes compared to using typedefs or anonymous objects](https://haxe.org/manual/types-structure-performance.html). As a consequence, replacing typedefs with @:structInit classes might slightly increase the runtime performance.
-
-
-
-
+Haxe might [perform better on static targets when using classes compared to using typedefs or anonymous objects](https://haxe.org/manual/types-structure-performance.html). As a consequence, replacing typedefs with `@:structInit` classes might slightly increase the runtime performance.
 
