@@ -1,6 +1,6 @@
 [tags]: / "expression-macro"
 
-# Generating code in a macro
+# Add build time using macro
 
 This example shows:
 
@@ -83,4 +83,4 @@ Test.main = function() {
 };
 ```
 
-> Author: [Jeff Ward](https://github.com/jcward) / [@jeff__ward](http://twitter.com/jeff__ward)
+> Author: [Jeff Ward](https://github.com/jcward)
