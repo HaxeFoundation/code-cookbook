@@ -163,14 +163,14 @@ Array elements can be filtered into a new array with a filtering function. Every
 
 ```haxe
 var fruits:Array<String> = ["apple", "pear", "banana"];
-var bananas = list.filter(item -> item == "banana");
+var bananas = fruits.filter(item -> item == "banana");
 trace(bananas); // ["banana"]
 ```
 You can also filter an array using array comprehension:
 
 ```haxe
 var fruits:Array<String> = ["apple", "pear", "banana"];
-var bananas = [for (v in list ) if (v == "banana") v];
+var bananas = [for (v in fruits ) if (v == "banana") v];
 trace(bananas); // ["banana"]
 ```
 
@@ -180,7 +180,7 @@ Array elements can be mapped into a new array with a mapping function. The mappi
 
 ```haxe
 var items:Array<String> = ["first", "second", "last"];
-var importantItems = list.map(item -> item.toUpperCase());
+var importantItems = items.map(item -> item.toUpperCase());
 trace(importantItems); // ["FIRST","SECOND","LAST"]
 ```
 
@@ -188,7 +188,7 @@ You can also map an array using array comprehension:
 
 ```haxe
 var items:Array<String> = ["first", "second", "last"];
-var importantItems = [for(v in list) v.toUpperCase()];
+var importantItems = [for(v in items) v.toUpperCase()];
 trace(importantItems); // ["FIRST","SECOND","LAST"]
 ```
 
@@ -216,7 +216,7 @@ A specific range of array elements from a starting index up to (excluding) an en
 
 ```haxe
 var items:Array<String> = ["first", "second", "last"];
-var sub = list.slice(1, 2);
+var sub = items.slice(1, 2);
 trace(sub); // ["second"]
 ``` 
 
@@ -242,7 +242,7 @@ Arrays can be prepared for printing by joining the elements together with a sepa
 ```haxe
 var items:Array<String> = ["first", "second", "last"];
 // Returns a string of array elements concatenated by separator string
-var joinedItems:String = list.join(" / ");
+var joinedItems:String = items.join(" / ");
 trace(joinedItems); // "first / second / last"
     
 // Returns a string representation of the array structure
