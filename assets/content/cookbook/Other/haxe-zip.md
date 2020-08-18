@@ -26,7 +26,7 @@ function getEntries(dir:String, entries:List<haxe.zip.Entry> = null, inDir:Null<
 				fileSize: bytes.length,
 				fileTime: Date.now(),
 				compressed: false,
-				dataSize: 0,
+				dataSize: sys.FileSystem.stat(path).size,
 				data: bytes,
 				crc32: haxe.crypto.Crc32.make(bytes)
 			};
