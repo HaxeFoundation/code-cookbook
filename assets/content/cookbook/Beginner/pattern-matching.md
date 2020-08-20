@@ -79,7 +79,7 @@ for (value in 0...10) {
 
 ### Or pattern
 
-The ```|``` operator can be used anywhere within patterns to describe multiple accepted patterns. If there is a captured variable in an or-pattern, it must appear in both its sub-patterns. 
+The `|` operator can be used anywhere within patterns to describe multiple accepted patterns. If there is a captured variable in an or-pattern, it must appear in both its sub-patterns. 
 
 Let's go on with the previous example and say that not only 2 and 4 are special, but 6 is too. You can switch on multiple cases like this:
 
