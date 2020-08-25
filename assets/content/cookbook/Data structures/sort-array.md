@@ -7,7 +7,7 @@
 You can easily sort an array using the Array's `sort()` function.
 ```haxe
 var myArray = [1,5,3,7,6,2,4];
-myArray.sort(function(a, b) return a - b);
+myArray.sort((a, b) -> (a - b));
 trace(myArray); // 1,2,3,4,5,6,7
 ```
 
