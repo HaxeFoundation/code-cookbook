@@ -7,7 +7,7 @@
 You can easily sort an array using the Array's `sort()` function.
 ```haxe
 var myArray = [1,5,3,7,6,2,4];
-myArray.sort(function(a, b) return a - b);
+myArray.sort((a, b) -> a - b);
 trace(myArray); // 1,2,3,4,5,6,7
 ```
 
@@ -48,5 +48,4 @@ haxe.ds.ArraySort.sort(myArray, function(a, b):Int {
 [tryhaxe](http://try.haxe.org/embed/76f24)
 
 Notice how the second array, when using `haxe.ds.ArraySort`, keeps the order of the elements with equal `i`. The sorting is stable.
-
 
