@@ -13,7 +13,7 @@
 			<ul class="unstyled">
 			::foreach category sitemap::
 				<li ::cond !category.isSerie::><a href="::category.outputPath::" ::attr class if(category==currentCategory) "active"::>::category.title::</a>
-					<ul class="unstyled" >
+					<ul class="unstyled">
 					::foreach page category.pages::
 						<li ::cond page.visible:: ::attr class if(page==currentPage) "active"::><a href="::page.outputPath::">::page.title::</a>
 							<ol ::cond page.category.isSerie && page.category==currentPage.category::>
@@ -59,8 +59,8 @@
 				<div ::cond currentPage.authors.length>0:: class="authors row" itemprop="author" itemscope="itemscope" itemtype="https://schema.org/Person">
 					<span class="span2">Author:</span> 
 					<div class="span4">::foreach author currentPage.authors::
-						<a href="::author.profileLink::"><img src="https://github.com/::author.username::.png?size=80" loading="lazy" width="40" height="40" title="::author.name::" /></a> 
-						<a href="::author.profileLink::" itemprop="url" rel="external" class="author-name"><span itemprop="name">::author.name::</span></a><br/>
+						<a href="::author.profileLink::" rel="external noopener nofollow"><img src="https://github.com/::author.username::.png?size=80" loading="lazy" width="40" height="40" title="::author.name::" /></a> 
+						<a href="::author.profileLink::" itemprop="url" rel="external noopener nofollow" class="author-name"><span itemprop="name">::author.name::</span></a><br/>
 					::end::
 					</div> 
 				</div> 
@@ -78,7 +78,7 @@
 						::end::
 						
 						::if author.profileLink != null::
-							<a href="::author.profileLink::" rel="external" class="author-name">::author.name::</a>
+							<a href="::author.profileLink::" rel="external nofollow noopener" class="author-name">::author.name::</a>
 						::else::
 							<span class="author-name">::author.name::</span>
 						::end::
@@ -115,15 +115,15 @@
 			</div>
 			<hr/>
 			<div class="contribution">
-				<span><i class="fa fa fa-edit"></i> <a href="::currentPage.editUrl::?message=Update:%20::currentPage.title::&description=%0A%0ASources:%0A*%20::currentPage.absoluteUrl::%0A%0A::foreach author currentPage.authors::%40::author.username:: ::end::" title="Edit '::currentPage.title::' on GitHub" rel="external">Edit page</a></span> 
-				 ::if false::<span>| <i class="fa fa-lightbulb-o"></i> <a href="https://github.com/HaxeFoundation/code-cookbook/issues/new?title=Suggestion:%20::currentPage.title::&body=%0A%0ASources:%0A*%20::currentPage.absoluteUrl::%0A*%20::currentPage.contributionUrl::%0A%0A::foreach author currentPage.authors::%40::author.username:: ::end::" title="Create issue about '::currentPage.title::' on GitHub" rel="external">Suggest improvement / Report issue</a></span> ::end::
+				<span><i class="fa fa fa-edit"></i> <a href="::currentPage.editUrl::?message=Update:%20::currentPage.title::&description=%0A%0ASources:%0A*%20::currentPage.absoluteUrl::%0A%0A::foreach author currentPage.authors::%40::author.username:: ::end::" title="Edit '::currentPage.title::' on GitHub" rel="external nofollow noopener">Edit page</a></span> 
+				 ::if false::<span>| <i class="fa fa-lightbulb-o"></i> <a href="https://github.com/HaxeFoundation/code-cookbook/issues/new?title=Suggestion:%20::currentPage.title::&body=%0A%0ASources:%0A*%20::currentPage.absoluteUrl::%0A*%20::currentPage.contributionUrl::%0A%0A::foreach author currentPage.authors::%40::author.username:: ::end::" title="Create issue about '::currentPage.title::' on GitHub" rel="external nofollow noopener">Suggest improvement / Report issue</a></span> ::end::
 				<span ::cond !currentPage.category.isSerie::>| <i class="fa fa-plus-circle"></i> <a href="::currentPage.addLinkUrl::" rel="external" title="Add new page in '::currentPage.category.title::' on Github">Add new page</a></span> 
 			</div>
 			<hr/>
 			<script src="https://utteranc.es/client.js" repo="HaxeFoundation/haxe.org-comments" branch="master" issue-term="[code.haxe.org] ::currentPage.category.title:: - ::currentPage.title::" async="async"></script>
 			
 			<center class="share-buttons">
-				<a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="haxe" data-size="large">Tweet</a> 
+				<a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="haxe" data-size="large" rel="external nofollow noopener">Tweet</a> 
 				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 				
 				&nbsp; 
