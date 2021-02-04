@@ -59,8 +59,8 @@
 		<div class="span4">
 			<h3><i class="fa fa-big fa-rocket"></i> The cross-platform development toolkit</h3>
 			<p>Haxe is a modern high-level strictly-typed programming language with a fast optimizing cross-compiler.</p>
-			<a href="https://haxe.org/download" class="btn btn-large"><i class="fa fa-download"></i> Download Haxe 4.1.1</a><br/>
-			<small><em>Released: 2020-05-22</em></small>
+			<a href="https://haxe.org/download" class="btn btn-large"><i class="fa fa-download"></i> Download Haxe 4.1.5</a><br/>
+			<small><em>Released: 2020-12-31</em></small>
 		</div>
 		<div class="span4">
 			<h3><i class="fa fa-big fa-gears"></i> Learning by example</h3>
@@ -68,15 +68,16 @@
 			Enjoy learning Haxe; It is great!</p>
 			<strong>More documentation:</strong>
 			<p>
+				<p><i class="fa fa-external-link"></i> <a href="https://haxe.org/documentation" rel="external">Haxe Documentation</a></p>
 				<p><i class="fa fa-external-link"></i> <a href="https://haxe.org/manual" rel="external">Haxe Manual</a></p>
-				<p><i class="fa fa-external-link"></i> <a href="http://api.haxe.org" rel="external">Haxe API documentation</a></p>
-				<p>You can try Haxe in the browser! <a href="http://try.haxe.org" rel="external">try.haxe.org</a></p>
+				<p><i class="fa fa-external-link"></i> <a href="https://api.haxe.org" rel="external">Haxe API documentation</a></p>
+				<p>You can try Haxe in the browser! <a href="https://try.haxe.org" rel="external">try.haxe.org</a></p>
 			</p>
 		</div>
 		<div class="span4">
 			<h3><i class="fa fa-big fa-globe"></i> Contribution is easy</h3>
 			<p>The project is being developed on GitHub. Feel free to contribute code snippets, tutorials and how-to guides. </p>
-			<p><i class="fa fa-github"></i> <a href="https://github.com/HaxeFoundation/code-cookbook" rel="external">Haxe Code Cookbook on Github</a></p>
+			<p><i class="fa fa-github"></i> <a href="https://github.com/HaxeFoundation/code-cookbook" rel="external noopener">Haxe Code Cookbook on Github</a></p>
 			<p>
 			<a class="github-button" href="https://github.com/HaxeFoundation/code-cookbook" data-icon="octicon-star" data-style="mega" data-count-href="/HaxeFoundation/code-cookbook/stargazers" data-count-api="/repos/HaxeFoundation/code-cookbook#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star HaxeFoundation/code-cookbook on GitHub">Star</a>
 			 &nbsp; <a class="github-button" href="https://github.com/HaxeFoundation/code-cookbook/fork" data-icon="octicon-repo-forked" data-style="mega" data-count-href="/HaxeFoundation/code-cookbook/network" data-count-api="/repos/HaxeFoundation/code-cookbook#forks_count" data-count-aria-label="# forks on GitHub" aria-label="Fork HaxeFoundation/code-cookbook on GitHub">Fork</a>
