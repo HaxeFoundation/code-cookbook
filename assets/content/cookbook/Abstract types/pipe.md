@@ -40,15 +40,15 @@ abstract Pipe<T>(T) to T {
 ## Usage
 
 ```haxe
-function addWorld(str:String):String {
+inline function addWorld(str:String):String {
 	return str + " world!";
 }
 
-function capitalize(str:String):String {
+inline function capitalize(str:String):String {
 	return str.toUpperCase();
 }
 
-function count(str:String):Int {
+inline function count(str:String):Int {
 	return str.length;
 }
 
