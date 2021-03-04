@@ -52,28 +52,30 @@ function count(str:String):Int {
 	return str.length;
 }
 
-// function call as argument version
-var nestedHelloWorld = capitalize(addWorld("Hello"));
-trace(nestedHelloWorld); // HELLO WORLD!
+function main() {
+	// function call as argument version
+	var nestedHelloWorld = capitalize(addWorld("Hello"));
+	trace(nestedHelloWorld); // HELLO WORLD!
 
-// update variable version
-var hello = "Hello";
-hello = addWorld(hello);
-hello = capitalize(hello);
-trace(hello); // HELLO WORLD!
+	// update variable version
+	var hello = "Hello";
+	hello = addWorld(hello);
+	hello = capitalize(hello);
+	trace(hello); // HELLO WORLD!
 
-// piped version
-var helloWorld:String = new Pipe("Hello")
-  | addWorld
-  | capitalize;
-trace(helloWorld); // HELLO WORLD!
+	// piped version
+	var helloWorld:String = new Pipe("Hello")
+	  | addWorld
+	  | capitalize;
+	trace(helloWorld); // HELLO WORLD!
 
-// piped version changing type from String to Int
-var helloWorldCount:Int = new Pipe("Hello")
-  | addWorld
-  | capitalize
-  | count;
-trace(helloWorldCount / 2); // 6
+	// piped version changing type from String to Int
+	var helloWorldCount:Int = new Pipe("Hello")
+	  | addWorld
+	  | capitalize
+	  | count;
+	trace(helloWorldCount / 2); // 6
+}
 ```
 
 > Learn about Haxe Abstracts here: <http://haxe.org/manual/types-abstract.html>
