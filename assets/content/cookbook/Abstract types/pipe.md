@@ -1,4 +1,4 @@
-[tags]: / "abstract-type"
+[tags]: / "abstract-type,pipe,operator-overloading"
 
 # Pipe using Abstract Operator Overloading
 
@@ -78,6 +78,6 @@ function main() {
 }
 ```
 
-> Learn about Haxe Abstracts here: <http://haxe.org/manual/types-abstract.html>
+> Learn about Haxe Abstracts here: <https://haxe.org/manual/types-abstract.html>
 > 
 > Author: [Jeremy Meltingtallow](https://github.com/PongoEngine)
