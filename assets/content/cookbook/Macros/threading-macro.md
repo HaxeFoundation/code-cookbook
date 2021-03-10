@@ -7,7 +7,7 @@
 Threading macros (or arrow macros) are used in Clojure for compose many function calls.
 
 
-Other language like Elixir, LiveScript or F# use a pipe operator (<code>|&gt;</code>) for the same functionality.
+Other language like Elixir, LiveScript or F# use a pipe operator (|&gt;) for the same functionality.
 
 In Haxe we can create the same utility with a simple macro. Thanks to the static analyzer we can eliminate the temp variables 
 used for memorize the intermediate values.
