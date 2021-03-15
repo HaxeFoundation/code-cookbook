@@ -42,7 +42,7 @@ var content:String = sys.io.File.getContent('my_folder/my_file.txt');
 trace(content);
 ```
 
-### Write content to a file
+### Save file to disk
 
 This example writes an object `person` to a json file:
 ```haxe
