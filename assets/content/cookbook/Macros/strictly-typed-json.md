@@ -36,6 +36,6 @@ for (i in leveldata.array) { // works now because we know the type of the leveld
 
 **Explanation**: We run the original `Json.parse(File.getContent())` snippet in a macro function so it will execute when the haxe compiles our calls to `JsonMacro.load()`. Instead of returning the JSON object, in macros we need to return _syntax_. So we must convert our JSON object into haxe syntax – just as if we'd typed our JSON out manually as haxe objects. Fortunately there's a built-in operator for converting values into haxe syntax, it's the ['macro-reification-value-operator': `$v{ some-basic-value }`](https://haxe.org/manual/macro-reification-expression.html). We could also use [`Context.makeExpr(value, position)`](https://api.haxe.org/haxe/macro/Context.html#makeExpr) to do the same job. We wrap the JSON reading a try-catch so we can tidy-up error reporting a little.
 
-With this approach, the JSON's content is embedded into your compiled app and not loaded at runtime.
+With this approach, the JSON's content is embedded into your compiled app and not loaded at runtime. The path argument must be a constant string and cannot be an expression evaluated at runtime.
 
 > Author: [George Corney](https://github.com/haxiomic)
