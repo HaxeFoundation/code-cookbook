@@ -2,7 +2,7 @@
 
 # Strictly Typed JSON
 
-It's possible read JSON files at compile-time into strictly-typed objects in haxe
+It's possible read JSON files at compile time into strictly typed objects in Haxe.
 
 <img src="assets/haxe-json-macro.png" />
 
