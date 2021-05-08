@@ -15,7 +15,7 @@ Instead, if you load the JSON in a macro, then the JSON data will be available a
 
 Create a file called **JsonMacro.hx** (or whatever you like) and add this:
 ```haxe
-macro function load(path: String) {
+macro function load(path:String) {
 	return try {
 		var json = haxe.Json.parse(sys.io.File.getContent(path));
 		macro $v{json};
