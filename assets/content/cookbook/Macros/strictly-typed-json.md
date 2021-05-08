@@ -1,6 +1,6 @@
 [tags]: / "macro,json,expression-macro,configuration"
 
-# Strictly-Typed JSON
+# Strictly Typed JSON
 
 It's possible read JSON files at compile-time into strictly-typed objects in haxe
 
