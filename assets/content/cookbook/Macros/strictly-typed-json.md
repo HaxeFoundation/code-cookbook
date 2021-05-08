@@ -11,7 +11,7 @@ Normally you might load a JSON file with something like this:
 var json = haxe.Json.parse(sys.io.File.getContent(path));
 ```
 
-Instead, if you load the JSON in a macro, then the JSON data will be available at compile-time and therefore the types will be known:
+Instead, if you load the JSON in a macro, then the JSON data will be available at compile time and therefore the types will be known:
 
 Create a file called **JsonMacro.hx** (or whatever you like) and add this:
 ```haxe
