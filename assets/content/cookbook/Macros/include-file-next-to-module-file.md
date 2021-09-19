@@ -177,7 +177,7 @@ interface IComponent {}
 
 ## About Context.registerModuleDependency
 
-With Context.registerModuleDependency you can let the haxe compiler know that a module now depends on a file in your filesystem.
+With `Context.registerModuleDependency` you can let the haxe compiler know that a module now depends on a file in your filesystem.
 This is relevant only when compiling using the haxe compilation server.
 
 The compilation server improves compile times by only redoing work on files that have changed or if their dependencies have changed.
