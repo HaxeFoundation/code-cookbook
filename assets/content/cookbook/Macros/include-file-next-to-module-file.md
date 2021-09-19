@@ -182,7 +182,7 @@ This is relevant only when compiling using the haxe compilation server.
 
 The compilation server improves compile times by only redoing work on files that have changed or if their dependencies have changed.
 
-If we don't tell haxe about this new file dependency changes to the included file could end up being ignored in a new compilation server build, resulting in a cached and now stale version of the contents being included.
+If we don't tell haxe about this new file dependency, then changes to the included file could end up being ignored in a new compilation server build, resulting in a cached and now stale version of the file's contents being included.
 
 ## Conclusion
 
