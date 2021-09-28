@@ -16,7 +16,7 @@ To use a map you can use the convenient `Map` abstract class in the [`toplevel` 
 
 
 
-The type of the value `V` can be any other type. All the specialized maps can ofcourse be used directly and have the same functionalities, but the underlying implementations are different for optimal performance. 
+The type of the value `V` can be any other type. All the specialized maps can of course be used directly and have the same functionalities, but the underlying implementations are different for optimal performance. 
 `Map` however provides some features which the concrete types don't have which is explained later.
 
 The specialized maps can be found in the [`haxe.ds` package](http://api.haxe.org/haxe/ds/).
