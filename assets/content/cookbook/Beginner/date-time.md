@@ -83,7 +83,31 @@ The example makes use of the `haxe.Timer` class and the `StringTools` as static 
 
 [tryhaxe](https://try.haxe.org/embed/D3512)
 
+## Getting Unix timestamp in milliseconds
+
+Unix time ( or  Epoch time) is the number of seconds that have elapsed since 1st January 1970 . It is widely used in many programs. 
+
+For all available Haxe targets , the Unix timestamp in seconds is obtainable like this:
+
+ ```haxe 
+ Date.now().getTime()
+ ```
+
+The above method will return milliseconds for Javascript target, but not for Hashlink, Eval or Neko ( it will return the correct seconds, but always 0 for milliseconds )
+
+To get the timestamp in milliseconds we can do
+```haxe
+ #if js js.lib.Date.now() #else Sys.time()*1000 #end
+```
+
+However, ```Sys.time()``` will return much more digits than miliseconds, and we can do ```Math.fround(Sys.time())``` to round to the nearest integer value.
+
+Here it is worth mentioning ```Timer.stamp()``` too. It will only matter between two measurements, but it will return same value as ```Sys.time()```  for some targets (such as  Neko, Hashlink and Eval target).
+
+For JS ```Timer.stamp()``` give other value , probably based on  ```performance.now()``` method in javascript.
+
 > Read more in the Haxe API documentation: 
 > 
 >  * [Date API](http://api.haxe.org/Date.html)
 >  * [DateTools API](http://api.haxe.org/DateTools.html)
+>  * [Timer API](https://api.haxe.org/haxe/Timer.html)
