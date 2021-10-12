@@ -85,7 +85,7 @@ The example makes use of the `haxe.Timer` class and the `StringTools` as static 
 
 ## Getting Unix timestamp in milliseconds
 
-Unix time ( or  Epoch time) is the number of seconds that have elapsed since 1st January 1970 . It is widely used in many programs. 
+Unix time (or Epoch time) is the number of seconds that have elapsed since 1 January 1970. It is widely used in many programs. 
 
 For all available Haxe targets , the Unix timestamp in seconds is obtainable like this:
 
