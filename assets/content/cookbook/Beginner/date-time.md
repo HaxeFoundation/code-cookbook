@@ -100,11 +100,9 @@ To get the timestamp in milliseconds we can do
  #if js js.lib.Date.now() #else Sys.time()*1000 #end
 ```
 
-However, ```Sys.time()``` will return much more digits than miliseconds, and we can do ```Math.fround(Sys.time())``` to round to the nearest integer value.
+`Sys.time()` returns a value with sub-millisecond accuracy. We can use `Math.fround(Sys.time())` to round to the nearest integer value.
 
-Here it is worth mentioning ```Timer.stamp()``` too. It will only matter between two measurements, but it will return same value as ```Sys.time()```  for some targets (such as  Neko, Hashlink and Eval target).
-
-For JS ```Timer.stamp()``` give other value , probably based on  ```performance.now()``` method in javascript.
+Here it is worth mentioning `Timer.stamp()` too. Its value on its own is unspecified, but the difference between two measurements is accurate to milliseconds as well.
 
 > Read more in the Haxe API documentation: 
 > 
