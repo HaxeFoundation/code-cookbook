@@ -93,7 +93,7 @@ For all available Haxe targets, the Unix timestamp in seconds is obtainable like
  Date.now().getTime()
  ```
 
-The above method will return milliseconds for Javascript target, but not for Hashlink, Eval or Neko ( it will return the correct seconds, but always 0 for milliseconds )
+The precision of the above method is in milliseconds for Javascript, Java, PHP and  CPP. In seconds for Eval, Hashlink, Neko and  Python with sub-millisecond accuracy .
 
 To get the timestamp in milliseconds we can do
 ```haxe
