@@ -87,20 +87,20 @@ The example makes use of the `haxe.Timer` class and the `StringTools` as static 
 
 Unix time (or Epoch time) is the number of seconds that have elapsed since 1 January 1970. It is widely used in many programs. 
 
-For all available Haxe targets, the Unix timestamp in seconds is obtainable like this:
+For all available Haxe targets, the Unix timestamp is obtainable like this:
 
  ```haxe 
  Date.now().getTime()
  ```
 
-The precision of the above method is in milliseconds for Javascript, Java, PHP and  CPP. In seconds for Eval, Hashlink, Neko and  Python with sub-millisecond accuracy .
+The precision of the above method is in milliseconds for Javascript, Java, PHP and  CPP. In seconds for Eval, Hashlink, Neko and with sub-millisecond accuracy for Python.
 
 To get the timestamp in milliseconds we can do
 ```haxe
  #if js js.lib.Date.now() #else Sys.time()*1000 #end
 ```
 
-`Sys.time()` returns a value with sub-millisecond accuracy. We can use `Math.fround(Sys.time())` to round to the nearest integer value.
+`Sys.time()` returns a value with sub-millisecond accuracy. We can use `Math.fround(Sys.time()*1000)` to round to the nearest integer value.
 
 Here it is worth mentioning `Timer.stamp()` too. Its value on its own is unspecified, but the difference between two measurements is accurate to milliseconds as well.
 
