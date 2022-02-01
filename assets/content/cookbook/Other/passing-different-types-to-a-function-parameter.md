@@ -92,7 +92,7 @@ function add(o:Dynamic):Array<Int> {
 
 ### Making it more type safe with `Either` 
 
-There is a more type safer way that let the compiler catch possible errors at compile time. 
+There is a more type safe way that let the compiler catch possible errors at compile time. 
 We can use [`haxe.ds.Either`](http://api.haxe.org/haxe/ds/Either.html).
 It has to be mentioned that `Either` gives some runtime performance overhead, but it brings type safety which we are looking for.
 
