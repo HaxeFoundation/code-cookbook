@@ -10,6 +10,7 @@ Ensure all comma's and quotes are correct using a macro function, which is execu
 ```haxe
 class Validator {
   public static macro function validateJson(path:String) {
+    haxe.macro.Context.registerModuleDependency(haxe.macro.Context.getLocalModule(), path);
     if (sys.FileSystem.exists(path)) {
       var content = sys.io.File.getContent(path);
       try {
