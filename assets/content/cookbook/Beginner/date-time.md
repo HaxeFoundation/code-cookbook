@@ -40,7 +40,7 @@ var monthNames = ["January", "February", "March", "April", "May", "June", "July"
 var monthName = monthNames[now.getMonth()];
 trace("this month is called " + monthName);
 
-var dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saterday"];
+var dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 var dayName = dayNames[now.getDay()];
 trace("this day is called " + dayName);
 ```
