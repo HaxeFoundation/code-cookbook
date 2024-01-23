@@ -61,6 +61,10 @@ class Macros {
       // get the file content of the template 
       var fileContent:String = File.getContent(filePath);
       
+      // Tell the haxe compiler that the module depends on this file
+      // See registerModuleDependency section
+      Context.registerModuleDependency(Context.getLocalModule(), path);
+      
       // return as expression
       return macro $v{fileContent};
     }  else {
@@ -124,6 +128,10 @@ class Macros {
       // get the file content of the template 
       var fileContent:String = File.getContent(filePath);
       
+      // Tell the haxe compiler that the module depends on this file
+      // See registerModuleDependency section
+      Context.registerModuleDependency(Context.getLocalModule(), path);
+      
       // add a static field called "TEMPLATE" to the current fields of the class
       fields.push({
         name:  "TEMPLATE",
@@ -166,6 +174,15 @@ class MyComponent implements IComponent {
 @:build(Macros.buildTemplate())
 interface IComponent {}
 ```
+
+## About Context.registerModuleDependency
+
+With `Context.registerModuleDependency` you can let the haxe compiler know that a module now depends on a file in your filesystem.
+This is relevant only when compiling using the haxe compilation server.
+
+The compilation server improves compile times by only redoing work on files that have changed or if their dependencies have changed.
+
+If we don't tell haxe about this new file dependency, then changes to the included file could end up being ignored in a new compilation server build, resulting in a cached and now stale version of the file's contents being included.
 
 ## Conclusion
 
