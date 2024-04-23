@@ -81,7 +81,7 @@ When countdown is running, it traces "5 days - 12:02:59" and when it is expired,
 
 The example makes use of the `haxe.Timer` class and the `StringTools` as static extension. Both are available in the standard library and run on any target.
 
-[tryhaxe](https://try.haxe.org/embed/D3512)
+[tryhaxe](https://try.haxe.org/embed/71972B65)
 
 > Read more in the Haxe API documentation: 
 > 
