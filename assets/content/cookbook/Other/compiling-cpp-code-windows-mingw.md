@@ -4,7 +4,7 @@
 
 On Windows, the compiler by default expects an installation of Microsoft Visual Studio Community edition when targeting c++. 
 
-However, there's the possibility of using [mingw](http://www.mingw.org/) instead, wich is much more quick and lightweight when it comes to installation size and hazzle. 
+However, there's the possibility of using [mingw](https://www.mingw-w64.org) instead, wich is much more quick and lightweight when it comes to installation size and hazzle. 
 
 > Please keep in mind that mingw isn't the default compiler alternative, and that you might need to dive into the cold c++ sea to get other than basic stuff going. 
 
