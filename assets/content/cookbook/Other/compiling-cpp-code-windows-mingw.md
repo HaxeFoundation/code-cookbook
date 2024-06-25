@@ -10,13 +10,9 @@ However, there's the possibility of using [mingw](https://www.mingw-w64.org) ins
 
 Setup and usage is very easy:
 
-## Installing mingw using haxelib
+## Installing mingw-w64
 
-The mingw compiler can be installed using haxelib with the following command:
-
-`> haxelib install minimingw`
-
-This downloads the mingw compiler into the location where the hxcpp toolchain expects to find ite.
+See [the mingw-w64 download page](https://www.mingw-w64.org/downloads/) for details about how to install.
 
 ## Add `-D toolchain=mingw` compiler directive
 
