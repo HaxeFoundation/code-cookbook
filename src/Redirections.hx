@@ -11,7 +11,7 @@ import sys.io.File;
  */
 class Redirections
 {
-	public static function generate(generator:Generator) 
+	public static function generate()
 	{
 		var list =  [
 			"category/abstract-types/rounded float.html" => "/category/abstract-types/rounded-float.html",
@@ -30,17 +30,17 @@ class Redirections
 		];
 		
 		for (page in list.keys()) {
-			var template = new Template(File.getContent(generator.contentPath + "redirection.mtt"));
+			var template = new Template(File.getContent(Config.contentPath + "redirection.mtt"));
 			var content = template.execute({
 				redirectionLink: list.get(page)
 			});
-			
+
 			// make sure directory exists
-			FileSystem.createDirectory(generator.outputPath + Path.directory(page));
-			
+			FileSystem.createDirectory(Config.outputPath + Path.directory(page));
+
 			// save to output
-			File.saveContent(generator.outputPath + page, content);
-			
+			File.saveContent(Config.outputPath + page, content);
+
 		}
 	}
 	
