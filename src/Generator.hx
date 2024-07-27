@@ -11,6 +11,7 @@ import sys.FileSystem;
 import sys.io.File;
 import templo.Template;
 import util.GitUtil.GitAuthorInfo;
+import Config.*;
 
 using StringTools;
 
@@ -18,16 +19,6 @@ using StringTools;
  * @author Mark Knol
  */
 class Generator {
-	public var contentPath = "./assets/content/";
-	public var outputPath = "./output/";
-	public var repositoryUrl = "";
-	public var repositoryBranch = "";
-	public var basePath = "";
-	public var titlePostFix = "";
-	public var cookbookFolder = Path.addTrailingSlash("cookbook");
-	public var assetsFolderName = "assets";
-	public var snippetsFolder = Path.addTrailingSlash("snippets");
-	
 	private var _pages:Array<Page> = new Array<Page>();
 	private var _folders:StringMap<Array<Page>> = new StringMap<Array<Page>>();
 	private var _templates:StringMap<Template> = new StringMap<Template>();

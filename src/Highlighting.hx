@@ -6,8 +6,6 @@ class Highlighting {
 	public static function main() {
 		Sys.println("Applying syntax highlighting ...");
 
-		var g = new Generator();
-
 		// Convert CSON grammar to json for vscode-textmate
 		File.saveContent("bin/javascript.json", Json.stringify(CSON.parse(File.getContent("grammars/language-javascript/grammars/javascript.cson"))));
 
@@ -25,7 +23,7 @@ class Highlighting {
 		];
 
 		// Go over the generated HTML file and apply syntax highlighting
-		var missingGrammars = Highlighter.patchFolder(g.outputPath, grammars, function (classList) {
+		var missingGrammars = Highlighter.patchFolder(Config.outputPath, grammars, function (classList) {
 			return classList.substr(12);
 		});
 
@@ -34,7 +32,7 @@ class Highlighting {
 		}
 
 		// Add CSS rules for highlighting
-		var path = g.outputPath + "/css/haxe-nav.min.css";
+		var path = Config.outputPath + "/css/haxe-nav.min.css";
 		var baseStyle = File.getContent(path);
 		var syntaxStyle = haxeGrammar.runCss();
 		File.saveContent(path, baseStyle + syntaxStyle);
