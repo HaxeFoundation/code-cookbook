@@ -4,7 +4,7 @@
 --next
 
 -lib markdown
--lib hxtemplo
+-lib hxtemplo:git:https://github.com/Simn/hxtemplo.git
 -lib hxparse
 -cp src
 -main Main
