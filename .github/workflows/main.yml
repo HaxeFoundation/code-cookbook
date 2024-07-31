@@ -17,10 +17,6 @@ jobs:
         with:
           haxe-version: 4.3.5
 
-      # we are using this version in order to build vscode-textmate
-      - name: Setup Node
-        uses: actions/setup-node@v1
-
       - name: Install
         # at some point all npm needs to be in package.json
         run: |
