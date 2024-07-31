@@ -1,6 +1,6 @@
 -cp src
 -main Highlighting
 -lib hxnodejs
--lib highlighter
+-lib highlighter:0.6.1
 -js bin/patch.js
 -cmd node bin/patch.js

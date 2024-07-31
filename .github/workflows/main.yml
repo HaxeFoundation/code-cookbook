@@ -1,0 +1,42 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+          # we need full git history for article dates
+          fetch-depth: 0
+
+      - name: Setup Haxe
+        uses: krdlab/setup-haxe@v1
+        with:
+          haxe-version: 4.3.5
+
+      # we are using this version in order to build vscode-textmate
+      - name: Setup Node
+        uses: actions/setup-node@v1
+
+      - name: Install
+        # at some point all npm needs to be in package.json
+        run: |
+          npm install
+          npm install -g less@2.7
+          npm install -g less-plugin-clean-css@1.5
+          haxelib install CodeCookBook-neko.hxml --always --quiet
+          haxelib install highlighting.hxml --always --quiet
+          haxelib list
+
+      - name: Generate website
+        run: |
+          haxe CodeCookBook-neko.hxml
+          haxe highlighting.hxml
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./output
