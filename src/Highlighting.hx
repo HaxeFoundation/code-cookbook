@@ -9,33 +9,30 @@ class Highlighting {
 		// Convert CSON grammar to json for vscode-textmate
 		File.saveContent("bin/javascript.json", Json.stringify(CSON.parse(File.getContent("grammars/language-javascript/grammars/javascript.cson"))));
 
-		var haxeGrammar = new Highlighter("grammars/haxe-TmLanguage/haxe.tmLanguage");
-		var hxmlGrammar = new Highlighter("grammars/haxe-TmLanguage/hxml.tmLanguage");
-		var xmlGrammar = new Highlighter("grammars/xml.tmbundle/Syntaxes/XML.plist");
-		var jsGrammar = new Highlighter("bin/javascript.json");
-
-		var grammars = [
-			"haxe" => haxeGrammar,
-			"hxml" => hxmlGrammar,
-			"html" => xmlGrammar,
-			"js" => jsGrammar,
-			"javascript" => jsGrammar,
+		var grammarFiles = [
+			"haxe" => "grammars/haxe-TmLanguage/haxe.tmLanguage",
+			"hxml" => "grammars/haxe-TmLanguage/hxml.tmLanguage",
+			"html" => "grammars/xml.tmbundle/Syntaxes/XML.plist",
+			"js" => "bin/javascript.json",
+			"javascript" => "bin/javascript.json",
 		];
 
-		// Go over the generated HTML file and apply syntax highlighting
-		var missingGrammars = Highlighter.patchFolder(Config.outputPath, grammars, function (classList) {
-			return classList.substr(12);
+		Highlighter.loadHighlighters(grammarFiles, function(highlighters) {
+			// Go over the generated HTML file and apply syntax highlighting
+			var missingGrammars = Highlighter.patchFolder(Config.outputPath, highlighters, function(classList) {
+				return classList.substr(12);
+			});
+
+			for (g in missingGrammars) {
+				Sys.println('Missing grammar for "${g}"');
+			}
+
+			// Add CSS rules for highlighting
+			var path = Config.outputPath + "/css/haxe-nav.min.css";
+			var baseStyle = File.getContent(path);
+			var syntaxStyle = highlighters["haxe"].runCss();
+			File.saveContent(path, baseStyle + syntaxStyle);
 		});
-
-		for (g in missingGrammars) {
-			Sys.println('Missing grammar for "${g}"');
-		}
-
-		// Add CSS rules for highlighting
-		var path = Config.outputPath + "/css/haxe-nav.min.css";
-		var baseStyle = File.getContent(path);
-		var syntaxStyle = haxeGrammar.runCss();
-		File.saveContent(path, baseStyle + syntaxStyle);
 	}
 }
 
