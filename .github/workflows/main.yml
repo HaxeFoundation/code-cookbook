@@ -30,13 +30,29 @@ jobs:
           haxelib install CodeCookBook-neko.hxml --always --quiet
           haxelib install highlighting.hxml --always --quiet
           haxelib list
+      
+      - name: Check out gh-pages branch
+        uses: actions/checkout@v4
+        with:
+          ref: 'gh-pages'
+          path: ./output
+          fetch-depth: 0
+    
+      - name: Prepare output directory
+        run:
+          rm -r ./output/*
 
       - name: Generate website
         run: |
           haxe CodeCookBook-neko.hxml
           haxe highlighting.hxml
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./output
+      - name: Deploy to gh-pages branch
+        if: github.ref == 'refs/heads/master'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Deploy to GitHub Pages from $GITHUB_SHA"
+          git push
+        working-directory: ./output
