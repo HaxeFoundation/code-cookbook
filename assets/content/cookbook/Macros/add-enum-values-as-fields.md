@@ -27,6 +27,7 @@ class Macro {
           throw 'Expected TInst, found: $found';
       }
     } catch(e) {
+      // Catch thrown errors and point them to the failing class
       Context.error(e.message, Context.currentPos());
       return Context.getBuildFields();
     }
@@ -57,6 +58,7 @@ class Macro {
       path.push(enumType.name);
       path.push(field.name);
 
+      // Create a getter that calls has() with the corresponding enum field
       final getterName = 'get_$name';
       final newFields = (macro class TempClass {
         public var $name(get, never):Bool;
