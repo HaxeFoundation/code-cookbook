@@ -1,6 +1,6 @@
 [tags]: / "autobuild-macro,building-fields"
 
-# Add enum values as fields
+# Autobuild fields from enum type param
 
 This macro function adds fields corresponding to an extended type's enum type param.
 
