@@ -139,6 +139,6 @@ class EnumSet<E:EnumValue> {
   }
 }
 ```
-Notice that fields A, B, C, D, E and F were added to DamageType
+Notice that a field for each `DamageType` were added to `DamageSet`
 
 > Author: [George Kurelic](https://github.com/geokureli)
