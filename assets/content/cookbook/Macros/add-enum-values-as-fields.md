@@ -79,43 +79,66 @@ The macro is used via [@:autoBuild](https://haxe.org/manual/macro-auto-build.htm
 
 ```haxe
 class Test {
-	static function main() {
-		final grades = new GradeSet();
-		grades.add(A);
-		grades.add(F);
-		grades.add(C);
-		trace(grades.A); // true
-		trace(grades.B); // false
-		trace(grades.C); // true
-		trace(grades.D); // false
-		trace(grades.F); // true
-	}
+  static function main() {
+    // poised dagger damage types
+    final dmg = new DamageSet([Poison, Piercing, Slashing]);
+    trace(dmg.Acid); // false
+    trace(dmg.Bludgeoning); // false
+    trace(dmg.Cold); // false
+    trace(dmg.Fire); // false
+    trace(dmg.Force); // false
+    trace(dmg.Lightning); // false
+    trace(dmg.Necrotic); // false
+    trace(dmg.Piercing); // true
+    trace(dmg.Poison); // true
+    trace(dmg.Psychic); // false
+    trace(dmg.Radiant); // false
+    trace(dmg.Slashing); // true
+    trace(dmg.Thunder); // false
+  }
 }
 
-class GradeSet extends EnumSet<Grade> {}
+class DamageSet extends EnumSet<DamageType> {}
 
-enum Grade { A; B; C; D; F; }
+enum DamageType {
+  Acid;
+  Bludgeoning;
+  Cold;
+  Fire;
+  Force;
+  Lightning;
+  Necrotic;
+  Piercing;
+  Poison;
+  Psychic;
+  Radiant;
+  Slashing;
+  Thunder;
+}
 
 @:autoBuild(Macro.buildSet())
 class EnumSet<E:EnumValue> {
-	final list = new Array<E>();
+  final list = new Array<E>();
 
-	public function new() {}
+  public function new(list:Array<E>) {
+    for (item in list)
+      add(item);
+  }
 
-	inline public function has(value:E):Bool {
-		return list.contains(value);
-	}
+  inline public function has(value:E):Bool {
+    return list.contains(value);
+  }
 
-	public function add(value:E) {
-		if (has(value) == false)
-			list.push(value);
-	}
+  public function add(value:E) {
+    if (has(value) == false)
+      list.push(value);
+  }
 
-	public function remove(value:E) {
-		list.remove(value);
-	}
+  public function remove(value:E) {
+    list.remove(value);
+  }
 }
 ```
-Notice that fields A, B, C, D, E and F were added to GradeSet
+Notice that fields A, B, C, D, E and F were added to DamageType
 
 > Author: [George Kurelic](https://github.com/geokureli)
