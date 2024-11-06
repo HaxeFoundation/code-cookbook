@@ -1,4 +1,4 @@
-[tags]: / "expression-macro,building-fields"
+[tags]: / "autobuild-macro,building-fields"
 
 # Add enum values as fields
 
