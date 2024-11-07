@@ -50,8 +50,7 @@ class Macro {
   }
 
   static function addFields(enumType:EnumType, fields:Array<Field>) {
-    final enumCT = Context.getType(enumType.module + "." + enumType.name).toComplexType();
-
+    // Add a getter for each enum value
     for (name => field in enumType.constructs) {
       // Determine the full path of the enum field
       final path = enumType.module.split(".");
