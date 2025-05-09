@@ -59,8 +59,8 @@
 		<div class="span4">
 			<h3><i class="fa fa-big fa-rocket"></i> The cross-platform development toolkit</h3>
 			<p>Haxe is a modern high-level strictly-typed programming language with a fast optimizing cross-compiler.</p>
-			<a href="https://haxe.org/download" class="btn btn-large"><i class="fa fa-download"></i> Download Haxe 4.3.6</a><br/>
-			<small><em>Released: 2024-08-07</em></small>
+			<a href="https://haxe.org/download" class="btn btn-large"><i class="fa fa-download"></i> Download Haxe 4.3.7</a><br/>
+			<small><em>Released: 2025-05-09</em></small>
 		</div>
 		<div class="span4">
 			<h3><i class="fa fa-big fa-gears"></i> Learning by example</h3>
