@@ -2,7 +2,8 @@
     "name": "code-cookbook",
     "version": "0.1.0",
     "devDependencies": {
-        "vscode-textmate": "5.0.2",
-        "cson-parser": "3.0.0"
+        "cson-parser": "3.0.0",
+        "vscode-oniguruma": "^2.0.1",
+        "vscode-textmate": "^9.1.0"
     }
 }
