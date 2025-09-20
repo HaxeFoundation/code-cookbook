@@ -2,7 +2,11 @@
 
 # Hxcpp Pointers
 
-This page covers the differences and use cases of the three main pointer types; `cpp.ConstRawPointer` and `cpp.RawPointer`, `cpp.ConstPointer` and `cpp.Pointer`, and `cpp.Star`.
+This page covers the differences and use cases of the three main pointer types:
+
+- `cpp.ConstRawPointer` and `cpp.RawPointer`
+- `cpp.ConstPointer` and `cpp.Pointer`
+- `cpp.ConstStar` and `cpp.Star`.
 
 ## cpp.RawPointer
 
