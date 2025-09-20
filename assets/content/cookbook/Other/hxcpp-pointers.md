@@ -38,7 +38,7 @@ extern class Foo {
 }
 ```
 
-The downside with these is that its not ergonomic from a haxe pov to represent and consume pointers to objects.
+The downside with these is that its not ergonomic in haxe code to represent and consume pointers to objects.
 
 ```haxe
 extern class Foo {
@@ -71,7 +71,7 @@ void foo(::cpp::Pointer<int> p) {}
 
 This type lives on the stack so does not contribute to GC pressure, it also is compatible with Dynamic, so you can pass `cpp.Pointer` types into dynamic places and use them with generic arguments. This type also contains loads of convenience functions for reinterpreting the pointer, arithmetic, conversions to haxe arrays and vectors, etc, etc. There are also member fields for accessing the `cpp.Pointer` as a `cpp.RawPointer` or `cpp.Star`.
 
-It also retains the array access that `cpp.RawPointer` does. On top of this the `::cpp::Pointer` type has implicit to and from conversions for the underlying pointer, which means you can extern the following function
+It also retains the array access that `cpp.RawPointer` supports. On top of this the `::cpp::Pointer` type has implicit to and from conversions for the underlying pointer, which means you can extern the following function
 
 ```cpp
 void foo(int* v) {}
@@ -83,7 +83,7 @@ with this haxe function
 function foo(v:cpp.Pointer<Int>) {}
 ```
 
-You don't need to use `cpp.RawPointer` here, you can use `cpp.Pointer` and all the convenience it provides. So why would you ever want to use `cpp.RawPointer` if `cpp.Pointer` does everything it does and is compatible with more of haxe's type system.
+You don't need to use `cpp.RawPointer` here, you can use `cpp.Pointer` and all the convenience it provides. So why would you ever want to use `cpp.RawPointer` if `cpp.Pointer` does everything it does and is compatible with more of haxe's type system?
 
 Function signatures.
 
@@ -109,7 +109,7 @@ That `fromStaticFunction` call will generate a function pointer with the signatu
 
 ## cpp.Star
 
-This is the last pointer type and like `cpp.RawPointer` it generates raw C pointers in the output code, the key difference is that this type does not support array access and will auto de-reference when accessing the underlying data. This means it's ideal for representing pointers to objects. E.g. the following C++
+This is the last pointer type and like `cpp.RawPointer` it generates raw C pointers in the output code. The key difference is that this type does not support array access and will auto de-reference when accessing the underlying data. This means it's ideal for representing pointers to objects. E.g. the following C++
 
 ```c++
 struct Bar {
