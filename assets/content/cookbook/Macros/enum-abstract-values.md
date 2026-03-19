@@ -1,8 +1,8 @@
 [tags]: / "enum,expression-macro"
 
-# Get all values of an @:enum abstract
+# Get all values of an enum abstract
 
-The following macro function returns an array of all possible values of a given `@:enum abstract` type.
+The following macro function returns an array of all possible values of a given `enum abstract` type.
 Since it's not possible in runtime (because abstracts doesn't exist there), we need to use a macro for that.
 
 ## Implementation
@@ -22,10 +22,10 @@ class AbstractEnumTools {
     // compiler will give a error here.
     var type = Context.getType(typePath.toString());
 
-    // Switch on the type and check if it's an abstract with @:enum metadata
+    // Switch on the type and check if it's an abstract with enum metadata
     switch (type.follow()) {
       case TAbstract(_.get() => ab, _) if (ab.meta.has(":enum")):
-        // @:enum abstract values are actually static fields of the abstract implementation class,
+        // enum abstract values are actually static fields of the abstract implementation class,
         // marked with @:enum and @:impl metadata. We generate an array of expressions that access those fields.
         // Note that this is a bit of implementation detail, so it can change in future Haxe versions, but it's been
         // stable so far.
@@ -40,7 +40,7 @@ class AbstractEnumTools {
         return macro $a{valueExprs};
       default:
         // The given type is not an abstract, or doesn't have @:enum metadata, show a nice error message.
-        throw new Error(type.toString() + " should be @:enum abstract", typePath.pos);
+        throw new Error(type.toString() + " should be enum abstract", typePath.pos);
     }
   }
 }
@@ -49,7 +49,7 @@ class AbstractEnumTools {
 ## Usage
 
 ```haxe
-@:enum abstract MyEnum(Int) {
+enum abstract MyEnum(Int) {
   var A = 1;
   var B = 2;
   var C = 3;
